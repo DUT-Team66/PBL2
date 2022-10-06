@@ -36,10 +36,7 @@ class QuanLy
     };
 
 
-    QuanLy();
-
-
-    QuanLy<DienThoai> DanhSachDienThoai;
+    
 
 
 */

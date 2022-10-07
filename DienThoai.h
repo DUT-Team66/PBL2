@@ -7,7 +7,7 @@ using namespace std;
 class DienThoai
 {
     private: 
-        string MaDT;
+        string ID;
         string TenDT;
         string TenHang;
 

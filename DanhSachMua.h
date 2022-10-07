@@ -2,6 +2,6 @@
 using namespace std;
 class DanhSachMua
 {
-    string MaDT;
+    string ID;
     int SL;
 };

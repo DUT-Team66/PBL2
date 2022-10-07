@@ -7,7 +7,7 @@ using namespace std;
 class NhanVien
 {
     private: 
-        string manv;
+        string ID;
         string HoTen;
         string NgaySinh;
         string DiaChi;

@@ -9,14 +9,14 @@ template <typename T>
             T* list;
             int length;
         public:
-            
+
             QuanLy(T*, int);
             ~QuanLy();
-            void Add(T);
+            void Add();
             void Show();
-            void Search(T);
-            void Update(T);
-            void Delete(T);
+            void Search();
+            void Update();
+            void Delete();
     };
 
 #endif

@@ -4,7 +4,7 @@ using namespace std;
 class DonHang
 {
     private: 
-        string Ma;
+        string ID;
         DanhSachMua DSM;
         string ngaymua;
         string Ma_nhanvienbanhang;

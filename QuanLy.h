@@ -2,41 +2,26 @@
 #define _QUANLY_
 #include <string>
 using namespace std;
-template <typename type>
 
-class QuanLy
-{
-    protected:      
-
-    public:
-        //QuanLy();
-        virtual ~QuanLy();
-        virtual void Add(type) = 0;
-        virtual void Show() = 0;
-        virtual void Search(string) = 0;  //Search
-        virtual void Update(string,type) = 0;
-        virtual void Delete(string) = 0;
-};
-
-#endif
-/*
-    template <typename T>
+template <typename T>
     class QuanLy {
         private : 
             T* list;
             int length;
         public:
-            QuanLy();
+            
+            QuanLy(T*, int);
             ~QuanLy();
-            void Add(T,int);
+            void Add(T);
             void Show();
             void Search(T);
             void Update(T);
             void Delete(T);
     };
 
-
-    
+#endif
+/*
+    QuanLy<DienThoai> QuanLyDienThoai
 
 
 */

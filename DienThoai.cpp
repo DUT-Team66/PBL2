@@ -8,14 +8,15 @@ DienThoai::DienThoai()
     this->MaDT="";
     this->TenDT="";
     this->Hang="";
-    this->RAM="";
-    this->ROM="";
+    this->RAM_ROM="";
     this->Chip="";
     this->Pin="";
     this->ManHinh="";
-    this->GiaNhap=0;
-    this->GiaBan=0;
-    this->SoLuong=0;
+}
+DienThoai::DienThoai(string a, string b,string c, string d, string e, string g, string h, int x, int y, int z)
+: MaDT(a), TenDT(b), Hang(c), RAM_ROM(d), Chip(e), Pin(g), ManHinh(h), GiaNhap(x), GiaBan(y), SoLuong(z)
+{
+
 }
 DienThoai::~DienThoai()
 {
@@ -50,23 +51,15 @@ const string& DienThoai::GetHang()
     return this->Hang;
 }
 
-void DienThoai::SetRAM(const string& s)
+void DienThoai::SetRAM_ROM(const string& s)
 {
-    this->RAM=s;
+    this->RAM_ROM=s;
 }
-const string& DienThoai::GetRAM()
+const string& DienThoai::GetRAM_ROM()
 {
-    return this->RAM;
+    return this->RAM_ROM;
 }
 
-void DienThoai::SetROM(const string& s)
-{
-    this->ROM=s;    
-}
-const string& DienThoai::GetROM()
-{
-    return this->ROM;
-}
 
 void DienThoai::SetChip(const string& s)
 {
@@ -95,31 +88,12 @@ const string& DienThoai::GetManHinh()
     return this->ManHinh;
 }
 
-void DienThoai::SetGiaNhap(const int& s)
+void DienThoai::Show1()
 {
-    this->GiaNhap=s;
+    cout<<"Ma dien thoai: "<<this->MaDT<<", Ten dien thoai: "<<this->TenDT<<", Hang san xuat: "<<this->Hang<<", RAM and ROM: "<<this->RAM_ROM<<"(GB), Chip xu li: "<<this->Chip<<", Dung luong pin"<<this->Pin<<"(mAh), Man hinh: "<<this->ManHinh<<endl;
 }
-const int& DienThoai::GetGiaNhap()
+void DienThoai::Show2()
 {
-    return this->GiaNhap;
+    cout<<"Ma dien thoai: "<<this->MaDT<<", Ten dien thoai: "<<this->TenDT<<", Hang san xuat: "<<this->Hang<<", RAM and ROM: "<<this->RAM_ROM<<"(GB), Chip xu li: "<<this->Chip<<", Dung luong pin"<<this->Pin<<"(mAh), Man hinh: "<<this->ManHinh<<endl;
+    cout<<"Gia nhap vao: "<<this->GiaNhap<<", Gia ban: "<<this->GiaBan<<", So luong con lai: "<<this->SoLuong;
 }
-
-void DienThoai::SetGiaBan(const int& s)
-{
-    this->GiaBan=s;
-}
-
-
-const int& DienThoai::GetGiaBan()
-{
-    return this->GiaBan;
-}
-
-void DienThoai::SetSoLuong(const int& s)
-{
-    this->SoLuong=s;
-}
-const int& DienThoai::GetSoLuong()
-{
-    return this->SoLuong;
-}    

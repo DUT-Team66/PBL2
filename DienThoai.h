@@ -1,59 +1,47 @@
-#ifndef _DIENTHOAI_
-#define _DIENTHOAI_
-
 #include <string>
 #include <iostream>
 using namespace std;
 class DienThoai
 {
     private: 
-        string ID;
-        string TenDT;
-        string TenHang;
-
-        
-        string RAM_ROM; // GB
-        
-        string Chip;
-        string Pin; // mAh
-        string ManHinh; // 
-        int GiaNhap;
-        int GiaBan;
-        int SoLuongConLai   ;
+        string MaDT;//a
+        string TenDT;//b
+        string Hang;//c
+        string RAM_ROM; // d
+        string Chip;//e
+        string Pin; // g
+        string ManHinh; //h 
+        int GiaNhap;//x
+        int GiaBan;//y
+        int SoLuong;//z
     public:
-
         DienThoai();
-        DienThoai(string,string,string,string,string,string,string,int, int, int);
+        DienThoai(string, string, string, string,string, string, string, int, int, int);
         ~DienThoai();
-
-        /*
         void SetMaDT(const string& );
-        const string& GetMADT();
+        const string& GetMaDT();
+
         void SetTenDT(const string& );
         const string& GetTenDT();
-        void SetTenHang(const string& );
-        const string& GetTenHang();
-        void SetGia(const int& );
-        const int& GetGia();
-        void SetLoai(const string& );
-        const string& GetLoai();
-        void SetRAM(const string& );
-        const string& GetRAM();
-        void SetROM(const string& );
-        const string& GetROM();
+
+
+        void SetHang(const string& );
+        const string& GetHang();
+
+        void SetRAM_ROM(const string& );
+        const string& GetRAM_ROM();
+
+
+        void SetChip(const string& );
+        const string& GetChip();
+
         void SetPin(const string& );
         const string& GetPin();
-        void SetSac(const string& );
-        const string& GetSac();
-        void SetTinhNang(const string& );
-        const string& GetTinhNang();
-        void SetSL(const int& );
-        const int& GetSL();
-        */
-       void Show();
 
+        void SetManHinh(const string& );
+        const string& GetManHinh();
+
+        void Show1();  // Cua khach hang
+        void Show2();   // Cua nhan vien va quan li
 
 };
-
-
-#endif

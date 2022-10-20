@@ -1,17 +1,14 @@
-
-#ifndef _ACCOUNT_
-#define _ACCOUNT_
-
 #include <string>
 using namespace std;
-
 class Account {
-    protected:
+    private:
         string account;
         string password;
     public:
-        Account(string, string);
+        Account();
+		Account(string,string);
         void Login();
+        void setData();
+        void showData();
+		
 };
-#endif
-

@@ -19,6 +19,7 @@ class NhanVien
 
         NhanVien();
         ~NhanVien();
+        //void enteracc();
         /*
         void SetMaNV(const string& );
         const string& GetMANV();

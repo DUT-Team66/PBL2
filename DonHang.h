@@ -4,11 +4,27 @@ using namespace std;
 class DonHang
 {
     private: 
-        string ID;
-        DanhSachMua DSM;
-        string ngaymua;
-        string Ma_nhanvienbanhang;
+        string MaDH;
         string MaKH;
-        int tong_gia_tien;
-};
+        string MaNV;
+        DanhSachMua* DSM;
+        int n; // Số các danh sách mua
+        string NgayMua;
+        int TongTien;
+    public:
+        DonHang();
+        ~DonHang();
+        void SetMaDH(const string& );
+        const string& GetMaDH();
 
+        
+        void SetDSM(const DanhSachMua& );
+        const string& GetDSM();
+        void SetMaKH(const string& );
+        const string& GetMaKH();
+        void SetMaNV(const string& );
+        const string& GetMaNV();
+        void SetNgayMua(const string& );
+        const string& GetNgayMua();
+        void Show();
+};

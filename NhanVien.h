@@ -1,5 +1,3 @@
-
-
 #include <string>
 #include <iostream>
 using namespace std;
@@ -7,34 +5,31 @@ using namespace std;
 class NhanVien
 {
     private: 
-        string ID;
-        string HoTen;
+        string MaNV;
+        string TenNV;
         string NgaySinh;
-        string DiaChi;
-        string SDT;
+        string DiaChiNV;
+        string SDTNV;
         string GioiTinh;
-        string SoCMDN;
-        string luong; // luong moi nhan vien khac nhau dua tren so dien thoai ban duoc
+        string Luong;    
     public:
 
         NhanVien();
+        NhanVien(string, string, string, string, string, string,string);
         ~NhanVien();
-        //void enteracc();
-        /*
         void SetMaNV(const string& );
-        const string& GetMANV();
-        void SetHoTen(const string& );
-        const string& GetHoTen();
+        const string& GetMaNV();
+        void SetTenNV(const string& );
+        const string& GetTenNV();
         void SetNgaySinh(const string& );
         const string& GetNgaySinh();
-        void SetDiaChi(const string& );
-        const string& GetDiaChi();
-        void SetSDT(const string& );
-        const string& GetSDT();
+        void SetDiaChiNV(const string& );
+        const string& GetDiaChiNV();
+        void SetSDTNV(const string& );
+        const string& GetSDTNV();
         void SetGioiTinh(const string& );
         const string& GetGioiTinh();
-        void SetSoCMND(const string& );
-        const string& GetSoCMND();
-        */
-       void Show();
+        void SetLuong(const string& );
+        const string& GetLuong();
+        void Show();
 };

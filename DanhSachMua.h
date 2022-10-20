@@ -2,6 +2,11 @@
 using namespace std;
 class DanhSachMua
 {
-    string ID;
-    int SL;
+    private:
+        string MaDT;
+        int SL;
+    public:
+        DanhSachMua();
+        ~DanhSachMua();
+        void Show();
 };

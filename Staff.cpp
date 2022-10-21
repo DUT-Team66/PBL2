@@ -10,11 +10,12 @@ Staff::Staff()
     this->address = "";
     this->phoneNumber = "";
     this->gender = "";
-    this->salary = "";
+    this->salary = 0;
 }
-Staff::Staff(string a, string b, string c, string d, string e, string g, string h)
-    : ID(a), name(b), dob(c), address(d), phoneNumber(e), gender(g), salary(h)
+Staff::Staff(string a, string b, string c, string d, string e, string g)
+    : name(a), ID(b), gender(c), dob(d), phoneNumber(e), address(g)
 {
+    this-> salary = 0;
 }
 Staff::~Staff()
 {
@@ -67,22 +68,22 @@ const string &Staff::getGender()
 {
     return this->gender;
 }
-void Staff::setSalary(const string &s)
+void Staff::setSalary(const int &s)
 {
     this->salary = s;
 }
-const string& Staff::getSalary()
+const int& Staff::getSalary()
 {
     return this->salary;
 }
 void Staff::show()
 {
-    cout << "Staff id: " << this->ID << "\n";
     cout << "Staff name: " << this->name << "\n";
-    cout << "Day of birth: " << this->dob << "\n";
-    cout << "Address: " << this->address << "\n";
-    cout << "Phone number: " << this->phoneNumber << "\n";
+    cout << "Staff id: " << this->ID << "\n";
     cout << "Gender: " << this->gender << "\n";
+    cout << "Day of birth: " << this->dob << "\n";
+    cout << "Phone number: " << this->phoneNumber << "\n";
+    cout << "Address: " << this->address << "\n";
     cout << "Salary: " << this->salary << "\n";
 
 }

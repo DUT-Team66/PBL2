@@ -1,6 +1,7 @@
 #include <iostream>
 #include "StaffManager.h"
 #include <string>
+#include <fstream>
 using namespace std;
 StaffManager::StaffManager()
 {
@@ -92,7 +93,7 @@ void StaffManager::Search(string s)
     cout << endl;
 }
 
-int StaffManager::IndexOf(string s) // ham them
+int StaffManager::IndexOf(int s) // ham them
 {
     int index = -1;
     for (int i = 0; i < this->n; i++)
@@ -107,13 +108,13 @@ int StaffManager::IndexOf(string s) // ham them
 }
 
 // chu y: Update co the cap nhat nhieu cai
-void StaffManager::Update(string m) // Cap nhat muc luong
+void StaffManager::Update(int m) // Cap nhat muc luong
 {
     int index = IndexOf(m);
     if (index >= 0)
     {
-        string g;
-        cout << "Muc luong moi: ";
+        int g;
+        cout << "New salary: ";
         cin >> g;
         (this->p + index)->setSalary(g);
     }
@@ -122,7 +123,50 @@ void StaffManager::Show()
 {
     for (int i = 0; i < this->n; i++)
     {
+        cout << i + 1 << ". ";
         (this->p + i)->show(); // Show ni của class SV
     }
     cout << endl;
+}
+void StaffManager::SetData() {
+    fstream readfile("Staff.txt", ios::in);
+	string tmpline;
+	while(getline(readfile,tmpline)) {
+		
+		string name = "", id = "", gender = "", dob = "", phonenumber = "", address = "";
+	
+		int i = 0;
+		while(tmpline[i] != '/') {
+			name += tmpline[i];
+			++i;
+		}
+		++i;
+		while(tmpline[i] != '/') {
+			id += tmpline[i];
+			++i;
+		}
+        ++i;
+		while(tmpline[i] != '/') {
+			gender += tmpline[i];
+			++i;
+		}
+		++i;
+        while(tmpline[i] != '/') {
+			dob += tmpline[i];
+			++i;
+		}
+		++i;
+        while(tmpline[i] != '/') {
+			phonenumber += tmpline[i];
+			++i;
+		}
+		++i;
+        while(tmpline[i] != '/') {
+			address += tmpline[i];
+			++i;
+		}
+		
+        this->Add(Staff(name,id, gender, dob, phonenumber, address));
+    }
+    readfile.close();
 }

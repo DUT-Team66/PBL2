@@ -7,9 +7,9 @@ Account::Account() {
 	this->username = "";
 	this->password = "";
 }
-Account::Account(string account, string password)
+Account::Account(string username, string password)
 {
-	this->username = account;
+	this->username = username;
 	this->password = password;
 }
 // void Account::setData() 

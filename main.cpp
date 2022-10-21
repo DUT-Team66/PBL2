@@ -1,16 +1,27 @@
 #include <iostream>
 #include <iomanip>
 #include "Account.h"
-#include "ListAccount.h"
+#include "AccountList.h"
+#include "Staff.h"
+#include "StaffManager.h"
+#include "Phone.h"
+#include "PhoneManager.h"
 using namespace std;
 int main()
 {
     
 	
-	ListAccount listAccount;
-	listAccount.setData();
-	listAccount.login();
-    //listAccount.showData();
+	AccountList accountList;
+	accountList.SetData();
+	//accountList.showData();
+	StaffManager staffList;
+	staffList.SetData();
+	//staffList.Show();
+	PhoneManager phonelist;
+	phonelist.SetData();
+    //phonelist.Show();
+
+	
 }
 
 /*

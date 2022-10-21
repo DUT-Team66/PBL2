@@ -12,13 +12,15 @@ class StaffManager
         
         StaffManager();
         ~StaffManager();
+        
         void Add(const Staff& );
         void Delete(string);
         void Search(string);
-
-        int IndexOf(string);
-        void Update(string);
+        int IndexOf(int);
+        void Update(int);
         void Show();
+
+        void SetData();
 };
 
 

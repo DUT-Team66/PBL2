@@ -11,7 +11,7 @@ OrderManager::~OrderManager()
 {
     delete[] this->p;
 }
-void OrderManager::add(const Order& s)
+void OrderManager::Add(const Order& s)
 {
     if(this->n==0) {
         this->p = new Order[this->n+1];
@@ -34,7 +34,7 @@ void OrderManager::add(const Order& s)
     }
 }
 
-void OrderManager::searchByOrderID(string m)
+void OrderManager::SearchByOrderID(string m)
 {
     int index=-1;
     for (int i=0;i<this->n;i++)
@@ -49,7 +49,7 @@ void OrderManager::searchByOrderID(string m)
     else cout<<"Khong co don hang nao!"<<endl;
 
 }
-void OrderManager::searchByCustomerID(string m)
+void OrderManager::SearchByCustomerID(string m)
 {
     int d=1;
     for (int i=0;i<this->n;i++)
@@ -63,7 +63,7 @@ void OrderManager::searchByCustomerID(string m)
         }
     }
 }
-void OrderManager::searchByStaffID(string m)
+void OrderManager::SearchByStaffID(string m)
 {   
     int d=1;
     for (int i=0;i<this->n;i++)
@@ -78,7 +78,7 @@ void OrderManager::searchByStaffID(string m)
     
     }     
 }
-void OrderManager::show() //Show All
+void OrderManager::Show() //Show All
 {
     for (int i=0;i<this->n;i++)
     {

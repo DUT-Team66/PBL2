@@ -15,12 +15,12 @@ class Staff
         string address;
         string phoneNumber;
         string gender;
-        string salary;    
+        int salary;    
     public:
 
     
         Staff();
-        Staff(string, string, string, string, string, string,string);
+        Staff(string, string, string, string, string, string);
         ~Staff();
         void setID(const string&);
         const string& getID();
@@ -34,8 +34,8 @@ class Staff
         const string& getPhoneNumber();
         void setGender(const string& );
         const string& getGender();
-        void setSalary(const string& );
-        const string& getSalary();
+        void setSalary(const int&);
+        const int& getSalary();
         void show();
 };
 

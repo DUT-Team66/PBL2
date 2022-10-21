@@ -10,10 +10,10 @@ class OrderManager
         //Khong co SV
         OrderManager();
         ~OrderManager();
-        void searchByOrderID(string);
-        void searchByCustomerID(string);
-        void searchByStaffID(string);
-        void add(const Order&);
-        void show();
+        void SearchByOrderID(string);
+        void SearchByCustomerID(string);
+        void SearchByStaffID(string);
+        void Add(const Order&);
+        void Show();
 };
 #endif

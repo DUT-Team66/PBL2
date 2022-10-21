@@ -1,3 +1,7 @@
+#ifndef _STAFF_
+#define _STAFF_
+
+
 #include <string>
 #include <iostream>
 using namespace std;
@@ -5,8 +9,8 @@ using namespace std;
 class Staff
 {
     private: 
-        string staffID;
-        string staffName;
+        string ID;
+        string name;
         string dob;
         string address;
         string phoneNumber;
@@ -18,10 +22,10 @@ class Staff
         Staff();
         Staff(string, string, string, string, string, string,string);
         ~Staff();
-        void setStaffID(const string&);
-        const string& getStaffID();
-        void setStaffName(const string&);
-        const string& getStaffName();
+        void setID(const string&);
+        const string& getID();
+        void setName(const string&);
+        const string& getName();
         void setDob(const string&);
         const string& getDob();
         void setAddress(const string& );
@@ -32,5 +36,8 @@ class Staff
         const string& getGender();
         void setSalary(const string& );
         const string& getSalary();
-        void Show();
+        void show();
 };
+
+
+#endif

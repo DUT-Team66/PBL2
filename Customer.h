@@ -12,7 +12,7 @@ class Customer {
         string customerPhoneNumber;
         string customerAddress;
     public:
-        void BuyPhone();
+        //void BuyPhone();
         //void getInfor();    
 
 };

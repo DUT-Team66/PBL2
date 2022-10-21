@@ -1,99 +1,15 @@
 #include <iostream>
 #include <iomanip>
+#include "Account.h"
+#include "ListAccount.h"
 using namespace std;
-class Account {
-    private:
-        string account;
-        string password;
-    public:
-        Account();
-		Account(string,string);
-        void Login();
-        void setData();
-        void showData();
-		
-};
-Account::Account() {
-	this->account = "";
-	this->password = "";
-}
-Account::Account(string account, string password)
-{
-	this->account = account;
-	this->password = password;
-}
-void Account::setData() 
-{
-    //cout << "Username: ";
-    cin >> this->account;
-    //cout << "Password: ";
-    cin >> this->password;
-}
-void Account::showData()
-{
-    cout << "Username: " << this->account << "\n";
-    cout << "Password: " << this->password << "\n";
-}
-class ListAccount {
-    private:
-        Account* data;
-        int length;
-    public:
-        ListAccount();
-		~ListAccount();
-        void setData();
-        void showData();
-
-
-
-};
-ListAccount::ListAccount() {
-	this-> data = nullptr;
-	this->length = 0;
-}
-ListAccount::~ListAccount() {
-	delete[] this->data;
-}
-void ListAccount::setData() 
-{
-	//Account acc("admin", "admin");
-	Account* acc = new Account[1];
-	acc->setData
-	
-	this->length++;
-
-	
-    // cin >> this->length;
-    // for(int i = 1; i < this->length; ++i) {
-	// 	Account tmp;
-	// 	tmp.setData();
-	// 	//*(this->data + i) = tmp;
-	// 	tmp.showData();
-
-	// }
-	
-	string name, pass;
-
-	while(cin >> name && cin >> pass) {
-		Account tmp(name, pass);
-		*(this->data + this->length) = tmp;
-		this->length++;
-		tmp.showData();
-	}
-
-}
-void ListAccount::showData()
-{
-    for(int i = 0; i < this->length; ++i) {
-        data[i].showData();
-    }
-}
 int main()
 {
-    freopen("account.txt","r",stdin);
+    
 	
 	ListAccount listAccount;
 	listAccount.setData();
+	listAccount.login();
     //listAccount.showData();
 }
 

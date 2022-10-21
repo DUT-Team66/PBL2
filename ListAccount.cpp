@@ -1,5 +1,6 @@
-#include <iostream>
-#include <string>
+
+#include <fstream>
+#include <iomanip>
 #include "ListAccount.h"
 using namespace std;
 
@@ -10,7 +11,7 @@ ListAccount::ListAccount() {
 ListAccount::~ListAccount() {
 	delete[] this->p;
 }
-void ListAccount::SetData() 
+void ListAccount::setData() 
 {	
 
 	fstream readfile("Account.txt", ios::in);
@@ -60,9 +61,37 @@ void ListAccount::SetData()
 }
 
 
-void ListAccount::ShowData()
+void ListAccount::showData()
 {
     for(int i = 0; i < this->n; ++i) {
         p[i].showData();
+    }
+}
+void ListAccount::login() {
+    
+    while(true) {
+        string username, password;
+        cout << setw(20) << "" << "Enter your account" << "\n\n";
+        cout << setw(22) << "" << "Username: ";
+        cin >> username;
+        cout << "\n";
+        cout << setw(22) << "" << "Password: ";
+        cin >> password;
+        cout << "\n";
+        
+        bool check = 0;
+        for(int i = 0; i < this->n; ++i) {
+            if(username == (this->p + i)->getUsername() && password == (this->p + i)->getPassword()) {
+                check = 1;
+                break;
+            }
+        }
+        if(check) {
+            cout << "Login successfull!\n";
+            break;
+        } else {
+            cout << "Invalid login information!\n";
+        }
+        system("pause"); 
     }
 }

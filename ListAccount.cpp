@@ -12,14 +12,30 @@ ListAccount::~ListAccount() {
 }
 void ListAccount::SetData() 
 {	
-	string name, pass;
-	while(cin >> name && cin >> pass) {
-		Account tmp(name, pass);
 
+	fstream readfile("Account.txt", ios::in);
+	string tmpacc;
+	while(getline(readfile,tmpacc)) {
+		
+		string username = "", password = "";
+		
+		
+		int i = 0;
+		while(tmpacc[i] != '/') {
+			username += tmpacc[i];
+			++i;
+		}
+		++i;
+		while(tmpacc[i] != '/') {
+			password += tmpacc[i];
+			++i;
+		}
+		Account acc(username, password);
+		
 		if(this->n==0) 
         {
             this->p = new Account[this->n+1];
-            *(this->p+this->n) = tmp;
+            *(this->p+this->n) = acc;
             this->n++;
         }
         else
@@ -31,14 +47,14 @@ void ListAccount::SetData()
             }
             delete[] this->p;
             this->p = new Account[this->n+1];
-            for (int i=0;i<this->n;i++)  // còn phần tử cuối
+            for (int i=0;i<this->n;i++)  // còn ph?n t? cu?i
                 *(this->p+i)=*(temp+i);
             delete[] temp;
-            *(this->p+this->n) = tmp;
+            *(this->p+this->n) = acc;
             this->n++;
         }
-        //tmp.showData();
     }
+    readfile.close();
 		
 	
 }

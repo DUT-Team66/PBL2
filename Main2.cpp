@@ -451,8 +451,21 @@ int main()
             s.Show();
             
             // In ra hóa đơn
+            
         }
-        
+        string enter3;
+        cin>>enter3;
+        cout<<"Enter D to finish"<<endl;
+        cout<<"Enter C to continue"<<endl;
+        cout<<"Your choice: ";
+        cin>>enter3;
+        while (enter3 != "D" && enter3 != "C")
+        {
+            cout << "Please re-enter: " << endl;
+            cin >> enter3;
+        }
+        if (enter3=="D") break; // Chỉnh sửa lại thông tin
+        if (enter3 == "C") continue;  
     }
     return 0;
 }

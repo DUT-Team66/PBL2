@@ -28,7 +28,6 @@ class Phone
         void setPhoneName(const string& );
         const string& getPhoneName();
 
-
         void setBrand(const string& );
         const string& getBrand();
 
@@ -44,6 +43,14 @@ class Phone
         void setCamera(const string& );
         const string& getCamera();
 
+        void setEntryPrice(const int&);
+        const int& getEntryPrice() const;
+
+        void setSalePrice(const int&);
+        const int& getSalePrice() const;
+
+        
+        void setInfo();
         void showForCustomer();   
         void showForStaff();   
 

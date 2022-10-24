@@ -1,3 +1,6 @@
+#ifndef _DATE_
+#define _DATE_
+
 #include <iostream>
 using namespace std;
 class Date
@@ -14,4 +17,4 @@ class Date
         friend ostream& operator<<(ostream &, const Date&);
         friend istream& operator>>(istream& , Date& );
 };
-
+#endif 

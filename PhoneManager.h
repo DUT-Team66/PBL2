@@ -2,6 +2,7 @@
 #ifndef _PHONEMANAGER_
 #define _PHONEMANAGER_
 #include "Phone.h"
+#include "ShoppingList.h"
 class PhoneManager
 {
     private: 
@@ -11,12 +12,20 @@ class PhoneManager
         //Khong co SV
         PhoneManager();
         ~PhoneManager();
-        int getlength();
         void Add(const Phone& s);
         void Delete(string);
         void Search(string);
-        void Show();
+        void Update(string);
+        void Show(); // show for staff
 
-        void SetData();
+        void ShowTable(); // show table for customer
+        void Show(int); // show 1 phone information
+
+
+        int GetLength();
+        const string& getPhoneID(int);
+        const int& getPhonePrice(int);
+        void LoadData();
+        void Menu();
 };
 #endif

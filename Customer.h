@@ -12,8 +12,21 @@ class Customer {
         string customerPhoneNumber;
         string customerAddress;
     public:
-        //void BuyPhone();
-        //void getInfor();    
+        Customer();
+        ~Customer();
+        void setCustomerID(const string& );
+        const string& getCustomerID() const;
+        void setCustomerName(const string& );
+        const string& getCustomerName() const;
+        void setCustomerPhoneNumber(const string&);
+        const string& getCustomerPhoneNumber() const;
+        void setCustomerAddress(const string&);
+        const string& getCustomerAddress() const;
+
+
+
+        void setInfo();    
+        void BuyPhone();
 
 };
 

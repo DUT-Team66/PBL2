@@ -8,6 +8,10 @@ ShoppingList::ShoppingList()
     this->phoneID="";
     this->amount=0;
 }
+ShoppingList::ShoppingList(string id, int amount) {
+    this->phoneID = id;
+    this->amount = amount;
+}
 ShoppingList::~ShoppingList()
 {
 

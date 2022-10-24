@@ -13,14 +13,17 @@ class StaffManager
         StaffManager();
         ~StaffManager();
         
-        void Add(const Staff& );
+        //----------------
+        void Add(const Staff&);
         void Delete(string);
         void Search(string);
-        int IndexOf(int);
-        void Update(int);
+        void Update(string);
         void Show();
-
-        void SetData();
+        //-----------------
+        const int& GetLength() const;
+        const string& getStaffID(int) const;
+        void LoadData(); // load data from file
+        void Menu(); // manage staff choice
 };
 
 

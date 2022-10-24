@@ -1,27 +1,32 @@
 #ifndef _STAFF_
 #define _STAFF_
 
-
+#include "PhoneManager.h"
+#include "OrderManager.h"
 #include <string>
 #include <iostream>
 using namespace std;
 
 class Staff
 {
-    private: 
-        string ID;
+    protected: 
         string name;
-        string dob;
-        string address;
-        string phoneNumber;
+        string ID;
         string gender;
+        string dob;
+        string phoneNumber;
+        string address;
         int salary;    
+
+        PhoneManager managePhone;
+        OrderManager manageOrder;
     public:
 
     
         Staff();
         Staff(string, string, string, string, string, string);
         ~Staff();
+
         void setID(const string&);
         const string& getID();
         void setName(const string&);
@@ -36,7 +41,11 @@ class Staff
         const string& getGender();
         void setSalary(const int&);
         const int& getSalary();
-        void show();
+        
+        void show(); // show staff information
+        void Menu(); // staff route
+
+        void setInfo(); // lay thong tin tu ban phim
 };
 
 

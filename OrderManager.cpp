@@ -1,6 +1,7 @@
 #include <iostream>
 #include "OrderManager.h"
 #include <string>
+#include <iomanip>
 using namespace std;
 OrderManager::OrderManager()
 {
@@ -86,4 +87,57 @@ void OrderManager::Show() //Show All
         cout<<endl;
     }
    
+}
+void OrderManager::Menu() {
+    while(true) {
+        int choice;
+        while(true) {
+            
+            cout << setw(25) << "" << "TRADES" << "\n\n\n";
+            cout << setw(22) << "" << "1. Search by OrderID" << "\n"; //  nhap orderid
+            cout << setw(22) << "" << "2. Search by CustomerID" << "\n"; // nhap customerid
+            cout << setw(22) << "" << "3. Search by StaffID" << "\n"; // nhap customerid
+            cout << setw(22) << "" << "4. Show all orders" << "\n";
+            cout << setw(22) << "" << "5. Go back" << "\n\n";
+            cout << setw(20) << "" << "Your choice: ";
+            cin >> choice;
+            if(choice != 1 && choice != 2 && choice !=3 && choice != 4 && choice != 5) {
+                cout << "Invalid choice, please re-enter!\n";
+                system("pause");
+                system("cls"); 
+            } else break;
+        }
+        if(choice == 1) {
+            cout << "Enter orderID you want to search: ";
+            string id; cin >> id;
+            for(int i = 0; i < this->n; ++i) {
+                if((this->p + i)->getID() == id) {
+                    (this->p + i)->show();
+                    break;
+                }
+            }
+        } else if (choice == 2) {
+            cout << "Enter customerID you want to search: ";
+            string id; cin >> id;
+            for(int i = 0; i < this->n; ++i) {
+                if((this->p + i)->getCustomerID() == id) {
+                    cout << i + 1 << "/\n";
+                    (this->p + i)->show();
+                }
+            }
+        } else if (choice == 3) {
+            cout << "Enter staffID you want to search: ";
+            string id; cin >> id;
+            for(int i = 0; i < this->n; ++i) {
+                if((this->p + i)->getStaffID() == id) {
+                    cout << i + 1 << "/\n";
+                    (this->p + i)->show();
+                }
+            }
+        } else if(choice == 4) {
+            this->Show();
+        } else break;
+        system("pause");
+        system("cls");
+    }
 }

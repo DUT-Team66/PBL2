@@ -2,6 +2,7 @@
 #include "PhoneManager.h"
 #include <string>
 #include <fstream>
+#include <iomanip>
 using namespace std;
 
 
@@ -14,7 +15,7 @@ PhoneManager::~PhoneManager()
 {
     delete[] this->p;
 }
-int PhoneManager::getlength()
+int PhoneManager::GetLength()
 {
     return this->n;
 }
@@ -99,20 +100,34 @@ void PhoneManager::Search(string m)
     cout<<endl;
 
 }
+const string& PhoneManager::getPhoneID(int index) {
+    return (this->p + index)->getPhoneID();
+}
 void PhoneManager::Show()
 {
-    int d=1;
+    
     for (int i=0;i<this->n;i++)
     {
-        cout<<d<<". ";
+        cout<< i + 1 <<". ";
         (this->p+i)->showForStaff(); 
-        d++; 
     }
    // cout<<endl;
 
 }
+void PhoneManager::ShowTable() {
+    for (int i=0;i<this->n;i++)
+    {
+        cout<< i + 1 <<". " << (this->p+i)->getPhoneName() << endl;
+    }
+}
+void PhoneManager::Show(int index) {
+    (this->p+index)->showForCustomer();
+}
 
-void PhoneManager::SetData() {
+const int& PhoneManager::getPhonePrice(int index) {
+    return (this->p + index)->getSalePrice();
+}
+void PhoneManager::LoadData() {
     fstream readfile("Phone.txt", ios::in);
 	string tmpline;
 	while(getline(readfile,tmpline)) {
@@ -162,4 +177,55 @@ void PhoneManager::SetData() {
 
     }
     readfile.close();
+}
+void PhoneManager::Menu() {
+    while(true) {
+        int choice;
+        while(true) {
+            
+            cout << setw(25) << "" << "PHONES" << "\n\n\n";
+            cout << setw(22) << "" << "1. Add phone" << "\n"; // nhap day du thong tin cua phone
+            cout << setw(22) << "" << "2. Delete phone" << "\n"; // nhap phoneid
+            cout << setw(22) << "" << "3. Search phone" << "\n"; // nhap phoneid
+            cout << setw(22) << "" << "4. Update phone" << "\n";
+            cout << setw(22) << "" << "5. Show all phones" << "\n";
+            cout << setw(22) << "" << "6. Go back" << "\n\n";
+            
+            cout << setw(20) << "" << "Your choice: ";
+            cin >> choice;
+            if(choice != 1 && choice != 2 && choice !=3 && choice != 4 && choice != 5 && choice != 6) {
+                cout << "Invalid choice, please re-enter!\n";
+                system("pause");
+                system("cls"); 
+            } else break;
+        }
+        if(choice == 1) {
+            Phone p;
+            p.setInfo();
+            this->Add(p);
+            cout << "Add successfully!\n";
+        } else if (choice == 2) {
+            string s;
+            cout << "Enter ID: ";
+            cin >> s;
+            this->Delete(s);
+            cout << "Delete successfully!\n";
+        } else if(choice == 3) {
+            string s;
+            cout << "Enter ID:";
+            cin >> s;
+            this->Search(s);
+        } else if (choice == 4) {
+            string s;
+            cout << "Enter ID: ";
+            cin >> s;
+            this->Update(s);
+            cout << "Update successfully!\n";
+        } else if(choice == 5) {
+            this->Show();
+        } else break;  
+        system("pause");
+        system("cls");
+    }
+    
 }

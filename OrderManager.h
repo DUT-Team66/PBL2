@@ -15,5 +15,6 @@ class OrderManager
         void SearchByStaffID(string);
         void Add(const Order&);
         void Show();
+        void Menu();
 };
 #endif

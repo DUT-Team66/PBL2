@@ -1,7 +1,9 @@
 #include "Staff.h"
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
+
 Staff::Staff()
 {
     this->ID = "";
@@ -11,6 +13,7 @@ Staff::Staff()
     this->phoneNumber = "";
     this->gender = "";
     this->salary = 0;
+    
 }
 Staff::Staff(string a, string b, string c, string d, string e, string g)
     : name(a), ID(b), gender(c), dob(d), phoneNumber(e), address(g)
@@ -86,4 +89,41 @@ void Staff::show()
     cout << "Address: " << this->address << "\n";
     cout << "Salary: " << this->salary << "\n";
 
+}
+void Staff::Menu() {
+    int choice;
+    while(true) {
+        cout << setw(20) << "" << "Choose what you want to manage" << "\n\n";
+        cout << setw(22) << "" << "1. Phones" << "\n";
+        cout << setw(22) << "" << "2. Trades" << "\n\n";
+        cout << setw(20) << "" << "Your choice: ";
+        cin >> choice;
+        if(choice != 1 && choice != 2) {
+            cout << "Invalid choice, please re-enter!\n";
+            system("pause");
+            system("cls"); 
+        } else break;
+    }
+    
+    if(choice == 1) {
+        this->managePhone.Menu();
+    } else if(choice == 2) {
+        this->manageOrder.Menu();
+    }
+}
+void Staff::setInfo() {
+    
+    cin.ignore();
+    cout << "Enter name: ";
+    getline(cin, this->name);
+    cout << "Enter ID: ";
+    getline(cin, this->ID);
+    cout << "Enter gender: ";
+    getline(cin, this->gender);
+    cout << "Enter dob: ";
+    getline(cin, this->dob);
+    cout << "Enter phone number: ";
+    getline(cin, this->phoneNumber);
+    cout << "Enter address: ";
+    getline(cin, this->address);
 }

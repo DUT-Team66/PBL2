@@ -92,13 +92,63 @@ const string& Phone::getDisplay()
 {
     return this->display;
 }
-
+void Phone::setEntryPrice(const int& price) {
+    this->entryPrice = price;
+}
+const int& Phone::getEntryPrice() const{
+    return this->entryPrice;
+}
+void Phone::setSalePrice(const int& price) {
+    this->salePrice = price;
+}
+const int& Phone::getSalePrice() const {
+    return this->salePrice;
+}
 void Phone::showForCustomer()
 {
-    cout<<"Phone name: "<<this->phoneName<<"\nPhone ID: "<<this->phoneID<<"\nBrand: "<<this->brand<<"\nProcessor: "<<this->processor<<"\nRAM/ROM: "<<this->RAM_ROM<<"\nCamera: "<<this->camera<<"\nDisplay: "<<this->display<<"\n";
+    cout<<"Phone name: "<<this->phoneName
+    <<"\nPhone ID: "<<this->phoneID
+    <<"\nBrand: "<<this->brand
+    <<"\nProcessor: "<<this->processor
+    <<"\nRAM/ROM: "<<this->RAM_ROM
+    <<"\nDisplay: "<<this->display
+    <<"\nCamera: "<<this->camera
+    <<"\nSale price: "<< this->salePrice
+    <<"\nRemaining amount: "<< this->remainingAmount << "\n";
 }
 void Phone::showForStaff()
 {
-    cout<<"Phone name: "<<this->phoneName<<"\nPhone ID: "<<this->phoneID<<"\nBrand: "<<this->brand<<"\nProcessor: "<<this->processor<<"\nRAM/ROM: "<<this->RAM_ROM<<"\nCamera: "<<this->camera<<"\nDisplay: "<<this->display<<"\n";
-    cout<<"Entry price: "<<this->entryPrice<<"\nSale price: "<<this->salePrice<<"\nRemaining amount: "<<this->remainingAmount << "\n";
+    cout<<"Phone name: "<<this->phoneName
+    <<"\nPhone ID: "<<this->phoneID
+    <<"\nBrand: "<<this->brand
+    <<"\nProcessor: "<<this->processor
+    <<"\nRAM/ROM: "<<this->RAM_ROM
+    <<"\nDisplay: "<<this->display
+    <<"\nCamera: "<<this->camera
+    <<"\nEntry price: "<<this->entryPrice
+    <<"\nSale price: "<<this->salePrice
+    <<"\nRemaining amount: "<<this->remainingAmount << "\n";
+}
+void Phone::setInfo() {
+    cin.ignore();
+    cout << "Enter phone name: ";
+    getline(cin, this->phoneName);
+    cout << "Enter phone id: ";
+    getline(cin, this->phoneID);
+    cout << "Enter brand: ";
+    getline(cin,this->brand);
+    cout << "Enter processor: ";
+    getline(cin, this->processor);
+    cout << "Enter RAM/ROM: ";
+    getline(cin, this->RAM_ROM);
+    cout << "Enter display: ";
+    getline(cin, this->display);
+    cout << "Enter camera: ";
+    getline(cin, this->camera);
+    cout << "Enter entry price: ";
+    cin >> this->entryPrice;
+    cout << "Enter sale price: ";
+    cin >> this->salePrice;
+    cout << "Enter remaining amount: ";
+    cin >> this->remainingAmount;
 }

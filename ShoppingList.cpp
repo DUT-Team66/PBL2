@@ -18,5 +18,5 @@ ShoppingList::~ShoppingList()
 }
 void ShoppingList::show()
 {
-    cout<<"Ma dien thoai: "<<this->phoneID<<", So luong: "<<this->amount;
+    cout<<"Phone id: "<< this->phoneID <<", Amount: "<< this->amount << "\n";
 }

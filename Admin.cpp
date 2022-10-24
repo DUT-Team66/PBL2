@@ -1,6 +1,13 @@
 #include "Admin.h"
 #include <iomanip>
 using namespace std;
+
+Admin::Admin() {
+
+}
+Admin::~Admin() {
+    
+}
 void Admin::calTurnover() {
     
 }
@@ -21,6 +28,7 @@ void Admin::Menu() {
                 system("cls"); 
             } else break;
         }
+        
         if(choice == 1) {
             this->manageStaff.Menu();
         } else if(choice == 2) {
@@ -30,5 +38,7 @@ void Admin::Menu() {
         } else {
             break;
         }
+        
     }
+
 }

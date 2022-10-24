@@ -194,6 +194,7 @@ void StaffManager::LoadData() {
     readfile.close();
 }
 void StaffManager::Menu() {
+    std::system("cls");
     while(true) {
         int choice;
         while(true) {
@@ -210,8 +211,8 @@ void StaffManager::Menu() {
             cin >> choice;
             if(choice != 1 && choice != 2 && choice !=3 && choice != 4 && choice != 5 && choice != 6) {
                 cout << "Invalid choice, please re-enter!\n";
-                system("pause");
-                system("cls"); 
+                std::system("pause");
+                std::system("cls"); 
             } else break;
         }
         if(choice == 1) {
@@ -238,8 +239,11 @@ void StaffManager::Menu() {
             cout << "Update successfully!\n";
         } else if(choice == 5) {
             this->Show();
-        } else break;  
+        } else {
+            std::system("cls");
+            break;  
+        }
+        std::system("pause");
+        std::system("cls");
     }
-    system("pause");
-    system("cls");
 }

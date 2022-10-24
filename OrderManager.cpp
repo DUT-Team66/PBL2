@@ -89,6 +89,7 @@ void OrderManager::Show() //Show All
    
 }
 void OrderManager::Menu() {
+    std::system("cls");
     while(true) {
         int choice;
         while(true) {
@@ -103,8 +104,8 @@ void OrderManager::Menu() {
             cin >> choice;
             if(choice != 1 && choice != 2 && choice !=3 && choice != 4 && choice != 5) {
                 cout << "Invalid choice, please re-enter!\n";
-                system("pause");
-                system("cls"); 
+                std::system("pause");
+                std::system("cls"); 
             } else break;
         }
         if(choice == 1) {
@@ -136,8 +137,11 @@ void OrderManager::Menu() {
             }
         } else if(choice == 4) {
             this->Show();
-        } else break;
-        system("pause");
-        system("cls");
+        } else {
+            std::system("cls");
+            break;  
+        } 
+        std::system("pause");
+        std::system("cls");
     }
 }

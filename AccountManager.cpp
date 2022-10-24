@@ -99,5 +99,6 @@ void AccountManager::Login(bool& isAdmin, bool& isStaff) {
             cout << "Invalid login information!\n";
         }
         system("pause"); 
+        system("cls");
     }
 }

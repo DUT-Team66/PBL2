@@ -84,6 +84,9 @@ void PhoneManager::Delete(string m)
         }
     }
 }
+void PhoneManager::Update(string id){
+
+}
 void PhoneManager::Search(string m)
 {
     int index=-1;
@@ -115,9 +118,12 @@ void PhoneManager::Show()
 
 }
 void PhoneManager::ShowTable() {
-    for (int i=0;i<this->n;i++)
+    for (int i=0;i<this->n;i+=2)
     {
-        cout<< i + 1 <<". " << (this->p+i)->getPhoneName() << endl;
+        cout<< i + 1 <<". " << setw(50) << left << (this->p+i)->getPhoneName()  << "" << i + 2 << ". " << (this->p + i + 1)->getPhoneName() << "\n";
+    }
+    if(n & 1) {
+        cout << this->n << ". " << (this->p + this->n - 1)->getPhoneName() << endl;
     }
 }
 void PhoneManager::Show(int index) {
@@ -179,6 +185,7 @@ void PhoneManager::LoadData() {
     readfile.close();
 }
 void PhoneManager::Menu() {
+    std::system("cls");
     while(true) {
         int choice;
         while(true) {
@@ -195,8 +202,8 @@ void PhoneManager::Menu() {
             cin >> choice;
             if(choice != 1 && choice != 2 && choice !=3 && choice != 4 && choice != 5 && choice != 6) {
                 cout << "Invalid choice, please re-enter!\n";
-                system("pause");
-                system("cls"); 
+                std::system("pause");
+                std::system("cls"); 
             } else break;
         }
         if(choice == 1) {
@@ -223,9 +230,12 @@ void PhoneManager::Menu() {
             cout << "Update successfully!\n";
         } else if(choice == 5) {
             this->Show();
-        } else break;  
-        system("pause");
-        system("cls");
+        } else {
+            std::system("cls");
+            break;  
+        }
+        std::system("pause");
+        std::system("cls");
     }
     
 }

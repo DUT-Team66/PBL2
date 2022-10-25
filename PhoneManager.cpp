@@ -247,7 +247,7 @@ void PhoneManager::LoadData() {
 void PhoneManager::UpdateFile() {
     fstream editfile("Phone.txt", ios::out);
     for(int i = 0; i < this->n; ++i) {
-        string s = (this->p + i)->getPhoneName() + "/" + (this->p + i)->getPhoneID() + "/" + (this->p + i)->getBrand() + "/" + (this->p + i)->getProcessor() + "/" + (this->p + i)->getDisplay() + "/" + (this->p + i)->getCamera() + "/";
+        string s = (this->p + i)->getPhoneName() + "/" + (this->p + i)->getPhoneID() + "/" + (this->p + i)->getBrand() + "/" + (this->p + i)->getProcessor() + "/" + (this->p + i)->getRAM_ROM() + "/" + (this->p + i)->getDisplay() + "/" + (this->p + i)->getCamera() + "/";
         editfile << s << "\n";
     }
     editfile.close();

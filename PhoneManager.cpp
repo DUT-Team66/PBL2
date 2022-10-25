@@ -83,9 +83,70 @@ void PhoneManager::Delete(string m)
             this->n--;
         }
     }
+    else cout<<"PhoneID does not exist!"<<"\n}";
 }
 void PhoneManager::Update(string id){
-
+    bool check = false;
+    cin.ignore();
+    for(int i = 0; i < this->n; ++i) {
+        if((this->p + i)->getPhoneID() == id) {
+            string phoneName, phoneID, brand, processor, RAM_ROM, display, camera ;
+            int entryPrice, salePrice, remainingAmount; 
+            cout<<"Enter phonename: ";
+            getline(cin, phoneName);
+            cout << "Enter phoneID: ";
+            getline(cin,phoneID);
+            cout << "Enter brand: ";
+            getline(cin,brand);
+            cout << "Enter processor: ";
+            getline(cin, processor);
+            cout<<"Enter RAM/ROM: ";
+            getline(cin,RAM_ROM);
+            cout<<"Enter display: ";
+            getline(cin,display);
+            cout<<"Enter camera: ";
+            getline(cin,camera);
+            cout<<"Enter entryprice: ";
+            cin>>entryPrice;
+            cout<<"Enter saleprice: ";
+            cin>>salePrice;
+            cout<<"Enter remainingamount: ";
+            cin>> remainingAmount;
+            if(phoneName != "") {
+                (this->p+i)->setPhoneName(phoneName);
+            } 
+            if(phoneID != "") {
+                (this->p+i)->setPhoneID(phoneID);
+            }
+            if(brand != "") {
+                (this->p+i)->setBrand(brand);
+            }
+            if(processor != "") {
+                (this->p+i)->setProcessor(processor);
+            }
+            if(RAM_ROM != "") {
+                (this->p+i)->setRAM_ROM(RAM_ROM);
+            } 
+            if(display != "") {
+                (this->p+i)->setDisplay(display);
+            }
+            if(camera != "") {
+                (this->p+i)->setCamera(camera);
+            }
+            if (entryPrice != 0) {
+                (this->p+i)->setEntryPrice(entryPrice);
+            }
+            if (salePrice != 0 ){
+                (this->p+i)->setSalePrice(salePrice);
+            }
+            if (remainingAmount!=-1) {
+                (this->p+i)->setRemainingAmount(remainingAmount);
+            }
+            check = true;
+            break;  
+        }
+    }
+    if(!check) cout << "PhoneID does not exist!" << "\n";
 }
 void PhoneManager::Search(string m)
 {

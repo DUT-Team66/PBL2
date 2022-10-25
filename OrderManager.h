@@ -16,5 +16,6 @@ class OrderManager
         void Add(const Order&);
         void Show();
         void Menu();
+        const OrderManager& operator=(const OrderManager& );
 };
 #endif

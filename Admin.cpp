@@ -8,6 +8,12 @@ Admin::Admin() {
 Admin::~Admin() {
     
 }
+void Admin::setStaffManager(const StaffManager& staffManager) {
+    this->manageStaff = staffManager;
+}
+void Admin::setAccountManager(const AccountManager& accountManager) {
+    this->managerAccount = accountManager;
+}
 void Admin::calTurnover() {
     
 }

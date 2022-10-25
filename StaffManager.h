@@ -24,6 +24,7 @@ class StaffManager
         const string& getStaffID(int) const;
         void LoadData(); // load data from file
         void Menu(); // manage staff choice
+
         const StaffManager& operator=(const StaffManager& );
 };
 

@@ -79,6 +79,12 @@ const int& Staff::getSalary()
 {
     return this->salary;
 }
+void Staff::setPhoneManager(const PhoneManager& phoneManager) {
+    this->managePhone = phoneManager;
+}
+void Staff::setOrderManager(const OrderManager& orderManager) {
+    this->manageOrder = orderManager;
+}
 void Staff::show()
 {
     cout << "Staff name: " << this->name << "\n";

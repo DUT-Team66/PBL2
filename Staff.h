@@ -41,7 +41,8 @@ class Staff
         const string& getGender();
         void setSalary(const int&);
         const int& getSalary();
-        
+        void setPhoneManager(const PhoneManager&);
+        void setOrderManager(const OrderManager&);
         void show(); // show staff information
         void Menu(); // staff route
 

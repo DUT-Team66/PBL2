@@ -150,9 +150,9 @@ const OrderManager& OrderManager::operator=(const OrderManager& v )
     if (this != &v) {
         this->n=v.n;
         delete[] this->p;
-        this->p = new int[this->n];
+        this->p = new Order[this->n];
         for (int i=0;i<this->n;i++)
-            (*this)[i] = *(v.p+i); 
+            *(this->p + i) = *(v.p+i); 
     }
     return *this;
 }

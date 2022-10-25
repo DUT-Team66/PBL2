@@ -70,6 +70,9 @@ void AccountManager::ShowData()
         p[i].showData();
     }
 }
+const int& AccountManager::GetLength() const {
+    return this->n;
+}
 void AccountManager::Login(bool& isAdmin, bool& isStaff) {
     
     while(true) {
@@ -107,9 +110,9 @@ const AccountManager& AccountManager::operator=(const AccountManager& v )
     if (this != &v) {
         this->n=v.n;
         delete[] this->p;
-        this->p = new int[this->n];
+        this->p = new Account[this->n];
         for (int i=0;i<this->n;i++)
-            (*this)[i] = *(v.p+i); 
+            *(this->p + i) = *(v.p+i); 
     }
     return *this;
 }

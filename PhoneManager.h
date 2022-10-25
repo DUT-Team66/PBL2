@@ -27,6 +27,7 @@ class PhoneManager
         const int& getPhonePrice(int);
         void LoadData();
         void Menu();
+
         const PhoneManager& operator=(const PhoneManager& );
 };
 #endif

@@ -24,7 +24,7 @@ void StaffManager::Add(const Staff &s)
     else
     {
         Staff *temp = new Staff[this->n];
-        for (int i = 0; i < this->n; i++)
+        for (int i = 0; i < this->n; i++)   
         {
             *(temp + i) = *(this->p + i);
         }
@@ -252,9 +252,9 @@ const StaffManager& StaffManager::operator=(const StaffManager& v )
     if (this != &v) {
         this->n=v.n;
         delete[] this->p;
-        this->p = new int[this->n];
+        this->p = new Staff[this->n];
         for (int i=0;i<this->n;i++)
-            (*this)[i] = *(v.p+i); 
+            *(this->p + i) = *(v.p+i); 
     }
     return *this;
 }

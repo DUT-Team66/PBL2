@@ -16,19 +16,33 @@ using namespace std;
 int main()
 {
 
-    OrderManager orderManager;
-    Admin admin;
-    Staff staff;
 
     AccountManager accountManager;
 	accountManager.LoadData();
-	
-	StaffManager staffManager;
+	//accountManager.ShowData();
+	//cout << accountManager.GetLength() << "\n";
+    
+    StaffManager staffManager;
 	staffManager.LoadData();
-
-	PhoneManager phoneManager;
+    //staffManager.Show();
+	//cout << staffManager.GetLength() << "\n";
+    
+    PhoneManager phoneManager;
 	phoneManager.LoadData();
+    //phoneManager.Show();
+    //cout << phoneManager.GetLength() << "\n";
+    
+    OrderManager orderManager;
+    Staff staff;
+    staff.setOrderManager(orderManager);
+    staff.setPhoneManager(phoneManager);
 
+    Admin admin;
+    admin.setOrderManager(orderManager);
+    admin.setPhoneManager(phoneManager);
+    admin.setAccountManager(accountManager);
+    admin.setStaffManager(staffManager);
+    //std::system("pause");
     std::system("cls");
 
 
@@ -56,7 +70,6 @@ int main()
         
         if(choice == 0) {
             std::cout << "Goodbye!\n";
-            system("pause");
             break;
         }
         else if (choice == 1)

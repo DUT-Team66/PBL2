@@ -18,8 +18,9 @@ class AccountManager {
         void Delete(string); // nhan vao ten staff
         void LoadData();
         void ShowData();
+        const int& GetLength() const;
         void Login(bool&,bool&);
-	const AccountManager& operator=(const AccountManager& );
+        const AccountManager& operator=(const AccountManager& );
 };
 
 #endif

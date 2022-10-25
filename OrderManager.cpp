@@ -145,3 +145,14 @@ void OrderManager::Menu() {
         std::system("cls");
     }
 }
+const OrderManager& OrderManager::operator=(const OrderManager& v )
+{
+    if (this != &v) {
+        this->n=v.n;
+        delete[] this->p;
+        this->p = new int[this->n];
+        for (int i=0;i<this->n;i++)
+            (*this)[i] = *(v.p+i); 
+    }
+    return *this;
+}

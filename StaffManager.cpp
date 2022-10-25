@@ -222,7 +222,7 @@ void StaffManager::LoadData() {
 void StaffManager::UpdateFile() {
     fstream editfile("Staff.txt", ios::out);
     for(int i = 0;i < this->n; ++i) {
-        string s = (this->p + i)->getName() + "/" + (this->p + i)->getID() + "/" + (this->p + i)->getGender() + "/" + (this->p + i)->getDob() + "/" + (this->p + i)->getPhoneNumber() + "/ " + (this->p + i)->getAddress() + "/" + (this->p + i)->getUsername() + "/" + (this->p + i)->getPassword() + '/';
+        string s = (this->p + i)->getName() + "/" + (this->p + i)->getID() + "/" + (this->p + i)->getGender() + "/" + (this->p + i)->getDob() + "/" + (this->p + i)->getPhoneNumber() + "/" + (this->p + i)->getAddress() + "/" + (this->p + i)->getUsername() + "/" + (this->p + i)->getPassword() + "/";
         editfile << s << "\n";
     }
     editfile.close();

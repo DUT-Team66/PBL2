@@ -12,12 +12,12 @@ Staff::Staff()
     this->dob = "";
     this->phoneNumber = "";
     this->address = "";
-    this->salary = 0;
+    this->salary = 5000000;
 }
 Staff::Staff(string a, string b, string c, string d, string e, string f,string g, string h)
     : name(a), ID(b), gender(c), dob(d), phoneNumber(e), address(f), account(g,h)
 {
-    this-> salary = 0;
+    this-> salary = 5000000;
 }
 Staff::~Staff()
 {
@@ -108,24 +108,27 @@ void Staff::show()
 
 }
 void Staff::Menu() {
-    int choice;
     while(true) {
-        cout << setw(20) << "" << "Choose what you want to manage" << "\n\n";
-        cout << setw(22) << "" << "1. Phones" << "\n";
-        cout << setw(22) << "" << "2. Trades" << "\n\n";
-        cout << setw(20) << "" << "Your choice: ";
-        cin >> choice;
-        if(choice != 1 && choice != 2) {
-            cout << "Invalid choice, please re-enter!\n";
-            system("pause");
-            system("cls"); 
+        int choice;
+        while(true) {
+            cout << setw(20) << "" << "Choose what you want to manage" << "\n\n";
+            cout << setw(22) << "" << "1. Phones" << "\n";
+            cout << setw(22) << "" << "2. Trades" << "\n";
+            cout << setw(22) << "" << "3. Go back" << "\n\n";
+            cout << setw(20) << "" << "Your choice: ";
+            cin >> choice;
+            if(choice != 1 && choice != 2 && choice != 3) {
+                cout << "Invalid choice, please re-enter!\n";
+                system("pause");
+                system("cls"); 
+            } else break;
+        }
+        
+        if(choice == 1) {
+            this->managePhone.Menu();
+        } else if(choice == 2) {
+            this->manageOrder.Menu();
         } else break;
-    }
-    
-    if(choice == 1) {
-        this->managePhone.Menu();
-    } else if(choice == 2) {
-        this->manageOrder.Menu();
     }
 }
 

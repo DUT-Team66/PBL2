@@ -19,7 +19,7 @@ class Phone
         int remainingAmount;//z
     public:
         Phone();
-        Phone(string, string, string, string,string, string, string);
+        Phone(string, string, string, string,string, string, string,int,int);
         ~Phone();
 
         void setPhoneID(const string& );

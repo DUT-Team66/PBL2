@@ -60,7 +60,7 @@ int main()
             std::cout << setw(22) << "" << "3. Exit" << "\n\n";
             std::cout << setw(20) << "" << "Your choice: ";
             std::cin >> choice;
-            if (choice != 1 && choice != 2 && choice != 0)
+            if (choice != 1 && choice != 2 && choice != 3)
             {
                 std::cout << "Please re-enter!\n";
                 std::system("pause");
@@ -71,7 +71,7 @@ int main()
         }
         std::system("cls");
         
-        if(choice == 0) {
+        if(choice == 3) {
             std::cout << "Goodbye!\n";
             break;
         }
@@ -153,9 +153,14 @@ int main()
                     ShoppingList sp(phoneManager.getPhoneID(choice - 1),amount); 
                     
                     if(amount != 0) {
-                        order.addToShoppingList(sp);
-                        int price = phoneManager.getPhonePrice(choice-1) * amount;
-                        order.setTotalPrice(order.getTotalPrice() + price);
+                        if(amount > phoneManager.getRemainingAmount(choice-1)) {
+                            cout << "Remaining amount is not enough\n"; 
+                        } else {
+                            order.addToShoppingList(sp);
+                            phoneManager.setRemainingAmount(choice-1,amount);
+                            int price = phoneManager.getPhonePrice(choice-1) * amount;
+                            order.setTotalPrice(order.getTotalPrice() + price);
+                        }
                     }
                 }
                 //system("pause");
@@ -192,7 +197,9 @@ int main()
             
             orderManager.Add(order);
             admin.setOrderManager(orderManager);
+            admin.setPhoneManager(phoneManager);
             staff.setOrderManager(orderManager);
+            staff.setPhoneManager(phoneManager);
         
             std::system("pause");
         }

@@ -193,13 +193,19 @@ void PhoneManager::Show(int index) {
 const int& PhoneManager::getPhonePrice(int index) {
     return (this->p + index)->getSalePrice();
 }
+const int& PhoneManager::getRemainingAmount(int index) {
+    return (this->p + index)->getRemainingAmount();
+}
+void PhoneManager::setRemainingAmount(int index, int amount) {
+    (this->p + index)->setRemainingAmount((this->p + index)->getRemainingAmount() - amount);
+}
 void PhoneManager::LoadData() {
     fstream readfile("Phone.txt", ios::in);
 	string tmpline;
 	while(getline(readfile,tmpline)) {
 		
 		string id = "", name = "", brand = "", processor = "", RAM_ROM = "", display = "", camera = "";
-		
+		int entryprice = 0, saleprice = 0;
 		
 		int i = 0;
 		while(tmpline[i] != '/') {
@@ -236,9 +242,20 @@ void PhoneManager::LoadData() {
 			camera += tmpline[i];
 			++i;
 		}
+        ++i;
+        while(tmpline[i] != '/') {
+            entryprice = entryprice*10 + tmpline[i] - 48;
+            ++i;
+        }
+        ++i;
+        while(tmpline[i] != '/') {
+            saleprice = saleprice*10 + tmpline[i] - 48;
+            ++i;
+        }
+        ++i;
 
 
-        this->Add(Phone(name,id,brand,processor,RAM_ROM,display,camera));
+        this->Add(Phone(name,id,brand,processor,RAM_ROM,display,camera,entryprice,saleprice));
 
 
     }
@@ -247,7 +264,7 @@ void PhoneManager::LoadData() {
 void PhoneManager::UpdateFile() {
     fstream editfile("Phone.txt", ios::out);
     for(int i = 0; i < this->n; ++i) {
-        string s = (this->p + i)->getPhoneName() + "/" + (this->p + i)->getPhoneID() + "/" + (this->p + i)->getBrand() + "/" + (this->p + i)->getProcessor() + "/" + (this->p + i)->getRAM_ROM() + "/" + (this->p + i)->getDisplay() + "/" + (this->p + i)->getCamera() + "/";
+        string s = (this->p + i)->getPhoneName() + "/" + (this->p + i)->getPhoneID() + "/" + (this->p + i)->getBrand() + "/" + (this->p + i)->getProcessor() + "/" + (this->p + i)->getRAM_ROM() + "/" + (this->p + i)->getDisplay() + "/" + (this->p + i)->getCamera() + "/" + to_string((this->p + i)->getEntryPrice()) + "/" + to_string((this->p + i)->getSalePrice()) + "/" ;
         editfile << s << "\n";
     }
     editfile.close();

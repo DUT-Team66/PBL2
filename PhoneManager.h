@@ -25,6 +25,8 @@ class PhoneManager
         int GetLength();
         const string& getPhoneID(int);
         const int& getPhonePrice(int);
+        const int& getRemainingAmount(int);
+        void setRemainingAmount(int,int);
         void LoadData();
         void UpdateFile();
         void Menu();

@@ -13,6 +13,18 @@ OrderManager::~OrderManager()
 {
     delete[] this->p;
 }
+const int& OrderManager::GetLength() const {
+    return this->n;
+}
+const int& OrderManager::GetMonth(int index) const {
+    return (this->p + index)->getPurchaseDay().getMonth();
+}
+const int& OrderManager::GetYear(int index) const {
+    return (this->p + index)->getPurchaseDay().getYear();
+}
+const int& OrderManager::GetTotalPrice(int index) const {
+    return (this->p + index)->getTotalPrice();
+}
 void OrderManager::Add(const Order& s)
 {
     if(this->n==0) {

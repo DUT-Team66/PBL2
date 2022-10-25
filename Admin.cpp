@@ -18,7 +18,16 @@ void Admin::setAccountManager(const AccountManager& accountManager) {
     this->manageAccount = accountManager;
 }
 void Admin::calTurnover() {
-    
+    int month, year;
+    cout << "Enter month: "; cin >> month;
+    cout << "Enter year: "; cin >> year;
+    long long totalTurnover = 0;
+    for(int i = 0; i < this->manageOrder.GetLength(); ++i) {
+        if(this->manageOrder.GetMonth(i) == month && this->manageOrder.GetYear(i) == year) {
+            totalTurnover += this->manageOrder.GetTotalPrice(i);
+        }
+    }
+    cout << "Turnover in " << month << "/" << year << " is " << totalTurnover << "\n"; 
 }
 void Admin::Menu() {
     while(true) {
@@ -28,10 +37,11 @@ void Admin::Menu() {
             cout << setw(22) << "" << "1. Staffs" << "\n";
             cout << setw(22) << "" << "2. Phones" << "\n";
             cout << setw(22) << "" << "3. Trades" << "\n";
-            cout << setw(22) << "" << "4. Go back" << "\n\n";
+            cout << setw(22) << "" << "4. Calculate turnover" << "\n";
+            cout << setw(22) << "" << "5. Go back" << "\n\n";
             cout << setw(20) << "" << "Your choice: ";
             cin >> choice;
-            if(choice != 1 && choice != 2 && choice != 3 && choice != 4) {
+            if(choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5) {
                 cout << "Invalid choice, please re-enter!\n";
                 system("pause");
                 system("cls"); 
@@ -44,9 +54,9 @@ void Admin::Menu() {
             this->managePhone.Menu();
         } else if(choice == 3) {
             this->manageOrder.Menu();
-        } else {
-            break;
-        }
+        } else if(choice == 4) {
+            this->calTurnover();
+        } else break;
         
     }
 

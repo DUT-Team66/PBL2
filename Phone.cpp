@@ -14,14 +14,12 @@ Phone::Phone()
     this->camera = "";
     this->entryPrice = 0;
     this->salePrice = 0;
-    this->remainingAmount = 0;
+    this->remainingAmount = 100;
 }
-Phone::Phone(string a, string b,string c, string d, string e, string g, string h)
-: phoneName(a), phoneID(b), brand(c), processor(d), RAM_ROM(e), display(g), camera(h)
+Phone::Phone(string a, string b,string c, string d, string e, string g, string h,int i, int j)
+: phoneName(a), phoneID(b), brand(c), processor(d), RAM_ROM(e), display(g), camera(h), entryPrice(i), salePrice(j)
 {
-    this->entryPrice = 0;
-    this->salePrice = 0;
-    this->remainingAmount = 0;
+    this->remainingAmount = 100;
 }
 Phone::~Phone()
 {

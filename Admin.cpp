@@ -8,11 +8,14 @@ Admin::Admin() {
 Admin::~Admin() {
     
 }
+Admin::Admin(string name, string id, string gender, string dob, string phoneNumber, string address, string username, string password) : Staff(name,id,gender,dob,phoneNumber,address,username,password) {
+    this->salary = 15000000;
+}
 void Admin::setStaffManager(const StaffManager& staffManager) {
     this->manageStaff = staffManager;
 }
 void Admin::setAccountManager(const AccountManager& accountManager) {
-    this->managerAccount = accountManager;
+    this->manageAccount = accountManager;
 }
 void Admin::calTurnover() {
     
@@ -47,4 +50,9 @@ void Admin::Menu() {
         
     }
 
+}
+void Admin::UpdateAllFiles() {
+    Staff::UpdateAllFiles();
+    this->manageStaff.UpdateFile();
+    this->manageAccount.UpdateFile();
 }

@@ -49,6 +49,15 @@ const Date &Order::getPurchaseDay() const
 {
     return this->purchaseDay;
 }
+const ShoppingList& Order::getShoppingList(int index) const {
+    return *(this->shoppingList + index);
+}
+void Order::setShpllength(const int& length) {
+    this->shpllength = length;
+}
+const int& Order::getShpllength() const {
+    return this->shpllength;
+}
 void Order::setTotalPrice(const int& totalPrice) {
     this->totalPrice = totalPrice;
 }

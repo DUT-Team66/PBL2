@@ -35,6 +35,7 @@ void StaffManager::Add(const Staff &s)
         delete[] temp;
         *(this->p + this->n) = s;
         this->n++;
+        
     }
 }
 void StaffManager::Delete(string s)
@@ -56,7 +57,7 @@ void StaffManager::Delete(string s)
         if (this->n == 1)
         {
             delete[] this->p;
-            this->p = 0;
+            this->p = nullptr;
             this->n--;
         }
         else
@@ -148,15 +149,30 @@ void StaffManager::Show()
 const int& StaffManager::GetLength() const {
     return this->n;
 }
+const string& StaffManager::getStaffName(int index) const {
+    return (this->p + index)->getName();
+}
 const string& StaffManager::getStaffID(int index) const {
     return (this->p + index)->getID();
+}
+const string& StaffManager::getStaffGender(int index) const {
+    return (this->p + index)->getGender();
+}
+const string& StaffManager::getStaffDob(int index) const {
+    return (this->p + index)->getDob();
+}
+const string& StaffManager::getStaffPhoneNumber(int index) const {
+    return (this->p + index)->getPhoneNumber();
+}
+const string& StaffManager::getStaffAddress(int index) const {
+    return (this->p + index)->getAddress();
 }
 void StaffManager::LoadData() {
     fstream readfile("Staff.txt", ios::in);
 	string tmpline;
 	while(getline(readfile,tmpline)) {
 		
-		string name = "", id = "", gender = "", dob = "", phonenumber = "", address = "";
+		string name = "", id = "", gender = "", dob = "", phonenumber = "", address = "", username = "", password = "";
 	
 		int i = 0;
 		while(tmpline[i] != '/') {
@@ -188,10 +204,30 @@ void StaffManager::LoadData() {
 			address += tmpline[i];
 			++i;
 		}
-		
-        this->Add(Staff(name,id, gender, dob, phonenumber, address));
+		++i;
+        while(tmpline[i] != '/') {
+            username += tmpline[i];
+            ++i;
+        }
+        ++i;
+        while(tmpline[i] != '/') {
+            password += tmpline[i];
+            ++i;
+        }
+        ++i;
+        this->Add(Staff(name,id, gender, dob, phonenumber, address,username,password));
     }
     readfile.close();
+}
+void StaffManager::UpdateFile() {
+    fstream editfile("Staff.txt", ios::out);
+    for(int i = 0;i < this->n; ++i) {
+        string s = (this->p + i)->getName() + "/" + (this->p + i)->getID() + "/" + (this->p + i)->getGender() + "/" + (this->p + i)->getDob() + "/" + (this->p + i)->getPhoneNumber() + "/ " + (this->p + i)->getAddress() + "/" + (this->p + i)->getUsername() + "/" + (this->p + i)->getPassword() + '/';
+        editfile << s << "\n";
+    }
+    editfile.close();
+
+
 }
 void StaffManager::Menu() {
     std::system("cls");
@@ -245,6 +281,38 @@ void StaffManager::Menu() {
         }
         std::system("pause");
         std::system("cls");
+    }
+}
+void StaffManager::Login(bool& isAdmin, bool& isStaff) {
+    
+    while(true) {
+        string username, password;
+        cout << setw(20) << "" << "Enter your account" << "\n\n";
+        cout << setw(22) << "" << "Username: ";
+        cin >> username;
+        cout << "\n";
+        cout << setw(22) << "" << "Password: ";
+        cin >> password;
+        cout << "\n";
+        
+        if(username == "admin" && password == "admin") {
+            isAdmin = true;
+        } else {
+            for(int i = 0; i < this->n; ++i) {
+                if(username == (this->p + i)->getUsername() && password == (this->p + i)->getPassword()) {
+                    isStaff = true;
+                    break;
+                }
+            }
+        }
+        if(isStaff || isAdmin)  {
+            cout << "Login successfully!\n";
+            break;
+        } else {
+            cout << "Invalid login information!\n";
+        }
+        system("pause"); 
+        system("cls");
     }
 }
 const StaffManager& StaffManager::operator=(const StaffManager& v )

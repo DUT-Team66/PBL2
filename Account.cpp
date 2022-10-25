@@ -19,10 +19,16 @@ Account::Account(string username, string password)
 //     //cout << "Password: ";
 //     cin >> this->password;
 // }
-string Account::getUsername() {
+void Account::setUsername(const string& username) {
+    this->username = username;
+}
+const string& Account::getUsername() const {
     return this->username;
 }
-string Account::getPassword() {
+void Account::setPassword(const string& password) {
+    this->password = password;
+}
+const string& Account::getPassword() const {
     return this->password;
 }
 void Account::showData()

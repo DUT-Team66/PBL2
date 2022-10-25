@@ -7,16 +7,16 @@ using namespace std;
 class Phone
 {
     private: 
-        string phoneName;
-        string phoneID;
-        string brand;
-        string processor;
-        string RAM_ROM; 
-        string display; 
-        string camera; 
-        int entryPrice;
-        int salePrice;
-        int remainingAmount;
+        string phoneName;//b
+        string phoneID;//a
+        string brand;//c
+        string processor;//e
+        string RAM_ROM; // d
+        string display; //h 
+        string camera; // g
+        int entryPrice;//x
+        int salePrice;//y
+        int remainingAmount;//z
     public:
         Phone();
         Phone(string, string, string, string,string, string, string);
@@ -48,6 +48,7 @@ class Phone
 
         void setSalePrice(const int&);
         const int& getSalePrice() const;
+
         void setRemainingAmount(const int&);
         const int& getRemainingAmount() const;
         

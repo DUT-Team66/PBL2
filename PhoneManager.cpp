@@ -52,7 +52,12 @@ void PhoneManager::Delete(string m)
             break;
         }
     }
+
+
     //Chu y truong hop index=-1(khong tim duoc)
+
+
+
     if (index >= 0)
     {
         if (this->n==1) {
@@ -78,10 +83,9 @@ void PhoneManager::Delete(string m)
             this->n--;
         }
     }
-    else cout<<"PhoneID does not exist!"<<"\n";
 }
 void PhoneManager::Update(string id){
-    bool check = false;
+     bool check = false;
     cin.ignore();
     for(int i = 0; i < this->n; ++i) {
         if((this->p + i)->getPhoneID() == id) {
@@ -239,6 +243,14 @@ void PhoneManager::LoadData() {
 
     }
     readfile.close();
+}
+void PhoneManager::UpdateFile() {
+    fstream editfile("Phone.txt", ios::out);
+    for(int i = 0; i < this->n; ++i) {
+        string s = (this->p + i)->getPhoneName() + "/" + (this->p + i)->getPhoneID() + "/" + (this->p + i)->getBrand() + "/" + (this->p + i)->getProcessor() + "/" + (this->p + i)->getDisplay() + "/" + (this->p + i)->getCamera() + "/";
+        editfile << s << "\n";
+    }
+    editfile.close();
 }
 void PhoneManager::Menu() {
     std::system("cls");

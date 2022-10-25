@@ -11,8 +11,10 @@ class Account {
     public:
         Account();
 		Account(string,string);
-        string getUsername();
-        string getPassword();
+        void setUsername(const string&);
+        const string& getUsername() const;
+        void setPassword(const string&);
+        const string& getPassword() const;
 
         //void setData();
         void showData();

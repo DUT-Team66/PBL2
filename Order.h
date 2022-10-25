@@ -23,8 +23,10 @@ class Order
         const string& getCustomerID() const;
         void setStaffID(const string& );
         const string& getStaffID() const;
-        void setShoppingList(const ShoppingList&);
-        const string& getShoppingList() const;
+        //void setShoppingList(const ShoppingList&);
+        const ShoppingList& getShoppingList(int) const;
+        void setShpllength(const int&);
+        const int& getShpllength() const;
         void setPurchaseDay(const Date& );
         const Date& getPurchaseDay() const;
         void setTotalPrice(const int&);

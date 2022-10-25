@@ -17,8 +17,8 @@ int main()
 {
 
 
-    AccountManager accountManager;
-	accountManager.LoadData();
+    // AccountManager accountManager;
+	// accountManager.LoadData();
 	//accountManager.ShowData();
 	//cout << accountManager.GetLength() << "\n";
     
@@ -33,14 +33,16 @@ int main()
     //cout << phoneManager.GetLength() << "\n";
     
     OrderManager orderManager;
+
     Staff staff;
     staff.setOrderManager(orderManager);
     staff.setPhoneManager(phoneManager);
 
-    Admin admin;
+    Admin admin("Katou Megumi","048203000396","Female","23/09/2012","0766772943","97 Hai Son", "admin" , "admin");
+    //Admin admin;
     admin.setOrderManager(orderManager);
     admin.setPhoneManager(phoneManager);
-    admin.setAccountManager(accountManager);
+    //admin.setAccountManager(accountManager);
     admin.setStaffManager(staffManager);
     //std::system("pause");
     std::system("cls");
@@ -52,9 +54,10 @@ int main()
         int choice;
         while(true) {
             std::cout << setw(25) << "" << "NH MOBILE STORE" << "\n\n\n";
-            std::cout << setw(20) << "" << "You are: " << "\n"; 
+            std::cout << setw(20) << "" << "Select role: " << "\n"; 
             std::cout << setw(22) << "" << "1. Staff" << "\n";
-            std::cout << setw(22) << "" << "2. Customer" << "\n\n";
+            std::cout << setw(22) << "" << "2. Customer" << "\n";
+            std::cout << setw(22) << "" << "3. Exit" << "\n\n";
             std::cout << setw(20) << "" << "Your choice: ";
             std::cin >> choice;
             if (choice != 1 && choice != 2 && choice != 0)
@@ -77,7 +80,7 @@ int main()
             // enter staff account
             
             bool isAdmin = false, isStaff = false;
-            accountManager.Login(isAdmin, isStaff);   
+            staffManager.Login(isAdmin, isStaff);   
             //
             std::system("pause");
             std::system("cls");
@@ -85,9 +88,11 @@ int main()
             if (isAdmin) {
                 // admin route--------------------------------------------------
                 admin.Menu();
+                admin.UpdateAllFiles();
             }
             else if (isStaff) {
                 staff.Menu();
+                staff.UpdateAllFiles();
             } 
         }
 
@@ -161,7 +166,7 @@ int main()
 
 
             
-
+            std::system("cls");
             string orderID;  // Tu dong cung cap ma don hang
             randOrderID(9, orderID);
             order.setID(orderID);
@@ -182,14 +187,19 @@ int main()
             order.setPurchaseDay(purchaseDay);
                     
             
-            orderManager.Add(order);
             order.show();
             // In ra hóa đơn
             
+            orderManager.Add(order);
+            admin.setOrderManager(orderManager);
+            staff.setOrderManager(orderManager);
+        
             std::system("pause");
         }
         std::system("cls");
     }
+    
+    orderManager.UpdateFile();
     return 0;
 }
 

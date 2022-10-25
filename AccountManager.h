@@ -15,10 +15,14 @@ class AccountManager {
         AccountManager();
 		~AccountManager();
         void Add(const Account&); 
-        void Delete(string); // nhan vao ten staff
+        void Delete(int); // nhan vao ten staff
         void LoadData();
         void ShowData();
+        void UpdateFile();
+        const string& getUsername(int) const;
+        const string& getPassword(int) const;
         const int& GetLength() const;
+
         void Login(bool&,bool&);
         const AccountManager& operator=(const AccountManager& );
 };

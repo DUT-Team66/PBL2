@@ -34,6 +34,22 @@ void AccountManager::Add(const Account& acc) {
         this->n++;
     }
 }
+void AccountManager::Delete(int index) {
+    Account *temp = new Account[this->n];
+    for (int i = 0; i < this->n; i++) {
+        *(temp + i) = *(this->p + i);
+    }
+    delete[] this->p;
+    this->p = new Account[this->n - 1];
+    for (int i = 0; i < index; i++) {
+        *(this->p + i) = *(temp + i);
+    }
+    for (int i = index; i < this->n - 1; i++) {
+        *(this->p + i) = *(temp + i + 1);
+    }
+    delete[] temp;
+    this->n--;
+}
 void AccountManager::LoadData() 
 {	
 
@@ -69,6 +85,20 @@ void AccountManager::ShowData()
         cout << i + 1 << ". ";
         p[i].showData();
     }
+}
+void AccountManager::UpdateFile() {
+    fstream editfile("Account.txt", ios::out);
+    for(int i = 0;i < this->n; ++i) {
+        string s = (this->p + i)->getUsername() + "/" + (this->p + i)->getPassword() + "/";
+        editfile << s << "\n";
+    }
+    editfile.close();
+}
+const string& AccountManager::getUsername(int index) const {
+    return (this->p + index)->getUsername();
+}
+const string& AccountManager::getPassword(int index) const {
+    return (this->p + index)->getPassword();
 }
 const int& AccountManager::GetLength() const {
     return this->n;

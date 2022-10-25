@@ -22,6 +22,15 @@ Date::~Date()
 {
 
 }
+const int& Date::getDay() const {
+    return this->day;
+}
+const int& Date::getMonth() const {
+    return this->month;
+}
+const int& Date::getYear() const {
+    return this->year;
+}
 ostream& operator<<(ostream& o, const Date& p) 
 {
     o<<p.day<<"/"<<p.month<<"/"<<p.year; 

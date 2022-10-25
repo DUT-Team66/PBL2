@@ -9,6 +9,7 @@ class PhoneManager
         Phone *p;
         int n;
     public:
+        //Khong co SV
         PhoneManager();
         ~PhoneManager();
         void Add(const Phone& s);
@@ -25,6 +26,7 @@ class PhoneManager
         const string& getPhoneID(int);
         const int& getPhonePrice(int);
         void LoadData();
+        void UpdateFile();
         void Menu();
 
         const PhoneManager& operator=(const PhoneManager& );

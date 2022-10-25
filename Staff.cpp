@@ -6,17 +6,16 @@ using namespace std;
 
 Staff::Staff()
 {
-    this->ID = "";
     this->name = "";
-    this->dob = "";
-    this->address = "";
-    this->phoneNumber = "";
+    this->ID = "";
     this->gender = "";
+    this->dob = "";
+    this->phoneNumber = "";
+    this->address = "";
     this->salary = 0;
-    
 }
-Staff::Staff(string a, string b, string c, string d, string e, string g)
-    : name(a), ID(b), gender(c), dob(d), phoneNumber(e), address(g)
+Staff::Staff(string a, string b, string c, string d, string e, string f,string g, string h)
+    : name(a), ID(b), gender(c), dob(d), phoneNumber(e), address(f), account(g,h)
 {
     this-> salary = 0;
 }
@@ -79,6 +78,18 @@ const int& Staff::getSalary()
 {
     return this->salary;
 }
+void Staff::setUsername(const string& username) {
+    this->account.setUsername(username);
+}
+const string& Staff::getUsername() const {
+    return this->account.getUsername();
+}
+void Staff::setPassword(const string& password) {
+    this->account.setPassword(password);
+}
+const string& Staff::getPassword() const {
+    return this->account.getPassword();
+}
 void Staff::setPhoneManager(const PhoneManager& phoneManager) {
     this->managePhone = phoneManager;
 }
@@ -117,6 +128,7 @@ void Staff::Menu() {
         this->manageOrder.Menu();
     }
 }
+
 void Staff::setInfo() {
     
     cin.ignore();
@@ -132,4 +144,7 @@ void Staff::setInfo() {
     getline(cin, this->phoneNumber);
     cout << "Enter address: ";
     getline(cin, this->address);
+}
+void Staff::UpdateAllFiles() {
+    this->managePhone.UpdateFile();
 }

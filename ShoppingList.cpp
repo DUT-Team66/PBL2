@@ -16,7 +16,13 @@ ShoppingList::~ShoppingList()
 {
 
 }
+const string& ShoppingList::getPhoneID() const {
+    return this->phoneID;
+}
+const int& ShoppingList::getAmount() const {
+    return this->amount;
+}
 void ShoppingList::show()
 {
-    cout<<"Phone id: "<< this->phoneID <<", Amount: "<< this->amount << "\n";
+    cout<<"Phone id: "<< this->phoneID <<", amount: "<< this->amount << "\n";
 }

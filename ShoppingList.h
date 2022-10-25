@@ -12,6 +12,8 @@ class ShoppingList
         ShoppingList();
         ShoppingList(string,int);
         ~ShoppingList();
+        const string& getPhoneID() const;
+        const int& getAmount() const;
         void show();
 };
 #endif

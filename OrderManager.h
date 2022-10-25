@@ -14,6 +14,8 @@ class OrderManager
         void SearchByCustomerID(string);
         void SearchByStaffID(string);
         void Add(const Order&);
+        void LoadData();
+        void UpdateFile();
         void Show();
         void Menu();
         const OrderManager& operator=(const OrderManager& );

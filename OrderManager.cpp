@@ -2,6 +2,7 @@
 #include "OrderManager.h"
 #include <string>
 #include <iomanip>
+#include <fstream>
 using namespace std;
 OrderManager::OrderManager()
 {
@@ -47,18 +48,17 @@ void OrderManager::SearchByOrderID(string m)
         }
     }
     if (index>=0) (this->p+index)->show();
-    else cout<<"Khong co don hang nao!"<<endl;
+    else cout<<"Order does not exist!"<< "\n";
 
 }
 void OrderManager::SearchByCustomerID(string m)
 {
-    int d=1;
+
     for (int i=0;i<this->n;i++)
     {
         if((this->p+i)->getCustomerID() == m)
         {
-            cout<<"Don hang thu "<<d<<":"<<endl;
-            d++;
+            cout << i + 1 << ". ";
             (this->p+i)->show();
             cout<<endl;
         }
@@ -66,19 +66,19 @@ void OrderManager::SearchByCustomerID(string m)
 }
 void OrderManager::SearchByStaffID(string m)
 {   
-    int d=1;
+
     for (int i=0;i<this->n;i++)
     {
         if((this->p+i)->getStaffID() == m)
         {
-            cout<<"Don hang thu "<<d<<":"<<endl;
-            d++;
+            cout << i + 1 << ". ";
             (this->p+i)->show();
             cout<<endl;
         }
     
     }     
 }
+
 void OrderManager::Show() //Show All
 {
     for (int i=0;i<this->n;i++)
@@ -87,6 +87,82 @@ void OrderManager::Show() //Show All
         cout<<endl;
     }
    
+}
+void OrderManager::LoadData() {
+    fstream readfile("Order.txt", ios::in);
+    string tmp;
+    while(getline(readfile, tmp)) {
+        int i = 0;
+        Order order;
+        string orderID = "";
+        while(tmp[i] != '/') {
+            orderID += tmp[i];
+            ++i;
+        }
+        ++i;
+        order.setID(orderID);
+        string customerID = "";
+        while(tmp[i] != '/') {
+            customerID += tmp[i];
+            ++i;
+        }
+        ++i;
+        order.setCustomerID(customerID);
+        string staffID = "";
+        while(tmp[i] != '/') {
+            staffID += tmp[i];
+            ++i;
+        }
+        ++i;
+        order.setStaffID(staffID);
+        while(tmp[i] != '/') {
+            string phoneID = ""; int amount = 0;
+            while(tmp[i] != ' ') {
+                phoneID += tmp[i];
+                ++i;
+            }
+            ++i;
+            while(tmp[i] != ' ') {
+                amount = amount*10 + tmp[i] - 48;
+                ++i;
+            }
+            ++i;
+            
+            order.addToShoppingList(ShoppingList(phoneID, amount));
+        }
+        ++i;
+        int shpllength = 0;
+        while(tmp[i] != '/') {
+            shpllength = shpllength*10 + tmp[i] - 48;
+            ++i;
+        }
+        ++i;
+        order.setShpllength(shpllength);
+
+        int day = 0, month = 0, year = 0;
+        while(tmp[i] != ' ') {
+            day = day*10 + tmp[i]-48;
+            ++i;
+        }
+        ++i;
+        while(tmp[i] != ' ') {
+            month = month*10 + tmp[i]-48;
+            ++i;
+        }
+        ++i;
+        while(tmp[i] != ' ') {
+            year = year*10 + tmp[i]-48;
+            ++i;
+        }
+        ++i;
+        order.setPurchaseDay(Date(day,month,year));
+        int price = 0;
+        while(tmp[i] != '/') {
+            price = price*10 + tmp[i] - 48;
+            ++i;
+        }
+        order.setTotalPrice(price);
+    }
 }
 void OrderManager::Menu() {
     std::system("cls");
@@ -155,4 +231,19 @@ const OrderManager& OrderManager::operator=(const OrderManager& v )
             *(this->p + i) = *(v.p+i); 
     }
     return *this;
+}
+void OrderManager::UpdateFile() {
+    fstream editfile("Order.txt", ios::out);
+    for(int i = 0; i < this->n; ++i) {
+        string tmp1 = "";
+        for(int j = 0; j < (this->p + i)->getShpllength(); ++j) {
+            ShoppingList sp = (this->p + i)->getShoppingList(j);
+            tmp1 += sp.getPhoneID() + " " + to_string(sp.getAmount()) + " ";
+        }
+        Date dmy = (this->p + i)->getPurchaseDay();
+        string tmp2 = to_string(dmy.getDay()) + " " + to_string(dmy.getMonth()) + " " + to_string(dmy.getYear()) + " ";
+        string s = (this->p + i)->getID() + "/" + (this->p + i)->getCustomerID() + "/" + (this->p + i)->getStaffID() + "/" + tmp1 + "/" + to_string((this->p + i)->getShpllength()) + "/" + tmp2 + "/";
+        editfile << s << "\n";
+    }
+    editfile.close();
 }

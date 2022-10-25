@@ -3,6 +3,7 @@
 
 #include "PhoneManager.h"
 #include "OrderManager.h"
+#include "Account.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -17,14 +18,14 @@ class Staff
         string phoneNumber;
         string address;
         int salary;    
-
+        Account account;
         PhoneManager managePhone;
         OrderManager manageOrder;
     public:
 
     
         Staff();
-        Staff(string, string, string, string, string, string);
+        Staff(string, string, string, string, string, string,string,string);
         ~Staff();
 
         void setID(const string&);
@@ -41,13 +42,19 @@ class Staff
         const string& getGender();
         void setSalary(const int&);
         const int& getSalary();
+        void setUsername(const string&);
+        const string& getUsername() const;
+        void setPassword(const string&); 
+        const string& getPassword() const;
         void setPhoneManager(const PhoneManager&);
         void setOrderManager(const OrderManager&);
         void show(); // show staff information
         void Menu(); // staff route
-
+    
         void setInfo(); // lay thong tin tu ban phim
-};
+        void UpdateAllFiles(); // update phone.txt
+
+};      
 
 
 #endif

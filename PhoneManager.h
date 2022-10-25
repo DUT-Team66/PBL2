@@ -9,7 +9,6 @@ class PhoneManager
         Phone *p;
         int n;
     public:
-        //Khong co SV
         PhoneManager();
         ~PhoneManager();
         void Add(const Phone& s);

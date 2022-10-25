@@ -98,12 +98,21 @@ void Phone::setEntryPrice(const int& price) {
 const int& Phone::getEntryPrice() const{
     return this->entryPrice;
 }
+
 void Phone::setSalePrice(const int& price) {
     this->salePrice = price;
 }
 const int& Phone::getSalePrice() const {
     return this->salePrice;
 }
+
+void Phone::setRemainingAmount(const int& amount) {
+    this->remainingAmount = amount;
+}
+const int& Phone::getRemainingAmount() const {
+    return this->remainingAmount;
+}
+
 void Phone::showForCustomer()
 {
     cout<<"Phone name: "<<this->phoneName

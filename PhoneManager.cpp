@@ -52,12 +52,7 @@ void PhoneManager::Delete(string m)
             break;
         }
     }
-
-
     //Chu y truong hop index=-1(khong tim duoc)
-
-
-
     if (index >= 0)
     {
         if (this->n==1) {
@@ -82,10 +77,11 @@ void PhoneManager::Delete(string m)
             delete[] temp;
             this->n--;
         }
-    }
+    } 
+	else cout<<"Phone does not exist!"<<"\n";
 }
 void PhoneManager::Update(string id){
-
+	
 }
 void PhoneManager::Search(string m)
 {
@@ -100,8 +96,7 @@ void PhoneManager::Search(string m)
     }
 
     if (index>=0) (this->p+index)->showForStaff();
-    cout<<endl;
-
+	else cout<<"Phone does not exist!"<<"\n";
 }
 const string& PhoneManager::getPhoneID(int index) {
     return (this->p + index)->getPhoneID();

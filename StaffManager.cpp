@@ -247,3 +247,14 @@ void StaffManager::Menu() {
         std::system("cls");
     }
 }
+const StaffManager& StaffManager::operator=(const StaffManager& v )
+{
+    if (this != &v) {
+        this->n=v.n;
+        delete[] this->p;
+        this->p = new int[this->n];
+        for (int i=0;i<this->n;i++)
+            (*this)[i] = *(v.p+i); 
+    }
+    return *this;
+}

@@ -19,6 +19,7 @@ class AccountManager {
         void LoadData();
         void ShowData();
         void Login(bool&,bool&);
+	const AccountManager& operator=(const AccountManager& );
 };
 
 #endif

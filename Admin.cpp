@@ -27,7 +27,9 @@ void Admin::calTurnover() {
             totalTurnover += this->manageOrder.GetTotalPrice(i);
         }
     }
-    cout << "Turnover in " << month << "/" << year << " is " << totalTurnover << "\n"; 
+    cout << "Turnover in " << month << "/" << year << " is " << totalTurnover << "\n";
+    system("pause"); 
+    system("cls");
 }
 void Admin::Menu() {
     while(true) {

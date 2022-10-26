@@ -24,5 +24,5 @@ const int& ShoppingList::getAmount() const {
 }
 void ShoppingList::show()
 {
-    cout<<"Phone id: "<< this->phoneID <<", amount: "<< this->amount << "\n";
+    cout<< "Phone id: "<< this->phoneID <<", amount: "<< this->amount << "\n";
 }

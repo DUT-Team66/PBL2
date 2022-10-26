@@ -55,7 +55,7 @@ class Phone
         void setInfo();
         void showForCustomer();   
         void showForStaff();   
-
+        
 };
 
 

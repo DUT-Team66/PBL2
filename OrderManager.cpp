@@ -95,8 +95,8 @@ void OrderManager::Show() //Show All
 {
     for (int i=0;i<this->n;i++)
     {
-        (this->p+i)->show();  
-        cout<<endl;
+        cout << setw(5) << "" << setw(2) << i + 1 << ". ";
+        (this->p+i)->show(); 
     }
    
 }
@@ -254,7 +254,7 @@ void OrderManager::UpdateFile() {
         }
         Date dmy = (this->p + i)->getPurchaseDay();
         string tmp2 = to_string(dmy.getDay()) + " " + to_string(dmy.getMonth()) + " " + to_string(dmy.getYear()) + " ";
-        string s = (this->p + i)->getID() + "/" + (this->p + i)->getCustomerID() + "/" + (this->p + i)->getStaffID() + "/" + tmp1 + "/" + to_string((this->p + i)->getShpllength()) + "/" + tmp2 + "/";
+        string s = (this->p + i)->getID() + "/" + (this->p + i)->getCustomerID() + "/" + (this->p + i)->getStaffID() + "/" + tmp1 + "/" + to_string((this->p + i)->getShpllength()) + "/" + tmp2 + "/" + to_string((this->p + i)->getTotalPrice()) + "/";
         editfile << s << "\n";
     }
     editfile.close();

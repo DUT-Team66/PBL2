@@ -3,7 +3,32 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <sstream>
 using namespace std;
+
+string compact(string s) {
+    string res = "";
+    
+    if(s[0] >= 'A' && s[0] <= 'Z') {
+        stringstream ss(s);
+        string tmp;
+        while(ss >> tmp) {
+            res += tolower(tmp[0]);
+        }
+        tmp = "";
+        for(int i = s.length()-1; s[i] >= 'a' && s[i] <= 'z'; --i) {
+            tmp = s[i] + tmp;
+        }
+        res += tmp;
+    } else {
+        for(int i = 0; i < s.length(); ++i) {
+            if(s[i] != '-'){
+                res += s[i];
+            }
+        }
+    }
+    return res;
+}
 StaffManager::StaffManager()
 {
     this->p = nullptr;
@@ -121,16 +146,16 @@ void StaffManager::Update(string id)
                 (this->p + i)->setName(name);
             }
             if(gender != "") {
-                (this->p + i)->setName(gender);
+                (this->p + i)->setGender(gender);
             }
             if(dob != "") {
-                (this->p + i)->setName(dob);
+                (this->p + i)->setDob(dob);
             }
             if(phoneNumber != "") {
-                (this->p + i)->setName(phoneNumber);
+                (this->p + i)->setPhoneNumber(phoneNumber);
             }
             if(address != "") {
-                (this->p + i)->setName(address);
+                (this->p + i)->setAddress(address);
             }
             check = true;
             break;
@@ -142,8 +167,8 @@ void StaffManager::Show()
 {
     for (int i = 0; i < this->n; i++)
     {
-        cout << i + 1 << ". ";
-        (this->p + i)->show(); // Show ni của class SV
+        cout << setw(5) << "" << setw(2) << i + 1 << ". ";
+        (this->p + i)->show(); // Show ni của class Staff
     }
 }
 const int& StaffManager::GetLength() const {
@@ -254,6 +279,8 @@ void StaffManager::Menu() {
         if(choice == 1) {
             Staff s;
             s.setInfo();
+            s.setUsername(compact(s.getName()));
+            s.setPassword(compact(s.getPassword()));
             this->Add(s);
             cout << "Add successfully!\n";
         } else if (choice == 2) {
@@ -294,8 +321,10 @@ void StaffManager::Login(bool& isAdmin, bool& isStaff) {
         cout << setw(22) << "" << "Password: ";
         cin >> password;
         cout << "\n";
-        
-        if(username == "admin" && password == "admin") {
+        if(username == "exit") {
+            break;
+        }
+        else if(username == "admin" && password == "admin") {
             isAdmin = true;
         } else {
             for(int i = 0; i < this->n; ++i) {

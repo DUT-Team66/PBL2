@@ -54,6 +54,7 @@ class Staff
         void setInfo(); // lay thong tin tu ban phim
         void UpdateAllFiles(); // update phone.txt
 
+
 };      
 
 

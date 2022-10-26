@@ -15,36 +15,28 @@ using namespace std;
 
 int main()
 {
-
-
-    // AccountManager accountManager;
-	// accountManager.LoadData();
-	//accountManager.ShowData();
-	//cout << accountManager.GetLength() << "\n";
     
     StaffManager staffManager;
 	staffManager.LoadData();
-    //staffManager.Show();
-	//cout << staffManager.GetLength() << "\n";
-    
+    staffManager.Show();
+
     PhoneManager phoneManager;
 	phoneManager.LoadData();
-    //phoneManager.Show();
-    //cout << phoneManager.GetLength() << "\n";
-    
+    phoneManager.Show();
+
     OrderManager orderManager;
+    orderManager.LoadData();
 
     Staff staff;
     staff.setOrderManager(orderManager);
     staff.setPhoneManager(phoneManager);
 
     Admin admin("Katou Megumi","048203000396","Female","23/09/2012","0766772943","97 Hai Son", "admin" , "admin");
-    //Admin admin;
     admin.setOrderManager(orderManager);
     admin.setPhoneManager(phoneManager);
-    //admin.setAccountManager(accountManager);
     admin.setStaffManager(staffManager);
-    //std::system("pause");
+
+    std::system("pause");
     std::system("cls");
 
 
@@ -190,7 +182,7 @@ int main()
             std::cin >> purchaseDay;
 
             order.setPurchaseDay(purchaseDay);
-                    
+            system("cls");
             
             order.show();
             // In ra hóa đơn

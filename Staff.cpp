@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+
 using namespace std;
 
 Staff::Staff()
@@ -98,13 +99,13 @@ void Staff::setOrderManager(const OrderManager& orderManager) {
 }
 void Staff::show()
 {
-    cout << "Staff name: " << this->name << "\n";
-    cout << "Staff id: " << this->ID << "\n";
-    cout << "Gender: " << this->gender << "\n";
-    cout << "Day of birth: " << this->dob << "\n";
-    cout << "Phone number: " << this->phoneNumber << "\n";
-    cout << "Address: " << this->address << "\n";
-    cout << "Salary: " << this->salary << "\n";
+    cout << "" << "Staff name: " << this->name << "\n";
+    cout << setw(9) << "" << "Staff id: " << this->ID << "\n";
+    cout << setw(9) << "" << "Gender: " << this->gender << "\n";
+    cout << setw(9) << "" << "Day of birth: " << this->dob << "\n";
+    cout << setw(9) << "" << "Phone number: " << this->phoneNumber << "\n";
+    cout << setw(9) << "" << "Address: " << this->address << "\n";
+    cout << setw(9) << "" << "Salary: " << this->salary << "\n";
 
 }
 void Staff::Menu() {
@@ -118,7 +119,7 @@ void Staff::Menu() {
             cout << setw(20) << "" << "Your choice: ";
             cin >> choice;
             if(choice != 1 && choice != 2 && choice != 3) {
-                cout << "Invalid choice, please re-enter!\n";
+                cout << setw(5) << "" << "Invalid choice, please re-enter!\n";
                 system("pause");
                 system("cls"); 
             } else break;
@@ -135,17 +136,17 @@ void Staff::Menu() {
 void Staff::setInfo() {
     
     cin.ignore();
-    cout << "Enter name: ";
+    cout << setw(4) << "" << "Enter name: ";
     getline(cin, this->name);
-    cout << "Enter ID: ";
+    cout << setw(4) << "" << "Enter ID: ";
     getline(cin, this->ID);
-    cout << "Enter gender: ";
+    cout << setw(4) << "" << "Enter gender: ";
     getline(cin, this->gender);
-    cout << "Enter dob: ";
+    cout << setw(4) << "" << "Enter dob: ";
     getline(cin, this->dob);
-    cout << "Enter phone number: ";
+    cout << setw(4) << "" << "Enter phone number: ";
     getline(cin, this->phoneNumber);
-    cout << "Enter address: ";
+    cout << setw(4) << "" << "Enter address: ";
     getline(cin, this->address);
 }
 void Staff::UpdateAllFiles() {

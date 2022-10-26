@@ -27,9 +27,7 @@ void Admin::calTurnover() {
             totalTurnover += this->manageOrder.GetTotalPrice(i);
         }
     }
-    cout << "Turnover in " << month << "/" << year << " is " << totalTurnover << "\n";
-    system("pause"); 
-    system("cls");
+    cout << "Turnover in " << month << "/" << year << " is " << totalTurnover << "\n";  
 }
 void Admin::Menu() {
     while(true) {
@@ -58,6 +56,8 @@ void Admin::Menu() {
             this->manageOrder.Menu();
         } else if(choice == 4) {
             this->calTurnover();
+            system("pause");
+            system("cls");
         } else break;
         
     }

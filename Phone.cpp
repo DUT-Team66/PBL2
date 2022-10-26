@@ -1,6 +1,7 @@
 #include "Phone.h"
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
 Phone::Phone()
@@ -122,16 +123,16 @@ void Phone::showForCustomer()
 }
 void Phone::showForStaff()
 {
-    cout<<"Phone name: "<<this->phoneName
-    <<"\nPhone ID: "<<this->phoneID
-    <<"\nBrand: "<<this->brand
-    <<"\nProcessor: "<<this->processor
-    <<"\nRAM/ROM: "<<this->RAM_ROM
-    <<"\nDisplay: "<<this->display
-    <<"\nCamera: "<<this->camera
-    <<"\nEntry price: "<<this->entryPrice
-    <<"\nSale price: "<<this->salePrice
-    <<"\nRemaining amount: "<<this->remainingAmount << "\n";
+    cout<< "Phone name: "<<this->phoneName << "\n"
+    << setw(9) << "" <<"Phone ID: "<<this->phoneID << "\n"
+    << setw(9) << "" <<"Brand: "<<this->brand << "\n"
+    << setw(9) << "" <<"Processor: "<<this->processor << "\n"
+    << setw(9) << "" <<"RAM/ROM: "<<this->RAM_ROM << "\n"
+    << setw(9) << "" <<"Display: "<<this->display << "\n"
+    << setw(9) << "" <<"Camera: "<<this->camera << "\n"
+    << setw(9) << "" <<"Entry price: "<<this->entryPrice << "\n"
+    << setw(9) << "" <<"Sale price: "<<this->salePrice << "\n"
+    << setw(9) << "" <<"Remaining amount: "<<this->remainingAmount << "\n";
 }
 void Phone::setInfo() {
     cin.ignore();

@@ -5,7 +5,6 @@
 #include <iomanip>
 using namespace std;
 
-
 PhoneManager::PhoneManager()
 {
     this->p = nullptr;
@@ -171,16 +170,15 @@ void PhoneManager::Show()
     
     for (int i=0;i<this->n;i++)
     {
-        cout<< i + 1 <<". ";
+        cout << setw(5) << "" << setw(2) << i + 1 << ". ";
         (this->p+i)->showForStaff(); 
     }
-   // cout<<endl;
 
 }
 void PhoneManager::ShowTable() {
     for (int i=0;i<this->n;i+=2)
     {
-        cout<< i + 1 <<". " << setw(50) << left << (this->p+i)->getPhoneName()  << "" << i + 2 << ". " << (this->p + i + 1)->getPhoneName() << "\n";
+        cout<< setw(2) << i + 1 <<". " << setw(40) << left << (this->p+i)->getPhoneName()  << "" << i + 2 << ". " << (this->p + i + 1)->getPhoneName() << "\n";
     }
     if(n & 1) {
         cout << this->n << ". " << (this->p + this->n - 1)->getPhoneName() << endl;

@@ -67,16 +67,16 @@ const int& Order::getTotalPrice() const {
 void Order::show()
 {
     cout << "Order id: " << this->ID << "\n";
-    cout << "Customer id: " << this->customerID << "\n";
-    cout << "Staff id: " << this->staffID << "\n";
-    cout << "Shopping list: \n";
+    cout << setw(9) << "" << "Customer id: " << this->customerID << "\n";
+    cout << setw(9) << "" << "Staff id: " << this->staffID << "\n";
+    cout << setw(9) << "" << "Shopping list: \n";
     for (int i = 0; i < this->shpllength; i++)
     {
-        cout << setw(5) << "";
+        cout << setw(10) << "" << setw(2) << i + 1 << ". ";
         (this->shoppingList + i)->show();
     }
-    cout << "Purchase day: " << this->purchaseDay << "\n";
-    cout << "Total price: " << this->totalPrice << "\n";
+    cout << setw(9) << "" << "Purchase day: " << this->purchaseDay << "\n";
+    cout << setw(9) << "" << "Total price: " << this->totalPrice << "\n";
 }
 void Order::addToShoppingList(const ShoppingList& sl) {
     if(this->shpllength==0) 

@@ -167,7 +167,7 @@ void StaffManager::Show()
 {
     for (int i = 0; i < this->n; i++)
     {
-        cout << setw(5) << "" << setw(2) << i + 1 << ". ";
+        cout << setw(2) << i + 1 << ". ";
         (this->p + i)->show(); // Show ni của class Staff
     }
 }
@@ -248,7 +248,9 @@ void StaffManager::UpdateFile() {
     fstream editfile("Staff.txt", ios::out);
     for(int i = 0;i < this->n; ++i) {
         string s = (this->p + i)->getName() + "/" + (this->p + i)->getID() + "/" + (this->p + i)->getGender() + "/" + (this->p + i)->getDob() + "/" + (this->p + i)->getPhoneNumber() + "/" + (this->p + i)->getAddress() + "/" + (this->p + i)->getUsername() + "/" + (this->p + i)->getPassword() + "/";
-        editfile << s << "\n";
+        if(i != this->n-1)
+            editfile << s << "\n";
+        else editfile << s;
     }
     editfile.close();
 

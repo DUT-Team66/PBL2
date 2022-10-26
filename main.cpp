@@ -8,8 +8,7 @@
 #include "Admin.h"
 #include "rand.h"
 #include <cstring>
-#include <cstdlib>
-#include <time.h>
+
 using namespace std;
 
 
@@ -19,11 +18,11 @@ int main()
     StaffManager staffManager;
 	staffManager.LoadData();
     staffManager.Show();
-
+    cout << staffManager.GetLength() << "\n";
     PhoneManager phoneManager;
 	phoneManager.LoadData();
     phoneManager.Show();
-
+    cout << phoneManager.GetLength() << "\n";
     OrderManager orderManager;
     orderManager.LoadData();
 
@@ -39,7 +38,9 @@ int main()
     std::system("pause");
     std::system("cls");
 
-
+    // for(int i = 0;i < 10;++i) {
+    //     cout << i + 1 << ". " << staffManager.getStaffID(i) << "\n";
+    // }
     // choose role
     while (true)
     { 
@@ -142,15 +143,20 @@ int main()
                     std::cout << "Amount: ";
                     int amount; std::cin >> amount;
                     
-                    ShoppingList sp(phoneManager.getPhoneID(choice - 1),amount); 
+                    //ShoppingList sp(phoneManager.getPhoneID(choice - 1),amount); 
                     
                     if(amount != 0) {
                         if(amount > phoneManager.getRemainingAmount(choice-1)) {
                             cout << "Remaining amount is not enough\n"; 
+                            system("pause");
                         } else {
-                            order.addToShoppingList(sp);
+                            if(order.searchShoppingList(phoneManager.getPhoneID(choice-1))) {
+                                order.addToShoppingList(phoneManager.getPhoneID(choice-1),amount);
+                            } else {
+                                order.addToShoppingList(ShoppingList(phoneManager.getPhoneID(choice - 1),amount));
+                            }
                             phoneManager.setRemainingAmount(choice-1,amount);
-                            int price = phoneManager.getPhonePrice(choice-1) * amount;
+                            long long price = phoneManager.getPhonePrice(choice-1) *(long long)amount;
                             order.setTotalPrice(order.getTotalPrice() + price);
                         }
                     }
@@ -163,20 +169,25 @@ int main()
 
 
             
-            std::system("cls");
-            string orderID;  // Tu dong cung cap ma don hang
+            //std::system("cls");
+
+            string orderID = "";  // Tu dong cung cap ma don hang
+            //cout << 1 << endl;
             randOrderID(9, orderID);
+            //cout << 2 << endl;
             order.setID(orderID);
-            //srand(time(NULL));
+            //cout << 3 << endl;
             
             order.setCustomerID(customer.getCustomerID());
+            //cout << 4 << endl;
             
-            
-            string staffID; // Mã nhân viên random
+            string staffID = ""; // Mã nhân viên random
             randStaffID(staffManager,staffID);
+            
+            //cout << 5 <<endl;
             order.setStaffID(staffID);
 
-            
+            //cout << 6 << endl;
             Date purchaseDay;
             std::cout << "Enter purchase day: ";
             std::cin >> purchaseDay;

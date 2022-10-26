@@ -22,7 +22,7 @@ const int& OrderManager::GetMonth(int index) const {
 const int& OrderManager::GetYear(int index) const {
     return (this->p + index)->getPurchaseDay().getYear();
 }
-const int& OrderManager::GetTotalPrice(int index) const {
+const long long& OrderManager::GetTotalPrice(int index) const {
     return (this->p + index)->getTotalPrice();
 }
 void OrderManager::Add(const Order& s)
@@ -95,7 +95,7 @@ void OrderManager::Show() //Show All
 {
     for (int i=0;i<this->n;i++)
     {
-        cout << setw(5) << "" << setw(2) << i + 1 << ". ";
+        cout << setw(2) << i + 1 << ". ";
         (this->p+i)->show(); 
     }
    
@@ -168,7 +168,7 @@ void OrderManager::LoadData() {
         }
         ++i;
         order.setPurchaseDay(Date(day,month,year));
-        int price = 0;
+        long long price = 0;
         while(tmp[i] != '/') {
             price = price*10 + tmp[i] - 48;
             ++i;
@@ -255,7 +255,8 @@ void OrderManager::UpdateFile() {
         Date dmy = (this->p + i)->getPurchaseDay();
         string tmp2 = to_string(dmy.getDay()) + " " + to_string(dmy.getMonth()) + " " + to_string(dmy.getYear()) + " ";
         string s = (this->p + i)->getID() + "/" + (this->p + i)->getCustomerID() + "/" + (this->p + i)->getStaffID() + "/" + tmp1 + "/" + to_string((this->p + i)->getShpllength()) + "/" + tmp2 + "/" + to_string((this->p + i)->getTotalPrice()) + "/";
-        editfile << s << "\n";
+        if(i != this->n-1) editfile << s << "\n";
+        else editfile << s;
     }
     editfile.close();
 }

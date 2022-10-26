@@ -22,6 +22,9 @@ const string& ShoppingList::getPhoneID() const {
 const int& ShoppingList::getAmount() const {
     return this->amount;
 }
+void ShoppingList::setAmount(const int& amount) {
+    this->amount = amount;
+}
 void ShoppingList::show()
 {
     cout<< "Phone id: "<< this->phoneID <<", amount: "<< this->amount << "\n";

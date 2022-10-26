@@ -100,12 +100,12 @@ void Staff::setOrderManager(const OrderManager& orderManager) {
 void Staff::show()
 {
     cout << "" << "Staff name: " << this->name << "\n";
-    cout << setw(9) << "" << "Staff id: " << this->ID << "\n";
-    cout << setw(9) << "" << "Gender: " << this->gender << "\n";
-    cout << setw(9) << "" << "Day of birth: " << this->dob << "\n";
-    cout << setw(9) << "" << "Phone number: " << this->phoneNumber << "\n";
-    cout << setw(9) << "" << "Address: " << this->address << "\n";
-    cout << setw(9) << "" << "Salary: " << this->salary << "\n";
+    cout << "" << "Staff id: " << this->ID << "\n";
+    cout << "Gender: " << this->gender << "\n";
+    cout << "Day of birth: " << this->dob << "\n";
+    cout << "Phone number: " << this->phoneNumber << "\n";
+    cout << "Address: " << this->address << "\n";
+    cout << "Salary: " << this->salary << "\n";
 
 }
 void Staff::Menu() {

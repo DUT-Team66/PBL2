@@ -1,6 +1,6 @@
 Iphone 14/ip14/Apple/Apple A15 Bionic/6GB-128GB/6.1 inch, Super Retina XDR/12MP + 12MP/21000000/25000000/
 Iphone 14 Pro/ip14pr/Apple/Apple A16 Binoic/6GB-128GB/6.1 inch, Super Retina XDR/48MP + 12MP/28000000/30000000/
-Iphone 14 Plus/ip14pl/Apple/Apple A15 Bionic/4GB-128GB/6.7 inch, Super Retina XDR/12MP + 12MP/24000000/1411176035/
+Iphone 14 Plus/ip14pl/Apple/Apple A15 Bionic/4GB-128GB/6.7 inch, Super Retina XDR/12MP + 12MP/24000000/27000000/
 Iphone 14 Promax/ip14prm/Apple/Apple A16 Bionic/6GB-128GB/6.7 inch, Super Retina XDR/48MP + 12MP/38000000/40000000/
 Iphone 13/ip13/Apple/Apple A15 Bionic/4GB-128GB/6.1 inch, Super Retina XDR/12MP + 12MP/19000000/20000000/
 Iphone 13 Pro/ip13pr/Apple/Apple A15 Bionic/6GB-256GB/6.1 inch, Super Retina XDR/12MP + 12MP/24000000/25000000/
@@ -18,6 +18,16 @@ Samsung Galaxy S22 5G/ssglxs225g/Samsung/Snapdragon8Gen1/8GB-128GB/6.1 inch, Dyn
 Samsung Galaxy S22 Ultra 5G/ssglxs22u5g/Samsung/Snapdragon8Gen1/8GB-128GB/6.8 inch, Dynamic AMOLED 2X/108MP + 40MP/25000000/28000000/
 Samsung Galaxy S22 Plus 5G/ssglxs22p5g/Samsung/Snapdragon8Gen1/8GB-128GB/6.6 inch, Dynamic AMOLED 2X/50MP + 10MP/19000000/20000000/
 Samsung Galaxy S22 Bora Purple/ssglxs22bp/Samsung/Snapdragon8Gen1/8GB-128GB/6.1 inch, Dynamic AMOLED 2X/50MP + 10MP/16000000/18000000/
+OPPO Find X5 Pro/opfdx5pr/OPPO/Snapdragon 8Gen1/12GB-256GB/6.7 inch, AMOLED/50MP + 13MP/28000000/30000000/
+OPPO Reno8 Pro/opr8pr/OPPO/MediaTek Dimensity 8100/12GB-256GB/6.7 inch, AMOLED/50MP + 32MP/19000000/21000000/
+OPPO Reno8 4G/opr84g/OPPO/Snapdragon 680/8GB-256GB/6.4 inch, AMOLED/64MP + 32MP/9000000/12000000/
+OPPO Reno8 Z 5G/opr8z5g/OPPO/Snapdragon 695 5G/8GB-256GB/6.43 inch, AMOLED/64MP + 16MP/10500000/12000000/
+OPPO Reno7/opr7/OPPO/Snapdragon 680/8GB-128GB/6.4 inch, AMOLED/64MP + 32MP/7000000/9000000/
+OPPO Reno7 Z 5G/opr7z5g/OPPO/Snapdragon 695 5G/8GB-128GB/6.43 inch, AMOLED/64MP + 16MP/9000000/10000000/
+OPPO Reno6 5G/opr65g/OPPO/MediaTek Dimensity 900 5G/8GB-128GB/6.43 inch, AMOLED/64MP + 32MP/10500000/11000000/
+OPPO Reno6 Z 5G/opr6z5g/OPPO/MediaTek Dimensity 800U/8GB-128GB/6.43 inch, AMOLED/64MP + 32MP/7000000/9000000/
+OPPO A96/opa96/OPPO/Snapdragon 680/8GB-128GB/6.59 inch, LCD/50MP + 16MP/7000000/8500000/
+OPPO A95/opa95/OPPO/Snapdragon 662/8GB-128GB/6.43 inch, AMOLED/48MP + 16MP/6000000/75000000/
 Vivo Y15 series/y15sr/Vivo/MediaTek Helio P35/3GB-32GB/6.51 inch, IPS LCD/13MP + 2MP/3000000/3500000/
 Vivo X80/vvx80/Vivo/MediaTek Dimensity 900 5G/8GB-128GB/6.78 inch, AMOLED/50MP + 12MP/17000000/19000000/
 Vivo Y53s/vvy53s/Vivo/MediaTek Helio G80/8GB-128GB/6.58 inch, AMOLED/64MP + 2MP/6000000/7000000/

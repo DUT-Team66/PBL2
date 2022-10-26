@@ -58,15 +58,16 @@ void Order::setShpllength(const int& length) {
 const int& Order::getShpllength() const {
     return this->shpllength;
 }
-void Order::setTotalPrice(const int& totalPrice) {
+void Order::setTotalPrice(const long long& totalPrice) {
     this->totalPrice = totalPrice;
 }
-const int& Order::getTotalPrice() const {
+const long long& Order::getTotalPrice() const {
     return this->totalPrice;
 }
 void Order::show()
 {
-    cout << "Order id: " << this->ID << "\n";
+    cout << setw(12) << "" << "ORDER" << "\n";
+    cout << setw(9) << "" << "Order id: " << this->ID << "\n";
     cout << setw(9) << "" << "Customer id: " << this->customerID << "\n";
     cout << setw(9) << "" << "Staff id: " << this->staffID << "\n";
     cout << setw(9) << "" << "Shopping list: \n";
@@ -77,6 +78,24 @@ void Order::show()
     }
     cout << setw(9) << "" << "Purchase day: " << this->purchaseDay << "\n";
     cout << setw(9) << "" << "Total price: " << this->totalPrice << "\n";
+}
+bool Order::searchShoppingList(string id) {
+    for(int i = 0; i < this->shpllength; ++i) {
+        if((this->shoppingList + i)->getPhoneID() == id)  {
+            return true;
+        }
+    }
+    return false;
+}
+void Order::addToShoppingList(string id, int amount) {
+    for(int i = 0; i < this->shpllength; ++i) {
+        if((this->shoppingList+i)->getPhoneID() == id) {
+            (this->shoppingList + i)->setAmount((this->shoppingList + i)->getAmount() + amount);
+            break;
+        }
+    }
+    cout << "Add to cart successfully!\n";
+    system("pause");
 }
 void Order::addToShoppingList(const ShoppingList& sl) {
     if(this->shpllength==0) 

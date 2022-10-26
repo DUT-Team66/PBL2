@@ -18,3 +18,13 @@ Samsung Galaxy S22 5G/ssglxs225g/Samsung/Snapdragon8Gen1/8GB-128GB/6.1 inch, Dyn
 Samsung Galaxy S22 Ultra 5G/ssglxs22u5g/Samsung/Snapdragon8Gen1/8GB-128GB/6.8 inch, Dynamic AMOLED 2X/108MP + 40MP/25000000/28000000/
 Samsung Galaxy S22 Plus 5G/ssglxs22p5g/Samsung/Snapdragon8Gen1/8GB-128GB/6.6 inch, Dynamic AMOLED 2X/50MP + 10MP/19000000/20000000/
 Samsung Galaxy S22 Bora Purple/ssglxs22bp/Samsung/Snapdragon8Gen1/8GB-128GB/6.1 inch, Dynamic AMOLED 2X/50MP + 10MP/16000000/18000000/
+Vivo Y15 series/y15sr/Vivo/MediaTek Helio P35/3GB-32GB/6.51 inch, IPS LCD/13MP + 2MP/3000000/3500000/
+Vivo X80/vvx80/Vivo/MediaTek Dimensity 900 5G/8GB-128GB/6.78 inch, AMOLED/50MP + 12MP/17000000/19000000/
+Vivo Y53s/vvy53s/Vivo/MediaTek Helio G80/8GB-128GB/6.58 inch, AMOLED/64MP + 2MP/6000000/7000000/
+OPPO A96/opa96/OPPO/Snapdragon 680/8GB-128GB/6.59 inch, AMOLED/50MP + 2MP/6000000/7000000/
+OPPO Find X5 Pro 5G/opfx55g/OPPO/Snapdragon 8 Gen 1/12GB-256GB/6.7 inch, Quad HD+(2K+)/50MP + 32MP/27000000/29000000/
+OPPO Reno6 series/oprn6sr/OPPO/MediaTek Dimensity 900 5G/8GB-128GB/6.43 inch, AMOLED/64MP + 8MP/9000000/10500000/
+Xiaomi Redmi Note 11S series/xmrn11s/Xiaomi/MediaTek Dimensity 810 5G/6GB-128GB/6.67 inch, IPS LCD/50MP + 8MP/6000000/6500000/
+Xiaomi 12T Pro/xm12tpr/Xiaomi/Snapdragon 8+ Gen 1/12GB-256GB/6.67 inch, AMOLED/200MP + 20MP/15000000/17000000/
+Xiaomi Redmi Note 10S/xmrmn10s/Xiaomi/MediaTek Helio G95/8GB-128GB/6.43 inch, AMOLED/64MP + 13MP/5000000/5500000/
+Xiaomi Redmi 10C/xmrm10c/Xiaomi/Snapdragon 680/4GB-64GB/6.71 inch, IPS LCD/50MP + 2MP/3000000/3500000/

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include "AccountManager.h"
+//#include "AccountManager.h"
 #include "OrderManager.h"
 #include "PhoneManager.h"
 #include "StaffManager.h"
@@ -18,11 +18,11 @@ int main()
     StaffManager staffManager;
 	staffManager.LoadData();
     staffManager.Show();
-    cout << staffManager.GetLength() << "\n";
+    //cout << staffManager.GetLength() << "\n";
     PhoneManager phoneManager;
 	phoneManager.LoadData();
     phoneManager.Show();
-    cout << phoneManager.GetLength() << "\n";
+    //cout << phoneManager.GetLength() << "\n";
     OrderManager orderManager;
     orderManager.LoadData();
 
@@ -81,16 +81,20 @@ int main()
             if (isAdmin) {
                 // admin route--------------------------------------------------
                 admin.Menu();
-                admin.UpdateAllFiles();
+                staffManager = admin.getStaffManager();
+                phoneManager = admin.getPhoneManager();
+                staff.setPhoneManager(phoneManager); 
             }
             else if (isStaff) {
                 staff.Menu();
-                staff.UpdateAllFiles();
+                phoneManager = staff.getPhoneManager();
+                admin.setPhoneManager(phoneManager);
             } 
         }
 
         else if (choice == 2)
         {
+            
             Customer customer;
             while (true)
             {
@@ -119,7 +123,7 @@ int main()
             
             //enter1: đến cái bảng đầu tiên
             std::system("cls");
-
+    
             Order order;
             
                 // Trường hợp chắc chắn mua
@@ -133,6 +137,8 @@ int main()
                 std::cin >> choice;
 
                 if(choice == 0) {
+                    //cout << "exit shopping\n";
+                    //system("pause");
                     break;
                 } else if(choice < 0 || choice > phoneManager.GetLength()) {
                     std::cout << "Invalid choice, please re-enter!\n";
@@ -165,11 +171,10 @@ int main()
                 std::system("cls");
             }
                 
+            //staffManager.Show();
+            //system("pause");
             
-
-
-            
-            //std::system("cls");
+            std::system("cls");
 
             string orderID = "";  // Tu dong cung cap ma don hang
             //cout << 1 << endl;
@@ -209,10 +214,11 @@ int main()
         std::system("cls");
     }
     
+    admin.UpdateAllFiles();
+    //staff.UpdateAllFiles();
     orderManager.UpdateFile();
     return 0;
 }
-
 /*
     //staff route--------------------------------------------------
     std::cout << setw(20) << "" << "Choose what you want to manage" << "\n\n";

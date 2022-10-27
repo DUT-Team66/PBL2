@@ -16,13 +16,17 @@ void randOrderID(int length, string& result)
     }
     // result[length] = 0;
 }
-void randStaffID(StaffManager staffManager,string& id) {
+void randStaffID(const StaffManager& staffManager,string& id) {
+    //staffManager.Show();
+    //cout << "staffmanager.length() = " << staffManager.GetLength() << "\n";
     srand(time(NULL));
     int index = rand()%(staffManager.GetLength());
-    // cout <<"index = "<< index << "\n";
-    // staffManager.getStaffID(index);
-    // cout << "index = " << index << "\n";
+    //int index = 6;
+    //cout <<"index = "<< index << "\n";
+    staffManager.getStaffID(index);
+    //cout << "index = " << index << "\n";
     id = staffManager.getStaffID(index);
+    //id = "10000000";
     //cout <<"index = " << index <<"\n";
     
 }

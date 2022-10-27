@@ -94,6 +94,9 @@ const string& Staff::getPassword() const {
 void Staff::setPhoneManager(const PhoneManager& phoneManager) {
     this->managePhone = phoneManager;
 }
+const PhoneManager& Staff::getPhoneManager() const {
+    return this->managePhone;
+}
 void Staff::setOrderManager(const OrderManager& orderManager) {
     this->manageOrder = orderManager;
 }

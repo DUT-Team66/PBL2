@@ -14,9 +14,12 @@ Admin::Admin(string name, string id, string gender, string dob, string phoneNumb
 void Admin::setStaffManager(const StaffManager& staffManager) {
     this->manageStaff = staffManager;
 }
-void Admin::setAccountManager(const AccountManager& accountManager) {
-    this->manageAccount = accountManager;
+const StaffManager& Admin::getStaffManager() const {
+    return this->manageStaff;
 }
+// void Admin::setAccountManager(const AccountManager& accountManager) {
+//     this->manageAccount = accountManager;
+//}
 void Admin::calTurnover() {
     int month, year;
     cout << "Enter month: "; cin >> month;
@@ -66,5 +69,5 @@ void Admin::Menu() {
 void Admin::UpdateAllFiles() {
     Staff::UpdateAllFiles();
     this->manageStaff.UpdateFile();
-    this->manageAccount.UpdateFile();
+    //this->manageAccount.UpdateFile();
 }

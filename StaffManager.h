@@ -18,7 +18,7 @@ class StaffManager
         void Delete(string);
         void Search(string);
         void Update(string);
-        void Show();
+        void Show() const;
         const string& getStaffName(int) const;
         const string& getStaffID(int) const;
         const string& getStaffGender(int) const;

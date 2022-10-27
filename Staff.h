@@ -47,7 +47,9 @@ class Staff
         void setPassword(const string&); 
         const string& getPassword() const;
         void setPhoneManager(const PhoneManager&);
+        const PhoneManager& getPhoneManager() const;
         void setOrderManager(const OrderManager&);
+        
         void show(); // show staff information
         void Menu(); // staff route
     

@@ -163,7 +163,7 @@ void StaffManager::Update(string id)
     }
     if(!check) cout << "Staff ID does not exist!\n";
 }
-void StaffManager::Show()
+void StaffManager::Show() const
 {
     for (int i = 0; i < this->n; i++)
     {

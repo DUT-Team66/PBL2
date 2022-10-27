@@ -9,15 +9,16 @@
 class Admin : public Staff {
     private:
         StaffManager manageStaff;
-        AccountManager manageAccount;
+        //AccountManager manageAccount;
     public:
         Admin();
         Admin(string,string, string, string,string,string,string,string);
         ~Admin();
 
         void setStaffManager(const StaffManager&);
-        void setAccountManager(const AccountManager&);
-
+        const StaffManager& getStaffManager() const;
+        //void setAccountManager(const AccountManager&);
+        
         void Menu(); // admin route
         void calTurnover(); //Doanh thu
         //void calProfit(); // loi nhuan

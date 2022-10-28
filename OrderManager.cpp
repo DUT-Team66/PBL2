@@ -3,6 +3,7 @@
 #include <string>
 #include <iomanip>
 #include <fstream>
+//#include "Table.h"
 using namespace std;
 OrderManager::OrderManager()
 {
@@ -47,7 +48,7 @@ void OrderManager::Add(const Order& s)
         this->n++;
     }
 }
-
+// 
 void OrderManager::SearchByOrderID(string m)
 {
     int index=-1;
@@ -65,30 +66,38 @@ void OrderManager::SearchByOrderID(string m)
 }
 void OrderManager::SearchByCustomerID(string m)
 {
-
+    bool check = 0;
     for (int i=0;i<this->n;i++)
     {
         if((this->p+i)->getCustomerID() == m)
         {
+            check = 1;
             cout << i + 1 << ". ";
             (this->p+i)->show();
             cout<<endl;
         }
     }
+    if(!check) {
+        cout << "Order does not exist!\n";
+    }
 }
 void OrderManager::SearchByStaffID(string m)
 {   
-
+    bool check = false;
     for (int i=0;i<this->n;i++)
     {
         if((this->p+i)->getStaffID() == m)
         {
+            check = true;
             cout << i + 1 << ". ";
             (this->p+i)->show();
             cout<<endl;
         }
     
     }     
+    if(!check) {
+        cout << "Order does not exist!\n";
+    }
 }
 
 void OrderManager::Show() //Show All
@@ -167,6 +176,7 @@ void OrderManager::LoadData() {
             ++i;
         }
         ++i;
+        ++i;
         order.setPurchaseDay(Date(day,month,year));
         long long price = 0;
         while(tmp[i] != '/') {
@@ -174,6 +184,7 @@ void OrderManager::LoadData() {
             ++i;
         }
         order.setTotalPrice(price);
+        this->Add(order);
     }
 }
 void OrderManager::Menu() {
@@ -182,7 +193,10 @@ void OrderManager::Menu() {
         int choice;
         while(true) {
             
-            cout << setw(25) << "" << "TRADES" << "\n\n\n";
+            // cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        // cout << setw(25) << "" << col << " TRADES " << col << "\n";
+	        // cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            cout << setw(25) << "" << "TRADES" << "\n\n";
             cout << setw(22) << "" << "1. Search by OrderID" << "\n"; //  nhap orderid
             cout << setw(22) << "" << "2. Search by CustomerID" << "\n"; // nhap customerid
             cout << setw(22) << "" << "3. Search by StaffID" << "\n"; // nhap customerid

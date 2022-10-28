@@ -119,6 +119,4 @@ void Order::addToShoppingList(const ShoppingList& sl) {
         *(this->shoppingList+this->shpllength) = sl;
         this->shpllength++;
     }
-    cout << "Add to cart successfully!\n";
-    system("pause");
 }

@@ -12,7 +12,7 @@ void randOrderID(int length, string& result)
 
     for (i = 0; i < length; i++)
     {
-        result += char_set[rand() % sizeof(char_set)];
+        result += char_set[rand() % 62];
     }
     // result[length] = 0;
 }

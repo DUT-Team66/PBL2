@@ -8,7 +8,7 @@
 #include "Admin.h"
 #include "rand.h"
 #include <cstring>
-
+//#include "Table.h"
 using namespace std;
 
 
@@ -17,11 +17,11 @@ int main()
     
     StaffManager staffManager;
 	staffManager.LoadData();
-    staffManager.Show();
+    ///staffManager.Show();
     //cout << staffManager.GetLength() << "\n";
     PhoneManager phoneManager;
 	phoneManager.LoadData();
-    phoneManager.Show();
+    //phoneManager.Show();
     //cout << phoneManager.GetLength() << "\n";
     OrderManager orderManager;
     orderManager.LoadData();
@@ -35,7 +35,7 @@ int main()
     admin.setPhoneManager(phoneManager);
     admin.setStaffManager(staffManager);
 
-    std::system("pause");
+    //std::system("pause");
     std::system("cls");
 
     // for(int i = 0;i < 10;++i) {
@@ -46,7 +46,10 @@ int main()
     { 
         int choice;
         while(true) {
-            std::cout << setw(25) << "" << "NH MOBILE STORE" << "\n\n\n";
+            // cout << setw(25) << "" << topLeftCorner << line(17) << topRightCorner << "\n";
+	        // cout << setw(25) << "" << col << " NH MOBILE STORE " << col << "\n";
+	        // cout << setw(25) << "" << botLeftCorner << line(17) << botRightCorner << "\n\n\n";
+            cout << setw(25) << "" << "NH MOBILE STORE" << "\n\n\n";
             std::cout << setw(20) << "" << "Select role: " << "\n"; 
             std::cout << setw(22) << "" << "1. Staff" << "\n";
             std::cout << setw(22) << "" << "2. Customer" << "\n";
@@ -65,7 +68,7 @@ int main()
         std::system("cls");
         
         if(choice == 3) {
-            std::cout << "Goodbye!\n";
+            std::cout << "SEE YOU NEXT TIMES!\n";
             break;
         }
         else if (choice == 1)
@@ -132,7 +135,7 @@ int main()
                 std::cout << "\t\tChoose what you want to purchase\n";
                 phoneManager.ShowTable();
                 
-                std::cout << "Your choice: ";
+                std::cout << setw(20) << "" << "Your choice: ";
                 int choice;
                 std::cin >> choice;
 
@@ -164,6 +167,9 @@ int main()
                             phoneManager.setRemainingAmount(choice-1,amount);
                             long long price = phoneManager.getPhonePrice(choice-1) *(long long)amount;
                             order.setTotalPrice(order.getTotalPrice() + price);
+                            cout << "Add to cart successfully!\n";
+                            system("pause");
+
                         }
                     }
                 }
@@ -176,39 +182,42 @@ int main()
             
             std::system("cls");
 
-            string orderID = "";  // Tu dong cung cap ma don hang
-            //cout << 1 << endl;
-            randOrderID(9, orderID);
-            //cout << 2 << endl;
-            order.setID(orderID);
-            //cout << 3 << endl;
-            
-            order.setCustomerID(customer.getCustomerID());
-            //cout << 4 << endl;
-            
-            string staffID = ""; // Mã nhân viên random
-            randStaffID(staffManager,staffID);
-            
-            //cout << 5 <<endl;
-            order.setStaffID(staffID);
+            if(order.getShpllength() != 0){
+                string orderID = "";  // Tu dong cung cap ma don hang
+                //cout << 1 << endl;
+                randOrderID(9, orderID);
+                //cout << 2 << endl;
+                order.setID(orderID);
+                //cout << 3 << endl;
+                
+                order.setCustomerID(customer.getCustomerID());
+                //cout << 4 << endl;
+                
+                string staffID = ""; // Mã nhân viên random
+                randStaffID(staffManager,staffID);
+                
+                //cout << 5 <<endl;
+                order.setStaffID(staffID);
 
-            //cout << 6 << endl;
-            Date purchaseDay;
-            std::cout << "Enter purchase day: ";
-            std::cin >> purchaseDay;
+                //cout << 6 << endl;
+                Date purchaseDay;
+                std::cout << "Enter purchase day: ";
+                std::cin >> purchaseDay;
 
-            order.setPurchaseDay(purchaseDay);
-            system("cls");
+                order.setPurchaseDay(purchaseDay);
+                system("cls");
+                
+                order.show();
+                // In ra hóa đơn
+                orderManager.Add(order);
+                admin.setOrderManager(orderManager);
+                admin.setPhoneManager(phoneManager);
+                staff.setOrderManager(orderManager);
+                staff.setPhoneManager(phoneManager);
+            }  else {
+                cout << "GOOD BYE!\n";
+            }
             
-            order.show();
-            // In ra hóa đơn
-            
-            orderManager.Add(order);
-            admin.setOrderManager(orderManager);
-            admin.setPhoneManager(phoneManager);
-            staff.setOrderManager(orderManager);
-            staff.setPhoneManager(phoneManager);
-        
             std::system("pause");
         }
         std::system("cls");
@@ -219,6 +228,7 @@ int main()
     orderManager.UpdateFile();
     return 0;
 }
+
 /*
     //staff route--------------------------------------------------
     std::cout << setw(20) << "" << "Choose what you want to manage" << "\n\n";

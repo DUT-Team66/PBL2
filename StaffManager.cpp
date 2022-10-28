@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <sstream>
+//#include "Table.h"
 using namespace std;
 
 string compact(string s) {
@@ -102,6 +103,7 @@ void StaffManager::Delete(string s)
             delete[] temp;
             this->n--;
         }
+        cout << "Delete successfully!\n";
     } else {
         cout << "Staff ID does not exist!\n";
     }
@@ -159,6 +161,7 @@ void StaffManager::Update(string id)
             }
             check = true;
             break;
+            cout << "Update successfully!\n";
         }
     }
     if(!check) cout << "Staff ID does not exist!\n";
@@ -261,8 +264,10 @@ void StaffManager::Menu() {
     while(true) {
         int choice;
         while(true) {
-            
-            cout << setw(25) << "" << "STAFFS" << "\n\n\n";
+            // cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        // cout << setw(25) << "" << col << " STAFFS " << col << "\n";
+	        // cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            cout << setw(25) << "STAFFS" << "\n\n";
             cout << setw(22) << "" << "1. Add a staff" << "\n"; // nhap day du thong tin cua staff
             cout << setw(22) << "" << "2. Delete a staff" << "\n"; // nhap staffid
             cout << setw(22) << "" << "3. Search a staff" << "\n"; // nhap staffid
@@ -290,7 +295,6 @@ void StaffManager::Menu() {
             cout << "Enter ID: ";
             cin >> s;
             this->Delete(s);
-            cout << "Delete successfully!\n";
         } else if(choice == 3) {
             string s;
             cout << "Enter ID:";
@@ -301,7 +305,6 @@ void StaffManager::Menu() {
             cout << "Enter ID: ";
             cin >> s;
             this->Update(s);
-            cout << "Update successfully!\n";
         } else if(choice == 5) {
             this->Show();
         } else {

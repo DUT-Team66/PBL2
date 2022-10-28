@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+//#include "Table.h"
 using namespace std;
 
 PhoneManager::PhoneManager()
@@ -39,6 +40,7 @@ void PhoneManager::Add(const Phone& s)
         *(this->p+this->n) = s;
         this->n++;
     }
+
 }
 void PhoneManager::Delete(string m)
 {
@@ -81,6 +83,10 @@ void PhoneManager::Delete(string m)
             delete[] temp;
             this->n--;
         }
+        cout << "Delete successfully!\n";
+
+    } else {
+        cout << "PhoneID does not exist!\n";
     }
 }
 void PhoneManager::Update(string id){
@@ -140,6 +146,7 @@ void PhoneManager::Update(string id){
             if (remainingAmount!=-1) {
                 (this->p+i)->setRemainingAmount(remainingAmount);
             }
+            cout << "Update successfully!\n";
             check = true;
             break;  
         }
@@ -159,6 +166,7 @@ void PhoneManager::Search(string m)
     }
 
     if (index>=0) (this->p+index)->showForStaff();
+    else cout << "PhoneID does not exist!\n";
     cout<<endl;
 
 }
@@ -274,7 +282,10 @@ void PhoneManager::Menu() {
         int choice;
         while(true) {
             
-            cout << setw(25) << "" << "PHONES" << "\n\n\n";
+            // cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        // cout << setw(25) << "" << col << " PHONES " << col << "\n";
+	        // cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            cout << setw(25) << "" << "PHONES" << "\n\n";
             cout << setw(22) << "" << "1. Add phone" << "\n"; // nhap day du thong tin cua phone
             cout << setw(22) << "" << "2. Delete phone" << "\n"; // nhap phoneid
             cout << setw(22) << "" << "3. Search phone" << "\n"; // nhap phoneid
@@ -300,7 +311,6 @@ void PhoneManager::Menu() {
             cout << "Enter ID: ";
             cin >> s;
             this->Delete(s);
-            cout << "Delete successfully!\n";
         } else if(choice == 3) {
             string s;
             cout << "Enter ID:";
@@ -311,7 +321,6 @@ void PhoneManager::Menu() {
             cout << "Enter ID: ";
             cin >> s;
             this->Update(s);
-            cout << "Update successfully!\n";
         } else if(choice == 5) {
             this->Show();
         } else {

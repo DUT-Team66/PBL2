@@ -4,7 +4,8 @@
 #include <fstream>
 #include <iomanip>
 #include <sstream>
-//#include "Table.h"
+#include <conio.h>
+#include "Table.h"
 using namespace std;
 
 string compact(string s) {
@@ -168,11 +169,65 @@ void StaffManager::Update(string id)
 }
 void StaffManager::Show() const
 {
-    for (int i = 0; i < this->n; i++)
-    {
-        cout << setw(2) << i + 1 << ". ";
-        (this->p + i)->show(); // Show ni của class Staff
-    }
+    cout << topLeftCorner << line(30); // staff name
+	cout << topMid << line(14); //staffID
+	cout << topMid << line(8); // gender
+	cout << topMid << line(12); // dob
+	cout << topMid << line(14); //phonenumber
+	cout << topMid << line(26); //address
+	cout << topMid << line(13); //salary
+	cout << topMid << line(11); //username
+	cout << topMid << line(10); // password
+	cout << topRightCorner << "\n";
+	
+	cout << col << setw(9) << "" << setw(21) << left << "Staff name"; 
+	cout << col << setw(3) << "" << setw(11) << left << "Staff ID";
+	cout << col << setw(1) << "" << setw(7) << left << "Gender";
+	cout << col << setw(4) << "" << setw(8) << left << "DOB";
+	cout << col << setw(1) << "" << setw(13) << left << "Phone number";
+	cout << col << setw(9) << "" << setw(17) << left << "Address";
+	cout << col << setw(2) << "" << setw(11) << left << "Salary";
+	cout << col << setw(2) << "" << setw(9) << left << "Username";
+	cout << col << setw(1) << "" << setw(9) << left << "Password";
+	cout << col << "\n";
+	
+	for(int i = 0; i < 10; ++i) {
+		cout << leftSide << line(30);
+		cout << midMid << line(14);
+		cout << midMid << line(8);
+		cout << midMid << line(12);
+		cout << midMid << line(14);
+		cout << midMid << line(26);
+		cout << midMid << line(13);
+		cout << midMid << line(11);
+		cout << midMid << line(10);
+		cout << rightSide << "\n";
+		
+		cout << col << " " << setw(29) << left << (this->p + i)->getName();
+		cout << col << " " << setw(13) << left << (this->p + i)->getID();
+		cout << col << " " << setw(7) << left << (this->p + i)->getGender();
+		cout << col << " " << setw(11) << left << (this->p + i)->getDob();
+		cout << col << "  " << setw(12) << left << (this->p + i)->getPhoneNumber();
+		cout << col << setw(25) << right << (this->p + i)->getAddress() << setw(1) << "";
+		cout << col << setw(12) << right << (this->p + i)->getSalary() << setw(1) << "";
+		cout << col << setw(10) << right << (this->p + i)->getUsername() << setw(1) << "";
+		cout << col << setw(9) << right << (this->p + i)->getPassword() << setw(1) << ""; 
+		cout << col << "\n";
+	}
+	
+	
+	cout << botLeftCorner << line(30); // staff name
+	cout << botMid << line(14); //staffID
+	cout << botMid << line(8); // gender
+	cout << botMid << line(12); // dob
+	cout << botMid << line(14); //phonenumber
+	cout << botMid << line(26); //address
+	cout << botMid << line(13); //salary
+	cout << botMid << line(11);
+	cout << botMid << line(10);
+	cout << botRightCorner << "\n";
+	
+    
 }
 const int& StaffManager::GetLength() const {
     return this->n;
@@ -264,18 +319,18 @@ void StaffManager::Menu() {
     while(true) {
         int choice;
         while(true) {
-            // cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
-	        // cout << setw(25) << "" << col << " STAFFS " << col << "\n";
-	        // cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
-            cout << setw(25) << "STAFFS" << "\n\n";
-            cout << setw(22) << "" << "1. Add a staff" << "\n"; // nhap day du thong tin cua staff
-            cout << setw(22) << "" << "2. Delete a staff" << "\n"; // nhap staffid
-            cout << setw(22) << "" << "3. Search a staff" << "\n"; // nhap staffid
-            cout << setw(22) << "" << "4. Update a staff" << "\n"; // nhap day du thong tin cua staff, neu khong doi nhap N/A
-            cout << setw(22) << "" << "5. Show all staffs" << "\n";
-            cout << setw(22) << "" << "6. Go back" << "\n\n";
+            cout << setw(45) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        cout << setw(45) << "" << col << " STAFFS " << col << "\n";
+	        cout << setw(45) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            // cout << setw(25) << "STAFFS" << "\n\n";
+            cout << setw(42) << "" << "1. Add a staff" << "\n"; // nhap day du thong tin cua staff
+            cout << setw(42) << "" << "2. Delete a staff" << "\n"; // nhap staffid
+            cout << setw(42) << "" << "3. Search a staff" << "\n"; // nhap staffid
+            cout << setw(42) << "" << "4. Update a staff" << "\n"; // nhap day du thong tin cua staff, neu khong doi nhap N/A
+            cout << setw(42) << "" << "5. Show all staffs" << "\n";
+            cout << setw(42) << "" << "6. Go back" << "\n\n";
 
-            cout << setw(20) << "" << "Your choice: ";
+            cout << setw(40) << "" << "Your choice: ";
             cin >> choice;
             if(choice != 1 && choice != 2 && choice !=3 && choice != 4 && choice != 5 && choice != 6) {
                 cout << "Invalid choice, please re-enter!\n";
@@ -319,17 +374,32 @@ void StaffManager::Login(bool& isAdmin, bool& isStaff) {
     
     while(true) {
         string username, password;
-        cout << setw(20) << "" << "Enter your account" << "\n\n";
+        cout << setw(25) << "" << "----LOGIN---- " << "\n\n";
         cout << setw(22) << "" << "Username: ";
         cin >> username;
-        cout << "\n";
-        cout << setw(22) << "" << "Password: ";
-        cin >> password;
         cout << "\n";
         if(username == "exit") {
             break;
         }
-        else if(username == "admin" && password == "admin") {
+        cout << setw(22) << "" << "Password: ";
+        //cin >> password;
+        char x = 'a';
+        while (x != '\n'){
+            x = getch();
+            if (x == 13) break;
+            else if (x == 8 && password.size() != 0){
+                password.pop_back();
+                cout << "\b" << " \b";
+            }
+            else if (x != 8){
+                password += x;
+                cout << '*';
+            }
+        }
+        
+        cout << "\n";
+
+        if(username == "admin" && password == "admin") {
             isAdmin = true;
         } else {
             for(int i = 0; i < this->n; ++i) {

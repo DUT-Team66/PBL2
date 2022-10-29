@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
-//#include "Table.h"
+#include "Table.h"
 using namespace std;
 
 PhoneManager::PhoneManager()
@@ -282,10 +282,10 @@ void PhoneManager::Menu() {
         int choice;
         while(true) {
             
-            // cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
-	        // cout << setw(25) << "" << col << " PHONES " << col << "\n";
-	        // cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
-            cout << setw(25) << "" << "PHONES" << "\n\n";
+            cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        cout << setw(25) << "" << col << " PHONES " << col << "\n";
+	        cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            // cout << setw(25) << "" << "PHONES" << "\n\n";
             cout << setw(22) << "" << "1. Add phone" << "\n"; // nhap day du thong tin cua phone
             cout << setw(22) << "" << "2. Delete phone" << "\n"; // nhap phoneid
             cout << setw(22) << "" << "3. Search phone" << "\n"; // nhap phoneid

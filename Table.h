@@ -1,30 +1,24 @@
+#ifndef _TABLE_
+#define _TABLE_
 
 #include <string>
 #include <iostream>
 using namespace std;
-#ifndef _TABLE_H_
-#define _TABLE_H_
 
-string line(int l) {
-	string s = "";
-	for(int i = 0; i < l; ++i) {
-		s += char(196);
-	}
-	return s;
-}
-char topLeftCorner = 218;
-char leftSide = 195;
-char botLeftCorner = 192;
+string line(int);
+extern char topLeftCorner;
+extern char leftSide;
+extern char botLeftCorner;
 
-char topRightCorner = 191;
-char rightSide = 180;
-char botRightCorner = 217;
+extern char topRightCorner;
+extern char rightSide;
+extern char botRightCorner;
 
-char row = 196;
-char col = 179;
+extern char row;
+extern char col;
 
-char topMid = 197;
-char midMid = 193;
-char botMid = 194;
+extern char topMid;
+extern char midMid;
+extern char botMid;
 
 #endif

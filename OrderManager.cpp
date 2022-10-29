@@ -3,7 +3,7 @@
 #include <string>
 #include <iomanip>
 #include <fstream>
-//#include "Table.h"
+#include "Table.h"
 using namespace std;
 OrderManager::OrderManager()
 {
@@ -193,10 +193,10 @@ void OrderManager::Menu() {
         int choice;
         while(true) {
             
-            // cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
-	        // cout << setw(25) << "" << col << " TRADES " << col << "\n";
-	        // cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
-            cout << setw(25) << "" << "TRADES" << "\n\n";
+            cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        cout << setw(25) << "" << col << " TRADES " << col << "\n";
+	        cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            //cout << setw(25) << "" << "TRADES" << "\n\n";
             cout << setw(22) << "" << "1. Search by OrderID" << "\n"; //  nhap orderid
             cout << setw(22) << "" << "2. Search by CustomerID" << "\n"; // nhap customerid
             cout << setw(22) << "" << "3. Search by StaffID" << "\n"; // nhap customerid

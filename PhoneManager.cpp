@@ -279,13 +279,14 @@ void PhoneManager::UpdateFile() {
 void PhoneManager::Menu() {
     std::system("cls");
     while(true) {
-        int choice;
+        string choice;
         while(true) {
             
             cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
 	        cout << setw(25) << "" << col << " PHONES " << col << "\n";
 	        cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
             // cout << setw(25) << "" << "PHONES" << "\n\n";
+            //this->Show();
             cout << setw(22) << "" << "1. Add phone" << "\n"; // nhap day du thong tin cua phone
             cout << setw(22) << "" << "2. Delete phone" << "\n"; // nhap phoneid
             cout << setw(22) << "" << "3. Search phone" << "\n"; // nhap phoneid
@@ -295,33 +296,66 @@ void PhoneManager::Menu() {
             
             cout << setw(20) << "" << "Your choice: ";
             cin >> choice;
-            if(choice != 1 && choice != 2 && choice !=3 && choice != 4 && choice != 5 && choice != 6) {
+            if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6") {
                 cout << "Invalid choice, please re-enter!\n";
                 std::system("pause");
                 std::system("cls"); 
             } else break;
         }
-        if(choice == 1) {
-            Phone p;
-            p.setInfo();
-            this->Add(p);
-            cout << "Add successfully!\n";
-        } else if (choice == 2) {
+        if(choice == "1") {
+            string phoneName;
+            cin.ignore();
+            bool exist = false;
+            cout << "Enter phone name: ";
+            getline(cin, phoneName);
+            for(int i = 0; i < this->n; ++i) {
+                if(phoneName == (this->p + i)->getPhoneName()) {
+                    exist = true;
+                }
+            }
+            if(!exist) {
+                string phoneID, brand, processor, RAM_ROM, display, camera; 
+                int entryPrice, salePrice;
+                cout << "Enter phone id: ";
+                getline(cin, phoneID);
+                cout << "Enter brand: ";
+                getline(cin,brand);
+                cout << "Enter processor: ";
+                getline(cin, processor);
+                cout << "Enter RAM/ROM: ";
+                getline(cin, RAM_ROM);
+                cout << "Enter display: ";
+                getline(cin, display);
+                cout << "Enter camera: ";
+                getline(cin, camera);
+                cout << "Enter entry price: ";
+                cin >> entryPrice;
+                cout << "Enter sale price: ";
+                cin >> salePrice;
+                
+                
+                this->Add(Phone(phoneName, phoneID, brand, processor, RAM_ROM, display, camera, entryPrice, salePrice));
+                cout << "Add successfully!\n";
+            } else {
+                cout << "Phone exists";
+            }
+        } else if (choice == "2") {
+            this->Show();
             string s;
             cout << "Enter ID: ";
             cin >> s;
             this->Delete(s);
-        } else if(choice == 3) {
+        } else if(choice == "3") {
             string s;
             cout << "Enter ID:";
             cin >> s;
             this->Search(s);
-        } else if (choice == 4) {
+        } else if (choice == "4") {
             string s;
             cout << "Enter ID: ";
             cin >> s;
             this->Update(s);
-        } else if(choice == 5) {
+        } else if(choice == "5") {
             this->Show();
         } else {
             std::system("cls");

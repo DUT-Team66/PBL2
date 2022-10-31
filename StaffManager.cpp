@@ -191,7 +191,7 @@ void StaffManager::Show() const
 	cout << col << setw(1) << "" << setw(9) << left << "Password";
 	cout << col << "\n";
 	
-	for(int i = 0; i < 10; ++i) {
+	for(int i = 0; i < this->n; ++i) {
 		cout << leftSide << line(30);
 		cout << midMid << line(14);
 		cout << midMid << line(8);
@@ -317,51 +317,74 @@ void StaffManager::UpdateFile() {
 void StaffManager::Menu() {
     std::system("cls");
     while(true) {
-        int choice;
+        string choice;
         while(true) {
-            cout << setw(45) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
-	        cout << setw(45) << "" << col << " STAFFS " << col << "\n";
-	        cout << setw(45) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        cout << setw(50) << "" << col << " STAFFS " << col << "\n";
+	        cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
             // cout << setw(25) << "STAFFS" << "\n\n";
-            cout << setw(42) << "" << "1. Add a staff" << "\n"; // nhap day du thong tin cua staff
-            cout << setw(42) << "" << "2. Delete a staff" << "\n"; // nhap staffid
-            cout << setw(42) << "" << "3. Search a staff" << "\n"; // nhap staffid
-            cout << setw(42) << "" << "4. Update a staff" << "\n"; // nhap day du thong tin cua staff, neu khong doi nhap N/A
-            cout << setw(42) << "" << "5. Show all staffs" << "\n";
-            cout << setw(42) << "" << "6. Go back" << "\n\n";
+            this->Show();
+            cout << setw(47) << "" << "1. Add a staff" << "\n"; // nhap day du thong tin cua staff
+            cout << setw(47) << "" << "2. Delete a staff" << "\n"; // nhap staffid
+            cout << setw(47) << "" << "3. Search a staff" << "\n"; // nhap staffid
+            cout << setw(47) << "" << "4. Update a staff" << "\n"; // nhap day du thong tin cua staff, neu khong doi nhap N/A
+            //cout << setw(47) << "" << "5. Show all staffs" << "\n";
+            cout << setw(47) << "" << "5. Go back" << "\n\n";
 
-            cout << setw(40) << "" << "Your choice: ";
+            cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
-            if(choice != 1 && choice != 2 && choice !=3 && choice != 4 && choice != 5 && choice != 6) {
+            if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" ) {
                 cout << "Invalid choice, please re-enter!\n";
                 std::system("pause");
                 std::system("cls"); 
             } else break;
         }
-        if(choice == 1) {
-            Staff s;
-            s.setInfo();
-            s.setUsername(compact(s.getName()));
-            s.setPassword(compact(s.getPassword()));
-            this->Add(s);
-            cout << "Add successfully!\n";
-        } else if (choice == 2) {
+        if(choice == "1") {
+            string id;
+            cin.ignore();
+            bool exist = false;
+            cout << setw(4) << "" << char(16) << "Enter ID: ";
+            getline(cin, id);
+            for(int i = 0;i < this->n; ++i) {
+                if(id == (this->p + i)->getID()) {
+                    exist = true;
+                }
+            }
+            if(!exist) {
+                string name, gender, dob, phoneNumber, address;
+                cout << setw(4) << "" << char(16) << "Enter name: ";
+                getline(cin, name);
+                cout << setw(4) << "" << char(16) << "Enter gender: ";
+                getline(cin, gender);
+                cout << setw(4) << "" << char(16) << "Enter dob: ";
+                getline(cin, dob);
+                cout << setw(4) << "" << char(16) << "Enter phone number: ";
+                getline(cin, phoneNumber);
+                cout << setw(4) << "" << char(16) << "Enter address: ";
+                getline(cin, address);
+                
+                this->Add(Staff(name, id, gender, dob, phoneNumber, address, compact(name), compact(dob)));
+                cout << "Add successfully!\n";
+            } else {
+                cout << "Staff exists\n";
+            }
+        } else if (choice == "2") {
+            //this->Show();
             string s;
             cout << "Enter ID: ";
             cin >> s;
             this->Delete(s);
-        } else if(choice == 3) {
+        } else if(choice == "3") {
+            //this->Show();
             string s;
             cout << "Enter ID:";
             cin >> s;
             this->Search(s);
-        } else if (choice == 4) {
+        } else if (choice == "4") {
             string s;
             cout << "Enter ID: ";
             cin >> s;
             this->Update(s);
-        } else if(choice == 5) {
-            this->Show();
         } else {
             std::system("cls");
             break;  

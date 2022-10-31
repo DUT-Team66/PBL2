@@ -190,7 +190,7 @@ void OrderManager::LoadData() {
 void OrderManager::Menu() {
     std::system("cls");
     while(true) {
-        int choice;
+        string choice;
         while(true) {
             
             cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
@@ -204,13 +204,13 @@ void OrderManager::Menu() {
             cout << setw(22) << "" << "5. Go back" << "\n\n";
             cout << setw(20) << "" << "Your choice: ";
             cin >> choice;
-            if(choice != 1 && choice != 2 && choice !=3 && choice != 4 && choice != 5) {
+            if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5") {
                 cout << "Invalid choice, please re-enter!\n";
                 std::system("pause");
                 std::system("cls"); 
             } else break;
         }
-        if(choice == 1) {
+        if(choice == "1") {
             cout << "Enter orderID you want to search: ";
             string id; cin >> id;
             for(int i = 0; i < this->n; ++i) {
@@ -219,7 +219,7 @@ void OrderManager::Menu() {
                     break;
                 }
             }
-        } else if (choice == 2) {
+        } else if (choice == "2") {
             cout << "Enter customerID you want to search: ";
             string id; cin >> id;
             for(int i = 0; i < this->n; ++i) {
@@ -228,7 +228,7 @@ void OrderManager::Menu() {
                     (this->p + i)->show();
                 }
             }
-        } else if (choice == 3) {
+        } else if (choice == "3") {
             cout << "Enter staffID you want to search: ";
             string id; cin >> id;
             for(int i = 0; i < this->n; ++i) {
@@ -237,7 +237,7 @@ void OrderManager::Menu() {
                     (this->p + i)->show();
                 }
             }
-        } else if(choice == 4) {
+        } else if(choice == "4") {
             this->Show();
         } else {
             std::system("cls");

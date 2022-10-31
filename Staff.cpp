@@ -113,7 +113,7 @@ void Staff::show()
 }
 void Staff::Menu() {
     while(true) {
-        int choice;
+        string choice;
         while(true) {
             cout << setw(20) << "" << "Choose what you want to manage" << "\n\n";
             cout << setw(22) << "" << "1. Phones" << "\n";
@@ -121,16 +121,16 @@ void Staff::Menu() {
             cout << setw(22) << "" << "3. Go back" << "\n\n";
             cout << setw(20) << "" << "Your choice: ";
             cin >> choice;
-            if(choice != 1 && choice != 2 && choice != 3) {
+            if(choice != "1" && choice != "2" && choice != "3") {
                 cout << setw(5) << "" << "Invalid choice, please re-enter!\n";
                 system("pause");
                 system("cls"); 
             } else break;
         }
         
-        if(choice == 1) {
+        if(choice == "1") {
             this->managePhone.Menu();
-        } else if(choice == 2) {
+        } else if(choice == "2") {
             this->manageOrder.Menu();
         } else break;
     }

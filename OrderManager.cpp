@@ -102,11 +102,66 @@ void OrderManager::SearchByStaffID(string m)
 
 void OrderManager::Show() //Show All
 {
-    for (int i=0;i<this->n;i++)
-    {
-        cout << setw(2) << i + 1 << ". ";
-        (this->p+i)->show(); 
-    }
+
+    cout << topLeftCorner << line(7); // stt
+	cout << topMid << line(11); // orderid
+	cout << topMid << line(14); //customerID
+	cout << topMid << line(14); // staffID
+	cout << topMid << line(14); // cart
+	cout << topMid << line(13); //purchaseday
+	cout << topMid << line(14); //totalprice
+	cout << topRightCorner << "\n";
+	
+	cout << col << setw(1) << "" << setw(6) << left << "Order";
+	cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
+	cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
+	cout << col << setw(3) << "" << setw(11) << left << "StaffID";
+	cout << col << setw(4) << "" << setw(10) << left << "Cart";
+	cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
+	cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
+	cout << col << "\n";
+	
+	for(int i = 0; i < this->n; ++i) {
+		cout << leftSide << line(7);
+		cout << midMid << line(11);
+		cout << midMid << line(14);
+		cout << midMid << line(14);
+		cout << midMid << line(14);
+		cout << midMid << line(13);
+		cout << midMid << line(14);
+		cout << rightSide << "\n";
+		
+		cout << col << "  " << setw(5) << left << i + 1;
+		cout << col << " " << setw(10) << left << (this->p + i )->getID();
+		cout << col << " " << setw(13) << left << (this->p + i)->getCustomerID();
+		cout << col << " " << setw(13) << left << (this->p + i)->getStaffID();
+        cout << col << " " << setw(0) << left << (this->p + i)->getShoppingList(0).getPhoneID() << "/" << to_string((this->p + i)->getShoppingList(0).getAmount()) << setw(12 - (this->p + i)->getShoppingList(0).getPhoneID().length() - to_string((this->p + i)->getShoppingList(0).getAmount()).length()) << "";
+		cout << col << "  " << setw(0) << left << (this->p + i)->getPurchaseDay() << setw(10 - to_string((this->p + i)->getPurchaseDay().getDay()).length() - to_string((this->p + i)->getPurchaseDay().getMonth()).length() - to_string((this->p + i)->getPurchaseDay().getYear()).length() - 1) << "";
+		cout << col << setw(13) << right << (this->p + i)->getTotalPrice() << setw(1) << "";	
+		cout << col << "\n";
+		
+		for(int j = 1; j < (this->p + i)->getShpllength(); ++j) {
+			cout << col << setw(7) << "";
+			cout << col << setw(11) << "";
+			cout << col << setw(14) << "";
+			cout << col << setw(14) << ""; 
+            cout << col << " " << setw(0) << left << (this->p + i)->getShoppingList(j).getPhoneID() << "/" << to_string((this->p + i)->getShoppingList(j).getAmount()) << setw(12 - (this->p + i)->getShoppingList(j).getPhoneID().length() - to_string((this->p + i)->getShoppingList(j).getAmount()).length()) << "";
+			cout << col << setw(13) << "";
+			cout << col << setw(14) << "";
+			cout << col << "\n";
+		}
+	}
+	
+	
+	cout << botLeftCorner << line(7); 
+	cout << botMid << line(11);
+	cout << botMid << line(14); 
+	cout << botMid << line(14); 
+	cout << botMid << line(14); 
+	cout << botMid << line(13);
+	cout << botMid << line(14); 
+	cout << botRightCorner << "\n";
+    
    
 }
 void OrderManager::LoadData() {
@@ -193,16 +248,16 @@ void OrderManager::Menu() {
         string choice;
         while(true) {
             
-            cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
-	        cout << setw(25) << "" << col << " TRADES " << col << "\n";
-	        cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            cout << setw(35) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        cout << setw(35) << "" << col << " TRADES " << col << "\n";
+	        cout << setw(35) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
             //cout << setw(25) << "" << "TRADES" << "\n\n";
-            cout << setw(22) << "" << "1. Search by OrderID" << "\n"; //  nhap orderid
-            cout << setw(22) << "" << "2. Search by CustomerID" << "\n"; // nhap customerid
-            cout << setw(22) << "" << "3. Search by StaffID" << "\n"; // nhap customerid
-            cout << setw(22) << "" << "4. Show all orders" << "\n";
-            cout << setw(22) << "" << "5. Go back" << "\n\n";
-            cout << setw(20) << "" << "Your choice: ";
+            cout << setw(32) << "" << "1. Search by OrderID" << "\n"; //  nhap orderid
+            cout << setw(32) << "" << "2. Search by CustomerID" << "\n"; // nhap customerid
+            cout << setw(32) << "" << "3. Search by StaffID" << "\n"; // nhap customerid
+            cout << setw(32) << "" << "4. Show all orders" << "\n";
+            cout << setw(32) << "" << "5. Go back" << "\n\n";
+            cout << setw(30) << "" << "Your choice: ";
             cin >> choice;
             if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5") {
                 cout << "Invalid choice, please re-enter!\n";

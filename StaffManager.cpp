@@ -104,26 +104,294 @@ void StaffManager::Delete(string s)
             delete[] temp;
             this->n--;
         }
-        cout << "Delete successfully!\n";
+        std::cout << "Delete successfully!\n";
     } else {
-        cout << "Staff ID does not exist!\n";
+        std::cout << "Staff ID does not exist!\n";
     }
 }
-void StaffManager::Search(string s)
+void StaffManager::Search()
 {
-    int index = -1;
-    for (int i = 0; i < this->n; i++)
-    {
-        if ((this->p + i)->getID() == s) {
-            index = i;
-            break;
-        }
+    // int index = -1;
+    // for (int i = 0; i < this->n; i++)
+    // {
+    //     if ((this->p + i)->getID() == s) {
+    //         index = i;
+    //         break;
+    //     }
+    // }
+
+    // if (index >= 0)
+    //     (this->p + index)->show();
+    // else std::cout << "Staff ID does not exist!\n";
+
+    std::system("cls");
+    std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+    std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
+    std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+    string choice; 
+    std::cout << setw(47) << "" << "1. Search by ID" << "\n";
+    std::cout << setw(47) << "" << "2. Search by name" << "\n";
+    std::cout << setw(47) << "" << "3. Search by gender" << "\n";
+    std::cout << setw(47) << "" << "4. Search by year of birth" << "\n"; 
+    std::cout << setw(47) << "" << "5. Search by phone number" << "\n";
+    //std::cout << setw(35) << "" << "6. Search by address" << "\n";
+    //std::cout << setw(35) << "" << "7. Search by salary" << "\n"; // salary from ... to ...
+    std::cout << setw(47) << "" << "6. Go back" << "\n";
+    std::cout << setw(45) << "" << "Your choice: ";
+    cin >> choice;
+    if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6") {
+        std::cout << "Invalid choice!\n";
+        std::system("pause");
     }
 
-    if (index >= 0)
-        (this->p + index)->show();
-    else cout << "Staff ID does not exist!\n";
-}
+    
+
+    if(choice == "1") {
+        string id;
+        cout << setw(47) << "" << "Enter staff ID: ";
+        cin >> id;   
+        std::cout << topLeftCorner << line(30); // staff name
+        std::cout << topMid << line(14); //staffID
+        std::cout << topMid << line(8); // gender
+        std::cout << topMid << line(12); // dob
+        std::cout << topMid << line(14); //phonenumber
+        std::cout << topMid << line(26); //address
+        std::cout << topMid << line(13); //salary
+        std::cout << topMid << line(11); //username
+        std::cout << topMid << line(10); // password
+        std::cout << topRightCorner << "\n";
+        
+
+        std::cout << col << setw(9) << "" << setw(21) << left << "Staff name"; 
+        std::cout << col << setw(3) << "" << setw(11) << left << "Staff ID";
+        std::cout << col << setw(1) << "" << setw(7) << left << "Gender";
+        std::cout << col << setw(4) << "" << setw(8) << left << "DOB";
+        std::cout << col << setw(1) << "" << setw(13) << left << "Phone number";
+        std::cout << col << setw(9) << "" << setw(17) << left << "Address";
+        std::cout << col << setw(2) << "" << setw(11) << left << "Salary";
+        std::cout << col << setw(2) << "" << setw(9) << left << "Username";
+        std::cout << col << setw(1) << "" << setw(9) << left << "Password";
+        std::cout << col << "\n";
+        for(int i = 0; i < this->n; ++i) {
+            if(id == (this->p + i)->getID()) {
+                std::cout << midMid << line(30);
+                std::cout << midMid << line(14);
+                std::cout << midMid << line(8);
+                std::cout << midMid << line(12);
+                std::cout << midMid << line(14);
+                std::cout << midMid << line(26);
+                std::cout << midMid << line(13);
+                std::cout << midMid << line(11);
+                std::cout << midMid << line(10);
+                std::cout << rightSide << "\n";
+                
+                (this->p + i)->show();
+            }
+        }
+    } else if (choice == "2") {
+        string name;
+        cout << setw(47) << "" << "Enter staff name: ";
+        cin >> name;
+        std::cout << topLeftCorner << line(30); // staffname 
+        std::cout << topMid << line(14); //staffID
+        std::cout << topMid << line(8); // gender
+        std::cout << topMid << line(12); // dob
+        std::cout << topMid << line(14); //phonenumber
+        std::cout << topMid << line(26); //address
+        std::cout << topMid << line(13); //salary
+        std::cout << topMid << line(11); //username
+        std::cout << topMid << line(10); // password
+        std::cout << topRightCorner << "\n";
+        
+        
+        std::cout << col << setw(9) << "" << setw(21) << left << "Staff name"; 
+        std::cout << col << setw(3) << "" << setw(11) << left << "Staff ID";
+        std::cout << col << setw(1) << "" << setw(7) << left << "Gender";
+        std::cout << col << setw(4) << "" << setw(8) << left << "DOB";
+        std::cout << col << setw(1) << "" << setw(13) << left << "Phone number";
+        std::cout << col << setw(9) << "" << setw(17) << left << "Address";
+        std::cout << col << setw(2) << "" << setw(11) << left << "Salary";
+        std::cout << col << setw(2) << "" << setw(9) << left << "Username";
+        std::cout << col << setw(1) << "" << setw(9) << left << "Password";
+        std::cout << col << "\n";
+
+        for(int i = 0; i < name.length(); ++i) {
+            name[i] = tolower(name[i]);
+        }
+        for(int i = 0; i < this->n; ++i) {
+            string tmp = "";
+            for(int j = 0; j < (this->p + i)->getName().length(); ++j){
+                tmp += tolower((this->p + i)->getName()[j]);
+            }
+            if(tmp.find(name) != -1) {
+
+                std::cout << midMid << line(30);
+                std::cout << midMid << line(14);
+                std::cout << midMid << line(8);
+                std::cout << midMid << line(12);
+                std::cout << midMid << line(14);
+                std::cout << midMid << line(26);
+                std::cout << midMid << line(13);
+                std::cout << midMid << line(11);
+                std::cout << midMid << line(10);
+                std::cout << rightSide << "\n";
+
+                (this->p + i)->show(); 
+            }
+        }
+    } else if (choice == "3") {
+        string gender;
+        cout << setw(47) << "" << "Enter gender: ";
+        cin >> gender;
+
+        std::cout << topLeftCorner << line(30); // staffname 
+        std::cout << topMid << line(14); //staffID
+        std::cout << topMid << line(8); // gender
+        std::cout << topMid << line(12); // dob
+        std::cout << topMid << line(14); //phonenumber
+        std::cout << topMid << line(26); //address
+        std::cout << topMid << line(13); //salary
+        std::cout << topMid << line(11); //username
+        std::cout << topMid << line(10); // password
+        std::cout << topRightCorner << "\n";
+        
+        
+        std::cout << col << setw(9) << "" << setw(21) << left << "Staff name"; 
+        std::cout << col << setw(3) << "" << setw(11) << left << "Staff ID";
+        std::cout << col << setw(1) << "" << setw(7) << left << "Gender";
+        std::cout << col << setw(4) << "" << setw(8) << left << "DOB";
+        std::cout << col << setw(1) << "" << setw(13) << left << "Phone number";
+        std::cout << col << setw(9) << "" << setw(17) << left << "Address";
+        std::cout << col << setw(2) << "" << setw(11) << left << "Salary";
+        std::cout << col << setw(2) << "" << setw(9) << left << "Username";
+        std::cout << col << setw(1) << "" << setw(9) << left << "Password";
+        std::cout << col << "\n";
+
+        for(int i = 0; i < this->n; ++i){
+            if(gender == (this->p + i)->getGender()) {
+
+                std::cout << midMid << line(30);
+                std::cout << midMid << line(14);
+                std::cout << midMid << line(8);
+                std::cout << midMid << line(12);
+                std::cout << midMid << line(14);
+                std::cout << midMid << line(26);
+                std::cout << midMid << line(13);
+                std::cout << midMid << line(11);
+                std::cout << midMid << line(10);
+                std::cout << rightSide << "\n";
+
+                (this->p + i)->show();
+            }
+        }
+    } else if (choice == "4") {
+        string year;
+        cout << setw(47) << "" << "Enter year of birth: ";
+        cin >> year;
+        
+        std::cout << topLeftCorner << line(30); // staffname 
+        std::cout << topMid << line(14); //staffID
+        std::cout << topMid << line(8); // gender
+        std::cout << topMid << line(12); // dob
+        std::cout << topMid << line(14); //phonenumber
+        std::cout << topMid << line(26); //address
+        std::cout << topMid << line(13); //salary
+        std::cout << topMid << line(11); //username
+        std::cout << topMid << line(10); // password
+        std::cout << topRightCorner << "\n";
+        
+        
+        std::cout << col << setw(9) << "" << setw(21) << left << "Staff name"; 
+        std::cout << col << setw(3) << "" << setw(11) << left << "Staff ID";
+        std::cout << col << setw(1) << "" << setw(7) << left << "Gender";
+        std::cout << col << setw(4) << "" << setw(8) << left << "DOB";
+        std::cout << col << setw(1) << "" << setw(13) << left << "Phone number";
+        std::cout << col << setw(9) << "" << setw(17) << left << "Address";
+        std::cout << col << setw(2) << "" << setw(11) << left << "Salary";
+        std::cout << col << setw(2) << "" << setw(9) << left << "Username";
+        std::cout << col << setw(1) << "" << setw(9) << left << "Password";
+        std::cout << col << "\n";
+
+        for(int i = 0; i < this->n; ++i) {
+            if((this->p + i)->getDob().substr(6) == year) {
+
+                std::cout << midMid << line(30);
+                std::cout << midMid << line(14);
+                std::cout << midMid << line(8);
+                std::cout << midMid << line(12);
+                std::cout << midMid << line(14);
+                std::cout << midMid << line(26);
+                std::cout << midMid << line(13);
+                std::cout << midMid << line(11);
+                std::cout << midMid << line(10);
+                std::cout << rightSide << "\n";
+
+                (this->p + i)->show();
+            }
+        }
+    } else if (choice == "5") {
+        string phoneNumber;
+        cout << setw(47) << "" << "Enter phone number: ";
+        cin >> phoneNumber;
+
+        std::cout << topLeftCorner << line(30); // staffname 
+        std::cout << topMid << line(14); //staffID
+        std::cout << topMid << line(8); // gender
+        std::cout << topMid << line(12); // dob
+        std::cout << topMid << line(14); //phonenumber
+        std::cout << topMid << line(26); //address
+        std::cout << topMid << line(13); //salary
+        std::cout << topMid << line(11); //username
+        std::cout << topMid << line(10); // password
+        std::cout << topRightCorner << "\n";
+        
+        
+        std::cout << col << setw(9) << "" << setw(21) << left << "Staff name"; 
+        std::cout << col << setw(3) << "" << setw(11) << left << "Staff ID";
+        std::cout << col << setw(1) << "" << setw(7) << left << "Gender";
+        std::cout << col << setw(4) << "" << setw(8) << left << "DOB";
+        std::cout << col << setw(1) << "" << setw(13) << left << "Phone number";
+        std::cout << col << setw(9) << "" << setw(17) << left << "Address";
+        std::cout << col << setw(2) << "" << setw(11) << left << "Salary";
+        std::cout << col << setw(2) << "" << setw(9) << left << "Username";
+        std::cout << col << setw(1) << "" << setw(9) << left << "Password";
+        std::cout << col << "\n";
+
+        for(int i = 0; i < this->n; ++i) {
+            if(phoneNumber == (this->p + i)->getPhoneNumber()) {
+
+                std::cout << midMid << line(30);
+                std::cout << midMid << line(14);
+                std::cout << midMid << line(8);
+                std::cout << midMid << line(12);
+                std::cout << midMid << line(14);
+                std::cout << midMid << line(26);
+                std::cout << midMid << line(13);
+                std::cout << midMid << line(11);
+                std::cout << midMid << line(10);
+                std::cout << rightSide << "\n";
+
+                (this->p + i)->show();
+            }
+        }
+    } else if (choice == "6") {
+        return;
+    }
+
+
+    std::cout << botLeftCorner << line(30); // staff name
+	std::cout << botMid << line(14); //staffID
+	std::cout << botMid << line(8); // gender
+	std::cout << botMid << line(12); // dob
+	std::cout << botMid << line(14); //phonenumber
+	std::cout << botMid << line(26); //address
+	std::cout << botMid << line(13); //salary
+	std::cout << botMid << line(11); // username
+	std::cout << botMid << line(10); // password
+	std::cout << botRightCorner << "\n";
+
+    //std::system("pause");
+ }
 
 
 
@@ -135,15 +403,15 @@ void StaffManager::Update(string id)
     for(int i = 0; i < this->n; ++i) {
         if((this->p + i)->getID() == id) {
             string name, gender, dob, phoneNumber, address;
-            cout << "Enter name: ";
+            std::cout << "Enter name: ";
             getline(cin, name);
-            cout << "Enter gender: ";
+            std::cout << "Enter gender: ";
             getline(cin, gender);
-            cout << "Enter dob: ";
+            std::cout << "Enter dob: ";
             getline(cin, dob);
-            cout << "Enter phone number: ";
+            std::cout << "Enter phone number: ";
             getline(cin, phoneNumber);
-            cout << "Enter address: ";
+            std::cout << "Enter address: ";
             getline(cin, address);
             if(name != "") {
                 (this->p + i)->setName(name);
@@ -162,70 +430,75 @@ void StaffManager::Update(string id)
             }
             check = true;
             break;
-            cout << "Update successfully!\n";
+            std::cout << "Update successfully!\n";
         }
     }
-    if(!check) cout << "Staff ID does not exist!\n";
+    if(!check) std::cout << "Staff ID does not exist!\n";
 }
 void StaffManager::Show() const
 {
-    cout << topLeftCorner << line(30); // staff name
-	cout << topMid << line(14); //staffID
-	cout << topMid << line(8); // gender
-	cout << topMid << line(12); // dob
-	cout << topMid << line(14); //phonenumber
-	cout << topMid << line(26); //address
-	cout << topMid << line(13); //salary
-	cout << topMid << line(11); //username
-	cout << topMid << line(10); // password
-	cout << topRightCorner << "\n";
+    std::cout << topLeftCorner << line(7); // order   
+    std::cout << topMid << line(30); // staff name
+	std::cout << topMid << line(14); //staffID
+	std::cout << topMid << line(8); // gender
+	std::cout << topMid << line(12); // dob
+	std::cout << topMid << line(14); //phonenumber
+	std::cout << topMid << line(26); //address
+	std::cout << topMid << line(13); //salary
+	std::cout << topMid << line(11); //username
+	std::cout << topMid << line(10); // password
+	std::cout << topRightCorner << "\n";
 	
-	cout << col << setw(9) << "" << setw(21) << left << "Staff name"; 
-	cout << col << setw(3) << "" << setw(11) << left << "Staff ID";
-	cout << col << setw(1) << "" << setw(7) << left << "Gender";
-	cout << col << setw(4) << "" << setw(8) << left << "DOB";
-	cout << col << setw(1) << "" << setw(13) << left << "Phone number";
-	cout << col << setw(9) << "" << setw(17) << left << "Address";
-	cout << col << setw(2) << "" << setw(11) << left << "Salary";
-	cout << col << setw(2) << "" << setw(9) << left << "Username";
-	cout << col << setw(1) << "" << setw(9) << left << "Password";
-	cout << col << "\n";
+    std::cout << col << setw(1) << "" << setw(6) << left << "Order";
+	std::cout << col << setw(9) << "" << setw(21) << left << "Staff name"; 
+	std::cout << col << setw(3) << "" << setw(11) << left << "Staff ID";
+	std::cout << col << setw(1) << "" << setw(7) << left << "Gender";
+	std::cout << col << setw(4) << "" << setw(8) << left << "DOB";
+	std::cout << col << setw(1) << "" << setw(13) << left << "Phone number";
+	std::cout << col << setw(9) << "" << setw(17) << left << "Address";
+	std::cout << col << setw(2) << "" << setw(11) << left << "Salary";
+	std::cout << col << setw(2) << "" << setw(9) << left << "Username";
+	std::cout << col << setw(1) << "" << setw(9) << left << "Password";
+	std::cout << col << "\n";
 	
 	for(int i = 0; i < this->n; ++i) {
-		cout << leftSide << line(30);
-		cout << midMid << line(14);
-		cout << midMid << line(8);
-		cout << midMid << line(12);
-		cout << midMid << line(14);
-		cout << midMid << line(26);
-		cout << midMid << line(13);
-		cout << midMid << line(11);
-		cout << midMid << line(10);
-		cout << rightSide << "\n";
+		std::cout << leftSide << line(7); 
+        std::cout << midMid << line(30);
+		std::cout << midMid << line(14);
+		std::cout << midMid << line(8);
+		std::cout << midMid << line(12);
+		std::cout << midMid << line(14);
+		std::cout << midMid << line(26);
+		std::cout << midMid << line(13);
+		std::cout << midMid << line(11);
+		std::cout << midMid << line(10);
+		std::cout << rightSide << "\n";
 		
-		cout << col << " " << setw(29) << left << (this->p + i)->getName();
-		cout << col << " " << setw(13) << left << (this->p + i)->getID();
-		cout << col << " " << setw(7) << left << (this->p + i)->getGender();
-		cout << col << " " << setw(11) << left << (this->p + i)->getDob();
-		cout << col << "  " << setw(12) << left << (this->p + i)->getPhoneNumber();
-		cout << col << setw(25) << right << (this->p + i)->getAddress() << setw(1) << "";
-		cout << col << setw(12) << right << (this->p + i)->getSalary() << setw(1) << "";
-		cout << col << setw(10) << right << (this->p + i)->getUsername() << setw(1) << "";
-		cout << col << setw(9) << right << (this->p + i)->getPassword() << setw(1) << ""; 
-		cout << col << "\n";
+        std::cout << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1;
+		std::cout << col << setw((30 - (this->p + i)->getName().length())/2) << "" << setw(30 - (30 - (this->p + i)->getName().length())/2) << left << (this->p + i)->getName();
+		std::cout << col << setw((14 - (this->p + i)->getID().length())/2) << "" << setw(14 - (14 - (this->p + i)->getID().length())/2) << left << (this->p + i)->getID();
+		std::cout << col << setw((8 - (this->p + i)->getGender().length())/2) << "" << setw(8 - (8 - (this->p + i)->getGender().length())/2) << left << (this->p + i)->getGender();
+		std::cout << col << setw((12 - (this->p + i)->getDob().length())/2) << "" << setw(12 - (12 - (this->p + i)->getDob().length())/2) << left << (this->p + i)->getDob();
+		std::cout << col << setw((14 - (this->p + i)->getPhoneNumber().length())/2) << "" << setw(14 - (14 - (this->p + i)->getPhoneNumber().length())/2) << left << (this->p + i)->getPhoneNumber();
+		std::cout << col << setw(26 - (26 - (this->p + i)->getAddress().length())/2) << right << (this->p + i)->getAddress() << setw((26 - (this->p + i)->getAddress().length())/2) << "";
+		std::cout << col << setw(13 - (13 - to_string((this->p + i)->getSalary()).length())/2) << right << (this->p + i)->getSalary() << setw((13 - to_string((this->p + i)->getSalary()).length())/2) << "";
+		std::cout << col << setw(11 - (11 - (this->p + i)->getUsername().length())/2) << right << (this->p + i)->getUsername() << setw((11 - (this->p + i)->getUsername().length())/2) << "";
+		std::cout << col << setw(10 - (10 - (this->p + i)->getPassword().length())/2) << right << (this->p + i)->getPassword() << setw((10 - (this->p + i)->getPassword().length())/2) << ""; 
+		std::cout << col << "\n";
 	}
 	
 	
-	cout << botLeftCorner << line(30); // staff name
-	cout << botMid << line(14); //staffID
-	cout << botMid << line(8); // gender
-	cout << botMid << line(12); // dob
-	cout << botMid << line(14); //phonenumber
-	cout << botMid << line(26); //address
-	cout << botMid << line(13); //salary
-	cout << botMid << line(11);
-	cout << botMid << line(10);
-	cout << botRightCorner << "\n";
+	std::cout << botLeftCorner << line(7); // order 
+    std::cout << botMid << line(30); // staff name
+	std::cout << botMid << line(14); //staffID
+	std::cout << botMid << line(8); // gender
+	std::cout << botMid << line(12); // dob
+	std::cout << botMid << line(14); //phonenumber
+	std::cout << botMid << line(26); //address
+	std::cout << botMid << line(13); //salary
+	std::cout << botMid << line(11); // username
+	std::cout << botMid << line(10); // password
+	std::cout << botRightCorner << "\n";
 	
     
 }
@@ -319,22 +592,22 @@ void StaffManager::Menu() {
     while(true) {
         string choice;
         while(true) {
-            cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
-	        cout << setw(50) << "" << col << " STAFFS " << col << "\n";
-	        cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
-            // cout << setw(25) << "STAFFS" << "\n\n";
-            this->Show();
-            cout << setw(47) << "" << "1. Add a staff" << "\n"; // nhap day du thong tin cua staff
-            cout << setw(47) << "" << "2. Delete a staff" << "\n"; // nhap staffid
-            cout << setw(47) << "" << "3. Search a staff" << "\n"; // nhap staffid
-            cout << setw(47) << "" << "4. Update a staff" << "\n"; // nhap day du thong tin cua staff, neu khong doi nhap N/A
-            //cout << setw(47) << "" << "5. Show all staffs" << "\n";
-            cout << setw(47) << "" << "5. Go back" << "\n\n";
+            std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
+	        std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            // std::cout << setw(25) << "STAFFS" << "\n\n";
+            //this->Show();
+            std::cout << setw(47) << "" << "1. Add a staff" << "\n"; // nhap day du thong tin cua staff
+            std::cout << setw(47) << "" << "2. Delete a staff" << "\n"; // nhap staffid
+            std::cout << setw(47) << "" << "3. Search a staff" << "\n"; // nhap staffid
+            std::cout << setw(47) << "" << "4. Update a staff" << "\n"; // nhap day du thong tin cua staff, neu khong doi nhap N/A
+            std::cout << setw(47) << "" << "5. Show all staffs" << "\n";
+            std::cout << setw(47) << "" << "6. Go back" << "\n\n";
 
-            cout << setw(45) << "" << "Your choice: ";
+            std::cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
-            if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" ) {
-                cout << "Invalid choice, please re-enter!\n";
+            if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6") {
+                std::cout << "Invalid choice, please re-enter!\n";
                 std::system("pause");
                 std::system("cls"); 
             } else break;
@@ -343,7 +616,7 @@ void StaffManager::Menu() {
             string id;
             cin.ignore();
             bool exist = false;
-            cout << setw(4) << "" << char(16) << "Enter ID: ";
+            std::cout << setw(4) << "" << char(16) << "Enter ID: ";
             getline(cin, id);
             for(int i = 0;i < this->n; ++i) {
                 if(id == (this->p + i)->getID()) {
@@ -352,39 +625,40 @@ void StaffManager::Menu() {
             }
             if(!exist) {
                 string name, gender, dob, phoneNumber, address;
-                cout << setw(4) << "" << char(16) << "Enter name: ";
+                std::cout << setw(4) << "" << char(16) << "Enter name: ";
                 getline(cin, name);
-                cout << setw(4) << "" << char(16) << "Enter gender: ";
+                std::cout << setw(4) << "" << char(16) << "Enter gender: ";
                 getline(cin, gender);
-                cout << setw(4) << "" << char(16) << "Enter dob: ";
+                std::cout << setw(4) << "" << char(16) << "Enter dob: ";
                 getline(cin, dob);
-                cout << setw(4) << "" << char(16) << "Enter phone number: ";
+                std::cout << setw(4) << "" << char(16) << "Enter phone number: ";
                 getline(cin, phoneNumber);
-                cout << setw(4) << "" << char(16) << "Enter address: ";
+                std::cout << setw(4) << "" << char(16) << "Enter address: ";
                 getline(cin, address);
                 
                 this->Add(Staff(name, id, gender, dob, phoneNumber, address, compact(name), compact(dob)));
-                cout << "Add successfully!\n";
+                std::cout << "Add successfully!\n";
             } else {
-                cout << "Staff exists\n";
+                std::cout << "Staff exists\n";
             }
         } else if (choice == "2") {
-            //this->Show();
+            this->Show();
             string s;
-            cout << "Enter ID: ";
+            std::cout << "Enter ID: ";
             cin >> s;
             this->Delete(s);
         } else if(choice == "3") {
             //this->Show();
-            string s;
-            cout << "Enter ID:";
-            cin >> s;
-            this->Search(s);
+            
+            this->Search();
         } else if (choice == "4") {
+            this->Show();
             string s;
-            cout << "Enter ID: ";
+            std::cout << "Enter ID: ";
             cin >> s;
             this->Update(s);
+        } else if(choice == "5") {
+            this->Show();    
         } else {
             std::system("cls");
             break;  
@@ -397,14 +671,14 @@ void StaffManager::Login(bool& isAdmin, bool& isStaff) {
     
     while(true) {
         string username, password;
-        cout << setw(25) << "" << "----LOGIN---- " << "\n\n";
-        cout << setw(22) << "" << "Username: ";
+        std::cout << setw(35) << "" << "----LOGIN---- " << "\n\n";
+        std::cout << setw(32) << "" << "Username: ";
         cin >> username;
-        cout << "\n";
+        std::cout << "\n";
         if(username == "exit") {
             break;
         }
-        cout << setw(22) << "" << "Password: ";
+        std::cout << setw(32) << "" << "Password: ";
         //cin >> password;
         char x = 'a';
         while (x != '\n'){
@@ -412,15 +686,15 @@ void StaffManager::Login(bool& isAdmin, bool& isStaff) {
             if (x == 13) break;
             else if (x == 8 && password.size() != 0){
                 password.pop_back();
-                cout << "\b" << " \b";
+                std::cout << "\b" << " \b";
             }
             else if (x != 8){
                 password += x;
-                cout << '*';
+                std::cout << '*';
             }
         }
         
-        cout << "\n";
+        std::cout << "\n";
 
         if(username == "admin" && password == "admin") {
             isAdmin = true;
@@ -433,10 +707,10 @@ void StaffManager::Login(bool& isAdmin, bool& isStaff) {
             }
         }
         if(isStaff || isAdmin)  {
-            cout << "Login successfully!\n";
+            std::cout << "Login successfully!\n";
             break;
         } else {
-            cout << "Invalid login information!\n";
+            std::cout << "Invalid login information!\n";
         }
         system("pause"); 
         system("cls");

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-
+#include "Table.h"
 using namespace std;
 
 Staff::Staff()
@@ -102,13 +102,16 @@ void Staff::setOrderManager(const OrderManager& orderManager) {
 }
 void Staff::show()
 {
-    cout << "" << "Staff name: " << this->name << "\n";
-    cout << "" << "Staff id: " << this->ID << "\n";
-    cout << "Gender: " << this->gender << "\n";
-    cout << "Day of birth: " << this->dob << "\n";
-    cout << "Phone number: " << this->phoneNumber << "\n";
-    cout << "Address: " << this->address << "\n";
-    cout << "Salary: " << this->salary << "\n";
+    std::cout << col << setw((30 - this->getName().length())/2) << "" << setw(30 - (30 - this->getName().length())/2) << left << this->getName();
+    std::cout << col << setw((14 - this->getID().length())/2) << "" << setw(14 - (14 - this->getID().length())/2) << left << this->getID();
+    std::cout << col << setw((8 - this->getGender().length())/2) << "" << setw(8 - (8 - this->getGender().length())/2) << left << this->getGender();
+    std::cout << col << setw((12 - this->getDob().length())/2) << "" << setw(12 - (12 - this->getDob().length())/2) << left << this->getDob();
+    std::cout << col << setw((14 - this->getPhoneNumber().length())/2) << "" << setw(14 - (14 - this->getPhoneNumber().length())/2) << left << this->getPhoneNumber();
+    std::cout << col << setw(26 - (26 - this->getAddress().length())/2) << right << this->getAddress() << setw((26 - this->getAddress().length())/2) << "";
+    std::cout << col << setw(13 - (13 - to_string(this->getSalary()).length())/2) << right << this->getSalary() << setw((13 - to_string(this->getSalary()).length())/2) << "";
+    std::cout << col << setw(11 - (11 - this->getUsername().length())/2) << right << this->getUsername() << setw((11 - this->getUsername().length())/2) << "";
+    std::cout << col << setw(10 - (10 - this->getPassword().length())/2) << right << this->getPassword() << setw((10 - this->getPassword().length())/2) << ""; 
+    std::cout << col << "\n";
 
 }
 void Staff::Menu() {

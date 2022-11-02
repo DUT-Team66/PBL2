@@ -175,12 +175,75 @@ const string& PhoneManager::getPhoneID(int index) {
 }
 void PhoneManager::Show()
 {
-    
-    for (int i=0;i<this->n;i++)
-    {
-        cout << setw(2) << i + 1 << ". ";
-        (this->p+i)->showForStaff(); 
-    }
+
+    cout << topLeftCorner << line(7); //order
+    cout << topMid << line(39); // phonename
+	cout << topMid << line(13); // phoneID
+	cout << topMid << line(9); // brand
+	cout << topMid << line(27); // processor
+	cout << topMid << line(12); // RAM_ROM
+	cout << topMid << line(29); // display
+	cout << topMid << line(13); // camera
+	cout << topMid << line(13); // entryprice
+	cout << topMid << line(12); // saleprice
+	cout << topMid << line(8); // remaining amount
+	cout << topRightCorner << "\n";
+	
+    cout << col << setw(1) << "" << setw(6) << left << "Order";
+	cout << col << setw(14) << "" << setw(25) << left << "Phone name"; 
+	cout << col << setw(3) << "" << setw(10) << left << "Phone ID";
+	cout << col << setw(2) << "" << setw(7) << left << "Brand";
+	cout << col << setw(9) << "" << setw(18) << left << "Processor";
+	cout << col << setw(2) << "" << setw(10) << left << "RAM-ROM";
+	cout << col << setw(11) << "" << setw(18) << left << "Display";
+	cout << col << setw(3) << "" << setw(10) << left << "Camera";
+	cout << col << setw(12) << right << "Entry price" << setw(1) << "" ;
+	cout << col << setw(11) << right << "Sale price" << setw(1) << "" ;
+	cout << col << setw(7) << right << "Amount" << setw(1) << "" ;
+	cout << col << "\n";
+	
+	for(int i = 0; i < this->n; ++i) {
+		cout << leftSide << line(7); 
+        cout << midMid << line(39); // phonename
+		cout << midMid << line(13); // phoneID
+		cout << midMid << line(9); // brand
+		cout << midMid << line(27); // processor
+		cout << midMid << line(12); // RAM_ROM
+		cout << midMid << line(29); // display
+		cout << midMid << line(13); // camera
+		cout << midMid << line(13); // entryprice
+		cout << midMid << line(12); // saleprice
+		cout << midMid << line(8); // remaining amount
+		cout << rightSide << "\n";
+		
+        cout << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1;
+		cout << col << setw((39 - (this->p + i)->getPhoneName().length())/2) << "" << setw(39 - (39 - (this->p + i)->getPhoneName().length())/2) << left << (this->p + i)->getPhoneName(); 
+		cout << col << setw((13 - (this->p + i)->getPhoneID().length())/2) << "" << setw(13 - (13 - (this->p + i)->getPhoneID().length())/2) << left << (this->p + i)->getPhoneID();
+		cout << col << setw((9 - (this->p + i)->getBrand().length())/2) << "" << setw(9 - (9 - (this->p + i)->getBrand().length())/2) << left << (this->p + i)->getBrand();
+		cout << col << setw((27 - (this->p + i)->getProcessor().length())/2) << "" << setw(27 - (27 - (this->p + i)->getProcessor().length())/2) << left << (this->p + i)->getProcessor();
+		cout << col << setw((12 - (this->p + i)->getRAM_ROM().length())/2) << "" << setw(12 - (12 - (this->p + i)->getRAM_ROM().length())/2) << left << (this->p + i)->getRAM_ROM();
+		cout << col << setw((29 - (this->p + i)->getDisplay().length())/2) << "" << setw(29 - (29 - (this->p + i)->getDisplay().length())/2) << left << (this->p + i)->getDisplay();
+		cout << col << setw((13 - (this->p + i)->getCamera().length())/2) << "" << setw(13 - (13 - (this->p + i)->getCamera().length())/2) << left << (this->p + i)->getCamera();
+		cout << col << setw(13 - (13 - to_string((this->p + i)->getEntryPrice()).length())/2) << right << (this->p + i)->getEntryPrice() << setw((13 - to_string((this->p + i)->getEntryPrice()).length())/2) << "" ;
+		cout << col << setw(12 - (12 - to_string((this->p + i)->getSalePrice()).length())/2) << right << (this->p + i)->getSalePrice() << setw((12 - to_string((this->p + i)->getSalePrice()).length())/2) << "" ;
+		cout << col << setw(8 - (8 - to_string((this->p + i)->getRemainingAmount()).length())/2) << right << (this->p + i)->getRemainingAmount() << setw((8 - to_string((this->p + i)->getRemainingAmount()).length())/2) << "" ;
+		cout << col << "\n";
+	}
+	
+	
+	cout << botLeftCorner << line(7); 
+    cout << botMid << line(39); // staff name
+	cout << botMid << line(13); //phone id
+	cout << botMid << line(9); // brand
+	cout << botMid << line(27); // processor
+	cout << botMid << line(12); //ramrom
+	cout << botMid << line(29); //display
+	cout << botMid << line(13); //camera
+	cout << botMid << line(13); // entryprice
+	cout << botMid << line(12); // sale price
+	cout << botMid << line(8); // remaining amount
+	cout << botRightCorner << "\n";
+
 
 }
 void PhoneManager::ShowTable() {

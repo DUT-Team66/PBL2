@@ -131,13 +131,13 @@ void OrderManager::Show() //Show All
 		cout << midMid << line(14);
 		cout << rightSide << "\n";
 		
-		cout << col << "  " << setw(5) << left << i + 1;
-		cout << col << " " << setw(10) << left << (this->p + i )->getID();
-		cout << col << " " << setw(13) << left << (this->p + i)->getCustomerID();
-		cout << col << " " << setw(13) << left << (this->p + i)->getStaffID();
-        cout << col << " " << setw(0) << left << (this->p + i)->getShoppingList(0).getPhoneID() << "/" << to_string((this->p + i)->getShoppingList(0).getAmount()) << setw(12 - (this->p + i)->getShoppingList(0).getPhoneID().length() - to_string((this->p + i)->getShoppingList(0).getAmount()).length()) << "";
+        cout << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1;
+		cout << col << setw((11 - (this->p + i)->getID().length())/2) << "" << setw(11 - (11 - (this->p + i)->getID().length())/2) << left << (this->p + i )->getID();
+		cout << col << setw((14 - (this->p + i)->getCustomerID().length())/2) << "" << setw(14 - (14 - (this->p + i)->getCustomerID().length())/2) << left << (this->p + i)->getCustomerID();
+		cout << col << setw((14 - (this->p + i)->getStaffID().length())/2) << "" << setw(14 - (14 - (this->p + i)->getStaffID().length())/2) << left << (this->p + i)->getStaffID();
+        cout << col << setw(1) << "" << (this->p + i)->getShoppingList(0).getPhoneID() << "/" << to_string((this->p + i)->getShoppingList(0).getAmount()) << setw(12 - (this->p + i)->getShoppingList(0).getPhoneID().length() - to_string((this->p + i)->getShoppingList(0).getAmount()).length()) << "";
 		cout << col << "  " << setw(0) << left << (this->p + i)->getPurchaseDay() << setw(10 - to_string((this->p + i)->getPurchaseDay().getDay()).length() - to_string((this->p + i)->getPurchaseDay().getMonth()).length() - to_string((this->p + i)->getPurchaseDay().getYear()).length() - 1) << "";
-		cout << col << setw(13) << right << (this->p + i)->getTotalPrice() << setw(1) << "";	
+		cout << col << setw(14 - (14 - to_string((this->p + i)->getTotalPrice()).length())/2) << right << (this->p + i)->getTotalPrice() << setw((14 - to_string((this->p + i)->getTotalPrice()).length())/2) << "";	
 		cout << col << "\n";
 		
 		for(int j = 1; j < (this->p + i)->getShpllength(); ++j) {

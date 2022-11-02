@@ -72,7 +72,7 @@ int main()
             std::cin >> choice;
             if (choice != "1" && choice != "2" && choice != "3")
             {
-                std::cout << "Please re-enter!\n";
+                std::cout << "Invalid choice, please re-enter!\n";
                 std::system("pause");
                 
             } else break;

@@ -16,7 +16,7 @@ class StaffManager
         //----------------
         void Add(const Staff&);
         void Delete(string);
-        void Search(string);
+        void Search();
         void Update(string);
         void Show() const;
         const string& getStaffName(int) const;

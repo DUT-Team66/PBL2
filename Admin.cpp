@@ -20,24 +20,17 @@ const StaffManager& Admin::getStaffManager() const {
 // void Admin::setAccountManager(const AccountManager& accountManager) {
 //     this->manageAccount = accountManager;
 //}
-void Admin::calTurnover() 
-{
-    int year;
-    cout << "Enter year: "; 
-    cin >> year;
-    long long totalTurnover[13]={0};
-    for(int i = 0; i < this->manageOrder.GetLength(); ++i)
-    {
-        if(this->manageOrder.GetYear(i) == year)
-        {
-            int month=this->manageOrder.GetMonth(i);
-            totalTurnover[month]+=this->manageOrder.GetTotalPrice(i);
+void Admin::calTurnover() {
+    int month, year;
+    cout << "Enter month: "; cin >> month;
+    cout << "Enter year: "; cin >> year;
+    long long totalTurnover = 0;
+    for(int i = 0; i < this->manageOrder.GetLength(); ++i) {
+        if(this->manageOrder.GetMonth(i) == month && this->manageOrder.GetYear(i) == year) {
+            totalTurnover += this->manageOrder.GetTotalPrice(i);
         }
     }
-    for (int i=1;i<=12;i++)
-    {
-        cout << "Turnover in " << i << " is " << totalTurnover[i] << "\n";  
-    }
+    cout << "Turnover in " << month << "/" << year << " is " << totalTurnover << "\n";  
 }
 void Admin::Menu() {
     while(true) {

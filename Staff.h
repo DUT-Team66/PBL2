@@ -1,8 +1,8 @@
 #ifndef _STAFF_
 #define _STAFF_
 
-#include "PhoneManager.h"
-#include "OrderManager.h"
+// #include "PhoneManager.h"
+// #include "OrderManager.h"
 #include "Account.h"
 #include <string>
 #include <iostream>
@@ -19,8 +19,10 @@ class Staff
         string address;
         int salary;    
         Account account;
-        PhoneManager managePhone;
-        OrderManager manageOrder;
+        // PhoneManager managePhone;
+        // OrderManager manageOrder;
+
+        Staff *next;
     public:
 
     
@@ -46,10 +48,12 @@ class Staff
         const string& getUsername() const;
         void setPassword(const string&); 
         const string& getPassword() const;
-        void setPhoneManager(const PhoneManager&);
-        const PhoneManager& getPhoneManager() const;
-        void setOrderManager(const OrderManager&);
-        
+        // void setPhoneManager(const PhoneManager&);
+        // const PhoneManager& getPhoneManager() const;
+        // void setOrderManager(const OrderManager&);
+        Staff* getNextStaff() const;
+        void setNextStaff(Staff*); 
+
         void show(); // show staff information
         void Menu(); // staff route
     

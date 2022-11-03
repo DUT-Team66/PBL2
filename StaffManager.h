@@ -1,23 +1,20 @@
-
 #ifndef _STAFFMANAGER_
 #define _STAFFMANAGER_
 
 #include "Staff.h"
-class StaffManager
-{
-    private: 
+
+class StaffManager {
+    private:
         Staff *p;
-        int n;
     public:
-        
         StaffManager();
         ~StaffManager();
         
         //----------------
-        void Add(const Staff&);
+        void Add(Staff*&);
         void Delete(string);
         void Search();
-        void Update(string);
+        void Update();
         void Show() const;
         const string& getStaffName(int) const;
         const string& getStaffID(int) const;
@@ -26,13 +23,14 @@ class StaffManager
         const string& getStaffPhoneNumber(int) const;
         const string& getStaffAddress(int) const;
         //-----------------
-        const int& GetLength() const;
+        //const int& GetLength() const;
         void LoadData(); // load data from file
         void UpdateFile(); // edit file
         void Menu(); // manage staff choice
         void Login(bool&,bool&);
         const StaffManager& operator=(const StaffManager& );
 };
+
 
 
 #endif

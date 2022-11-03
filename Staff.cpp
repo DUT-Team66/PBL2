@@ -2,11 +2,14 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include "Table.h"
+
 using namespace std;
 
 Staff::Staff()
 {
+    //Staff *tmp = new Staff;
+    
+    //*(this) = *tmp;
     this->name = "";
     this->ID = "";
     this->gender = "";
@@ -14,11 +17,14 @@ Staff::Staff()
     this->phoneNumber = "";
     this->address = "";
     this->salary = 5000000;
+
+    this->next = nullptr;
 }
 Staff::Staff(string a, string b, string c, string d, string e, string f,string g, string h)
     : name(a), ID(b), gender(c), dob(d), phoneNumber(e), address(f), account(g,h)
 {
     this-> salary = 5000000;
+    this->next = nullptr;
 }
 Staff::~Staff()
 {
@@ -91,27 +97,31 @@ void Staff::setPassword(const string& password) {
 const string& Staff::getPassword() const {
     return this->account.getPassword();
 }
-void Staff::setPhoneManager(const PhoneManager& phoneManager) {
-    this->managePhone = phoneManager;
+// void Staff::setPhoneManager(const PhoneManager& phoneManager) {
+//     this->managePhone = phoneManager;
+// }
+// const PhoneManager& Staff::getPhoneManager() const {
+//     return this->managePhone;
+// }
+// void Staff::setOrderManager(const OrderManager& orderManager) {
+//     this->manageOrder = orderManager;
+// }
+Staff* Staff::getNextStaff() const {
+    return this->next;
+
 }
-const PhoneManager& Staff::getPhoneManager() const {
-    return this->managePhone;
-}
-void Staff::setOrderManager(const OrderManager& orderManager) {
-    this->manageOrder = orderManager;
+void Staff::setNextStaff(Staff* s) {
+    this->next = s;
 }
 void Staff::show()
 {
-    std::cout << col << setw((30 - this->getName().length())/2) << "" << setw(30 - (30 - this->getName().length())/2) << left << this->getName();
-    std::cout << col << setw((14 - this->getID().length())/2) << "" << setw(14 - (14 - this->getID().length())/2) << left << this->getID();
-    std::cout << col << setw((8 - this->getGender().length())/2) << "" << setw(8 - (8 - this->getGender().length())/2) << left << this->getGender();
-    std::cout << col << setw((12 - this->getDob().length())/2) << "" << setw(12 - (12 - this->getDob().length())/2) << left << this->getDob();
-    std::cout << col << setw((14 - this->getPhoneNumber().length())/2) << "" << setw(14 - (14 - this->getPhoneNumber().length())/2) << left << this->getPhoneNumber();
-    std::cout << col << setw(26 - (26 - this->getAddress().length())/2) << right << this->getAddress() << setw((26 - this->getAddress().length())/2) << "";
-    std::cout << col << setw(13 - (13 - to_string(this->getSalary()).length())/2) << right << this->getSalary() << setw((13 - to_string(this->getSalary()).length())/2) << "";
-    std::cout << col << setw(11 - (11 - this->getUsername().length())/2) << right << this->getUsername() << setw((11 - this->getUsername().length())/2) << "";
-    std::cout << col << setw(10 - (10 - this->getPassword().length())/2) << right << this->getPassword() << setw((10 - this->getPassword().length())/2) << ""; 
-    std::cout << col << "\n";
+    cout << "" << "Staff name: " << this->name << "\n";
+    cout << "" << "Staff id: " << this->ID << "\n";
+    cout << "Gender: " << this->gender << "\n";
+    cout << "Day of birth: " << this->dob << "\n";
+    cout << "Phone number: " << this->phoneNumber << "\n";
+    cout << "Address: " << this->address << "\n";
+    cout << "Salary: " << this->salary << "\n";
 
 }
 void Staff::Menu() {
@@ -131,11 +141,11 @@ void Staff::Menu() {
             } else break;
         }
         
-        if(choice == "1") {
-            this->managePhone.Menu();
-        } else if(choice == "2") {
-            this->manageOrder.Menu();
-        } else break;
+        // if(choice == "1") {
+        //     this->managePhone.Menu();
+        // } else if(choice == "2") {
+        //     this->manageOrder.Menu();
+        // } else break;
     }
 }
 
@@ -156,5 +166,5 @@ void Staff::setInfo() {
     getline(cin, this->address);
 }
 void Staff::UpdateAllFiles() {
-    this->managePhone.UpdateFile();
+    //this->managePhone.UpdateFile();
 }

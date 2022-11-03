@@ -7,7 +7,6 @@
 #include <conio.h>
 #include "Table.h"
 using namespace std;
-
 string compact(string s) {
     string res = "";
     
@@ -31,99 +30,37 @@ string compact(string s) {
     }
     return res;
 }
-StaffManager::StaffManager()
-{
+StaffManager::StaffManager() {
     this->p = nullptr;
-    this->n = 0;
+
 }
-StaffManager::~StaffManager()
-{
-    delete[] this->p;
+StaffManager::~StaffManager() {
+    delete this->p;
 }
-void StaffManager::Add(const Staff &s)
-{
-    if (this->n == 0)
-    {
-        this->p = new Staff[this->n + 1];
-        *(this->p + this->n) = s;
-        this->n++;
+void StaffManager::Add(Staff*& s) {
+    Staff *tmp = this->p;
+    while(tmp->getNextStaff() != nullptr) {
+        tmp = tmp->getNextStaff();
     }
-    else
-    {
-        Staff *temp = new Staff[this->n];
-        for (int i = 0; i < this->n; i++)   
-        {
-            *(temp + i) = *(this->p + i);
-        }
-        delete[] this->p;
-        this->p = new Staff[this->n + 1];
-        for (int i = 0; i < this->n; i++) // còn phần tử cuối
-            *(this->p + i) = *(temp + i);
-        delete[] temp;
-        *(this->p + this->n) = s;
-        this->n++;
-        
-    }
+    tmp->setNextStaff(s);
+    delete tmp;
 }
-void StaffManager::Delete(string s)
-{
-    int index = -1;
-    for (int i = 0; i < this->n; i++)
-    {
-        if ((this->p + i)->getID() == s)
-        {
-            index = i;
+void StaffManager::Delete(string id) {
+    Staff *tmp = this->p;
+    Staff *btmp = this->p;
+    while(tmp != nullptr) {
+        if(tmp->getID() == id) {
+            btmp->setNextStaff(tmp->getNextStaff());
+            delete tmp;
             break;
         }
+        btmp = tmp;
+        tmp = tmp->getNextStaff();
     }
-
-    // Chu y truong hop index=-1(khong tim duoc)
-
-    if (index >= 0)
-    {
-        if (this->n == 1)
-        {
-            delete[] this->p;
-            this->p = nullptr;
-            this->n--;
-        }
-        else
-        {
-            Staff *temp = new Staff[this->n];
-            for (int i = 0; i < this->n; i++) {
-                *(temp + i) = *(this->p + i);
-            }
-            delete[] this->p;
-            this->p = new Staff[this->n - 1];
-            for (int i = 0; i < index; i++) {
-                *(this->p + i) = *(temp + i);
-            }
-            for (int i = index; i < this->n - 1; i++) {
-                *(this->p + i) = *(temp + i + 1);
-            }
-            delete[] temp;
-            this->n--;
-        }
-        std::cout << "Delete successfully!\n";
-    } else {
-        std::cout << "Staff ID does not exist!\n";
-    }
+    delete tmp;
+    delete btmp;
 }
-void StaffManager::Search()
-{
-    // int index = -1;
-    // for (int i = 0; i < this->n; i++)
-    // {
-    //     if ((this->p + i)->getID() == s) {
-    //         index = i;
-    //         break;
-    //     }
-    // }
-
-    // if (index >= 0)
-    //     (this->p + index)->show();
-    // else std::cout << "Staff ID does not exist!\n";
-
+void StaffManager::Search() {
     std::system("cls");
     std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
     std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
@@ -143,8 +80,6 @@ void StaffManager::Search()
         std::cout << "Invalid choice!\n";
         std::system("pause");
     }
-
-    
 
     if(choice == "1") {
         string id;
@@ -172,8 +107,11 @@ void StaffManager::Search()
         std::cout << col << setw(2) << "" << setw(9) << left << "Username";
         std::cout << col << setw(1) << "" << setw(9) << left << "Password";
         std::cout << col << "\n";
-        for(int i = 0; i < this->n; ++i) {
-            if(id == (this->p + i)->getID()) {
+        
+        
+        Staff *tmp = this->p;
+        while(tmp != nullptr) {
+            if(id == tmp->getID()) {
                 std::cout << midMid << line(30);
                 std::cout << midMid << line(14);
                 std::cout << midMid << line(8);
@@ -185,8 +123,9 @@ void StaffManager::Search()
                 std::cout << midMid << line(10);
                 std::cout << rightSide << "\n";
                 
-                (this->p + i)->show();
+                tmp->show();
             }
+            tmp = tmp->getNextStaff();
         }
     } else if (choice == "2") {
         string name;
@@ -218,12 +157,15 @@ void StaffManager::Search()
         for(int i = 0; i < name.length(); ++i) {
             name[i] = tolower(name[i]);
         }
-        for(int i = 0; i < this->n; ++i) {
-            string tmp = "";
-            for(int j = 0; j < (this->p + i)->getName().length(); ++j){
-                tmp += tolower((this->p + i)->getName()[j]);
+
+        Staff *tmp = this->p;
+        
+        while(tmp != nullptr) {
+            string tmps = "";
+            for(int j = 0; j < tmp->getName().length(); ++j){
+                tmps += tolower(tmp->getName()[j]);
             }
-            if(tmp.find(name) != -1) {
+            if(tmps.find(name) != -1) {
 
                 std::cout << midMid << line(30);
                 std::cout << midMid << line(14);
@@ -236,8 +178,9 @@ void StaffManager::Search()
                 std::cout << midMid << line(10);
                 std::cout << rightSide << "\n";
 
-                (this->p + i)->show(); 
+                tmp->show(); 
             }
+            tmp = tmp->getNextStaff();
         }
     } else if (choice == "3") {
         string gender;
@@ -267,8 +210,11 @@ void StaffManager::Search()
         std::cout << col << setw(1) << "" << setw(9) << left << "Password";
         std::cout << col << "\n";
 
-        for(int i = 0; i < this->n; ++i){
-            if(gender == (this->p + i)->getGender()) {
+
+        Staff *tmp = this->p;
+
+        while(tmp != nullptr) {
+            if(gender == tmp->getGender()) {
 
                 std::cout << midMid << line(30);
                 std::cout << midMid << line(14);
@@ -281,8 +227,9 @@ void StaffManager::Search()
                 std::cout << midMid << line(10);
                 std::cout << rightSide << "\n";
 
-                (this->p + i)->show();
+                tmp->show();
             }
+            tmp = tmp->getNextStaff();
         }
     } else if (choice == "4") {
         string year;
@@ -312,8 +259,9 @@ void StaffManager::Search()
         std::cout << col << setw(1) << "" << setw(9) << left << "Password";
         std::cout << col << "\n";
 
-        for(int i = 0; i < this->n; ++i) {
-            if((this->p + i)->getDob().substr(6) == year) {
+        Staff *tmp = this->p;
+        while(tmp != nullptr) {
+            if(tmp->getDob().substr(6) == year) {
 
                 std::cout << midMid << line(30);
                 std::cout << midMid << line(14);
@@ -326,8 +274,9 @@ void StaffManager::Search()
                 std::cout << midMid << line(10);
                 std::cout << rightSide << "\n";
 
-                (this->p + i)->show();
+                tmp->show();
             }
+            tmp = tmp->getNextStaff();
         }
     } else if (choice == "5") {
         string phoneNumber;
@@ -357,8 +306,10 @@ void StaffManager::Search()
         std::cout << col << setw(1) << "" << setw(9) << left << "Password";
         std::cout << col << "\n";
 
-        for(int i = 0; i < this->n; ++i) {
-            if(phoneNumber == (this->p + i)->getPhoneNumber()) {
+
+        Staff *tmp = this->p;
+        while(tmp != nullptr) {
+            if(phoneNumber == tmp->getPhoneNumber()) {
 
                 std::cout << midMid << line(30);
                 std::cout << midMid << line(14);
@@ -371,8 +322,9 @@ void StaffManager::Search()
                 std::cout << midMid << line(10);
                 std::cout << rightSide << "\n";
 
-                (this->p + i)->show();
+                tmp->show();
             }
+            tmp = tmp->getNextStaff();
         }
     } else if (choice == "6") {
         return;
@@ -391,52 +343,55 @@ void StaffManager::Search()
 	std::cout << botRightCorner << "\n";
 
     //std::system("pause");
- }
-
-
-
-// chu y: Update co the cap nhat nhieu cai
-void StaffManager::Update(string id) 
-{
-    bool check = false;
-    cin.ignore();
-    for(int i = 0; i < this->n; ++i) {
-        if((this->p + i)->getID() == id) {
-            string name, gender, dob, phoneNumber, address;
-            std::cout << "Enter name: ";
-            getline(cin, name);
-            std::cout << "Enter gender: ";
-            getline(cin, gender);
-            std::cout << "Enter dob: ";
-            getline(cin, dob);
-            std::cout << "Enter phone number: ";
-            getline(cin, phoneNumber);
-            std::cout << "Enter address: ";
-            getline(cin, address);
-            if(name != "") {
-                (this->p + i)->setName(name);
-            }
-            if(gender != "") {
-                (this->p + i)->setGender(gender);
-            }
-            if(dob != "") {
-                (this->p + i)->setDob(dob);
-            }
-            if(phoneNumber != "") {
-                (this->p + i)->setPhoneNumber(phoneNumber);
-            }
-            if(address != "") {
-                (this->p + i)->setAddress(address);
-            }
-            check = true;
-            break;
-            std::cout << "Update successfully!\n";
-        }
-    }
-    if(!check) std::cout << "Staff ID does not exist!\n";
 }
-void StaffManager::Show() const
-{
+    
+void StaffManager::Update() {
+    std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+    std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
+    std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+    this->Show();
+
+    string id; 
+    std::cout << setw(45) << "" << "Enter staff id: ";
+    cin >> id;
+    bool exist = false;
+    Staff *tmp = this->p;
+    while(tmp != nullptr) {
+        if(tmp->getID() == id) {
+            exist = true;
+            break;
+        }
+    
+    }
+    if(exist) {
+        std::cout << setw(47) << "" << "1. Update name\n";
+        std::cout << setw(47) << "" << "2. Update gender\n";
+        std::cout << setw(47) << "" << "3. Update day of birth\n";
+        std::cout << setw(47) << "" << "4. Update phone number\n";
+        std::cout << setw(47) << "" << "5. Update address\n";
+        std::cout << setw(47) << "" << "6. Update salary\n";
+        std::cout << setw(47) << "" << "7. Go back\n";
+
+        string choice;
+        std::cout << setw(45) << "" << "Your choice: ";
+        cin >> choice;
+
+        if(choice == "1") {
+            string name;
+            std::cout << setw(45) << "" << "Enter staff name: ";
+            cin.ignore();
+            getline(cin,name);
+            
+        }
+
+    } else {
+        cout << setw(45) << "" << "Staff ID does not exist!\n";
+    }
+    std::system("pause");
+
+}
+
+void StaffManager::Show() const {
     std::cout << topLeftCorner << line(7); // order   
     std::cout << topMid << line(30); // staff name
 	std::cout << topMid << line(14); //staffID
@@ -461,7 +416,10 @@ void StaffManager::Show() const
 	std::cout << col << setw(1) << "" << setw(9) << left << "Password";
 	std::cout << col << "\n";
 	
-	for(int i = 0; i < this->n; ++i) {
+
+    Staff *tmp = this->p;
+    int i = 0;
+	while( tmp != nullptr) {
 		std::cout << leftSide << line(7); 
         std::cout << midMid << line(30);
 		std::cout << midMid << line(14);
@@ -474,17 +432,19 @@ void StaffManager::Show() const
 		std::cout << midMid << line(10);
 		std::cout << rightSide << "\n";
 		
-        std::cout << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1;
-		std::cout << col << setw((30 - (this->p + i)->getName().length())/2) << "" << setw(30 - (30 - (this->p + i)->getName().length())/2) << left << (this->p + i)->getName();
-		std::cout << col << setw((14 - (this->p + i)->getID().length())/2) << "" << setw(14 - (14 - (this->p + i)->getID().length())/2) << left << (this->p + i)->getID();
-		std::cout << col << setw((8 - (this->p + i)->getGender().length())/2) << "" << setw(8 - (8 - (this->p + i)->getGender().length())/2) << left << (this->p + i)->getGender();
-		std::cout << col << setw((12 - (this->p + i)->getDob().length())/2) << "" << setw(12 - (12 - (this->p + i)->getDob().length())/2) << left << (this->p + i)->getDob();
-		std::cout << col << setw((14 - (this->p + i)->getPhoneNumber().length())/2) << "" << setw(14 - (14 - (this->p + i)->getPhoneNumber().length())/2) << left << (this->p + i)->getPhoneNumber();
-		std::cout << col << setw(26 - (26 - (this->p + i)->getAddress().length())/2) << right << (this->p + i)->getAddress() << setw((26 - (this->p + i)->getAddress().length())/2) << "";
-		std::cout << col << setw(13 - (13 - to_string((this->p + i)->getSalary()).length())/2) << right << (this->p + i)->getSalary() << setw((13 - to_string((this->p + i)->getSalary()).length())/2) << "";
-		std::cout << col << setw(11 - (11 - (this->p + i)->getUsername().length())/2) << right << (this->p + i)->getUsername() << setw((11 - (this->p + i)->getUsername().length())/2) << "";
-		std::cout << col << setw(10 - (10 - (this->p + i)->getPassword().length())/2) << right << (this->p + i)->getPassword() << setw((10 - (this->p + i)->getPassword().length())/2) << ""; 
+        std::cout << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1; ++i;
+		std::cout << col << setw((30 - tmp->getName().length())/2) << "" << setw(30 - (30 - tmp->getName().length())/2) << left << tmp->getName();
+		std::cout << col << setw((14 - tmp->getID().length())/2) << "" << setw(14 - (14 - tmp->getID().length())/2) << left << tmp->getID();
+		std::cout << col << setw((8 - tmp->getGender().length())/2) << "" << setw(8 - (8 - tmp->getGender().length())/2) << left << tmp->getGender();
+		std::cout << col << setw((12 - tmp->getDob().length())/2) << "" << setw(12 - (12 - tmp->getDob().length())/2) << left << tmp->getDob();
+		std::cout << col << setw((14 - tmp->getPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->getPhoneNumber().length())/2) << left << tmp->getPhoneNumber();
+		std::cout << col << setw(26 - (26 - tmp->getAddress().length())/2) << right << tmp->getAddress() << setw((26 - tmp->getAddress().length())/2) << "";
+		std::cout << col << setw(13 - (13 - to_string(tmp->getSalary()).length())/2) << right << tmp->getSalary() << setw((13 - to_string(tmp->getSalary()).length())/2) << "";
+		std::cout << col << setw(11 - (11 - tmp->getUsername().length())/2) << right << tmp->getUsername() << setw((11 - tmp->getUsername().length())/2) << "";
+		std::cout << col << setw(10 - (10 - tmp->getPassword().length())/2) << right << tmp->getPassword() << setw((10 - tmp->getPassword().length())/2) << ""; 
 		std::cout << col << "\n";
+
+        tmp = tmp->getNextStaff();
 	}
 	
 	
@@ -502,91 +462,8 @@ void StaffManager::Show() const
 	
     
 }
-const int& StaffManager::GetLength() const {
-    return this->n;
-}
-const string& StaffManager::getStaffName(int index) const {
-    return (this->p + index)->getName();
-}
-const string& StaffManager::getStaffID(int index) const {
-    return (this->p + index)->getID();
-}
-const string& StaffManager::getStaffGender(int index) const {
-    return (this->p + index)->getGender();
-}
-const string& StaffManager::getStaffDob(int index) const {
-    return (this->p + index)->getDob();
-}
-const string& StaffManager::getStaffPhoneNumber(int index) const {
-    return (this->p + index)->getPhoneNumber();
-}
-const string& StaffManager::getStaffAddress(int index) const {
-    return (this->p + index)->getAddress();
-}
-void StaffManager::LoadData() {
-    fstream readfile("Staff.txt", ios::in);
-	string tmpline;
-	while(getline(readfile,tmpline)) {
-		
-		string name = "", id = "", gender = "", dob = "", phonenumber = "", address = "", username = "", password = "";
-	
-		int i = 0;
-		while(tmpline[i] != '/') {
-			name += tmpline[i];
-			++i;
-		}
-		++i;
-		while(tmpline[i] != '/') {
-			id += tmpline[i];
-			++i;
-		}
-        ++i;
-		while(tmpline[i] != '/') {
-			gender += tmpline[i];
-			++i;
-		}
-		++i;
-        while(tmpline[i] != '/') {
-			dob += tmpline[i];
-			++i;
-		}
-		++i;
-        while(tmpline[i] != '/') {
-			phonenumber += tmpline[i];
-			++i;
-		}
-		++i;
-        while(tmpline[i] != '/') {
-			address += tmpline[i];
-			++i;
-		}
-		++i;
-        while(tmpline[i] != '/') {
-            username += tmpline[i];
-            ++i;
-        }
-        ++i;
-        while(tmpline[i] != '/') {
-            password += tmpline[i];
-            ++i;
-        }
-        ++i;
-        this->Add(Staff(name,id, gender, dob, phonenumber, address,username,password));
-    }
-    readfile.close();
-}
-void StaffManager::UpdateFile() {
-    fstream editfile("Staff.txt", ios::out);
-    for(int i = 0;i < this->n; ++i) {
-        string s = (this->p + i)->getName() + "/" + (this->p + i)->getID() + "/" + (this->p + i)->getGender() + "/" + (this->p + i)->getDob() + "/" + (this->p + i)->getPhoneNumber() + "/" + (this->p + i)->getAddress() + "/" + (this->p + i)->getUsername() + "/" + (this->p + i)->getPassword() + "/";
-        if(i != this->n-1)
-            editfile << s << "\n";
-        else editfile << s;
-    }
-    editfile.close();
 
 
-}
 void StaffManager::Menu() {
     std::system("cls");
     while(true) {
@@ -616,27 +493,33 @@ void StaffManager::Menu() {
             string id;
             cin.ignore();
             bool exist = false;
-            std::cout << setw(4) << "" << char(16) << "Enter ID: ";
-            getline(cin, id);
-            for(int i = 0;i < this->n; ++i) {
-                if(id == (this->p + i)->getID()) {
+            std::cout << setw(4) << "" << char(16) << " Enter ID: ";
+            std::getline(cin, id);
+            
+            Staff *tmp = this->p;
+            while(tmp != nullptr) {
+                if(tmp->getID() == id) {
                     exist = true;
+                    break;
                 }
             }
+            delete tmp;
+
             if(!exist) {
                 string name, gender, dob, phoneNumber, address;
                 std::cout << setw(4) << "" << char(16) << "Enter name: ";
-                getline(cin, name);
+                std::getline(cin, name);
                 std::cout << setw(4) << "" << char(16) << "Enter gender: ";
-                getline(cin, gender);
+                std::getline(cin, gender);
                 std::cout << setw(4) << "" << char(16) << "Enter dob: ";
-                getline(cin, dob);
+                std::getline(cin, dob);
                 std::cout << setw(4) << "" << char(16) << "Enter phone number: ";
-                getline(cin, phoneNumber);
+                std::getline(cin, phoneNumber);
                 std::cout << setw(4) << "" << char(16) << "Enter address: ";
-                getline(cin, address);
-                
-                this->Add(Staff(name, id, gender, dob, phoneNumber, address, compact(name), compact(dob)));
+                std::getline(cin, address);
+
+                Staff *staff = new Staff{name, id, gender, dob, phoneNumber, address, compact(name), compact(dob)};
+                this->Add(staff);
                 std::cout << "Add successfully!\n";
             } else {
                 std::cout << "Staff exists\n";
@@ -656,7 +539,7 @@ void StaffManager::Menu() {
             string s;
             std::cout << "Enter ID: ";
             cin >> s;
-            this->Update(s);
+            this->Update();
         } else if(choice == "5") {
             this->Show();    
         } else {
@@ -666,64 +549,5 @@ void StaffManager::Menu() {
         std::system("pause");
         std::system("cls");
     }
-}
-void StaffManager::Login(bool& isAdmin, bool& isStaff) {
-    
-    while(true) {
-        string username, password;
-        std::cout << setw(35) << "" << "----LOGIN---- " << "\n\n";
-        std::cout << setw(32) << "" << "Username: ";
-        cin >> username;
-        std::cout << "\n";
-        if(username == "exit") {
-            break;
-        }
-        std::cout << setw(32) << "" << "Password: ";
-        //cin >> password;
-        char x = 'a';
-        while (x != '\n'){
-            x = getch();
-            if (x == 13) break;
-            else if (x == 8 && password.size() != 0){
-                password.pop_back();
-                std::cout << "\b" << " \b";
-            }
-            else if (x != 8){
-                password += x;
-                std::cout << '*';
-            }
-        }
-        
-        std::cout << "\n";
 
-        if(username == "admin" && password == "admin") {
-            isAdmin = true;
-        } else {
-            for(int i = 0; i < this->n; ++i) {
-                if(username == (this->p + i)->getUsername() && password == (this->p + i)->getPassword()) {
-                    isStaff = true;
-                    break;
-                }
-            }
-        }
-        if(isStaff || isAdmin)  {
-            std::cout << "Login successfully!\n";
-            break;
-        } else {
-            std::cout << "Invalid login information!\n";
-        }
-        system("pause"); 
-        system("cls");
-    }
-}
-const StaffManager& StaffManager::operator=(const StaffManager& v )
-{
-    if (this != &v) {
-        this->n=v.n;
-        delete[] this->p;
-        this->p = new Staff[this->n];
-        for (int i=0;i<this->n;i++)
-            *(this->p + i) = *(v.p+i); 
-    }
-    return *this;
 }

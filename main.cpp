@@ -26,7 +26,7 @@ int stringToInt(string s) {
 } 
 int main()
 {
-    //SetConsoleCP(437); 
+    SetConsoleCP(437); 
     SetConsoleOutputCP(437); // hien thi ki tu ascii
     
     StaffManager staffManager;
@@ -72,7 +72,7 @@ int main()
             std::cin >> choice;
             if (choice != "1" && choice != "2" && choice != "3")
             {
-                std::cout << "Invalid choice, please re-enter!\n";
+                std::cout << "Please re-enter!\n";
                 std::system("pause");
                 
             } else break;

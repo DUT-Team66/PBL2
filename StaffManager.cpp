@@ -112,7 +112,7 @@ void StaffManager::Search() {
         Staff *tmp = this->p;
         while(tmp != nullptr) {
             if(id == tmp->getID()) {
-                std::cout << midMid << line(30);
+                std::cout << leftSide << line(30);
                 std::cout << midMid << line(14);
                 std::cout << midMid << line(8);
                 std::cout << midMid << line(12);
@@ -127,6 +127,7 @@ void StaffManager::Search() {
             }
             tmp = tmp->getNextStaff();
         }
+        delete tmp;
     } else if (choice == "2") {
         string name;
         cout << setw(47) << "" << "Enter staff name: ";
@@ -167,7 +168,7 @@ void StaffManager::Search() {
             }
             if(tmps.find(name) != -1) {
 
-                std::cout << midMid << line(30);
+                std::cout << leftSide << line(30);
                 std::cout << midMid << line(14);
                 std::cout << midMid << line(8);
                 std::cout << midMid << line(12);
@@ -182,6 +183,8 @@ void StaffManager::Search() {
             }
             tmp = tmp->getNextStaff();
         }
+
+        delete tmp;
     } else if (choice == "3") {
         string gender;
         cout << setw(47) << "" << "Enter gender: ";
@@ -216,7 +219,7 @@ void StaffManager::Search() {
         while(tmp != nullptr) {
             if(gender == tmp->getGender()) {
 
-                std::cout << midMid << line(30);
+                std::cout << leftSide << line(30);
                 std::cout << midMid << line(14);
                 std::cout << midMid << line(8);
                 std::cout << midMid << line(12);
@@ -231,6 +234,7 @@ void StaffManager::Search() {
             }
             tmp = tmp->getNextStaff();
         }
+        delete tmp;
     } else if (choice == "4") {
         string year;
         cout << setw(47) << "" << "Enter year of birth: ";
@@ -263,7 +267,7 @@ void StaffManager::Search() {
         while(tmp != nullptr) {
             if(tmp->getDob().substr(6) == year) {
 
-                std::cout << midMid << line(30);
+                std::cout << leftSide << line(30);
                 std::cout << midMid << line(14);
                 std::cout << midMid << line(8);
                 std::cout << midMid << line(12);
@@ -278,6 +282,7 @@ void StaffManager::Search() {
             }
             tmp = tmp->getNextStaff();
         }
+        delete tmp;
     } else if (choice == "5") {
         string phoneNumber;
         cout << setw(47) << "" << "Enter phone number: ";
@@ -311,7 +316,7 @@ void StaffManager::Search() {
         while(tmp != nullptr) {
             if(phoneNumber == tmp->getPhoneNumber()) {
 
-                std::cout << midMid << line(30);
+                std::cout << leftSide << line(30);
                 std::cout << midMid << line(14);
                 std::cout << midMid << line(8);
                 std::cout << midMid << line(12);
@@ -326,6 +331,7 @@ void StaffManager::Search() {
             }
             tmp = tmp->getNextStaff();
         }
+        delete tmp;
     } else if (choice == "6") {
         return;
     }
@@ -346,49 +352,119 @@ void StaffManager::Search() {
 }
     
 void StaffManager::Update() {
-    std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
-    std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
-    std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
-    this->Show();
+    while(true) {
+        std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+        std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
+        std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+        this->Show();
 
-    string id; 
-    std::cout << setw(45) << "" << "Enter staff id: ";
-    cin >> id;
-    bool exist = false;
-    Staff *tmp = this->p;
-    while(tmp != nullptr) {
-        if(tmp->getID() == id) {
-            exist = true;
+        string id; 
+        std::cout << setw(45) << "" << "(Enter 'exit' to exit)\n";
+        std::cout << setw(45) << "" << char(16) << " Enter staff id: ";
+        cin >> id;
+        if(id == "exit") {
             break;
         }
-    
-    }
-    if(exist) {
-        std::cout << setw(47) << "" << "1. Update name\n";
-        std::cout << setw(47) << "" << "2. Update gender\n";
-        std::cout << setw(47) << "" << "3. Update day of birth\n";
-        std::cout << setw(47) << "" << "4. Update phone number\n";
-        std::cout << setw(47) << "" << "5. Update address\n";
-        std::cout << setw(47) << "" << "6. Update salary\n";
-        std::cout << setw(47) << "" << "7. Go back\n";
-
-        string choice;
-        std::cout << setw(45) << "" << "Your choice: ";
-        cin >> choice;
-
-        if(choice == "1") {
-            string name;
-            std::cout << setw(45) << "" << "Enter staff name: ";
-            cin.ignore();
-            getline(cin,name);
-            
+        bool exist = false;
+        Staff *tmp = this->p;
+        while(tmp != nullptr) {
+            if(tmp->getID() == id) {
+                exist = true;
+                break;
+            }
+            tmp = tmp->getNextStaff();
         }
+        if(exist) {
+            system("cls");
+            string choice;
 
-    } else {
-        cout << setw(45) << "" << "Staff ID does not exist!\n";
+            while(true) {
+                std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+                std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
+                std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+                
+                std::cout << topLeftCorner << line(30); // staff name
+                std::cout << topMid << line(14); //staffID
+                std::cout << topMid << line(8); // gender
+                std::cout << topMid << line(12); // dob
+                std::cout << topMid << line(14); //phonenumber
+                std::cout << topMid << line(26); //address
+                std::cout << topMid << line(13); //salary
+                std::cout << topMid << line(11); //username
+                std::cout << topMid << line(10); // password
+                std::cout << topRightCorner << "\n";
+
+                tmp->show();
+
+                std::cout << botLeftCorner << line(30); // staff name
+                std::cout << botMid << line(14); //staffID
+                std::cout << botMid << line(8); // gender
+                std::cout << botMid << line(12); // dob
+                std::cout << botMid << line(14); //phonenumber
+                std::cout << botMid << line(26); //address
+                std::cout << botMid << line(13); //salary
+                std::cout << botMid << line(11); // username
+                std::cout << botMid << line(10); // password
+                std::cout << botRightCorner << "\n\n";
+
+                std::cout << setw(47) << "" << "1. Update name\n";
+                std::cout << setw(47) << "" << "2. Update gender\n";
+                std::cout << setw(47) << "" << "3. Update day of birth\n";
+                std::cout << setw(47) << "" << "4. Update phone number\n";
+                std::cout << setw(47) << "" << "5. Update address\n";
+                std::cout << setw(47) << "" << "6. Update salary\n";
+                std::cout << setw(47) << "" << "7. Go back\n";
+
+                std::cout << setw(45) << "" << "Your choice: ";
+                cin >> choice;
+                if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6" && choice != "7") {
+                    cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
+                }
+
+
+                if(choice == "1") {
+                    string name;
+                    std::cout << setw(45) << "" << "Enter staff's name: ";
+                    cin.ignore();
+                    getline(cin,name);
+                    tmp->setName(name);
+                } else if(choice == "2") {
+                    string gender;
+                    std::cout << setw(45) << "" << "Enter staff's gender: ";
+                    cin >> gender;
+                    tmp->setGender(gender);
+                } else if(choice == "3") {
+                    string dob;
+                    std::cout << setw(45) << "" << "Enter staff's day of birth: ";
+                    cin >> dob;
+                    tmp->setDob(dob);
+                } else if(choice == "4") {
+                    string phoneNumber;
+                    std::cout << setw(45) << "" << "Enter staff's phone number: ";
+                    cin >> phoneNumber;
+                    tmp->setPhoneNumber(phoneNumber);
+                } else if(choice == "5") {
+                    string address;
+                    std::cout << setw(45) << "" << "Enter staff's address: ";
+                    cin >> address;
+                    tmp->setAddress(address);
+                } else if(choice == "6") {
+                    int salary;
+                    std::cout << setw(45) << "" << "Enter staff's salary: ";
+                    cin >> salary;
+                    tmp->setSalary(salary);
+                } else if(choice == "7") {
+                    break;;
+                } 
+                cout << setw(45) << "" << "Update successfully!\n";
+                std::system("pause");
+                std::system("cls");
+            }
+        } else {
+            cout << setw(45) << "" << "Staff ID does not exist!\n";
+        }
+        std::system("pause");
     }
-    std::system("pause");
-
 }
 
 void StaffManager::Show() const {

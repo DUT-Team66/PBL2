@@ -64,6 +64,12 @@ void Order::setTotalPrice(const long long& totalPrice) {
 const long long& Order::getTotalPrice() const {
     return this->totalPrice;
 }
+Order* Order::getNextOrder() const {
+    return this->next;
+}
+void Order::setNextOrder(Order* order) {
+    this->next = order;
+}
 void Order::show()
 {
     cout << setw(12) << "" << "ORDER" << "\n";

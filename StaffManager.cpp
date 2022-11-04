@@ -346,49 +346,169 @@ void StaffManager::Search() {
 }
     
 void StaffManager::Update() {
-    std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
-    std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
-    std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
-    this->Show();
+    while(true) {
+        std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+        std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
+        std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n";
+        this->Show();
 
-    string id; 
-    std::cout << setw(45) << "" << "Enter staff id: ";
-    cin >> id;
-    bool exist = false;
-    Staff *tmp = this->p;
-    while(tmp != nullptr) {
-        if(tmp->getID() == id) {
-            exist = true;
-            break;
+        string id; 
+        std::cout << setw(45) << "" << "(Enter 'exit' to exit)\n\n";
+        std::cout << setw(45) << "" << "Enter staff id: ";
+        cin >> id;
+        if(id == "exit") {
+            return;
         }
-    
-    }
-    if(exist) {
-        std::cout << setw(47) << "" << "1. Update name\n";
-        std::cout << setw(47) << "" << "2. Update gender\n";
-        std::cout << setw(47) << "" << "3. Update day of birth\n";
-        std::cout << setw(47) << "" << "4. Update phone number\n";
-        std::cout << setw(47) << "" << "5. Update address\n";
-        std::cout << setw(47) << "" << "6. Update salary\n";
-        std::cout << setw(47) << "" << "7. Go back\n";
-
-        string choice;
-        std::cout << setw(45) << "" << "Your choice: ";
-        cin >> choice;
-
-        if(choice == "1") {
-            string name;
-            std::cout << setw(45) << "" << "Enter staff name: ";
-            cin.ignore();
-            getline(cin,name);
-            
+        bool exist = false;
+        Staff *tmp = this->p;
+        while(tmp != nullptr) {
+            if(tmp->getID() == id) {
+                exist = true;
+                break;
+            }
+        
         }
 
-    } else {
-        cout << setw(45) << "" << "Staff ID does not exist!\n";
-    }
-    std::system("pause");
 
+        if(exist) {
+            while(true) {
+                std::cout << setw(47) << "" << "1. Update name\n";
+                std::cout << setw(47) << "" << "2. Update gender\n";
+                std::cout << setw(47) << "" << "3. Update day of birth\n";
+                std::cout << setw(47) << "" << "4. Update phone number\n";
+                std::cout << setw(47) << "" << "5. Update address\n";
+                std::cout << setw(47) << "" << "6. Update salary\n";
+                std::cout << setw(47) << "" << "7. Go back\n\n";
+
+                string choice;
+                std::cout << setw(45) << "" << "Your choice: ";
+                cin >> choice;
+
+                label:
+                std::system("cls");
+
+                std::cout << setw(47) << "" << "1. Update name\n";
+                std::cout << setw(47) << "" << "2. Update gender\n";
+                std::cout << setw(47) << "" << "3. Update day of birth\n";
+                std::cout << setw(47) << "" << "4. Update phone number\n";
+                std::cout << setw(47) << "" << "5. Update address\n";
+                std::cout << setw(47) << "" << "6. Update salary\n";
+                std::cout << setw(47) << "" << "7. Go back\n\n";
+                std::cout << setw(45) << "" << "Your choice: " << choice << "\n";
+                
+
+
+                if(choice == "1") {
+                    string name;
+                    std::cout << setw(45) << "" << "Enter staff name: ";
+                    cin.ignore();
+                    getline(cin,name);
+                    tmp->setName(name);
+                } else if(choice == "2") {
+                    string gender;
+                
+                    try {    
+                        std::cout << setw(45) << "" << "Enter staff gender: ";
+                        cin >> gender;
+                        for(int i = 0; i < gender.length(); ++i) {
+                            gender[i] = tolower(gender[i]);
+                        }
+                        if(gender != "male" || gender != "female") {
+                            throw int(1);
+                        }
+                    }
+                    catch(int) {
+                        cout << "Invalid gender, gender should be Male or Female!\n";
+                        std::system("pause");  
+                        goto label;
+                    }
+                    
+                
+                    tmp->setGender(gender); 
+                
+                } else if(choice == "3") {
+                    string dob;
+                    std::cout << setw(45) << "" << "Enter staff day of birth: ";
+                    cin >> dob;
+                    bool legal = false;
+                    if(dob[0] >= '0' && dob[0] <= '9' && dob[1] >= '0' && dob[1] < '9' && dob[2] == '-' && dob[3] >= '0' && dob[3] <= '9' && dob[4] >= '0' && dob[4] < '9' && dob[5] == '-' && dob[6] >= '0' && dob[6] <= '9' && dob[7] >= '0' && dob[7] <= '9' && dob[8] >= '0' && dob[8] <= '9' && dob[9] >= '0' && dob[9] <= '9') {
+                        int day = stoi(dob.substr(0,2)), month = stoi(dob.substr(3,2)), year = stoi(dob.substr(6));
+                        if(year >= 1900 || year <= 2022) {
+                            if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+                                if(day >= 1 && day < 31) {
+                                    legal = true;
+                                }
+                            } else if( month == 4 || month == 6 || month == 9 || month == 11) {
+                                if(day >= 1 && day <= 30) {
+                                    legal = true;
+                                }
+                            } else if(month == 2) {
+                                if(year % 400 == 0|| (year % 4 == 0 && year % 100 != 0)) {
+                                    if(day >= 1 && day <= 29) {
+                                        legal = true;
+                                    }
+                                } else {
+                                    if(day >= 1 && day <= 28) {
+                                        legal = true;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    if(legal) tmp->setDob(dob);
+                    else {
+                        cout << "Invalid input data, day of birth should be dd-mm-yyyy!\n";
+                        std::system("pause");
+                        goto label;
+                    }
+
+                    tmp->setDob(dob);
+                } else if(choice == "4") {
+                    string phoneNumber;
+                    try {
+                        std::cout << setw(45) << "" << "Enter staff phone number: ";
+                        cin >> phoneNumber;
+                        bool checkLegal = true;
+                        for(int i = 0; i < phoneNumber.length(); ++i) {
+                            if(phoneNumber[i] < '0' || phoneNumber[i] > '9') {
+                                checkLegal = false;
+                                break;
+                            }
+                        }
+                        if(!checkLegal || phoneNumber.length() != 10) {
+                            throw int(1);
+                        }
+                    }
+                    catch (int) {
+                        cout << "Invalid phone number, phone number must have 10 digits!\n";
+                        std::system("cls");
+                        goto label;
+                    }
+
+                    tmp->setPhoneNumber(phoneNumber);
+                } else if(choice == "5") {
+                    string address;
+                    std::cout << setw(45) << "" << "Enter staff address: ";
+                    cin >> address;
+                    tmp->setAddress(address);
+                } else if(choice == "6") {
+                    int salary;
+                    std::cout << setw(45) << "" << "Enter staff salary: ";
+                    cin >> salary;
+                    tmp->setSalary(salary);
+                } else if(choice == "7") {
+                    break;
+                }
+                std::cout << setw(45) << "" << "Update successfully!\n";
+                std::system("pause");
+                std::system("cls");
+            }
+        } else {
+            cout << setw(45) << "" << "Staff ID does not exist!\n";
+            std::system("pause");
+        }
+    }
 }
 
 void StaffManager::Show() const {
@@ -550,4 +670,172 @@ void StaffManager::Menu() {
         std::system("cls");
     }
 
+}
+
+
+const string& StaffManager::getStaffName(int index) const {
+    Staff* tmp = this->p;
+    while(index--) {
+        tmp = tmp->getNextStaff();
+    }
+    return tmp->getName();
+}
+const string& StaffManager::getStaffID(int index) const {
+    Staff* tmp = this->p;
+    while(index--) {
+        tmp = tmp->getNextStaff();
+    }
+    return tmp->getID();
+}
+const string& StaffManager::getStaffGender(int index) const {
+    Staff* tmp = this->p;
+    while(index--) {
+        tmp = tmp->getNextStaff();
+    }
+    return tmp->getGender();
+}
+const string& StaffManager::getStaffDob(int index) const {
+    Staff* tmp = this->p;
+    while(index--) {
+        tmp = tmp->getNextStaff();
+    }
+    return tmp->getDob();
+}
+const string& StaffManager::getStaffPhoneNumber(int index) const {
+    Staff* tmp = this->p;
+    while(index--) {
+        tmp = tmp->getNextStaff();
+    }
+    return tmp->getPhoneNumber();
+}
+const string& StaffManager::getStaffAddress(int index) const {
+    Staff* tmp = this->p;
+    while(index--) {
+        tmp = tmp->getNextStaff();
+    }
+    return tmp->getAddress();
+}
+void StaffManager::Login(bool& isAdmin, bool& isStaff) {
+    while(true) {
+        string username, password;
+        std::cout << setw(35) << "" << "----LOGIN---- " << "\n\n";
+        std::cout << setw(32) << "" << "Username: ";
+        cin >> username;
+        std::cout << "\n";
+        if(username == "exit") {
+            break;
+        }
+        std::cout << setw(32) << "" << "Password: ";
+        //cin >> password;
+        char x = 'a';
+        while (x != '\n'){
+            x = getch();
+            if (x == 13) break;
+            else if (x == 8 && password.size() != 0){
+                password.pop_back();
+                std::cout << "\b" << " \b";
+            }
+            else if (x != 8){
+                password += x;
+                std::cout << '*';
+            }
+        }
+        
+        std::cout << "\n";
+
+        if(username == "admin" && password == "admin") {
+            isAdmin = true;
+        } else {
+            Staff* tmp = this->p;
+            while(tmp != nullptr) {
+                if(tmp->getUsername() == username && tmp->getPassword() == password) {
+                    isStaff = true;
+                    break;
+                }
+                tmp = tmp->getNextStaff();
+            }
+        }
+        if(isStaff || isAdmin)  {
+            std::cout << "Login successfully!\n";
+            break;
+        } else {
+            std::cout << "Invalid login information!\n";
+        }
+        system("pause"); 
+        system("cls");
+    }
+}
+
+void StaffManager::LoadData() {
+    fstream readfile("Staff.txt", ios::in);
+	string tmpline;
+	while(getline(readfile,tmpline)) {
+		
+		string name = "", id = "", gender = "", dob = "", phonenumber = "", address = "", username = "", password = "";
+	
+		int i = 0;
+		while(tmpline[i] != '/') {
+			name += tmpline[i];
+			++i;
+		}
+		++i;
+		while(tmpline[i] != '/') {
+			id += tmpline[i];
+			++i;
+		}
+        ++i;
+		while(tmpline[i] != '/') {
+			gender += tmpline[i];
+			++i;
+		}
+		++i;
+        while(tmpline[i] != '/') {
+			dob += tmpline[i];
+			++i;
+		}
+		++i;
+        while(tmpline[i] != '/') {
+			phonenumber += tmpline[i];
+			++i;
+		}
+		++i;
+        while(tmpline[i] != '/') {
+			address += tmpline[i];
+			++i;
+		}
+		++i;
+        while(tmpline[i] != '/') {
+            username += tmpline[i];
+            ++i;
+        }
+        ++i;
+        while(tmpline[i] != '/') {
+            password += tmpline[i];
+            ++i;
+        }
+        ++i;
+        Staff *s = new Staff{name,id, gender, dob, phonenumber, address,username,password};
+        this->Add(s);
+    }
+    readfile.close();
+}
+void StaffManager::UpdateFile() {
+    fstream editfile("Staff.txt", ios::out);
+    Staff* tmp = this->p;
+    while(tmp != nullptr) {
+    
+        string s = tmp->getName() + "/" + tmp->getID() + "/" + tmp->getGender() + "/" + tmp->getDob() + "/" + tmp->getPhoneNumber() + "/" + tmp->getAddress() + "/" + tmp->getUsername() + "/" + tmp->getPassword() + "/";
+        if(tmp->getNextStaff() != nullptr)
+            editfile << s << "\n";
+        else editfile << s;
+        tmp = tmp->getNextStaff();
+    
+    }
+    editfile.close();
+}
+const StaffManager& StaffManager::operator=(const StaffManager& s) {
+    if(this != &s) {
+        this->p = s.p;
+    }
+    return *this;
 }

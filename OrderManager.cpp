@@ -8,14 +8,19 @@ using namespace std;
 OrderManager::OrderManager()
 {
     this->p = nullptr;
-    this->n = 0;
+
 }
 OrderManager::~OrderManager()
 {
     delete[] this->p;
 }
 const int& OrderManager::GetLength() const {
-    return this->n;
+    int n = 0;
+    Order* tmp = this->p;
+    while(tmp != nullptr) {
+        ++n;
+        tmp = tmp->getNextOrder();
+    }
 }
 const int& OrderManager::GetMonth(int index) const {
     return (this->p + index)->getPurchaseDay().getMonth();
@@ -51,17 +56,14 @@ void OrderManager::Add(const Order& s)
 // 
 void OrderManager::SearchByOrderID(string m)
 {
-    int index=-1;
-    for (int i=0;i<this->n;i++)
-    {
-        if((this->p+i)->getID() == m)
-        {
-            index=i;
-            break;
+    bool exist = false;
+    Order* tmp = this->p;
+    while(tmp != nullptr) {
+        if(tmp->getID() == m) {
+            exist = true;
+            tmp->show();
         }
     }
-    if (index>=0) (this->p+index)->show();
-    else cout<<"Order does not exist!"<< "\n";
 
 }
 void OrderManager::SearchByCustomerID(string m)

@@ -14,6 +14,8 @@ class Order
         int shpllength; // Số các danh sách mua
         Date purchaseDay;
         long long totalPrice;
+
+        Order* next;
     public:
         Order();
         ~Order();
@@ -31,7 +33,8 @@ class Order
         const Date& getPurchaseDay() const;
         void setTotalPrice(const long long&);
         const long long& getTotalPrice() const;
-        
+        Order* getNextOrder() const;
+        void setNextOrder(Order*);
         void show();
         bool searchShoppingList(string);
         void addToShoppingList(string,int);

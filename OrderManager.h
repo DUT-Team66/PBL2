@@ -5,7 +5,7 @@ class OrderManager
 {
     private: 
         Order *p;
-        int n;
+        
     public:
         //Khong co SV
         OrderManager();

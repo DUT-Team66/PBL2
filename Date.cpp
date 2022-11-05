@@ -38,11 +38,11 @@ ostream& operator<<(ostream& o, const Date& p)
 }
 istream& operator>>(istream& in, Date& p)
 {
-    cout<<endl<<"\t\tDay: ";
+    cout<<endl<<"Day: ";
     in>>p.day;
-    cout<<"\t\tMonth: ";
-    in >> p.month;
-    cout<<"\t\tYear: ";
+    cout<<"Month: ";
+    in>>p.month;
+    cout<<"Year: ";
     in>>p.year;
     return in;
 }

@@ -4,7 +4,7 @@
 
 #include "StaffManager.h"
 
-#include "AccountManager.h"
+//#include "AccountManager.h"
 
 class Admin : public Staff {
     private:
@@ -21,6 +21,7 @@ class Admin : public Staff {
         
         void Menu(); // admin route
         void calTurnover(); //Doanh thu
+        void Thuchi();
         //void calProfit(); // loi nhuan
         void UpdateAllFiles(); // update phone.txt, staff.txt, account.txt
 };

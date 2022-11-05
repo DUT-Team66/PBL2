@@ -6,7 +6,12 @@
 class StaffManager
 {
     private: 
-        Staff *p;
+        struct Node{
+            Staff data;
+            Node* pNext;
+        };
+        Node *pHead;
+        Node *pTail;
         int n;
     public:
         
@@ -17,7 +22,7 @@ class StaffManager
         void Add(const Staff&);
         void Delete(string);
         void Search();
-        void Update(string);
+        void Update();
         void Show() const;
         const string& getStaffName(int) const;
         const string& getStaffID(int) const;
@@ -33,6 +38,4 @@ class StaffManager
         void Login(bool&,bool&);
         const StaffManager& operator=(const StaffManager& );
 };
-
-
 #endif

@@ -193,13 +193,78 @@ const string& PhoneManager::getPhoneID(int index) {
 }
 void PhoneManager::Show()
 {
-    int d=1;
-    for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-    {
-        cout << setw(2) << d<< ". ";
-        d++;
-        k->data.showForStaff(); 
+    cout << topLeftCorner << line(7); //order
+    cout << topMid << line(39); // phonename
+	cout << topMid << line(13); // phoneID
+	cout << topMid << line(9); // brand
+	cout << topMid << line(27); // processor
+	cout << topMid << line(12); // RAM_ROM
+	cout << topMid << line(29); // display
+	cout << topMid << line(13); // camera
+	cout << topMid << line(13); // entryprice
+	cout << topMid << line(12); // saleprice
+	cout << topMid << line(8); // remaining amount
+	cout << topRightCorner << "\n";
+	
+    cout << col << setw(1) << "" << setw(6) << left << "Order";
+	cout << col << setw(14) << "" << setw(25) << left << "Phone name"; 
+	cout << col << setw(3) << "" << setw(10) << left << "Phone ID";
+	cout << col << setw(2) << "" << setw(7) << left << "Brand";
+	cout << col << setw(9) << "" << setw(18) << left << "Processor";
+	cout << col << setw(2) << "" << setw(10) << left << "RAM-ROM";
+	cout << col << setw(11) << "" << setw(18) << left << "Display";
+	cout << col << setw(3) << "" << setw(10) << left << "Camera";
+	cout << col << setw(12) << right << "Entry price" << setw(1) << "" ;
+	cout << col << setw(11) << right << "Sale price" << setw(1) << "" ;
+	cout << col << setw(7) << right << "Amount" << setw(1) << ""  << "\n";
+
+    Node *tmp = this->pHead;
+    int i = 0;
+    while(tmp != nullptr) {
+        cout << leftSide << line(7); 
+        cout << midMid << line(39); // phonename
+		cout << midMid << line(13); // phoneID
+		cout << midMid << line(9); // brand
+		cout << midMid << line(27); // processor
+		cout << midMid << line(12); // RAM_ROM
+		cout << midMid << line(29); // display
+		cout << midMid << line(13); // camera
+		cout << midMid << line(13); // entryprice
+		cout << midMid << line(12); // saleprice
+		cout << midMid << line(8); // remaining amount
+		cout << rightSide << "\n";
+		
+        cout << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1; ++i;
+		cout << col << setw((39 - tmp->data.getPhoneName().length())/2) << "" << setw(39 - (39 - tmp->data.getPhoneName().length())/2) << left << tmp->data.getPhoneName(); 
+		cout << col << setw((13 - tmp->data.getPhoneID().length())/2) << "" << setw(13 - (13 - tmp->data.getPhoneID().length())/2) << left << tmp->data.getPhoneID();
+		cout << col << setw((9 - tmp->data.getBrand().length())/2) << "" << setw(9 - (9 - tmp->data.getBrand().length())/2) << left << tmp->data.getBrand();
+		cout << col << setw((27 - tmp->data.getProcessor().length())/2) << "" << setw(27 - (27 - tmp->data.getProcessor().length())/2) << left << tmp->data.getProcessor();
+		cout << col << setw((12 - tmp->data.getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->data.getRAM_ROM().length())/2) << left << tmp->data.getRAM_ROM();
+		cout << col << setw((29 - tmp->data.getDisplay().length())/2) << "" << setw(29 - (29 - tmp->data.getDisplay().length())/2) << left << tmp->data.getDisplay();
+		cout << col << setw((13 - tmp->data.getCamera().length())/2) << "" << setw(13 - (13 - tmp->data.getCamera().length())/2) << left << tmp->data.getCamera();
+		cout << col << setw(13 - (13 - to_string(tmp->data.getEntryPrice()).length())/2) << right << tmp->data.getEntryPrice() << setw((13 - to_string(tmp->data.getEntryPrice()).length())/2) << "" ;
+		cout << col << setw(12 - (12 - to_string(tmp->data.getSalePrice()).length())/2) << right << tmp->data.getSalePrice() << setw((12 - to_string(tmp->data.getSalePrice()).length())/2) << "" ;
+		cout << col << setw(8 - (8 - to_string(tmp->data.getRemainingAmount()).length())/2) << right << tmp->data.getRemainingAmount() << setw((8 - to_string(tmp->data.getRemainingAmount()).length())/2) << "" ;
+		cout << col << "\n";
+
+        tmp = tmp->pNext;
     }
+    cout << botLeftCorner << line(7); 
+    cout << botMid << line(39); // staff name
+	cout << botMid << line(13); //phone id
+	cout << botMid << line(9); // brand
+	cout << botMid << line(27); // processor
+	cout << botMid << line(12); //ramrom
+	cout << botMid << line(29); //display
+	cout << botMid << line(13); //camera
+	cout << botMid << line(13); // entryprice
+	cout << botMid << line(12); // sale price
+	cout << botMid << line(8); // remaining amount
+	cout << botRightCorner << "\n";
+
+
+
+    
 
 }
 
@@ -346,51 +411,87 @@ void PhoneManager::UpdateFile() {
     editfile.close();
 }
 void PhoneManager::Menu() {
-    std::system("cls");
+     std::system("cls");
     while(true) {
-        int choice;
+        string choice;
         while(true) {
             
-            // cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
-	        // cout << setw(25) << "" << col << " PHONES " << col << "\n";
-	        // cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
-            cout << setw(25) << "" << "PHONES" << "\n\n";
-            cout << setw(22) << "" << "1. Add phone" << "\n"; // nhap day du thong tin cua phone
-            cout << setw(22) << "" << "2. Delete phone" << "\n"; // nhap phoneid
-            cout << setw(22) << "" << "3. Search phone" << "\n"; // nhap phoneid
-            cout << setw(22) << "" << "4. Update phone" << "\n";
-            cout << setw(22) << "" << "5. Show all phones" << "\n";
-            cout << setw(22) << "" << "6. Go back" << "\n\n";
+            cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        cout << setw(50) << "" << col << " PHONES " << col << "\n";
+	        cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            // cout << setw(25) << "" << "PHONES" << "\n\n";
+            //this->Show();
+            cout << setw(47) << "" << "1. Add phone" << "\n"; // nhap day du thong tin cua phone
+            cout << setw(47) << "" << "2. Delete phone" << "\n"; // nhap phoneid
+            cout << setw(47) << "" << "3. Search phone" << "\n"; // nhap phoneid
+            cout << setw(47) << "" << "4. Update phone" << "\n";
+            cout << setw(47) << "" << "5. Show all phones" << "\n";
+            cout << setw(47) << "" << "6. Go back" << "\n\n";
             
-            cout << setw(20) << "" << "Your choice: ";
+            cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
-            if(choice != 1 && choice != 2 && choice !=3 && choice != 4 && choice != 5 && choice != 6) {
+            if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6") {
                 cout << "Invalid choice, please re-enter!\n";
                 std::system("pause");
                 std::system("cls"); 
             } else break;
         }
-        if(choice == 1) {
-            Phone p;
-            p.setInfo();
-            this->Add(p);
-            cout << "Add successfully!\n";
-        } else if (choice == 2) {
+        if(choice == "1") {
+            string phoneName;
+            cin.ignore();
+            bool exist = false;
+            cout << setw(45) << "" << "Enter phone name: ";
+            getline(cin, phoneName);
+            Node* tmp = this->pHead;
+            while(tmp != nullptr) {
+                if(tmp->data.getPhoneName() == phoneName) {
+                    exist = true;
+                    break;
+                }
+            }
+            if(!exist) {
+                string phoneID, brand, processor, RAM_ROM, display, camera; 
+                int entryPrice, salePrice;
+                cout << setw(45) << "" << "Enter phone id: ";
+                getline(cin, phoneID);
+                cout << setw(45) << "" << "Enter brand: ";
+                getline(cin,brand);
+                cout << setw(45) << "" << "Enter processor: ";
+                getline(cin, processor);
+                cout << setw(45) << "" << "Enter RAM/ROM: ";
+                getline(cin, RAM_ROM);
+                cout << setw(45) << "" << "Enter display: ";
+                getline(cin, display);
+                cout << setw(45) << "" << "Enter camera: ";
+                getline(cin, camera);
+                cout << setw(45) << "" << "Enter entry price: ";
+                cin >> entryPrice;
+                cout << setw(45) << "" << "Enter sale price: ";
+                cin >> salePrice;
+                
+                
+                this->Add(Phone(phoneName, phoneID, brand, processor, RAM_ROM, display, camera, entryPrice, salePrice));
+                cout << setw(45) << "" << "\nAdd successfully!\n";
+            } else {
+                cout << setw(45) << "" << "Phone exists";
+            }
+        } else if (choice == "2") {
+            this->Show();
             string s;
-            cout << "Enter ID: ";
+            cout << setw(45) << "" << "Enter ID: ";
             cin >> s;
             this->Delete(s);
-        } else if(choice == 3) {
+        } else if(choice == "3") {
             string s;
-            cout << "Enter ID:";
+            cout << setw(45) << "" << "Enter ID:";
             cin >> s;
             this->Search(s);
-        } else if (choice == 4) {
-            string s;
-            cout << "Enter ID: ";
+        } else if (choice == "4") {
+            string s; 
+            cout << setw(45) << "" << "Enter ID: ";
             cin >> s;
             this->Update(s);
-        } else if(choice == 5) {
+        } else if(choice == "5") {
             this->Show();
         } else {
             std::system("cls");

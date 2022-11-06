@@ -77,69 +77,259 @@ void OrderManager::Add(const Order& s)
 // 
 void OrderManager::SearchByOrderID(string m)
 {
-    int index=-1;
-     for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-    {
-        if(k->data.getID() == m)
-        {
-            index=1;
-            k->data.show();
+    bool checkExist = false;
+    Node *tmp = this->pHead;
+    while(tmp != nullptr) {
+        if(tmp->data.getID() == m) {
+            checkExist = true;
+            cout << topLeftCorner << line(11); // orderid
+            cout << topMid << line(14); //customerID
+            cout << topMid << line(14); // staffID
+            cout << topMid << line(14); // cart
+            cout << topMid << line(13); //purchaseday
+            cout << topMid << line(14); //totalprice
+            cout << topRightCorner << "\n";
+            
+            cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
+            cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
+            cout << col << setw(3) << "" << setw(11) << left << "StaffID";
+            cout << col << setw(4) << "" << setw(10) << left << "Cart";
+            cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
+            cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
+            cout << col << "\n";
+
+            cout << leftSide << line(11);
+            cout << midMid << line(14);
+            cout << midMid << line(14);
+            cout << midMid << line(14);
+            cout << midMid << line(13);
+            cout << midMid << line(14);
+            cout << rightSide << "\n";
+
+            cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
+            cout << col << setw((14 - tmp->data.getCustomerID().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerID().length())/2) << left << tmp->data.getCustomerID();
+            cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
+            cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
+            cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
+            cout << col << setw(14 - (14 - to_string(tmp->data.getTotalPrice()).length())/2) << right << tmp->data.getTotalPrice() << setw((14 - to_string(tmp->data.getTotalPrice()).length())/2) << "";	
+            cout << col << "\n";
+
+            int n = tmp->data.getShpllength();
+            for(int j = 1; j < n; ++j) {
+                cout << col << setw(11) << "";
+                cout << col << setw(14) << "";
+                cout << col << setw(14) << ""; 
+                cout << col << " " << setw(0) << left << tmp->data.getGoods(j).getPhoneID() << "/" << to_string(tmp->data.getGoods(j).getAmount()) << setw(12 - tmp->data.getGoods(j).getPhoneID().length() - to_string(tmp->data.getGoods(j).getAmount()).length()) << "";
+                cout << col << setw(13) << "";
+                cout << col << setw(14) << "";
+                cout << col << "\n";
+            }
+            cout << botLeftCorner << line(11);
+            cout << botMid << line(14); 
+            cout << botMid << line(14); 
+            cout << botMid << line(14); 
+            cout << botMid << line(13);
+            cout << botMid << line(14); 
+            cout << botRightCorner << "\n";
             break;
         }
     }
-    if (index==-1) cout<<"Order does not exist!"<< "\n";
+
+    if(!checkExist) {
+        std::cout << setw(45) << "" << " No orders found!\n";
+    }
 
 }
 void OrderManager::SearchByCustomerID(string m)
 {
-    bool check = 0;
-    int d=0;
-     for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-    {
-        if(k->data.getCustomerID() == m)
-        {
-            check = 1;
-            cout << d + 1 << ". ";
-            k->data.show();
-            cout<<endl;
-            d++;
+    bool checkExist = false;
+    Node *tmp = this->pHead;
+    while(tmp != nullptr) {
+        if(tmp->data.getCustomerID() == m) {
+            checkExist = true;
+            cout << topLeftCorner << line(11); // orderid
+            cout << topMid << line(14); //customerID
+            cout << topMid << line(14); // staffID
+            cout << topMid << line(14); // cart
+            cout << topMid << line(13); //purchaseday
+            cout << topMid << line(14); //totalprice
+            cout << topRightCorner << "\n";
+            
+            cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
+            cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
+            cout << col << setw(3) << "" << setw(11) << left << "StaffID";
+            cout << col << setw(4) << "" << setw(10) << left << "Cart";
+            cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
+            cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
+            cout << col << "\n";
+
+            cout << leftSide << line(11);
+            cout << midMid << line(14);
+            cout << midMid << line(14);
+            cout << midMid << line(14);
+            cout << midMid << line(13);
+            cout << midMid << line(14);
+            cout << rightSide << "\n";
+
+            cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
+            cout << col << setw((14 - tmp->data.getCustomerID().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerID().length())/2) << left << tmp->data.getCustomerID();
+            cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
+            cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
+            cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
+            cout << col << setw(14 - (14 - to_string(tmp->data.getTotalPrice()).length())/2) << right << tmp->data.getTotalPrice() << setw((14 - to_string(tmp->data.getTotalPrice()).length())/2) << "";	
+            cout << col << "\n";
+
+            int n = tmp->data.getShpllength();
+            for(int j = 1; j < n; ++j) {
+                cout << col << setw(11) << "";
+                cout << col << setw(14) << "";
+                cout << col << setw(14) << ""; 
+                cout << col << " " << setw(0) << left << tmp->data.getGoods(j).getPhoneID() << "/" << to_string(tmp->data.getGoods(j).getAmount()) << setw(12 - tmp->data.getGoods(j).getPhoneID().length() - to_string(tmp->data.getGoods(j).getAmount()).length()) << "";
+                cout << col << setw(13) << "";
+                cout << col << setw(14) << "";
+                cout << col << "\n";
+            }
+            cout << botLeftCorner << line(11);
+            cout << botMid << line(14); 
+            cout << botMid << line(14); 
+            cout << botMid << line(14); 
+            cout << botMid << line(13);
+            cout << botMid << line(14); 
+            cout << botRightCorner << "\n";
         }
     }
-    if(!check) {
-        cout << "Order does not exist!\n";
+
+    if(!checkExist) {
+        std::cout << setw(45) << "" << " No orders found!\n";
     }
 }
 void OrderManager::SearchByStaffID(string m)
 {   
-    bool check = false;
-    int d=0;
-     for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-    {
-        if(k->data.getStaffID() == m)
-        {
-            check = true;
-            cout << d + 1 << ". ";
-            k->data.show();
-            cout<<endl;
-            d++;
+    bool checkExist = false;
+    Node *tmp = this->pHead;
+    while(tmp != nullptr) {
+        if(tmp->data.getStaffID() == m) {
+            checkExist = true;
+            cout << topLeftCorner << line(11); // orderid
+            cout << topMid << line(14); //customerID
+            cout << topMid << line(14); // staffID
+            cout << topMid << line(14); // cart
+            cout << topMid << line(13); //purchaseday
+            cout << topMid << line(14); //totalprice
+            cout << topRightCorner << "\n";
+            
+            cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
+            cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
+            cout << col << setw(3) << "" << setw(11) << left << "StaffID";
+            cout << col << setw(4) << "" << setw(10) << left << "Cart";
+            cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
+            cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
+            cout << col << "\n";
+
+            cout << leftSide << line(11);
+            cout << midMid << line(14);
+            cout << midMid << line(14);
+            cout << midMid << line(14);
+            cout << midMid << line(13);
+            cout << midMid << line(14);
+            cout << rightSide << "\n";
+
+            cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
+            cout << col << setw((14 - tmp->data.getCustomerID().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerID().length())/2) << left << tmp->data.getCustomerID();
+            cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
+            cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
+            cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
+            cout << col << setw(14 - (14 - to_string(tmp->data.getTotalPrice()).length())/2) << right << tmp->data.getTotalPrice() << setw((14 - to_string(tmp->data.getTotalPrice()).length())/2) << "";	
+            cout << col << "\n";
+
+            int n = tmp->data.getShpllength();
+            for(int j = 1; j < n; ++j) {
+                cout << col << setw(11) << "";
+                cout << col << setw(14) << "";
+                cout << col << setw(14) << ""; 
+                cout << col << " " << setw(0) << left << tmp->data.getGoods(j).getPhoneID() << "/" << to_string(tmp->data.getGoods(j).getAmount()) << setw(12 - tmp->data.getGoods(j).getPhoneID().length() - to_string(tmp->data.getGoods(j).getAmount()).length()) << "";
+                cout << col << setw(13) << "";
+                cout << col << setw(14) << "";
+                cout << col << "\n";
+            }
+            cout << botLeftCorner << line(11);
+            cout << botMid << line(14); 
+            cout << botMid << line(14); 
+            cout << botMid << line(14); 
+            cout << botMid << line(13);
+            cout << botMid << line(14); 
+            cout << botRightCorner << "\n";
         }
-    
-    }     
-    if(!check) {
-        cout << "Order does not exist!\n";
+    }
+
+    if(!checkExist) {
+        std::cout << setw(45) << "" << " No orders found!\n";
     }
 }
 
 void OrderManager::Show() //Show All
 {
-    int d=0;
-     for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-    {
-        cout << setw(2) << d + 1 << ". ";
-        k->data.show(); 
-        d++;
-    }
-   
+    cout << topLeftCorner << line(7); // stt
+	cout << topMid << line(11); // orderid
+	cout << topMid << line(14); //customerID
+	cout << topMid << line(14); // staffID
+	cout << topMid << line(14); // cart
+	cout << topMid << line(13); //purchaseday
+	cout << topMid << line(14); //totalprice
+	cout << topRightCorner << "\n";
+	
+	cout << col << setw(1) << "" << setw(6) << left << "Order";
+	cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
+	cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
+	cout << col << setw(3) << "" << setw(11) << left << "StaffID";
+	cout << col << setw(4) << "" << setw(10) << left << "Cart";
+	cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
+	cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
+	cout << col << "\n";
+
+    Node *tmp = this->pHead;
+    int i = 0;
+    while(tmp != nullptr) {
+        cout << leftSide << line(7);
+		cout << midMid << line(11);
+		cout << midMid << line(14);
+		cout << midMid << line(14);
+		cout << midMid << line(14);
+		cout << midMid << line(13);
+		cout << midMid << line(14);
+		cout << rightSide << "\n";
+		
+        cout << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1; ++i;
+		cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
+		cout << col << setw((14 - tmp->data.getCustomerID().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerID().length())/2) << left << tmp->data.getCustomerID();
+		cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
+        cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
+		cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
+		cout << col << setw(14 - (14 - to_string(tmp->data.getTotalPrice()).length())/2) << right << tmp->data.getTotalPrice() << setw((14 - to_string(tmp->data.getTotalPrice()).length())/2) << "";	
+		cout << col << "\n";
+
+        int n = tmp->data.getShpllength();
+        for(int j = 1; j < n; ++j) {
+            cout << col << setw(7) << "";
+			cout << col << setw(11) << "";
+			cout << col << setw(14) << "";
+			cout << col << setw(14) << ""; 
+            cout << col << " " << setw(0) << left << tmp->data.getGoods(j).getPhoneID() << "/" << to_string(tmp->data.getGoods(j).getAmount()) << setw(12 - tmp->data.getGoods(j).getPhoneID().length() - to_string(tmp->data.getGoods(j).getAmount()).length()) << "";
+			cout << col << setw(13) << "";
+			cout << col << setw(14) << "";
+			cout << col << "\n";
+        }
+        tmp = tmp->pNext;
+    } 
+    cout << botLeftCorner << line(7); 
+	cout << botMid << line(11);
+	cout << botMid << line(14); 
+	cout << botMid << line(14); 
+	cout << botMid << line(14); 
+	cout << botMid << line(13);
+	cout << botMid << line(14); 
+	cout << botRightCorner << "\n";
+    
 }
 void OrderManager::LoadData() {
     fstream readfile("Order.txt", ios::in);
@@ -181,7 +371,7 @@ void OrderManager::LoadData() {
             }
             ++i;
             
-            order.addToShoppingList(ShoppingList(phoneID, amount));
+            order.addToCart(Goods(phoneID, amount));
         }
         ++i;
         int shpllength = 0;
@@ -220,60 +410,42 @@ void OrderManager::LoadData() {
     }
 }
 void OrderManager::Menu() {
+
     std::system("cls");
     while(true) {
-        int choice;
+        string choice;
         while(true) {
             
-            // cout << setw(25) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
-	        // cout << setw(25) << "" << col << " TRADES " << col << "\n";
-	        // cout << setw(25) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
-            cout << setw(25) << "" << "TRADES" << "\n\n";
-            cout << setw(22) << "" << "1. Search by OrderID" << "\n"; //  nhap orderid
-            cout << setw(22) << "" << "2. Search by CustomerID" << "\n"; // nhap customerid
-            cout << setw(22) << "" << "3. Search by StaffID" << "\n"; // nhap customerid
-            cout << setw(22) << "" << "4. Show all orders" << "\n";
-            cout << setw(22) << "" << "5. Go back" << "\n\n";
-            cout << setw(20) << "" << "Your choice: ";
+            cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        cout << setw(50) << "" << col << " ORDERS " << col << "\n";
+	        cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            //cout << setw(25) << "" << "TRADES" << "\n\n";
+            cout << setw(47) << "" << "1. Search by OrderID" << "\n"; //  nhap orderid
+            cout << setw(47) << "" << "2. Search by CustomerID" << "\n"; // nhap customerid
+            cout << setw(47) << "" << "3. Search by StaffID" << "\n"; // nhap customerid
+            cout << setw(47) << "" << "4. Show all orders" << "\n";
+            cout << setw(47) << "" << "5. Go back" << "\n\n";
+            cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
-            if(choice != 1 && choice != 2 && choice !=3 && choice != 4 && choice != 5) {
+            if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5") {
                 cout << "Invalid choice, please re-enter!\n";
                 std::system("pause");
                 std::system("cls"); 
             } else break;
         }
-        if(choice == 1) {
+        if(choice == "1") {
             cout << "Enter orderID you want to search: ";
             string id; cin >> id;
-            for (Node *k=this->pHead;k!=NULL;k=k->pNext) {
-                if(k->data.getID() == id) {
-                    k->data.show();
-                    break;
-                }
-            }
-        } else if (choice == 2) {
+            this->SearchByOrderID(id);
+        } else if (choice == "2") {
             cout << "Enter customerID you want to search: ";
             string id; cin >> id;
-            int d=0;
-            for (Node *k=this->pHead;k!=NULL;k=k->pNext) {
-                if(k->data.getCustomerID() == id) {
-                    cout << d + 1 << "/\n";
-                    k->data.show();
-                    d++;
-                }
-            }
-        } else if (choice == 3) {
+            this->SearchByCustomerID(id);
+        } else if (choice == "3") {
             cout << "Enter staffID you want to search: ";
             string id; cin >> id;
-            int d=0;
-            for (Node *k=this->pHead;k!=NULL;k=k->pNext) {
-                if(k->data.getStaffID() == id) {
-                    cout << d + 1 << "/\n";
-                    k->data.show();
-                    d++;
-                }
-            }
-        } else if(choice == 4) {
+            this->SearchByStaffID(id);
+        } else if(choice == "4") {
             this->Show();
         } else {
             std::system("cls");
@@ -309,7 +481,7 @@ void OrderManager::UpdateFile() {
     for (Node *k=this->pHead;k!=NULL;k=k->pNext) {
         string tmp1 = "";
         for(int j = 0; j < k->data.getShpllength(); ++j) {
-            ShoppingList sp = k->data.getShoppingList(j);
+            Goods sp = k->data.getGoods(j);
             tmp1 += sp.getPhoneID() + " " + to_string(sp.getAmount()) + " ";
         }
         Date dmy = k->data.getPurchaseDay();

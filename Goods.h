@@ -1,18 +1,19 @@
-#ifndef _SHOPPINGLIST_
-#define _SHOPPINGLIST_
+#ifndef _GOODS_
+#define _GOODS_
 
 #include <string>
 using namespace std;
-class ShoppingList
+class Goods
 {
     private:
         string phoneID;
         int amount;
     public:
-        ShoppingList();
-        ShoppingList(string,int);
-        ~ShoppingList();
+        Goods();
+        Goods(string,int);
+        ~Goods();
         const string& getPhoneID() const;
+        void setPhoneID(const string&);
         const int& getAmount() const;
         void setAmount(const int&);
         void show();

@@ -1,31 +1,34 @@
 #include <iostream>
-#include "ShoppingList.h"
+#include "Goods.h"
 #include <string>
 using namespace std;
 
-ShoppingList::ShoppingList()
+Goods::Goods()
 {
     this->phoneID="";
     this->amount=0;
 }
-ShoppingList::ShoppingList(string id, int amount) {
+Goods::Goods(string id, int amount) {
     this->phoneID = id;
     this->amount = amount;
 }
-ShoppingList::~ShoppingList()
+Goods::~Goods()
 {
 
 }
-const string& ShoppingList::getPhoneID() const {
+const string& Goods::getPhoneID() const {
     return this->phoneID;
 }
-const int& ShoppingList::getAmount() const {
+void Goods::setPhoneID(const string& id) {
+    this->phoneID = id;
+}
+const int& Goods::getAmount() const {
     return this->amount;
 }
-void ShoppingList::setAmount(const int& amount) {
+void Goods::setAmount(const int& amount) {
     this->amount = amount;
 }
-void ShoppingList::show()
+void Goods::show()
 {
     cout<< "Phone id: "<< this->phoneID <<", amount: "<< this->amount << "\n";
 }

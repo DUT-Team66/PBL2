@@ -10,7 +10,7 @@ using namespace std;
 
 string compact(string s) {
     string res = "";
-    
+
     if(s[0] >= 'A' && s[0] <= 'Z') {
         stringstream ss(s);
         string tmp;
@@ -404,7 +404,7 @@ void StaffManager::Search()
                 }
             } else {
                 std::cout << setw(45) << "" << "Gender must be 'male' or 'female'!\n";
-                std::system("pause");
+                //std::system("pause");
             }
             
         } else if (choice == "4") { // year of birth

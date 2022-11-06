@@ -2,7 +2,7 @@
 #ifndef _PHONEMANAGER_
 #define _PHONEMANAGER_
 #include "Phone.h"
-#include "ShoppingList.h"
+#include "Goods.h"
 class PhoneManager
 {
     private: 

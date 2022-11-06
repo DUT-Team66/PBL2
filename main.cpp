@@ -23,10 +23,11 @@ int stringToInt(string s) {
         }
     }
     return res;
+    
 } 
 int main()
 {
-    SetConsoleCP(437); 
+    //SetConsoleCP(437); 
     SetConsoleOutputCP(437); // hien thi ki tu ascii
     
     StaffManager staffManager;
@@ -49,7 +50,7 @@ int main()
     admin.setPhoneManager(phoneManager);
     admin.setStaffManager(staffManager);
 
-    //std::system("pause");
+    std::system("pause");
     std::system("cls");
 
     // for(int i = 0;i < 10;++i) {
@@ -60,15 +61,15 @@ int main()
     { 
         string choice;
         while(true) {
-            cout << setw(32) << "" << topLeftCorner << line(17) << topRightCorner << "\n";
-	        cout << setw(32) << "" << col << " NH MOBILE STORE " << col << "\n";
-	        cout << setw(32) << "" << botLeftCorner << line(17) << botRightCorner << "\n\n\n";
+            cout << setw(50) << "" << topLeftCorner << line(17) << topRightCorner << "\n";
+	        cout << setw(50) << "" << col << " NH MOBILE STORE " << col << "\n";
+	        cout << setw(50) << "" << botLeftCorner << line(17) << botRightCorner << "\n\n\n";
             //cout << setw(25) << "" << "NH MOBILE STORE" << "\n\n\n";
-            std::cout << setw(30) << "" << "Select role: " << "\n"; 
-            std::cout << setw(32) << "" << "1. Staff" << "\n";
-            std::cout << setw(32) << "" << "2. Customer" << "\n";
-            std::cout << setw(32) << "" << "3. Exit" << "\n\n";
-            std::cout << setw(30) << "" << "Your choice: ";
+            std::cout << setw(45) << "" << "Select role: " << "\n"; 
+            std::cout << setw(47) << "" << "1. Staff" << "\n";
+            std::cout << setw(47) << "" << "2. Customer" << "\n";
+            std::cout << setw(47) << "" << "3. Exit" << "\n\n";
+            std::cout << setw(45) << "" << "Your choice: ";
             std::cin >> choice;
             if (choice != "1" && choice != "2" && choice != "3")
             {
@@ -171,10 +172,10 @@ int main()
                             cout << "Remaining amount is not enough\n"; 
                             std::system("pause");
                         } else {
-                            if(order.searchShoppingList(phoneManager.getPhoneID(ichoice-1))) {
-                                order.addToShoppingList(phoneManager.getPhoneID(ichoice-1),amount);
+                            if(order.searchCart(phoneManager.getPhoneID(ichoice-1))) {
+                                order.addToCart(phoneManager.getPhoneID(ichoice-1),amount);
                             } else {
-                                order.addToShoppingList(ShoppingList(phoneManager.getPhoneID(ichoice - 1),amount));
+                                order.addToCart(Goods(phoneManager.getPhoneID(ichoice - 1),amount));
                             }
                             phoneManager.setRemainingAmount(ichoice-1,amount);
                             long long price = phoneManager.getPhonePrice(ichoice-1) *(long long)amount;

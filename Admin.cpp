@@ -24,8 +24,8 @@ const StaffManager& Admin::getStaffManager() const {
 void Admin::calTurnover() 
 {
     int year;
-    cout << "Enter year: "; 
-    cin >> year;
+    std::cout << "Enter year: "; 
+    std::cin >> year;
     long long totalTurnover[13]={0};
     for(int i = 0; i < this->manageOrder.GetLength(); ++i)
     {

@@ -639,7 +639,7 @@ void StaffManager::Update()  // chu y: Update co the cap nhat nhieu cai
                 std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
                 std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n";
                 
-                std::cout << setw(47) << "" << "Staff ID: " << id << "\n";
+                staff->data.show();
 
                 std::cout << setw(47) << "" << "1. Update name\n";
                 std::cout << setw(47) << "" << "2. Update gender\n";
@@ -687,7 +687,7 @@ void StaffManager::Update()  // chu y: Update co the cap nhat nhieu cai
                         }
                     }
                     catch(int) {
-                        cout << "Invalid gender, gender should be 'Male' or 'Female'!\n";
+                        cout << "Invalid gender, gender must be 'Male' or 'Female'!\n";
                         std::system("pause");  
                         goto label;
                     }
@@ -1053,6 +1053,7 @@ void StaffManager::Menu() {
             this->Add(s);
             cout << "Add successfully!\n";
         } else if (choice == "2") {
+            this->Show();
             string s;
             cout << "Enter ID: ";
             cin >> s;
@@ -1060,6 +1061,7 @@ void StaffManager::Menu() {
         } else if(choice == "3") {
             this->Search();
         } else if (choice == "4") {
+            this->Show();
             this->Update();
         } else if(choice == "5") {
             this->Show();

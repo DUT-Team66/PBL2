@@ -267,7 +267,6 @@ void PhoneManager::Show()
     
 
 }
-
 void PhoneManager::ShowTable() {
     // for (int i=0;i<this->n;i+=2)
     // {

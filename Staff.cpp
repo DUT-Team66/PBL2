@@ -159,26 +159,7 @@ void Staff::show()
     
 
 }
-void Staff::showForSetInfo() {
-    if(this->name != "") {
-        cout << setw(45) << "" << "Enter name: " << this->name << "\n";
-    }
-    if(this->ID != "") {
-        cout << setw(45) << "" << "Enter ID: " << this->ID << "\n";
-    }
-    if(this->gender != "" ) {
-        cout << setw(45) << "" << "Enter gender: " << this->gender << "\n";
-    }
-    if(this->dob != "") {
-        cout << setw(45) << "" << "Enter dob: " << this->dob << "\n";
-    }
-    if(this->phoneNumber != "") {
-        cout << setw(45) << "" << "Enter phone number: " << this->phoneNumber << "\n";
-    }
-    if(this->address != "") {
-        cout << setw(45) << "" << "Enter address: " << this->address << "\n";
-    }
-}
+
 
 void Staff::Menu() {
     while(true) {
@@ -206,19 +187,45 @@ void Staff::Menu() {
 }
 
 void Staff::setInfo() {
+
+    string name, gender, dob, phoneNumber, address;
+    //cin.ignore();
+    cout << setw(45) << "" << "Enter name: ";
+    getline(cin, name);
+
+
+    while(true) {
+        std::system("cls");
+        std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+        std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
+        std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+
+        cout << setw(47) << "" << "1. Add a staff" << "\n"; // nhap day du thong tin cua staff
+        cout << setw(47) << "" << "2. Delete a staff" << "\n"; // nhap staffid
+        cout << setw(47) << "" << "3. Search a staff" << "\n"; // nhap staffid
+        cout << setw(47) << "" << "4. Update a staff" << "\n"; // nhap day du thong tin cua staff, neu khong doi nhap N/A
+        cout << setw(47) << "" << "5. Show all staffs" << "\n";
+        cout << setw(47) << "" << "6. Go back" << "\n\n";
+
+        cout << setw(45) << "" << "Your choice: " << 1 << "\n";
+        //cout << setw(45) << "" << "Enter ID: " << id << "\n";
+        cout << setw(45) << "" << "Enter gender: ";
+        getline(cin, this->gender);
+        for(int i = 0; i < gender.length(); ++i) {
+            gender[i] = tolower(gender[i]);
+        }
+        if(gender != "male" && gender != "female") {
+            cout << setw(45) << "" << "Invalid gender, gender must be 'Male' or 'Female'" << "\n";
+            std::system("pause");
+        } else break;
+    }
     
-    cin.ignore();
-    cout << setw(4) << "" << "Enter name: ";
-    getline(cin, this->name);
-    cout << setw(4) << "" << "Enter ID: ";
-    getline(cin, this->ID);
-    cout << setw(4) << "" << "Enter gender: ";
-    getline(cin, this->gender);
-    cout << setw(4) << "" << "Enter dob: ";
+
+    cout << setw(45) << "" << "Enter dob(dd-mm-yyyy): ";
     getline(cin, this->dob);
-    cout << setw(4) << "" << "Enter phone number: ";
+    cout << setw(45) << "" << "Enter phone number: ";
     getline(cin, this->phoneNumber);
-    cout << setw(4) << "" << "Enter address: ";
+    cout << setw(45) << "" << "Enter address: ";
     getline(cin, this->address);
 }
 void Staff::UpdateAllFiles() {

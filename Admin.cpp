@@ -60,7 +60,7 @@ void Admin::Thuchi()
 }
 void Admin::Menu() {
     while(true) {
-        int choice;
+        string choice;
         while(true) {
             std::cout << setw(50) << "" << topLeftCorner << line(7) << topRightCorner << "\n";
             std::cout << setw(50) << "" << col << " ADMIN " << col << "\n";
@@ -73,20 +73,20 @@ void Admin::Menu() {
             cout << setw(47) << "" << "5. Go back" << "\n\n";
             cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
-            if(choice != 1 && choice != 2 && choice != 3 && choice != 4 && choice != 5) {
+            if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5") {
                 cout << "Invalid choice, please re-enter!\n";
                 system("pause");
                 system("cls"); 
             } else break;
         }
         
-        if(choice == 1) {
+        if(choice == "1") {
             this->manageStaff.Menu();
-        } else if(choice == 2) {
+        } else if(choice == "2") {
             this->managePhone.Menu();
-        } else if(choice == 3) {
+        } else if(choice == "3") {
             this->manageOrder.Menu();
-        } else if(choice == 4) {
+        } else if(choice == "4") {
             this->calTurnover();
             system("pause");
             system("cls");

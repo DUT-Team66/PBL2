@@ -133,6 +133,7 @@ void OrderManager::SearchByOrderID(string m)
             cout << botRightCorner << "\n";
             break;
         }
+        tmp = tmp->pNext;
     }
 
     if(!checkExist) {
@@ -197,6 +198,7 @@ void OrderManager::SearchByCustomerID(string m)
             cout << botMid << line(14); 
             cout << botRightCorner << "\n";
         }
+        tmp = tmp->pNext;
     }
 
     if(!checkExist) {
@@ -260,6 +262,7 @@ void OrderManager::SearchByStaffID(string m)
             cout << botMid << line(14); 
             cout << botRightCorner << "\n";
         }
+        tmp = tmp->pNext;
     }
 
     if(!checkExist) {
@@ -434,15 +437,15 @@ void OrderManager::Menu() {
             } else break;
         }
         if(choice == "1") {
-            cout << "Enter orderID you want to search: ";
+            cout << setw(45) << "" << "Enter orderID you want to search: ";
             string id; cin >> id;
             this->SearchByOrderID(id);
         } else if (choice == "2") {
-            cout << "Enter customerID you want to search: ";
+            cout << setw(45) << "" << "Enter customerID you want to search: ";
             string id; cin >> id;
             this->SearchByCustomerID(id);
         } else if (choice == "3") {
-            cout << "Enter staffID you want to search: ";
+            cout << setw(45) << "" << "Enter staffID you want to search: ";
             string id; cin >> id;
             this->SearchByStaffID(id);
         } else if(choice == "4") {

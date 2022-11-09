@@ -27,6 +27,7 @@ int stringToInt(string s) {
 } 
 int main()
 {
+    //system("Color 0F");
     //SetConsoleCP(437); 
     SetConsoleOutputCP(437); // hien thi ki tu ascii
     
@@ -50,7 +51,7 @@ int main()
     admin.setPhoneManager(phoneManager);
     admin.setStaffManager(staffManager);
 
-    std::system("pause");
+    //std::system("pause");
     std::system("cls");
 
     // for(int i = 0;i < 10;++i) {
@@ -61,9 +62,10 @@ int main()
     { 
         string choice;
         while(true) {
-            cout << setw(50) << "" << topLeftCorner << line(17) << topRightCorner << "\n";
-	        cout << setw(50) << "" << col << " NH MOBILE STORE " << col << "\n";
-	        cout << setw(50) << "" << botLeftCorner << line(17) << botRightCorner << "\n\n\n";
+            title();
+            // cout << setw(50) << "" << topLeftCorner << line(17) << topRightCorner << "\n";
+	        // cout << setw(50) << "" << col << " NH MOBILE STORE " << col << "\n";
+	        // cout << setw(50) << "" << botLeftCorner << line(17) << botRightCorner << "\n\n\n";
             //cout << setw(25) << "" << "NH MOBILE STORE" << "\n\n\n";
             std::cout << setw(45) << "" << "Select role: " << "\n"; 
             std::cout << setw(47) << "" << "1. Staff" << "\n";

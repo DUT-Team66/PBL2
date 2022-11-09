@@ -50,7 +50,6 @@ class Staff
         const PhoneManager& getPhoneManager() const;
         void setOrderManager(const OrderManager&);
         
-        void showForSetInfo(); // 
         void show(); // show staff information
         void Menu(); // staff route
     

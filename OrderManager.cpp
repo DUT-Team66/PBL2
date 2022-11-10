@@ -437,15 +437,15 @@ void OrderManager::Menu() {
             } else break;
         }
         if(choice == "1") {
-            cout << setw(45) << "" << "Enter orderID you want to search: ";
+            cout << setw(35) << "" << "Enter orderID you want to search: ";
             string id; cin >> id;
             this->SearchByOrderID(id);
         } else if (choice == "2") {
-            cout << setw(45) << "" << "Enter customerID you want to search: ";
+            cout << setw(35) << "" << "Enter customerID you want to search: ";
             string id; cin >> id;
             this->SearchByCustomerID(id);
         } else if (choice == "3") {
-            cout << setw(45) << "" << "Enter staffID you want to search: ";
+            cout << setw(35) << "" << "Enter staffID you want to search: ";
             string id; cin >> id;
             this->SearchByStaffID(id);
         } else if(choice == "4") {

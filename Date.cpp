@@ -1,5 +1,6 @@
 #include "Date.h"
 #include <iostream>
+#include <iomanip>
 using namespace std;
 Date::Date()
 {
@@ -38,11 +39,18 @@ ostream& operator<<(ostream& o, const Date& p)
 }
 istream& operator>>(istream& in, Date& p)
 {
-    cout<<endl<<"Day: ";
-    in>>p.day;
-    cout<<"Month: ";
+    cout << " Day: ";
+    in>>p.day; 
+    cout << setw(49) << "" <<"Month: ";
     in>>p.month;
-    cout<<"Year: ";
-    in>>p.year;
+    cout << setw(50) << "" <<"Year: ";
+    in>>p.year; 
+    
+    // in >> p.day; 
+    // cout << " / ";
+    // in >> p.month;
+    // cout << " / ";
+    // in >> p.year;
+
     return in;
 }

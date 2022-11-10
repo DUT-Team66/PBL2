@@ -77,18 +77,18 @@ void Order::show() //27
 
     cout << setw(46) << "" << topLeftCorner << line(27) << topRightCorner << "\n";
     cout << setw(46) << "" << col << " Order id: " << setw(27 - 11) << left << this->ID << col << "\n";
-    cout << setw(46) << "" << col << " Customer id: " << setw(27 - 14) << left << this->customerID << "\n";
-    cout << setw(46) << "" << col << " Staff id: " << setw(27 - 11) << left << this->staffID << "\n";
-    cout << setw(46) << "" << col << " Cart: " << setw(27-7) << "" << "\n";
+    cout << setw(46) << "" << col << " Customer id: " << setw(27 - 14) << left << this->customerID << col << "\n";
+    cout << setw(46) << "" << col << " Staff id: " << setw(27 - 11) << left << this->staffID << col << "\n";
+    cout << setw(46) << "" << col << " Cart: " << setw(27-7) << "" << col << "\n";
     
     Cart* tmp = this->cart;
     while(tmp != nullptr) {
-        cout << setw(46) << "" << col << setw(3) << "" << setw(27 - 3) << left << tmp->data.getPhoneID() << "/" << tmp->data.getAmount() << col << "\n";
+        cout << setw(46) << "" << col << setw(3) << "" << tmp->data.getPhoneID() << "/" << tmp->data.getAmount() << setw(27 - 4 - tmp->data.getPhoneID().length() - to_string(tmp->data.getAmount()).length()) << "" << col << "\n";
         tmp = tmp->pNext; 
     }
     
-    cout << setw(46) << "" << col << " Purchase day: " << setw(27 - 15) << left << this->purchaseDay << col << "\n";
-    cout << setw(46) << "" << col << " Total price: " << setw(27 - 14) << left << this->totalPrice << "\n";
+    cout << setw(46) << "" << col << " Purchase day: " << this->purchaseDay << setw(27 - 15 - 2 - to_string(this->purchaseDay.getDay()).length() - to_string(this->purchaseDay.getMonth()).length() - to_string(this->purchaseDay.getYear()).length()) << "" << col << "\n";
+    cout << setw(46) << "" << col << " Total price: " << setw(27 - 14) << left << this->totalPrice << col << "\n";
     cout << setw(46) << "" << botLeftCorner << line(27) << botRightCorner << "\n\n";
 }
 bool Order::searchCart(string id) {

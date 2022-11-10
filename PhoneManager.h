@@ -28,7 +28,6 @@ class PhoneManager
         void Show(int); // show 1 phone information
 
 
-        
         const string& getPhoneID(int);
         const int& getPhonePrice(int);
         const int& getRemainingAmount(int);

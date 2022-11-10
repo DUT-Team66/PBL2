@@ -146,10 +146,11 @@ int main()
                 // Trường hợp chắc chắn mua
                 // Sẽ thêm 1 đơn hàng
             while(true) {
-                std::cout << "\t\tChoose what you want to purchase\n";
+                std::cout << setw(30) << "" << "Choose what you want to purchase\n";
                 phoneManager.ShowTable();
-                
-                std::cout << setw(20) << "" << "Your choice: ";
+                std::cout << "\n";
+                std::cout << setw(45) << "" << "Enter 'exit' to exit!\n";
+                std::cout << setw(45) << "" << "Your choice: ";
                 string choice;
                 std::cin >> choice;
                 int ichoice = stringToInt(choice);
@@ -158,20 +159,20 @@ int main()
                     //system("pause");
                     break;
                 } else if(ichoice < 1 || ichoice > phoneManager.GetLength()) {
-                    std::cout << "Invalid choice, please re-enter!\n";
+                    std::cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
                     std::system("pause");
                 } else {
 
                     phoneManager.Show(ichoice-1); 
 
-                    std::cout << "Amount: ";
+                    std::cout << setw(45) << "" << "Amount: ";
                     int amount; std::cin >> amount;
                     
                     //ShoppingList sp(phoneManager.getPhoneID(choice - 1),amount); 
                     
                     if(amount != 0) {
                         if(amount > phoneManager.getRemainingAmount(ichoice-1)) {
-                            cout << "Remaining amount is not enough\n"; 
+                            cout << setw(45) << "" << "Remaining amount is not enough\n"; 
                             std::system("pause");
                         } else {
                             if(order.searchCart(phoneManager.getPhoneID(ichoice-1))) {
@@ -182,7 +183,7 @@ int main()
                             phoneManager.setRemainingAmount(ichoice-1,amount);
                             long long price = phoneManager.getPhonePrice(ichoice-1) *(long long)amount;
                             order.setTotalPrice(order.getTotalPrice() + price);
-                            cout << "Add to cart successfully!\n";
+                            cout << setw(45) << "" << "Add to cart successfully!\n";
                             std::system("pause");
 
                         }
@@ -216,7 +217,8 @@ int main()
 
                 //cout << 6 << endl;
                 Date purchaseDay;
-                std::cout << "Enter purchase day: ";
+                std::cout << "\n\n";
+                std::cout << setw(30) << "" << "Enter purchase day: ";
                 std::cin >> purchaseDay;
 
                 order.setPurchaseDay(purchaseDay);
@@ -230,12 +232,12 @@ int main()
                 staff.setOrderManager(orderManager);
                 staff.setPhoneManager(phoneManager);
             }  else {
-                cout << "GOOD BYE!\n";
+                cout << setw(45) << "" << "GOOD BYE!\n";
             }
             
             std::system("pause");
         } else if(choice == "3") {
-            std::cout << "SEE YOU NEXT TIMES!\n";
+            std::cout << setw(45) << "" << "SEE YOU NEXT TIMES!\n";
             break;
         }
         std::system("cls");

@@ -37,18 +37,18 @@ const string& Customer::getCustomerAddress() const {
 }
 void Customer::setInfo() {
     cin.ignore();
-    cout << setw(20) << "" << "Enter your information" << "\n\n";
+    cout << setw(30) << "" << "Enter your information" << "\n\n";
 	
-	cout << setw(22) << "" << "Name: ";
+	cout << setw(32) << "" << "Name: ";
 	getline(cin, this->customerName);
 	
-	cout << setw(22) << "" << "ID: ";
+	cout << setw(32) << "" << "ID: ";
 	getline(cin, this->customerID);
 	
-	cout << setw(22) << "" << "Phone number: ";
+	cout << setw(32) << "" << "Phone number: ";
 	getline(cin, this->customerPhoneNumber);
 	
-	cout << setw(22) << "" << "Address: ";
+	cout << setw(32) << "" << "Address: ";
 	getline(cin, this->customerAddress);
 }
 void Customer::BuyPhone() {

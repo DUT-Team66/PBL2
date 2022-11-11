@@ -2,11 +2,11 @@
 #include <iomanip>
 #include <iostream>
 using namespace std;
-Customer::Customer() {
-    this->customerID = "";
-    this->customerName = "";
-    this->customerPhoneNumber = "";
-    this->customerAddress = "";
+Customer::Customer(string a, string b, string c,string d) {
+    this->customerID = a;
+    this->customerName = b;
+    this->customerPhoneNumber = c;
+    this->customerAddress = d;
 }
 Customer::~Customer() {
 
@@ -51,6 +51,10 @@ void Customer::setInfo() {
 	cout << setw(22) << "" << "Address: ";
 	getline(cin, this->customerAddress);
 }
-void Customer::BuyPhone() {
-    
+void Customer::Show()   // Chưa vẽ bảng
+{
+	cout<<"CustomerID: "<<this->customerID<<"\n";
+	cout<<"CustomrName: "<<this->customerName<<"\n";
+	cout<<"CustomerPhoneNumber: "<<this->customerPhoneNumber<<"\n";
+	cout<<"CustomerAddress: "<<this->customerAddress<<"\n";
 }

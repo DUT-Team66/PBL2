@@ -12,8 +12,9 @@ class Customer {
         string customerPhoneNumber;
         string customerAddress;
     public:
-        Customer();
+        Customer(string ="", string="", string="", string="");
         ~Customer();
+        
         void setCustomerID(const string& );
         const string& getCustomerID() const;
         void setCustomerName(const string& );
@@ -23,11 +24,9 @@ class Customer {
         void setCustomerAddress(const string&);
         const string& getCustomerAddress() const;
 
-
-
         void setInfo();    
-        void BuyPhone();
 
+        void Show();
 };
 
 

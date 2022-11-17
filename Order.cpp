@@ -2,14 +2,15 @@
 #include <iostream>
 #include <string>
 #include <iomanip>  
+#include "Table.h"
 using namespace std;
 
 Order::Order()
 {
     this->ID = "";
-    this->customerID = "";
+    this->customerPhoneNumber = "";
     this->staffID = "";
-    this->shoppingList = nullptr;
+    this->cart = nullptr;
     this->shpllength = 0;
     this->purchaseDay = Date(0,0,0);
     this->totalPrice = 0;
@@ -25,13 +26,13 @@ const string &Order::getID() const
 {
     return this->ID;
 }
-void Order::setCustomerID(const string &s)
+void Order::setCustomerPhoneNumber(const string &s)
 {
-    this->customerID = s;
+    this->customerPhoneNumber = s;
 }
-const string &Order::getCustomerID() const
+const string &Order::getCustomerPhoneNumber() const
 {
-    return this->customerID;
+    return this->customerPhoneNumber;
 }
 void Order::setStaffID(const string &s)
 {
@@ -49,8 +50,12 @@ const Date &Order::getPurchaseDay() const
 {
     return this->purchaseDay;
 }
-const ShoppingList& Order::getShoppingList(int index) const {
-    return *(this->shoppingList + index);
+const Goods& Order::getGoods(int index) const {
+    Cart* tmp = this->cart;
+    while(index--) {
+        tmp = tmp->pNext;
+    }
+    return tmp->data;
 }
 void Order::setShpllength(const int& length) {
     this->shpllength = length;
@@ -64,65 +69,60 @@ void Order::setTotalPrice(const long long& totalPrice) {
 const long long& Order::getTotalPrice() const {
     return this->totalPrice;
 }
-Order* Order::getNextOrder() const {
-    return this->next;
-}
-void Order::setNextOrder(Order* order) {
-    this->next = order;
-}
-void Order::show()
+void Order::show() //27 
 {
-    cout << setw(12) << "" << "ORDER" << "\n";
-    cout << setw(9) << "" << "Order id: " << this->ID << "\n";
-    cout << setw(9) << "" << "Customer id: " << this->customerID << "\n";
-    cout << setw(9) << "" << "Staff id: " << this->staffID << "\n";
-    cout << setw(9) << "" << "Shopping list: \n";
-    for (int i = 0; i < this->shpllength; i++)
-    {
-        cout << setw(10) << "" << setw(2) << i + 1 << ". ";
-        (this->shoppingList + i)->show();
+    cout << setw(50) << "" << topLeftCorner << line(7) << topRightCorner << "\n";
+    cout << setw(50) << "" << col << " ORDER " << col << "\n";
+    cout << setw(50) << "" << botLeftCorner << line(7) << botRightCorner << "\n\n";
+
+    cout << setw(46) << "" << topLeftCorner << line(27) << topRightCorner << "\n";
+    cout << setw(46) << "" << col << " Order id: " << setw(27 - 11) << left << this->ID << col << "\n";
+    cout << setw(46) << "" << col << " Customer phone number: " << setw(27 - 14) << left << this->customerPhoneNumber << col << "\n";
+    cout << setw(46) << "" << col << " Staff id: " << setw(27 - 11) << left << this->staffID << col << "\n";
+    cout << setw(46) << "" << col << " Cart: " << setw(27-7) << "" << col << "\n";
+    
+    Cart* tmp = this->cart;
+    while(tmp != nullptr) {
+        cout << setw(46) << "" << col << setw(3) << "" << tmp->data.getPhoneID() << "/" << tmp->data.getAmount() << setw(27 - 4 - tmp->data.getPhoneID().length() - to_string(tmp->data.getAmount()).length()) << "" << col << "\n";
+        tmp = tmp->pNext; 
     }
-    cout << setw(9) << "" << "Purchase day: " << this->purchaseDay << "\n";
-    cout << setw(9) << "" << "Total price: " << this->totalPrice << "\n";
+    
+    cout << setw(46) << "" << col << " Purchase day: " << this->purchaseDay << setw(27 - 15 - 2 - to_string(this->purchaseDay.getDay()).length() - to_string(this->purchaseDay.getMonth()).length() - to_string(this->purchaseDay.getYear()).length()) << "" << col << "\n";
+    cout << setw(46) << "" << col << " Total price: " << setw(27 - 14) << left << this->totalPrice << col << "\n";
+    cout << setw(46) << "" << botLeftCorner << line(27) << botRightCorner << "\n\n";
 }
-bool Order::searchShoppingList(string id) {
-    for(int i = 0; i < this->shpllength; ++i) {
-        if((this->shoppingList + i)->getPhoneID() == id)  {
+bool Order::searchCart(string id) {
+    Cart* tmp = this->cart;
+    while(tmp != nullptr) {
+        if(tmp->data.getPhoneID() == id) {
             return true;
         }
+        tmp = tmp->pNext;
     }
     return false;
 }
-void Order::addToShoppingList(string id, int amount) {
-    for(int i = 0; i < this->shpllength; ++i) {
-        if((this->shoppingList+i)->getPhoneID() == id) {
-            (this->shoppingList + i)->setAmount((this->shoppingList + i)->getAmount() + amount);
+void Order::addToCart(string id, int amount) {
+    Cart* tmp = this->cart;
+    while(tmp != nullptr) {
+        if(tmp->data.getPhoneID() == id) {
+            tmp->data.setAmount(tmp->data.getAmount() + amount);
             break;
         }
+        tmp = tmp->pNext;
     }
-    cout << "Add to cart successfully!\n";
-    system("pause");
 }
-void Order::addToShoppingList(const ShoppingList& sl) {
-    if(this->shpllength==0) 
-    {
-        this->shoppingList = new ShoppingList[this->shpllength+1];
-        *(this->shoppingList+this->shpllength) = sl;
-        this->shpllength++;
-    }
-    else
-    {
-        ShoppingList *temp = new ShoppingList[this->shpllength];
-        for (int i=0;i<this->shpllength;i++)
-        {
-            *(temp+i) = *(this->shoppingList+i);
+void Order::addToCart(const Goods& g) {
+    Cart *c = new Cart;
+    c->data.setPhoneID(g.getPhoneID());
+    c->data.setAmount(g.getAmount());
+    if(this->cart == nullptr) {
+        this->cart = c;
+    } else {
+        Cart *tmp = this->cart;
+        while(tmp->pNext != nullptr) {
+            tmp = tmp->pNext;
         }
-        delete[] this->shoppingList;
-        this->shoppingList = new ShoppingList[this->shpllength+1];
-        for (int i=0;i<this->shpllength;i++)  // còn ph?n t? cu?i
-            *(this->shoppingList+i)=*(temp+i);
-        delete[] temp;
-        *(this->shoppingList+this->shpllength) = sl;
-        this->shpllength++;
+        tmp->pNext = c;
     }
+    this->shpllength++;
 }

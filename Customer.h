@@ -1,4 +1,3 @@
-
 #ifndef _CUSTOMER_
 #define _CUSTOMER_
 
@@ -7,15 +6,13 @@ using namespace std;
 
 class Customer {
     protected:
-        string customerID;
         string customerName;
         string customerPhoneNumber;
         string customerAddress;
     public:
-        Customer();
+        Customer(string ="", string="", string="");
         ~Customer();
-        void setCustomerID(const string& );
-        const string& getCustomerID() const;
+        
         void setCustomerName(const string& );
         const string& getCustomerName() const;
         void setCustomerPhoneNumber(const string&);
@@ -23,11 +20,8 @@ class Customer {
         void setCustomerAddress(const string&);
         const string& getCustomerAddress() const;
 
-
-
-        void setInfo();    
-        void BuyPhone();
-
+       
+        void Show();
 };
 
 

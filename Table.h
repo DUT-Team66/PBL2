@@ -6,6 +6,7 @@
 using namespace std;
 
 string line(int);
+void title();
 extern char topLeftCorner;
 extern char leftSide;
 extern char botLeftCorner;

@@ -1044,6 +1044,7 @@ void StaffManager::Menu() {
     while(true) {
         string choice;
         while(true) {
+            std::system("cls");
             std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
             std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
             std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
@@ -1264,11 +1265,30 @@ void StaffManager::Menu() {
             std::system("pause");
         } else if (choice == "2") {
             this->Show();
-            string s;
+            string id;
             cout << "Enter ID: ";
-            cin >> s;
-            this->Delete(s);
-            std::system("pause");
+            cin >> id;
+            bool checkLegal = true;
+            for(int i = 0; i < id.length(); ++i) {
+                if(id[i] < '0' || id[i] > '9') {
+                    checkLegal = true;
+                    break;
+                }
+            }
+            if(!checkLegal || id.length() != 12) {
+                cout << setw(45) << "" << "Invalid id!" << "\n";
+                system("pause");
+                continue;
+            }
+            string confirm; cout << setw(45) << "" << "Confirm (Y/N): ";
+            cin >> confirm;
+            if(confirm == "Y") {
+                this->Delete(id);
+                std::system("pause");
+            } else if(confirm != "N") {
+                cout << setw(45) << "" << "Invalid choice!\n";
+                std::system("pause");
+            }
         } else if(choice == "3") {
             this->Search();
             std::system("pause");

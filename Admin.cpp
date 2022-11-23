@@ -1,6 +1,8 @@
 #include "Admin.h"
 #include <iomanip>
 #include "Table.h"
+#include <vector>
+#include <fstream>
 using namespace std;
 
 Admin::Admin() {
@@ -21,42 +23,49 @@ const StaffManager& Admin::getStaffManager() const {
 // void Admin::setAccountManager(const AccountManager& accountManager) {
 //     this->manageAccount = accountManager;
 //}
-void Admin::calTurnover() 
-{
-    int year;
-    std::cout << "Enter year: "; 
-    std::cin >> year;
-    long long totalTurnover[13]={0};
-    for(int i = 0; i < this->manageOrder.GetLength(); ++i)
-    {
-        if(this->manageOrder.GetYear(i) == year)
-        {
-            int month=this->manageOrder.GetMonth(i);
-            totalTurnover[month]+=this->manageOrder.GetTotalPrice(i);
-        }
+long long Admin::Import() {
+    long long total = 0;
+    for(int i = 1; i <= this->managePhone.GetLength(); ++i) {
+        total += (100 - this->managePhone.getRemainingAmount(i)) * this->managePhone.getPhonePrice(i);
     }
-    for (int i=1;i<=12;i++)
-    {
-        cout << "Turnover in " << i << " is " << totalTurnover[i] << "\n";  
-    }
+    return total;
 }
-void Admin::Thuchi()
-{
-    int year;
-    cout << "Enter year: "; 
-    cin >> year;
-    long long Von[13];
-    long long Doanhthu[13];
-    long long Chiphikhac;
-    long long Loinhuan[13];
-    for(int i = 0; i < this->manageOrder.GetLength(); ++i)
-    {
-        if(this->manageOrder.GetYear(i) == year)
-        {
-            int month=this->manageOrder.GetMonth(i);
-            Doanhthu[month]+=this->manageOrder.GetTotalPrice(i);
-        }
+
+void Admin::ThongKe()
+{   
+
+    cout << topLeftCorner << line(12); // date
+    cout << topMid << line(13); // von
+    cout << topMid << line(13); // doanh thu
+    cout << topMid << line(13); // loi nhuan
+    cout << topRightCorner << "\n";
+
+    cout << col << setw(4) << "" << setw(8) << left << "Thang";
+    cout << col << setw(5) << "" << setw(8) << left << "Von";
+    cout << col << setw(2) << "" << setw(11) << left << "Doanh thu";
+    cout << col << setw(2) << "" << setw(11) << left << "Loi nhuan";
+    cout << col << "\n";
+    
+    for(int i = 0; i < thongKe.size(); ++i) {
+        cout << leftSide << line(12);
+        cout << topMid << line(13);
+        cout << topMid << line(13);
+        cout << topMid << line(13);
+        cout << rightSide << "\n";
+
+        string datestr = to_string(thongKe[i].getDate().getMonth()) + "/" + to_string(thongKe[i].getDate().getYear());
+        cout << col << setw((12 - datestr.length())/2) << "" << setw(12 - (12 - datestr.length())/2) << datestr;
+        cout << col << setw((13 - to_string(thongKe[i].getVon()).length())) << "" << setw(13 - (13 - to_string(thongKe[i].getVon()).length())) << thongKe[i].getVon();
+        cout << col << setw((13 - to_string(thongKe[i].getDoanhThu()).length())) << "" << setw(13 - (13 - to_string(thongKe[i].getDoanhThu()).length())) << thongKe[i].getDoanhThu(); 
+        cout << col << setw((13 - to_string(thongKe[i].getDoanhThu()).length())) << "" << setw(13 - (13 - to_string(thongKe[i].getDoanhThu()).length())) << thongKe[i].getDoanhThu(); 
+        cout << col << "\n";
     }
+    cout << botLeftCorner << line(12);
+    cout << botMid << line(13);
+    cout << botMid << line(13);
+    cout << botMid << line(13);
+    cout << botRightCorner << "\n";
+    
 }
 void Admin::Menu() {
     while(true) {
@@ -90,7 +99,7 @@ void Admin::Menu() {
         } else if(choice == "4") {
             this->manageCustomer.Menu();
         } else if(choice == "5") {
-            this->calTurnover();
+            this->ThongKe();
             system("pause");
             system("cls");
         } else break;
@@ -98,8 +107,22 @@ void Admin::Menu() {
     }
 
 }
+void Admin:: UpdateThongKe() {
+    fstream editfile("ThongKe.txt", ios::out);
+    int d = 0;
+    for(int i = 0; i < this->thongKe.size(); ++i) {
+        string s = to_string(thongKe[i].getDate().getMonth()) + "-" + to_string(thongKe[i].getDate().getYear()) + "/" + to_string(thongKe[i].getVon()) + "/" + to_string(thongKe[i].getDoanhThu()) + "/" + to_string(thongKe[i].getLoiNhuan()) + "/";
+        if(d != this->thongKe.size() - 1) {
+            editfile << s << "\n";
+        } else editfile << s;
+        ++d;
+    }
+    editfile.close();
+
+}
 void Admin::UpdateAllFiles() {
     Staff::UpdateAllFiles();
     this->manageStaff.UpdateFile();
+    this->UpdateThongKe();
     //this->manageAccount.UpdateFile();
 }

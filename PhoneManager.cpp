@@ -1508,8 +1508,15 @@ void PhoneManager::Menu() {
             string s;
             std::cout << setw(45) << "" << "Enter ID: ";
             cin >> s;
-            this->Delete(s);
-            std::system("pause");
+            cout << setw(45) << "" << "Confirm (Y/N): ";
+            string confirm; cin >> confirm;
+            if(confirm == "Y") {
+                this->Delete(s);
+                std::system("pause");
+            } else if(confirm != "N") {
+                cout << setw(45) << "" << "Invalid choice!\n";
+                std::system("pause");
+            }
         } else if(choice == "3") {
             this->Search();
         } else if (choice == "4") {

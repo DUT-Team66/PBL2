@@ -1058,7 +1058,7 @@ void StaffManager::Menu() {
             cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
             if(choice != "1" && choice != "2" && choice !="3" && choice != "4" && choice != "5" && choice != "6") {
-                cout << "Invalid choice, please re-enter!\n";
+                cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
                 std::system("pause");
                 std::system("cls"); 
             } else break;
@@ -1066,8 +1066,19 @@ void StaffManager::Menu() {
         if(choice == "1") {
             string id;
             cout << setw(45) << "" << "Enter ID: ";
-            cin.ignore();
-            getline(cin, id);
+            cin >> id;
+            bool checkLegal = true;
+            for(int i = 0; i < id.length(); ++i) {
+                if(id[i] < '0' || id[i] > '9') {
+                    checkLegal = true;
+                    break;
+                }
+            }
+            if(!checkLegal || id.length() != 12) {
+                cout << setw(45) << "" << "Invalid id!" << "\n";
+                system("pause");
+                continue;
+            }
             Node *tmp = this->pHead;
             bool checkExist = false;
             while(tmp != nullptr) {
@@ -1250,24 +1261,29 @@ void StaffManager::Menu() {
                 cout << setw(45) << "" << "Staff exists!\n";
                 tmp->data.show();
             }
+            std::system("pause");
         } else if (choice == "2") {
             this->Show();
             string s;
             cout << "Enter ID: ";
             cin >> s;
             this->Delete(s);
+            std::system("pause");
         } else if(choice == "3") {
             this->Search();
+            std::system("pause");
         } else if (choice == "4") {
             this->Show();
             this->Update();
+            std::system("pause");
         } else if(choice == "5") {
             this->Show();
+            std::system("pause");
         } else {
             std::system("cls");
             break;  
         }
-        std::system("pause");
+        //std::system("pause");
         std::system("cls");
     }
 }

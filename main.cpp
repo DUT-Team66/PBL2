@@ -1,6 +1,5 @@
 /*
-    -check customer đã vào hay chưa
-    - thêm quản lí customer vào admin.menu và staff.menu
+    
     -test + fixbug
 
 */

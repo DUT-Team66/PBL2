@@ -31,7 +31,7 @@ const string& Customer::getCustomerAddress() const {
 
 void Customer::Show()   // Chưa vẽ bảng
 {
-	cout << setw(45) << "" << "Name: " << this->customerName << "\n";
+	cout << setw(42) << "" << "Name: " << this->customerName << "\n";
 	//cout<<"CustomerPhoneNumber: "<<this->customerPhoneNumber<<"\n";
-	cout << setw(45) << "" << "Address: " << this->customerAddress << "\n";
+	cout << setw(42) << "" << "Address: " << this->customerAddress << "\n";
 }

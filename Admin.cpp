@@ -69,11 +69,12 @@ void Admin::Menu() {
             cout << setw(47) << "" << "1. Staffs" << "\n";
             cout << setw(47) << "" << "2. Phones" << "\n";
             cout << setw(47) << "" << "3. Trades" << "\n";
-            cout << setw(47) << "" << "4. Revenue/Expense statistics" << "\n"; // thống kê thu chi
-            cout << setw(47) << "" << "5. Go back" << "\n\n";
+            cout << setw(47) << "" << "4. Customers" << "\n";
+            cout << setw(47) << "" << "5. Revenue/Expense statistics" << "\n"; // thống kê thu chi
+            cout << setw(47) << "" << "6. Go back" << "\n\n";
             cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
-            if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5") {
+            if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6") {
                 cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
                 system("pause");
                 system("cls"); 
@@ -87,6 +88,8 @@ void Admin::Menu() {
         } else if(choice == "3") {
             this->manageOrder.Menu();
         } else if(choice == "4") {
+            this->manageCustomer.Menu();
+        } else if(choice == "5") {
             this->calTurnover();
             system("pause");
             system("cls");

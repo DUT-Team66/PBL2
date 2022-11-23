@@ -20,7 +20,7 @@ class OrderManager
         const int& GetYear(int) const; // lay nam 
         const long long& GetTotalPrice(int) const; // lay tong tien cua 1 don hang
         void SearchByOrderID(string);
-        void SearchByCustomerID(string);
+        void SearchByCustomerPhoneNumber(string);
         void SearchByStaffID(string);
         void Add(const Order&);
         void LoadData();

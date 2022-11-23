@@ -10,7 +10,7 @@ string line(int l) {
 	}
 	return s;
 }
-void title() {
+void title() {	
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, 1);
             

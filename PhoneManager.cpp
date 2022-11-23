@@ -1066,6 +1066,7 @@ void PhoneManager::ShowTable() {
     for(int i = 0; i < this->n % 5; ++i) {
         std::cout << col << setw(3) << right << cnt << ". " << setw(20) << left << phone->data.getPhoneName();
         ++cnt;
+        phone = phone->pNext;
     }
     
     for(int i = 0; i < 5 - this->n % 5; ++i) {
@@ -1520,7 +1521,7 @@ void PhoneManager::Menu() {
             break;  
         }
         //std::system("pause");
-        //std::system("cls");
+        std::system("cls");
     }
     
 }

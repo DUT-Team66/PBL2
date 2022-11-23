@@ -22,7 +22,7 @@ class Staff
         Account account;
         PhoneManager managePhone;
         OrderManager manageOrder;
-        CustomerManager customerManager;
+        CustomerManager manageCustomer;
     public:
 
     

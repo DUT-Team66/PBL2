@@ -18,7 +18,7 @@ class CustomerManager
         void Add(const Customer& s);
         void Delete(string);
         void Search(string);
-        void Show(); 
+        void Show() const; 
         void setInfo(Customer&);
         void LoadData();
         void UpdateFile();

@@ -30,8 +30,12 @@ long long Admin::Import() {
     }
     return total;
 }
-
-void Admin::ThongKe()
+void Admin::AddThongKe() {
+    ThongKe tk(0,0,0,0,0);
+    long long dt = 0;
+    
+}
+void Admin::ShowThongKe()
 {   
 
     cout << topLeftCorner << line(12); // date
@@ -53,7 +57,7 @@ void Admin::ThongKe()
         cout << topMid << line(13);
         cout << rightSide << "\n";
 
-        string datestr = to_string(thongKe[i].getDate().getMonth()) + "/" + to_string(thongKe[i].getDate().getYear());
+        string datestr = to_string(thongKe[i].getMonth()) + "/" + to_string(thongKe[i].getYear());
         cout << col << setw((12 - datestr.length())/2) << "" << setw(12 - (12 - datestr.length())/2) << datestr;
         cout << col << setw((13 - to_string(thongKe[i].getVon()).length())) << "" << setw(13 - (13 - to_string(thongKe[i].getVon()).length())) << thongKe[i].getVon();
         cout << col << setw((13 - to_string(thongKe[i].getDoanhThu()).length())) << "" << setw(13 - (13 - to_string(thongKe[i].getDoanhThu()).length())) << thongKe[i].getDoanhThu(); 
@@ -99,7 +103,7 @@ void Admin::Menu() {
         } else if(choice == "4") {
             this->manageCustomer.Menu();
         } else if(choice == "5") {
-            this->ThongKe();
+            this->ShowThongKe();
             system("pause");
             system("cls");
         } else break;
@@ -107,11 +111,45 @@ void Admin::Menu() {
     }
 
 }
+void Admin::LoadThongKe() {
+    fstream readfile("Order.txt", ios::in);
+    string tmp;
+    while(getline(readfile, tmp)) {
+        int i = 0;
+        int month, year; long long von, doanhthu, loinhuan;
+        while(tmp[i] != '-') {
+            month = month*10 + tmp[i] - 48;
+            ++i;
+        }
+        ++i;
+        while(tmp[i] != '/') {
+            year = year*10 + tmp[i] - 48;
+            ++i;
+        }
+        ++i;
+        while(tmp[i] != '/') {
+            von = von*10 + tmp[i]-48;
+            ++i;
+        }
+        ++i;
+        while(tmp[i] != '/') {
+            doanhthu = doanhthu*10 + tmp[i] -48;
+            ++i;
+        }
+        ++i;
+        while(tmp[i] != '/') {
+            loinhuan = loinhuan*10 + tmp[i] - 48;
+            ++i;
+        }
+        ++i;
+        thongKe.push_back(ThongKe(month, year, von, doanhthu, loinhuan));
+    }
+}
 void Admin:: UpdateThongKe() {
     fstream editfile("ThongKe.txt", ios::out);
     int d = 0;
     for(int i = 0; i < this->thongKe.size(); ++i) {
-        string s = to_string(thongKe[i].getDate().getMonth()) + "-" + to_string(thongKe[i].getDate().getYear()) + "/" + to_string(thongKe[i].getVon()) + "/" + to_string(thongKe[i].getDoanhThu()) + "/" + to_string(thongKe[i].getLoiNhuan()) + "/";
+        string s = to_string(thongKe[i].getMonth()) + "-" + to_string(thongKe[i].getYear()) + "/" + to_string(thongKe[i].getVon()) + "/" + to_string(thongKe[i].getDoanhThu()) + "/" + to_string(thongKe[i].getLoiNhuan()) + "/";
         if(d != this->thongKe.size() - 1) {
             editfile << s << "\n";
         } else editfile << s;

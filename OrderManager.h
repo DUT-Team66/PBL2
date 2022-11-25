@@ -25,6 +25,7 @@ class OrderManager
         void Add(const Order&);
         void LoadData();
         void UpdateFile();
+        long long calDoanhThu();
         void Show();
         void Menu();
         const OrderManager& operator=(const OrderManager& );

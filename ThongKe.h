@@ -5,26 +5,28 @@
 using namespace std;
 class ThongKe {
     private:
-        Date date;
+        int month, year;
         long long doanhThu;
         long long von;
         long long loiNhuan;
-        long long tongLuongNV;
-        long long chiPhiKhac;
+        const long long tongLuongNV = 10*5000000;
+        const long long chiPhiKhac = 10000000;
     public:
-        ThongKe(Date, long long,long long,long long,long long,long long);
-        Date getDate();
-        void setDate(Date);
+        ThongKe(int, int, long long,long long,long long);
+        int getMonth();
+        void setMonth(int);
+        int getYear();
+        void setYear(int);
         long long getDoanhThu();
         void setDoanhThu(long long);
         long long getVon();
         void setVon(long long);
         long long getLoiNhuan();
         void setLoiNhuan(long long);
-        long long getTongLuongNV();
-        void setTongLuongNV(long long);
-        long long getChiPhiKhac();
-        void setChiPhiKhac(long long);
+        // long long getTongLuongNV();
+        // void setTongLuongNV(long long);
+        // long long getChiPhiKhac();
+        // void setChiPhiKhac(long long);
 
 };
 

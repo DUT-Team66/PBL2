@@ -269,7 +269,14 @@ void OrderManager::SearchByStaffID(string m)
         std::cout << setw(45) << "" << " No orders found!\n";
     }
 }
-
+long long OrderManager::calDoanhThu() {
+    long long dt = 0;
+    for(Node* tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+        if(tmp->data.getPurchaseDay().getMonth() == 11 && tmp->data.getPurchaseDay().getYear()) 
+            dt += tmp->data.getTotalPrice();
+    }
+    return dt;
+}
 void OrderManager::Show() //Show All
 {
     cout << topLeftCorner << line(7); // stt

@@ -1,14 +1,20 @@
 #include "ThongKe.h"
 #define ll long long
 
-ThongKe::ThongKe(Date date, ll doanhThu, ll von, ll loinhuan,ll tongluongnv,ll chiphikhac) : date(date), doanhThu(doanhThu), von(von), loiNhuan(loinhuan), tongLuongNV(tongluongnv), chiPhiKhac(chiphikhac) {
+ThongKe::ThongKe(int month, int year, ll von, ll doanhthu, ll loinhuan) : month(month), year(year), doanhThu(doanhthu), von(von), loiNhuan(loinhuan){
 
 }
-Date ThongKe::getDate() {
-    return this->date;
+int ThongKe::getMonth() {
+    return this->month;
 }
-void ThongKe::setDate(Date date) {
-    this->date = date;
+void ThongKe::setMonth(int month) {
+    this->month = month;
+}
+int ThongKe::getYear() {
+    return this->year;
+}
+void ThongKe::setYear(int year) {
+    this->year = year;
 }
 long long ThongKe::getDoanhThu() {
     return this->doanhThu;
@@ -28,15 +34,15 @@ ll ThongKe::getLoiNhuan() {
 void ThongKe::setLoiNhuan(ll loinhuan) {
     this->loiNhuan = loinhuan;
 }
-ll ThongKe::getTongLuongNV() {
-    return this->tongLuongNV;
-}
-void ThongKe::setTongLuongNV(ll tongluongnv) {
-    this->tongLuongNV = tongluongnv;
-} 
-ll ThongKe::getChiPhiKhac() {
-    return this->chiPhiKhac;
-}
-void ThongKe::setChiPhiKhac(ll chiphikhac) {
-    this->chiPhiKhac = chiphikhac;
-}
+// ll ThongKe::getTongLuongNV() {
+//     return this->tongLuongNV;
+// }
+// void ThongKe::setTongLuongNV(ll tongluongnv) {
+//     this->tongLuongNV = tongluongnv;
+// } 
+// ll ThongKe::getChiPhiKhac() {
+//     return this->chiPhiKhac;
+// }
+// void ThongKe::setChiPhiKhac(ll chiphikhac) {
+//     this->chiPhiKhac = chiphikhac;
+// }

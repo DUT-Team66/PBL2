@@ -4,6 +4,7 @@
 
 #include "StaffManager.h"
 #include "ThongKe.h"
+#include <vector>
 
 //#include "AccountManager.h"
 
@@ -21,7 +22,8 @@ class Admin : public Staff {
         const StaffManager& getStaffManager() const;
         //void setAccountManager(const AccountManager&);
         long long Import(); // nhap hang hoa
-        void ThongKe();
+        void AddThongKe(); 
+        void ShowThongKe();
         //void calProfit(); // loi nhuan
         void Menu(); // admin route
         void LoadThongKe(); // chua viet cpp

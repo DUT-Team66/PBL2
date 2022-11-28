@@ -108,23 +108,25 @@ void Admin::Menu() {
 void Admin::Import(const Date& date) {
 
     long long total = 0;
+    cout << this->managePhone.GetLength() << "\n";
     for(int i = 0; i < this->managePhone.GetLength(); ++i) {
         total += (100 - this->managePhone.getRemainingAmount(i))* this->managePhone.getEntryPrice(i);
+        cout << i << "\n";
         this->managePhone.setRemainingAmount(i,this->managePhone.getRemainingAmount(i) - 100);
     }
-
+    cout << 1 << "\n";
     time_t now = time(0);
     // convert now to string form
     tm *ltm = localtime(&now);
 
     if(date.getMonth() != ltm->tm_mon) {
-        this->thongKe.push_back(ThongKe(date,total,0,0));
+        this->thongKe.push_back(ThongKe(Date(ltm->tm_mday,ltm->tm_mon + 1, 1900 + ltm->tm_year),total,0,0));
     } else {
         this->thongKe[this->thongKe.size()-1].setVon(this->thongKe[this->thongKe.size()-1].getVon() + total);
     }
 
 
-
+    cout << 2 << "\n";
 
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, 10);

@@ -272,7 +272,7 @@ void OrderManager::SearchByStaffID(string m)
 
 void OrderManager::Show() //Show All
 {
-    cout << topLeftCorner << line(7); // stt
+    cout << setw(15) << "" << topLeftCorner << line(7); // stt
 	cout << topMid << line(11); // orderid
 	cout << topMid << line(14); //customerID
 	cout << topMid << line(14); // staffID
@@ -281,7 +281,7 @@ void OrderManager::Show() //Show All
 	cout << topMid << line(14); //totalprice
 	cout << topRightCorner << "\n";
 	
-	cout << col << setw(1) << "" << setw(6) << left << "Order";
+	cout << setw(15) << "" << col << setw(1) << "" << setw(6) << left << "Order";
 	cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
 	cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
 	cout << col << setw(3) << "" << setw(11) << left << "StaffID";
@@ -293,7 +293,7 @@ void OrderManager::Show() //Show All
     Node *tmp = this->pHead;
     int i = 0;
     while(tmp != nullptr) {
-        cout << leftSide << line(7);
+        cout << setw(15) << "" << leftSide << line(7);
 		cout << midMid << line(11);
 		cout << midMid << line(14);
 		cout << midMid << line(14);
@@ -302,7 +302,7 @@ void OrderManager::Show() //Show All
 		cout << midMid << line(14);
 		cout << rightSide << "\n";
 		
-        cout << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1; ++i;
+        cout << setw(15) << "" << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1; ++i;
 		cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
 		cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
 		cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
@@ -313,7 +313,7 @@ void OrderManager::Show() //Show All
 
         int n = tmp->data.getShpllength();
         for(int j = 1; j < n; ++j) {
-            cout << col << setw(7) << "";
+            cout << setw(15) << "" << col << setw(7) << "";
 			cout << col << setw(11) << "";
 			cout << col << setw(14) << "";
 			cout << col << setw(14) << ""; 
@@ -324,7 +324,7 @@ void OrderManager::Show() //Show All
         }
         tmp = tmp->pNext;
     } 
-    cout << botLeftCorner << line(7); 
+    cout << setw(15) << "" << botLeftCorner << line(7); 
 	cout << botMid << line(11);
 	cout << botMid << line(14); 
 	cout << botMid << line(14); 

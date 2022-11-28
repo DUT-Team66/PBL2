@@ -32,6 +32,14 @@ int CustomerManager::GetLength()
 }
 void CustomerManager::Add(const Customer& s)
 {
+    bool checkExist = false;
+    for(Node* tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+        if(s.getCustomerPhoneNumber() == tmp->data.getCustomerPhoneNumber()) {
+            checkExist = true;
+            break;
+        }
+    }
+    if(checkExist) return;
     Node *p= new Node;
     if (p==NULL)
     {
@@ -123,13 +131,13 @@ void CustomerManager::Search(string m)
 }
 void CustomerManager::Show() const  
 {
-    cout << topLeftCorner << line(7); //order
+    cout << setw(15) << "" << topLeftCorner << line(7); //order
     cout << topMid << line(30); // customer name
     cout << topMid << line(14); // customer phone number
     cout << topMid << line(26); // address
     cout << topRightCorner << "\n";
     
-    cout << col << setw(1) << "" << setw(6) << left << "Order";
+    cout << setw(15) << "" << col << setw(1) << "" << setw(6) << left << "Order";
     cout << col << setw(13) << "" << setw(30 - 13) << left << "Name";
     cout << col << setw(1) << "" << setw(14 - 1) << left << "Phone number";
     cout << col << setw(9) << "" << setw(26 - 9) << left << "Address";
@@ -137,20 +145,20 @@ void CustomerManager::Show() const
     
     int i = 1;
     for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
-        std::cout << leftSide << line(7);
+        std::cout << setw(15) << "" << leftSide << line(7);
         std::cout << midMid << line(30);
         std::cout << midMid << line(14);
         std::cout << midMid << line(26);
         std::cout << rightSide << "\n";
 
-        std::cout << col << setw((7 - to_string(i).length())/2) << "" << setw(7 - (7 - to_string(i).length())/2) << left << i ; ++i;
+        std::cout << setw(15) << "" << col << setw((7 - to_string(i).length())/2) << "" << setw(7 - (7 - to_string(i).length())/2) << left << i ; ++i;
         std::cout << col << setw((30 - tmp->data.getCustomerName().length())/2) << "" << setw(30 - (30 - tmp->data.getCustomerName().length())/2) << left << tmp->data.getCustomerName();
         std::cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
         std::cout << col << setw(26 - (26 - tmp->data.getCustomerAddress().length())/2) << right << tmp->data.getCustomerAddress() << setw((26 - tmp->data.getCustomerAddress().length())/2) << "";
         std::cout << col << "\n";
         
     }
-    cout << botLeftCorner << line(7);
+    cout << setw(15) << "" << botLeftCorner << line(7);
     cout << botMid << line(30);
     cout << botMid << line(14);
     cout << botMid << line(26);

@@ -16,12 +16,12 @@ Phone::Phone()
     this->camera = "";
     this->entryPrice = 0;
     this->salePrice = 0;
-    this->remainingAmount = 100;
+    this->remainingAmount = 0;
 }
-Phone::Phone(string a, string b,string c, string d, string e, string g, string h,int i, int j)
-: phoneName(a), phoneID(b), brand(c), processor(d), RAM_ROM(e), display(g), camera(h), entryPrice(i), salePrice(j)
+Phone::Phone(string a, string b,string c, string d, string e, string g, string h,int i, int j, int k)
+: phoneName(a), phoneID(b), brand(c), processor(d), RAM_ROM(e), display(g), camera(h), entryPrice(i), salePrice(j), remainingAmount(k)
 {
-    this->remainingAmount = 100;
+    
 }
 Phone::~Phone()
 {
@@ -171,7 +171,7 @@ void Phone::showForCustomer()
 }
 void Phone::showForStaff()
 {
-    std::cout << topMid << line(39); // phonename
+    std::cout << topLeftCorner << line(39); // phonename
 	std::cout << topMid << line(13); // phoneID
 	std::cout << topMid << line(9); // brand
 	std::cout << topMid << line(27); // processor
@@ -192,9 +192,10 @@ void Phone::showForStaff()
 	std::cout << col << setw(3) << "" << setw(10) << left << "Camera";
 	std::cout << col << setw(12) << right << "Entry price" << setw(1) << "" ;
 	std::cout << col << setw(11) << right << "Sale price" << setw(1) << "" ;
-	std::cout << col << setw(7) << right << "Amount" << setw(1) << ""  << "\n";
+	std::cout << col << setw(7) << right << "Amount" << setw(1) << "";
+    std::cout << col << "\n";
 
-    std::cout << midMid << line(39); // phonename
+    std::cout << leftSide << line(39); // phonename
     std::cout << midMid << line(13); // phoneID
     std::cout << midMid << line(9); // brand
     std::cout << midMid << line(27); // processor
@@ -218,8 +219,8 @@ void Phone::showForStaff()
     std::cout << col << setw(8 - (8 - to_string(this->remainingAmount).length())/2) << right << this->remainingAmount << setw((8 - to_string(this->remainingAmount).length())/2) << "" ;
     std::cout << col << "\n";
 
-    std::cout << botLeftCorner << line(7); 
-    std::cout << botMid << line(39); // staff name
+
+    std::cout << botLeftCorner << line(39); // staff name
 	std::cout << botMid << line(13); //phone id
 	std::cout << botMid << line(9); // brand
 	std::cout << botMid << line(27); // processor

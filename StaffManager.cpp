@@ -6,6 +6,7 @@
 #include <sstream>
 #include "Table.h"
 #include <conio.h>
+#include <windows.h>
 using namespace std;
 
 string compact(string s) {
@@ -229,29 +230,30 @@ void StaffManager::Search()
             } else {
                 std::cout << "No staffs found!\n";
                 //std::system("pause");
-    
             }
+            std::system("pause");
         } else if (choice == "2") { // name
             string name;
             std::cout << setw(45) << "" << "Enter staff name: ";
-            std::cin >> name;
+            cin.ignore();
+            std::getline(std::cin, name);
             for(int i = 0; i < name.length(); ++i) {
                 name[i] = tolower(name[i]);
             }
-            bool checkexist = false;
+            bool checkExist = false;
             for(Node *k = this->pHead; k != nullptr; k = k->pNext) {
                 string tmps = "";
                 for(int j = 0; j < k->data.getName().length(); ++j){
                     tmps += tolower(k->data.getName()[j]);
                 }
                 if(tmps.find(name) != -1) {
-                    checkexist = true;
+                    checkExist = true;
                     k = nullptr;
                     break;
                 }
             }
             
-            if(checkexist) {
+            if(checkExist) {
                 std::cout << topLeftCorner << line(30); // staffname 
                 std::cout << topMid << line(14); //staffID
                 std::cout << topMid << line(8); // gender
@@ -320,6 +322,7 @@ void StaffManager::Search()
                 //std::system("pause");
                 //continue;
             }
+            std::system("pause");
         } else if (choice == "3") { // gender
             string gender;
             std::cout << setw(45) << "" << "Enter gender: ";
@@ -406,7 +409,7 @@ void StaffManager::Search()
                 std::cout << setw(45) << "" << "Gender must be 'male' or 'female'!\n";
                 //std::system("pause");
             }
-            
+            std::system("pause");
         } else if (choice == "4") { // year of birth
             string year;
             std::cout << setw(45) << "" << "Enter year of birth: ";
@@ -500,6 +503,7 @@ void StaffManager::Search()
                 //std::system("pause");
                 //continue;
             }
+            std::system("pause");
         } else if (choice == "5") { // phone number
             string phoneNumber;
             std::cout << setw(45) << "" << "Enter phone number: ";
@@ -592,6 +596,7 @@ void StaffManager::Search()
                 std::cout << setw(45) << "" << "No staffs found!\n";
                 //std::system("pause");
             }
+            std::system("pause");
         } else if (choice == "6") { // go back
             return;
         }
@@ -600,7 +605,7 @@ void StaffManager::Search()
 
 
 
-        std::system("pause");
+        //std::system("pause");
     }
     
 }
@@ -674,7 +679,7 @@ void StaffManager::Update()  // chu y: Update co the cap nhat nhieu cai
                 
 
 
-                if(choice == "1") {
+                if(choice == "1") { // update name
                     string name;
                     std::cout << setw(45) << "" << "Enter staff name: ";
                     std::cin.ignore();
@@ -682,7 +687,7 @@ void StaffManager::Update()  // chu y: Update co the cap nhat nhieu cai
                     staff->data.setName(name);
                     std::cout << setw(45) << "" << "Update successfully!\n";
                     std::system("pause");
-                } else if(choice == "2") {
+                } else if(choice == "2") {  // update gender
                     string gender;
                 
                     std::cout << setw(45) << "" << "Enter staff gender: ";
@@ -702,7 +707,7 @@ void StaffManager::Update()  // chu y: Update co the cap nhat nhieu cai
                     
 
                 
-                } else if(choice == "3") {
+                } else if(choice == "3") { // update dob
                     string dob;
                     std::cout << setw(45) << "" << "Enter staff day of birth(dd-mm-yyyy): ";
                     std::cin >> dob;
@@ -741,7 +746,7 @@ void StaffManager::Update()  // chu y: Update co the cap nhat nhieu cai
                         std::system("pause");
 
                     
-                } else if(choice == "4") {
+                } else if(choice == "4") { // update phone number
                     string phoneNumber;
                     
                     std::cout << setw(45) << "" << "Enter staff phone number: ";
@@ -762,7 +767,7 @@ void StaffManager::Update()  // chu y: Update co the cap nhat nhieu cai
                     }
                     std::system("pause");
 
-                } else if(choice == "5") {
+                } else if(choice == "5") { // update address
                     string address;
                     std::cout << setw(45) << "" << "Enter staff address: ";
                     cin.ignore();
@@ -793,7 +798,7 @@ void StaffManager::Update()  // chu y: Update co the cap nhat nhieu cai
                     }
                     std::system("pause");
 
-                } else if(choice == "6") {
+                } else if(choice == "6") { // update salary
                     string salary;
                     std::cout << setw(45) << "" << "Enter staff salary: ";
                     cin >> salary;
@@ -814,15 +819,13 @@ void StaffManager::Update()  // chu y: Update co the cap nhat nhieu cai
                         //goto label;
                     }
                     std::system("pause");
-                } else if(choice == "7") {
-                    break;
+                } else if(choice == "7") { // go back
+                    break; 
                 } else {
                     cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
                     cin.ignore(32767, '\n');
                     std::system("pause");
                 }
-                //std::system("pause");
-                std::system("cls");
             }
         } else {
             cout << setw(45) << "" << "Staff ID does not exist!\n";
@@ -1042,6 +1045,7 @@ void StaffManager::Menu() {
     while(true) {
         string choice;
         while(true) {
+            std::system("cls");
             std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
             std::cout << setw(50) << "" << col << " STAFFS " << col << "\n";
             std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
@@ -1056,7 +1060,7 @@ void StaffManager::Menu() {
             cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
             if(choice != "1" && choice != "2" && choice !="3" && choice != "4" && choice != "5" && choice != "6") {
-                cout << "Invalid choice, please re-enter!\n";
+                cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
                 std::system("pause");
                 std::system("cls"); 
             } else break;
@@ -1064,8 +1068,19 @@ void StaffManager::Menu() {
         if(choice == "1") {
             string id;
             cout << setw(45) << "" << "Enter ID: ";
-            cin.ignore();
-            getline(cin, id);
+            cin >> id;
+            bool checkLegal = true;
+            for(int i = 0; i < id.length(); ++i) {
+                if(id[i] < '0' || id[i] > '9') {
+                    checkLegal = true;
+                    break;
+                }
+            }
+            if(!checkLegal || id.length() != 12) {
+                cout << setw(45) << "" << "Invalid id!" << "\n";
+                system("pause");
+                continue;
+            }
             Node *tmp = this->pHead;
             bool checkExist = false;
             while(tmp != nullptr) {
@@ -1248,24 +1263,48 @@ void StaffManager::Menu() {
                 cout << setw(45) << "" << "Staff exists!\n";
                 tmp->data.show();
             }
+            std::system("pause");
         } else if (choice == "2") {
             this->Show();
-            string s;
+            string id;
             cout << "Enter ID: ";
-            cin >> s;
-            this->Delete(s);
+            cin >> id;
+            bool checkLegal = true;
+            for(int i = 0; i < id.length(); ++i) {
+                if(id[i] < '0' || id[i] > '9') {
+                    checkLegal = true;
+                    break;
+                }
+            }
+            if(!checkLegal || id.length() != 12) {
+                cout << setw(45) << "" << "Invalid id!" << "\n";
+                system("pause");
+                continue;
+            }
+            string confirm; cout << setw(45) << "" << "Confirm (Y/N): ";
+            cin >> confirm;
+            if(confirm == "Y") {
+                this->Delete(id);
+                std::system("pause");
+            } else if(confirm != "N") {
+                cout << setw(45) << "" << "Invalid choice!\n";
+                std::system("pause");
+            }
         } else if(choice == "3") {
             this->Search();
+            std::system("pause");
         } else if (choice == "4") {
             this->Show();
             this->Update();
+            std::system("pause");
         } else if(choice == "5") {
             this->Show();
+            std::system("pause");
         } else {
             std::system("cls");
             break;  
         }
-        std::system("pause");
+        //std::system("pause");
         std::system("cls");
     }
 }
@@ -1309,10 +1348,17 @@ void StaffManager::Login(bool& isAdmin, bool& isStaff) {
         }
         std::cout << "\n";
         if(isStaff || isAdmin)  {
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	        SetConsoleTextAttribute(hConsole, 10); // bright green
             cout << setw(45) << "" <<"Login successfully!\n";
+	        SetConsoleTextAttribute(hConsole, 15); // bright white
             break;
         } else {
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	        SetConsoleTextAttribute(hConsole, 12);
             cout << setw(45) << "" << "Invalid login information!\n";
+            SetConsoleTextAttribute(hConsole, 15);
+
         }
         std::system("pause"); 
         std::system("cls");

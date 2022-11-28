@@ -100,6 +100,9 @@ const PhoneManager& Staff::getPhoneManager() const {
 void Staff::setOrderManager(const OrderManager& orderManager) {
     this->manageOrder = orderManager;
 }
+void Staff::setCustomerManager(const CustomerManager& manageCustomer) {
+    this->manageCustomer = manageCustomer;
+}
 void Staff::show()
 {
     std::cout << topLeftCorner << line(30); // staff name
@@ -163,25 +166,31 @@ void Staff::show()
 
 void Staff::Menu() {
     while(true) {
-        int choice;
+        string choice;
         while(true) {
-            cout << setw(20) << "" << "Choose what you want to manage" << "\n\n";
-            cout << setw(22) << "" << "1. Phones" << "\n";
-            cout << setw(22) << "" << "2. Trades" << "\n";
-            cout << setw(22) << "" << "3. Go back" << "\n\n";
-            cout << setw(20) << "" << "Your choice: ";
+            std::cout << setw(50) << "" << topLeftCorner << line(7) << topRightCorner << "\n";
+            std::cout << setw(50) << "" << col << " STAFF " << col << "\n";
+            std::cout << setw(50) << "" << botLeftCorner << line(7) << botRightCorner << "\n\n";
+            cout << setw(45) << "" << "Choose what you want to manage" << "\n\n";
+            cout << setw(47) << "" << "1. Phones" << "\n";
+            cout << setw(47) << "" << "2. Trades" << "\n";
+            cout << setw(47) << "" << "3. Customers" << "\n";
+            cout << setw(47) << "" << "4. Go back" << "\n\n";
+            cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
-            if(choice != 1 && choice != 2 && choice != 3) {
-                cout << setw(5) << "" << "Invalid choice, please re-enter!\n";
+            if(choice != "1" && choice != "2" && choice != "3" && choice != "4") {
+                cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
                 system("pause");
                 system("cls"); 
             } else break;
         }
         
-        if(choice == 1) {
+        if(choice == "1") {
             this->managePhone.Menu();
-        } else if(choice == 2) {
+        } else if(choice == "2") {
             this->manageOrder.Menu();
+        } else if(choice == "3") {
+            this->manageCustomer.Menu();
         } else break;
     }
 }

@@ -10,9 +10,9 @@ string line(int l) {
 	}
 	return s;
 }
-void title() {
+void title() {	
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hConsole, 1);
+	SetConsoleTextAttribute(hConsole, 9);
             
            
 	cout << "\n";
@@ -26,7 +26,7 @@ void title() {
 	cout << setw(45) << "" << "       M O B I L E   S T O R E                     " << "\n\n\n";
 	
 	
-	SetConsoleTextAttribute(hConsole, 7);
+	SetConsoleTextAttribute(hConsole, 15);
 }
 char topLeftCorner = 218;
 char leftSide = 195;

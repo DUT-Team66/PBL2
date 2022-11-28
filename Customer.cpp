@@ -2,20 +2,13 @@
 #include <iomanip>
 #include <iostream>
 using namespace std;
-Customer::Customer() {
-    this->customerID = "";
-    this->customerName = "";
-    this->customerPhoneNumber = "";
-    this->customerAddress = "";
+Customer::Customer(string a, string b, string c) { 
+    this->customerPhoneNumber = a;
+    this->customerName = b;
+    this->customerAddress = c;
 }
 Customer::~Customer() {
 
-}
-void Customer::setCustomerID(const string& id) {
-	this->customerID = id;
-}
-const string& Customer::getCustomerID() const {
-	return this->customerID;
 }
 void Customer::setCustomerName(const string& name) {
 	this->customerName = name;
@@ -35,22 +28,10 @@ void Customer::setCustomerAddress(const string& address) {
 const string& Customer::getCustomerAddress() const {
 	return this->customerAddress;
 }
-void Customer::setInfo() {
-    cin.ignore();
-    cout << setw(30) << "" << "Enter your information" << "\n\n";
-	
-	cout << setw(32) << "" << "Name: ";
-	getline(cin, this->customerName);
-	
-	cout << setw(32) << "" << "ID: ";
-	getline(cin, this->customerID);
-	
-	cout << setw(32) << "" << "Phone number: ";
-	getline(cin, this->customerPhoneNumber);
-	
-	cout << setw(32) << "" << "Address: ";
-	getline(cin, this->customerAddress);
-}
-void Customer::BuyPhone() {
-    
+
+void Customer::Show()   // Chưa vẽ bảng
+{
+	cout << setw(42) << "" << "Name: " << this->customerName << "\n";
+	//cout<<"CustomerPhoneNumber: "<<this->customerPhoneNumber<<"\n";
+	cout << setw(42) << "" << "Address: " << this->customerAddress << "\n";
 }

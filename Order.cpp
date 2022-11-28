@@ -8,7 +8,7 @@ using namespace std;
 Order::Order()
 {
     this->ID = "";
-    this->customerID = "";
+    this->customerPhoneNumber = "";
     this->staffID = "";
     this->cart = nullptr;
     this->shpllength = 0;
@@ -26,13 +26,13 @@ const string &Order::getID() const
 {
     return this->ID;
 }
-void Order::setCustomerID(const string &s)
+void Order::setCustomerPhoneNumber(const string &s)
 {
-    this->customerID = s;
+    this->customerPhoneNumber = s;
 }
-const string &Order::getCustomerID() const
+const string &Order::getCustomerPhoneNumber() const
 {
-    return this->customerID;
+    return this->customerPhoneNumber;
 }
 void Order::setStaffID(const string &s)
 {
@@ -74,22 +74,27 @@ void Order::show() //27
     cout << setw(50) << "" << topLeftCorner << line(7) << topRightCorner << "\n";
     cout << setw(50) << "" << col << " ORDER " << col << "\n";
     cout << setw(50) << "" << botLeftCorner << line(7) << botRightCorner << "\n\n";
+    
+    int w = 26;
 
-    cout << setw(46) << "" << topLeftCorner << line(27) << topRightCorner << "\n";
-    cout << setw(46) << "" << col << " Order id: " << setw(27 - 11) << left << this->ID << col << "\n";
-    cout << setw(46) << "" << col << " Customer id: " << setw(27 - 14) << left << this->customerID << col << "\n";
-    cout << setw(46) << "" << col << " Staff id: " << setw(27 - 11) << left << this->staffID << col << "\n";
-    cout << setw(46) << "" << col << " Cart: " << setw(27-7) << "" << col << "\n";
+    cout << setw(45) << "" << topLeftCorner << line(w) << topRightCorner << "\n";
+    cout << setw(45) << "" << col << " Order id: " << setw(w - 11) << right << this->ID << col << "\n";
+    cout << setw(45) << "" << col << " Customer p/n: " << setw(w - 15) << right << this->customerPhoneNumber << col << "\n";
+    cout << setw(45) << "" << col << " Staff id: " << setw(w - 11) << right << this->staffID << col << "\n";
     
     Cart* tmp = this->cart;
+    string stmp = tmp->data.getPhoneID() + "/" + to_string(tmp->data.getAmount());
+    cout << setw(45) << "" << col << " Cart: " << setw(w-7) << right << stmp << col << "\n";
+    tmp = tmp->pNext;
     while(tmp != nullptr) {
-        cout << setw(46) << "" << col << setw(3) << "" << tmp->data.getPhoneID() << "/" << tmp->data.getAmount() << setw(27 - 4 - tmp->data.getPhoneID().length() - to_string(tmp->data.getAmount()).length()) << "" << col << "\n";
+        string stmp = tmp->data.getPhoneID() + "/" + to_string(tmp->data.getAmount());
+        cout << setw(45) << "" << col << setw(w) << right << stmp << col << "\n";
         tmp = tmp->pNext; 
     }
-    
-    cout << setw(46) << "" << col << " Purchase day: " << this->purchaseDay << setw(27 - 15 - 2 - to_string(this->purchaseDay.getDay()).length() - to_string(this->purchaseDay.getMonth()).length() - to_string(this->purchaseDay.getYear()).length()) << "" << col << "\n";
-    cout << setw(46) << "" << col << " Total price: " << setw(27 - 14) << left << this->totalPrice << col << "\n";
-    cout << setw(46) << "" << botLeftCorner << line(27) << botRightCorner << "\n\n";
+    string date = to_string(this->purchaseDay.getDay()) + "/" + to_string(this->purchaseDay.getMonth()) + "/" + to_string(this->purchaseDay.getYear());
+    cout << setw(45) << "" << col << " Purchase day: " << setw(w - 15) << right << date << col << "\n";
+    cout << setw(45) << "" << col << " Total price: " << setw(w - 14) << right << this->totalPrice << col << "\n";
+    cout << setw(45) << "" << botLeftCorner << line(w) << botRightCorner << "\n\n";
 }
 bool Order::searchCart(string id) {
     Cart* tmp = this->cart;
@@ -106,11 +111,10 @@ void Order::addToCart(string id, int amount) {
     while(tmp != nullptr) {
         if(tmp->data.getPhoneID() == id) {
             tmp->data.setAmount(tmp->data.getAmount() + amount);
+            break;
         }
         tmp = tmp->pNext;
     }
-    cout << "Add to cart successfully!\n";
-    system("pause");
 }
 void Order::addToCart(const Goods& g) {
     Cart *c = new Cart;

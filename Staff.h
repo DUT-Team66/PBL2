@@ -3,6 +3,7 @@
 
 #include "PhoneManager.h"
 #include "OrderManager.h"
+#include "CustomerManager.h"
 #include "Account.h"
 #include <string>
 #include <iostream>
@@ -21,6 +22,7 @@ class Staff
         Account account;
         PhoneManager managePhone;
         OrderManager manageOrder;
+        CustomerManager manageCustomer;
     public:
 
     
@@ -49,6 +51,7 @@ class Staff
         void setPhoneManager(const PhoneManager&);
         const PhoneManager& getPhoneManager() const;
         void setOrderManager(const OrderManager&);
+        void setCustomerManager(const CustomerManager&);
         
         void show(); // show staff information
         void Menu(); // staff route

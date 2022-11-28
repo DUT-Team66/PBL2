@@ -107,7 +107,7 @@ void OrderManager::SearchByOrderID(string m)
             cout << rightSide << "\n";
 
             cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
-            cout << col << setw((14 - tmp->data.getCustomerID().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerID().length())/2) << left << tmp->data.getCustomerID();
+            cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
             cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
             cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
             cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
@@ -141,12 +141,12 @@ void OrderManager::SearchByOrderID(string m)
     }
 
 }
-void OrderManager::SearchByCustomerID(string m)
+void OrderManager::SearchByCustomerPhoneNumber(string m)
 {
     bool checkExist = false;
     Node *tmp = this->pHead;
     while(tmp != nullptr) {
-        if(tmp->data.getCustomerID() == m) {
+        if(tmp->data.getCustomerPhoneNumber() == m) {
             checkExist = true;
             cout << topLeftCorner << line(11); // orderid
             cout << topMid << line(14); //customerID
@@ -173,7 +173,7 @@ void OrderManager::SearchByCustomerID(string m)
             cout << rightSide << "\n";
 
             cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
-            cout << col << setw((14 - tmp->data.getCustomerID().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerID().length())/2) << left << tmp->data.getCustomerID();
+            cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
             cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
             cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
             cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
@@ -237,7 +237,7 @@ void OrderManager::SearchByStaffID(string m)
             cout << rightSide << "\n";
 
             cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
-            cout << col << setw((14 - tmp->data.getCustomerID().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerID().length())/2) << left << tmp->data.getCustomerID();
+            cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
             cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
             cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
             cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
@@ -304,7 +304,7 @@ void OrderManager::Show() //Show All
 		
         cout << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1; ++i;
 		cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
-		cout << col << setw((14 - tmp->data.getCustomerID().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerID().length())/2) << left << tmp->data.getCustomerID();
+		cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
 		cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
         cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
 		cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
@@ -347,13 +347,13 @@ void OrderManager::LoadData() {
         }
         ++i;
         order.setID(orderID);
-        string customerID = "";
+        string customerPhonenumber = "";
         while(tmp[i] != '/') {
-            customerID += tmp[i];
+            customerPhonenumber += tmp[i];
             ++i;
         }
         ++i;
-        order.setCustomerID(customerID);
+        order.setCustomerPhoneNumber(customerPhonenumber);
         string staffID = "";
         while(tmp[i] != '/') {
             staffID += tmp[i];
@@ -422,10 +422,10 @@ void OrderManager::Menu() {
             cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
 	        cout << setw(50) << "" << col << " ORDERS " << col << "\n";
 	        cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
-            //cout << setw(25) << "" << "TRADES" << "\n\n";
-            cout << setw(47) << "" << "1. Search by OrderID" << "\n"; //  nhap orderid
-            cout << setw(47) << "" << "2. Search by CustomerID" << "\n"; // nhap customerid
-            cout << setw(47) << "" << "3. Search by StaffID" << "\n"; // nhap customerid
+
+            cout << setw(47) << "" << "1. Search by orderID" << "\n"; //  nhap orderid
+            cout << setw(47) << "" << "2. Search by customer phone number" << "\n"; // nhap customerid
+            cout << setw(47) << "" << "3. Search by staffID" << "\n"; // nhap customerid
             cout << setw(47) << "" << "4. Show all orders" << "\n";
             cout << setw(47) << "" << "5. Go back" << "\n\n";
             cout << setw(45) << "" << "Your choice: ";
@@ -440,21 +440,25 @@ void OrderManager::Menu() {
             cout << setw(35) << "" << "Enter orderID you want to search: ";
             string id; cin >> id;
             this->SearchByOrderID(id);
+            std::system("pause");
         } else if (choice == "2") {
-            cout << setw(35) << "" << "Enter customerID you want to search: ";
-            string id; cin >> id;
-            this->SearchByCustomerID(id);
+            cout << setw(35) << "" << "Enter customer phone number you want to search: ";
+            string phoneNumber; cin >> phoneNumber;
+            this->SearchByCustomerPhoneNumber(phoneNumber);
+            std::system("pause");
         } else if (choice == "3") {
             cout << setw(35) << "" << "Enter staffID you want to search: ";
             string id; cin >> id;
             this->SearchByStaffID(id);
+            std::system("pause");
         } else if(choice == "4") {
             this->Show();
+            std::system("pause");
         } else {
             std::system("cls");
             break;  
         } 
-        std::system("pause");
+        // std::system("pause");
         std::system("cls");
     }
 }
@@ -489,7 +493,7 @@ void OrderManager::UpdateFile() {
         }
         Date dmy = k->data.getPurchaseDay();
         string tmp2 = to_string(dmy.getDay()) + " " + to_string(dmy.getMonth()) + " " + to_string(dmy.getYear()) + " ";
-        string s = k->data.getID() + "/" + k->data.getCustomerID() + "/" + k->data.getStaffID() + "/" + tmp1 + "/" + to_string(k->data.getShpllength()) + "/" + tmp2 + "/" + to_string(k->data.getTotalPrice()) + "/";
+        string s = k->data.getID() + "/" + k->data.getCustomerPhoneNumber() + "/" + k->data.getStaffID() + "/" + tmp1 + "/" + to_string(k->data.getShpllength()) + "/" + tmp2 + "/" + to_string(k->data.getTotalPrice()) + "/";
         if(d != this->n-1) editfile << s << "\n";
         else editfile << s;
         d++;

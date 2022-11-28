@@ -8,7 +8,7 @@ class Order
 {
     private: 
         string ID;
-        string customerID;
+        string customerPhoneNumber;
         string staffID;
         //Goods* goods;
         struct Cart {
@@ -29,8 +29,8 @@ class Order
         ~Order();
         void setID(const string& );
         const string& getID() const;
-        void setCustomerID(const string& );
-        const string& getCustomerID() const;
+        void setCustomerPhoneNumber(const string& );
+        const string& getCustomerPhoneNumber() const;
         void setStaffID(const string& );
         const string& getStaffID() const;
         //void setGoods(const Goods&);

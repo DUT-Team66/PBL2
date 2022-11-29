@@ -1,18 +1,18 @@
-Iphone 14 Plus/ip14pl/Apple/Apple A15 Bionic/4GB-128GB/6.7 inch, Super Retina XDR/12MP + 12MP/24000000/27000000/98/
-Iphone 14 Promax/ip14prm/Apple/Apple A16 Bionic/6GB-128GB/6.7 inch, Super Retina XDR/48MP + 12MP/38000000/40000000/87/
-Iphone 13/ip13/Apple/Apple A15 Bionic/4GB-128GB/6.1 inch, Super Retina XDR/12MP + 12MP/19000000/20000000/98/
-Iphone 13 Pro/ip13pr/Apple/Apple A15 Bionic/6GB-256GB/6.1 inch, Super Retina XDR/12MP + 12MP/24000000/25000000/80/
-Iphone 13 Promax/ip13prm/Apple/Apple A15 Bionic/46B-256GB/6.7 inch, Super Retina XDR/12MP + 12MP/28000000/33000000/100/
+Iphone 14 Plus/ip14pl/Apple/Apple A15 Bionic/4GB-128GB/6.7 inch, Super Retina XDR/12MP + 12MP/24000000/27000000/100/
+Iphone 14 Promax/ip14prm/Apple/Apple A16 Bionic/6GB-128GB/6.7 inch, Super Retina XDR/48MP + 12MP/38000000/40000000/69/
+Iphone 13/ip13/Apple/Apple A15 Bionic/4GB-128GB/6.1 inch, Super Retina XDR/12MP + 12MP/19000000/20000000/100/
+Iphone 13 Pro/ip13pr/Apple/Apple A15 Bionic/6GB-256GB/6.1 inch, Super Retina XDR/12MP + 12MP/24000000/25000000/100/
+Iphone 13 Promax/ip13prm/Apple/Apple A15 Bionic/46B-256GB/6.7 inch, Super Retina XDR/12MP + 12MP/28000000/33000000/90/
 Iphone 13 Mini/ip13mn/Apple/Apple A15 Bionic/4GB-128GB/5.4 inch, Super Retina XDR/12MP + 12MP/19000000/21000000/100/
-Iphone 12/ip12/Apple/Apple A14 Bionic/4GB-64GB/6.1 inch, Super Retina XDR/12MP + 12MP/14000000/15000000/92/
+Iphone 12/ip12/Apple/Apple A14 Bionic/4GB-64GB/6.1 inch, Super Retina XDR/12MP + 12MP/14000000/15000000/100/
 Iphone 12 Pro/ip12pr/Apple/Apple A14 Bionic/6GB-64GB/6.1 inch, Super Retina XDR/12MP + 12MP/14500000/16000000/100/
 Iphone 12 Promax/ip12prm/Apple/Apple A14 Bionic/6GB-128GB/6.7 inch, Super Retina XDR/12MP + 12MP/29000000/32000000/100/
 Iphone 12 Mini/ip12mn/Apple/Apple A14 Bionic/4GB-64GB/5.4 inch, Super Retina XDR/12MP + 12MP/16000000/18000000/100/
 Iphone 11/ip11/Apple/Apple A13 Bionic/4GB-64GB/6.1 inch, Liquid Retina HD/12MP + 12MP/11500000/13000000/100/
-Samsung Galaxy Z/ssglxz/Samsung/Snapdragon 8+ Gen 1/12GB-256GB/7.6 inch, Dynamic AMOLED 2X/50MP + 10MP/41000000/44000000/100/
+Samsung Galaxy Z/ssglxz/Samsung/Snapdragon 8+ Gen 1/12GB-256GB/7.6 inch, Dynamic AMOLED 2X/50MP + 10MP/41000000/44000000/80/
 Samsung Galaxy S22/ssglxs22/Samsung/Snapdragon 8 Gen 1/8GB-128GB/6.1 inch, Dynamic AMOLED 2X/50MP + 10MP/15000000/17000000/100/
 OPPO Find X5 Pro/opfdx5pr/OPPO/Snapdragon 8 Gen 1/12GB-256GB/6.7 inch, AMOLED/50MP + 13MP/28000000/30000000/100/
-OPPO Reno8 Pro/opr8pr/OPPO/MediaTek Dimensity 8100/12GB-256GB/6.7 inch, AMOLED/50MP + 32MP/19000000/21000000/100/
+OPPO Reno8 Pro/opr8pr/OPPO/MediaTek Dimensity 8100/12GB-256GB/6.7 inch, AMOLED/50MP + 32MP/19000000/21000000/90/
 OPPO Reno8 4G/opr84g/OPPO/Snapdragon 680/8GB-256GB/6.4 inch, AMOLED/64MP + 32MP/9000000/12000000/100/
 OPPO Reno8 Z 5G/opr8z5g/OPPO/Snapdragon 695 5G/8GB-256GB/6.43 inch, AMOLED/64MP + 16MP/10500000/12000000/100/
 OPPO Reno7/opr7/OPPO/Snapdragon 680/8GB-128GB/6.4 inch, AMOLED/64MP + 32MP/7000000/9000000/100/
@@ -21,7 +21,7 @@ OPPO Reno6 5G/opr65g/OPPO/MediaTek Dimensity 900 5G/8GB-128GB/6.43 inch, AMOLED/
 OPPO Reno6 Z 5G/opr6z5g/OPPO/MediaTek Dimensity 800U/8GB-128GB/6.43 inch, AMOLED/64MP + 32MP/7000000/9000000/100/
 OPPO A96/opa96/OPPO/Snapdragon 680/8GB-128GB/6.59 inch, LCD/50MP + 16MP/7000000/8500000/100/
 OPPO A95/opa95/OPPO/Snapdragon 662/8GB-128GB/6.43 inch, AMOLED/48MP + 16MP/6000000/7500000/100/
-Vivo X80/vvx80/Vivo/MediaTek Dimensity 900 5G/8GB-128GB/6.78 inch, AMOLED/50MP + 12MP/17000000/19000000/100/
+Vivo X80/vvx80/Vivo/MediaTek Dimensity 900 5G/8GB-128GB/6.78 inch, AMOLED/50MP + 12MP/17000000/19000000/90/
 Vivo Y53s/vvy53s/Vivo/MediaTek Helio G80/8GB-128GB/6.58 inch, AMOLED/64MP + 2MP/6000000/7000000/100/
-Xiaomi 12T Pro/xm12tpr/Xiaomi/Snapdragon 8+ Gen 1/12GB-256GB/6.67 inch, AMOLED/200MP + 20MP/15000000/17000000/96/
-Xiaomi Redmi 10C/xmrm10c/Xiaomi/Snapdragon 680/4GB-64GB/6.71 inch, IPS LCD/50MP + 2MP/3000000/3500000/94/
+Xiaomi 12T Pro/xm12tpr/Xiaomi/Snapdragon 8+ Gen 1/12GB-256GB/6.67 inch, AMOLED/200MP + 20MP/15000000/17000000/100/
+Xiaomi Redmi 10C/xmrm10c/Xiaomi/Snapdragon 680/4GB-64GB/6.71 inch, IPS LCD/50MP + 2MP/3000000/3500000/100/

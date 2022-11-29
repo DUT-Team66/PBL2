@@ -465,13 +465,14 @@ void OrderManager::Menu() {
 const OrderManager& OrderManager::operator=(const OrderManager& v )
 {
     if (this != &v) {
-        this->n=v.n;
+        //this->n=v.n;
         Node *k;  
         while (this->pHead!=NULL)
         {
             k=this->pHead;
             this->pHead=this->pHead->pNext;
             delete k;
+            this->n--;
         }
         this->pTail=NULL;
         for (Node *k=v.pHead;k!=NULL;k=k->pNext)

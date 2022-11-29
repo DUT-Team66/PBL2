@@ -228,7 +228,7 @@ void StaffManager::Search()
                 std::cout << botMid << line(10); // password
                 std::cout << botRightCorner << "\n";
             } else {
-                std::cout << "No staffs found!\n";
+                std::cout << setw(45) << "" << "No staffs found!\n";
                 //std::system("pause");
             }
             std::system("pause");
@@ -619,13 +619,18 @@ void StaffManager::Update()  // chu y: Update co the cap nhat nhieu cai
         std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
         this->Show();
 
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(hConsole, grey); 
+        cout << setw(45) << "" <<"Enter 'exit' to exit!\n";
+        SetConsoleTextAttribute(hConsole, brightwhite); 
         string id; 
-        std::cout << setw(45) << "" << "(Enter 'exit' to exit)\n\n";
         std::cout << setw(45) << "" << "Enter staff id: ";
         std::cin >> id;
+
         if(id == "exit") {
             return;
         }
+        
         bool checkExist = false;
         Node *staff = this->pHead;
         while(staff != nullptr) {
@@ -1066,9 +1071,25 @@ void StaffManager::Menu() {
             } else break;
         }
         if(choice == "1") {
+            if(this->n == 10) {
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                SetConsoleTextAttribute(hConsole, brightred); 
+                std::cout << setw(45) << "" << "Full of staffs!\n";
+                SetConsoleTextAttribute(hConsole, brightwhite); 
+                std::system("pause");
+                continue;
+            }
+
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	        SetConsoleTextAttribute(hConsole, grey); 
+            cout << setw(45) << "" <<"Enter 'exit' to exit!\n";
+	        SetConsoleTextAttribute(hConsole, brightwhite); 
             string id;
             cout << setw(45) << "" << "Enter ID: ";
             cin >> id;
+            if(id == "exit") {
+                continue;
+            }
             bool checkLegal = true;
             for(int i = 0; i < id.length(); ++i) {
                 if(id[i] < '0' || id[i] > '9') {
@@ -1077,7 +1098,10 @@ void StaffManager::Menu() {
                 }
             }
             if(!checkLegal || id.length() != 12) {
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                SetConsoleTextAttribute(hConsole, brightred); 
                 cout << setw(45) << "" << "Invalid id!" << "\n";
+                SetConsoleTextAttribute(hConsole, brightwhite);
                 system("pause");
                 continue;
             }
@@ -1092,7 +1116,7 @@ void StaffManager::Menu() {
             }
             if(!checkExist) {
                 string name, gender, dob, phoneNumber, address;
-                //cin.ignore();
+                cin.ignore();
 
                 cout << setw(45) << "" << "Enter name: ";
                 getline(cin, name);
@@ -1266,9 +1290,16 @@ void StaffManager::Menu() {
             std::system("pause");
         } else if (choice == "2") {
             this->Show();
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	        SetConsoleTextAttribute(hConsole, grey); 
+            cout << setw(45) << "" <<"Enter 'exit' to exit!\n";
+	        SetConsoleTextAttribute(hConsole, brightwhite); 
             string id;
-            cout << "Enter ID: ";
+            cout << setw(45) << "" << "Enter ID: ";
             cin >> id;
+            if(id == "exit") {
+                continue;
+            }
             bool checkLegal = true;
             for(int i = 0; i < id.length(); ++i) {
                 if(id[i] < '0' || id[i] > '9') {
@@ -1292,11 +1323,11 @@ void StaffManager::Menu() {
             }
         } else if(choice == "3") {
             this->Search();
-            std::system("pause");
+            //std::system("pause");
         } else if (choice == "4") {
             this->Show();
             this->Update();
-            std::system("pause");
+            //std::system("pause");
         } else if(choice == "5") {
             this->Show();
             std::system("pause");
@@ -1308,7 +1339,7 @@ void StaffManager::Menu() {
         std::system("cls");
     }
 }
-void StaffManager::Login(bool& isAdmin, bool& isStaff) {
+void StaffManager::Login(bool& isAdmin, bool& isStaff) {    
     
     while(true) {
         string username, password;
@@ -1349,14 +1380,14 @@ void StaffManager::Login(bool& isAdmin, bool& isStaff) {
         std::cout << "\n";
         if(isStaff || isAdmin)  {
             HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	        SetConsoleTextAttribute(hConsole, 10); // bright green
-            cout << setw(45) << "" <<"Login successfully!\n";
-	        SetConsoleTextAttribute(hConsole, 15); // bright white
+	        SetConsoleTextAttribute(hConsole, brightgreen); 
+            cout << setw(47) << "" <<"Login successfully!\n";
+	        SetConsoleTextAttribute(hConsole, brightwhite); 
             break;
         } else {
             HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	        SetConsoleTextAttribute(hConsole, 12);
-            cout << setw(45) << "" << "Invalid login information!\n";
+            cout << setw(47) << "" << "Invalid login information!\n";
             SetConsoleTextAttribute(hConsole, 15);
 
         }
@@ -1367,13 +1398,14 @@ void StaffManager::Login(bool& isAdmin, bool& isStaff) {
 const StaffManager& StaffManager::operator=(const StaffManager& v ) 
 {
     if (this != &v) {
-        this->n=v.n;
+        //this->n=v.n;
         Node *k;  
         while (this->pHead!=NULL)
         {
             k=this->pHead;
             this->pHead=this->pHead->pNext;
             delete k;
+            this->n--;
         }
         this->pTail=NULL;
         for (Node *k=v.pHead;k!=NULL;k=k->pNext)

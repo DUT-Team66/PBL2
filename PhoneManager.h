@@ -20,7 +20,7 @@ class PhoneManager
         //Khong co SV
         PhoneManager();
         ~PhoneManager();
-        int GetLength();
+        int GetLength() const;
         void Add(const Phone& s);
         void Delete(string);
         void Search();

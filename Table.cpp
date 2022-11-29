@@ -42,3 +42,21 @@ char col = 179;
 char midMid = 197;
 char botMid = 193;
 char topMid = 194;
+
+char arrow = 16;
+
+int blue = 1;
+int green = 2;
+int cyan = 3;
+int red = 4;
+int pink = 5;
+int yellow = 6;
+int white = 7;
+int grey = 8;
+int brightblue = 9;
+int brightgreen = 10;
+int brightcyan = 11;
+int brightred = 12;
+int brightpink = 13;
+int brightyellow = 14;
+int brightwhite = 15;

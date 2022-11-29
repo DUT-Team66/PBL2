@@ -48,11 +48,12 @@ void Admin::ShowThongKe()
         cout << midMid << line(16);
         cout << rightSide << "\n";
 
-        string datestr = to_string(thongKe[i].getDate().getMonth()) + "/" + to_string(thongKe[i].getDate().getYear());
+        string datestr = to_string(this->thongKe[i].getDate().getMonth()) + "/" + to_string(this->thongKe[i].getDate().getYear());
         cout << setw(30) << "" << col << setw((12 - datestr.length())/2) << "" << setw(12 - (12 - datestr.length())/2) << datestr;
-        cout << col << setw((16 - to_string(thongKe[i].getVon()).length())/2) << "" << setw(16 - (16 - to_string(thongKe[i].getVon()).length())/2) << left << thongKe[i].getVon();
-        cout << col << setw((16 - to_string(thongKe[i].getDoanhThu()).length())/2) << "" << setw(16 - (16 - to_string(thongKe[i].getDoanhThu()).length())/2) << left << thongKe[i].getDoanhThu(); 
-        cout << col << setw((16 - to_string(thongKe[i].getLoiNhuan()).length())/2) << "" << setw(16 - (16 - to_string(thongKe[i].getLoiNhuan()).length())/2) << left << thongKe[i].getLoiNhuan(); 
+        cout << col << setw((16 - to_string(this->thongKe[i].getVon()).length())/2) << "" << setw(16 - (16 - to_string(this->thongKe[i].getVon()).length())/2) << left << this->thongKe[i].getVon();
+        cout << col << setw((16 - to_string(this->thongKe[i].getDoanhThu()).length())/2) << "" << setw(16 - (16 - to_string(thongKe[i].getDoanhThu()).length())/2) << left << thongKe[i].getDoanhThu(); 
+        if(this->thongKe[i].getLoiNhuan() <= 0) cout << col << setw(8) << "" << setw(8) << left << 0;
+        else cout << col << setw((16 - to_string(this->thongKe[i].getLoiNhuan()).length())/2) << "" << setw(16 - (16 - to_string(thongKe[i].getLoiNhuan()).length())/2) << left << thongKe[i].getLoiNhuan(); 
         cout << col << "\n";
     }
     cout << setw(30) << "" << botLeftCorner << line(12);
@@ -66,6 +67,7 @@ void Admin::Menu() {
     while(true) {
         string choice;
         while(true) {
+            std::system("cls");
             std::cout << setw(50) << "" << topLeftCorner << line(7) << topRightCorner << "\n";
             std::cout << setw(50) << "" << col << " ADMIN " << col << "\n";
             std::cout << setw(50) << "" << botLeftCorner << line(7) << botRightCorner << "\n\n";
@@ -95,7 +97,7 @@ void Admin::Menu() {
         } else if(choice == "4") {
             this->manageCustomer.Menu();
         } else if(choice == "5") {
-            this->Import(this->thongKe[this->thongKe.size()-1].getDate());
+            this->Import();
         } else if(choice == "6") {
             this->ShowThongKe();
             system("pause");
@@ -105,34 +107,45 @@ void Admin::Menu() {
     }
 
 }
-void Admin::Import(const Date& date) {
+void Admin::Import() {
 
+    string confirm; cout << setw(45) << "" << "Confirm (Y/N): ";
+    cin >> confirm;
+    if(confirm == "N") {
+        return;
+    } else if(confirm != "Y") {
+        cout << setw(45) << "" << "Invalid choice!\n";
+        std::system("pause");
+        return;
+    }
     long long total = 0;
-    cout << this->managePhone.GetLength() << "\n";
+    //cout << this->managePhone.GetLength() << "\n";
     for(int i = 0; i < this->managePhone.GetLength(); ++i) {
         total += (100 - this->managePhone.getRemainingAmount(i))* this->managePhone.getEntryPrice(i);
-        cout << i << "\n";
+        //cout << i << "\n";
         this->managePhone.setRemainingAmount(i,this->managePhone.getRemainingAmount(i) - 100);
     }
-    cout << 1 << "\n";
+    //cout << 1 << "\n";
     time_t now = time(0);
     // convert now to string form
     tm *ltm = localtime(&now);
 
-    if(date.getMonth() != ltm->tm_mon) {
+    if(this->thongKe[this->thongKe.size()-1].getDate().getMonth() != 1 + ltm->tm_mon) {
         this->thongKe.push_back(ThongKe(Date(ltm->tm_mday,ltm->tm_mon + 1, 1900 + ltm->tm_year),total,0,0));
     } else {
         this->thongKe[this->thongKe.size()-1].setVon(this->thongKe[this->thongKe.size()-1].getVon() + total);
     }
 
 
-    cout << 2 << "\n";
+    //cout << 2 << "\n";
 
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, 10);
     cout << "\n";
     cout << setw(45) << "" << "IMPORT SUCCESSFULLY!" << "\n";
     SetConsoleTextAttribute(hConsole, 7);
+    std::system("pause");
+    std::system("cls");
 }
 void Admin::LoadThongKe() {
     fstream readfile("ThongKe.txt", ios::in);
@@ -161,9 +174,18 @@ void Admin::LoadThongKe() {
             ++i;
         }
         ++i;
-        while(tmp[i] != '/') {
-            loinhuan = loinhuan*10 + tmp[i] - 48;
+        if(tmp[i] != '-') {
+            while(tmp[i] != '/') {
+                loinhuan = loinhuan*10 + tmp[i] - 48;
+                ++i;
+            }
+        } else {
             ++i;
+            while(tmp[i] != '/') {
+                loinhuan = loinhuan*10 + tmp[i] - 48;
+                ++i;
+            }
+            loinhuan *= -1;
         }
         ++i;
         this->thongKe.push_back(ThongKe(Date(0,month, year),von, doanhthu, loinhuan));

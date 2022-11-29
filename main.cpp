@@ -62,11 +62,13 @@ int main()
     admin.LoadThongKe();
 
     //std::system("pause");
-    std::system("cls");
-
-    // for(int i = 0;i < 10;++i) {
-    //     cout << i + 1 << ". " << staffManager.getStaffID(i) << "\n";
-    // }
+    //std::system("cls");
+    // cout << phoneManager.GetLength() << "\n";
+    // cout << staffManager.GetLength() << "\n";
+    // cout << admin.getPhoneManager().GetLength();
+    // cout << admin.getStaffManager().GetLength() << "\n";
+    
+   
     // choose role
     while (true)
     { 
@@ -81,11 +83,14 @@ int main()
             std::cout << setw(47) << "" << "1. Staff" << "\n";
             std::cout << setw(47) << "" << "2. Customer" << "\n";
             std::cout << setw(47) << "" << "3. Exit" << "\n\n";
-            std::cout << setw(45) << "" << "Your choice: ";
+            std::cout << setw(45) << "" << arrow << " Your choice: "; // co mui ten
             std::cin >> choice;
             if (choice != "1" && choice != "2" && choice != "3")
             {
-                std::cout << "Please re-enter!\n";
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	            SetConsoleTextAttribute(hConsole, brightyellow);
+                std::cout << setw(45) << "" << "Please re-enter!\n";
+	            SetConsoleTextAttribute(hConsole, brightwhite); 
                 std::system("pause");
                 
             } else break;
@@ -257,6 +262,7 @@ int main()
             
             std::system("pause");
         } else if(choice == "3") {
+            std::cout << "\n\n";
             std::cout << setw(45) << "" << "GOOD BYE!\n";
             break;
         }

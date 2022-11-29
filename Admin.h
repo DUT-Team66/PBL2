@@ -23,7 +23,7 @@ class Admin : public Staff {
         void ShowThongKe();
         //void calProfit(); // loi nhuan
         void Menu(); // admin route
-        void Import(const Date&);
+        void Import();
         void LoadThongKe(); // 
         void UpdateThongKe();
         void UpdateDoanhThuLoiNhuan(Order&);

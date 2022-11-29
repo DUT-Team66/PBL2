@@ -173,7 +173,7 @@ void CustomerManager::setInfo(Customer& customer) {
 
     
         string phoneNumber;
-        cout << setw(42) << "" << "Phone number: ";
+        cout << setw(42) << "" << arrow << " Phone number: ";
         cin >> phoneNumber;
         bool checkLegal = true;
         for(int i = 0; i < phoneNumber.length(); ++i) {
@@ -205,10 +205,10 @@ void CustomerManager::setInfo(Customer& customer) {
         if(!checkExist) {
             cin.ignore();
             string name, address;
-            cout << setw(42) << "" << "Name: ";
+            cout << setw(42) << "" << arrow << " Name: ";
             getline(cin, name);
             
-            cout << setw(42) << "" << "Address: ";
+            cout << setw(42) << "" << arrow << " Address: ";
             getline(cin, address);
 
             customer.setCustomerPhoneNumber(phoneNumber);
@@ -327,12 +327,12 @@ void CustomerManager::Menu() {
             }
             
             if(checkExist) {
-                cout << topLeftCorner << line(30);
+                cout << setw(15) << "" << topLeftCorner << line(30);
                 cout << topMid << line(14);
                 cout << topMid << line(26);
                 cout << topRightCorner << "\n";
                 
-                cout << col << setw(13) << "" << setw(30 - 13) << left << "Name";
+                cout << setw(15) << "" << col << setw(13) << "" << setw(30 - 13) << left << "Name";
                 cout << col << setw(1) << "" << setw(14 - 1) << left << "Phone number";
                 cout << col << setw(9) << "" << setw(26 - 9) << left << "Address";
                 cout << col << "\n";
@@ -343,18 +343,18 @@ void CustomerManager::Menu() {
                         tmps += tolower(tmp->data.getCustomerName()[j]);
                     }
                     if(tmps.find(name) != -1) { 
-                        std::cout << leftSide << line(30);
+                        std::cout << setw(15) << "" << leftSide << line(30);
                         std::cout << midMid << line(14);
                         std::cout << midMid << line(26);
                         std::cout << rightSide << "\n";
 
-                        std::cout << col << setw((30 - tmp->data.getCustomerName().length())/2) << "" << setw(30 - (30 - tmp->data.getCustomerName().length())/2) << left << tmp->data.getCustomerName();
+                        std::cout << setw(15) << "" << col << setw((30 - tmp->data.getCustomerName().length())/2) << "" << setw(30 - (30 - tmp->data.getCustomerName().length())/2) << left << tmp->data.getCustomerName();
                         std::cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
                         std::cout << col << setw(26 - (26 - tmp->data.getCustomerAddress().length())/2) << right << tmp->data.getCustomerAddress() << setw((26 - tmp->data.getCustomerAddress().length())/2) << "";
                         std::cout << col << "\n";
                     }
                 }
-                cout << botLeftCorner << line(30);
+                cout << setw(15) << "" << botLeftCorner << line(30);
                 cout << botMid << line(14);
                 cout << botMid << line(26);
                 cout << botRightCorner << "\n";
@@ -365,7 +365,7 @@ void CustomerManager::Menu() {
             // std::system("pause");
 
         } else if (choice == "2") { // search by phone number
-            std::cout << setw(45) << "" << "Enter phone number: " << "\n";
+            std::cout << setw(45) << "" << "Enter phone number: ";
             string phoneNumber;
             std:: cin >> phoneNumber;
             bool checkExist = false;
@@ -377,30 +377,30 @@ void CustomerManager::Menu() {
             }
             
             if(checkExist) {
-                cout << topLeftCorner << line(30);
+                cout << setw(15) << "" << topLeftCorner << line(30);
                 cout << topMid << line(14);
                 cout << topMid << line(26);
                 cout << topRightCorner << "\n";
                 
-                cout << col << setw(13) << "" << setw(30 - 13) << left << "Name";
+                cout << setw(15) << "" << col << setw(13) << "" << setw(30 - 13) << left << "Name";
                 cout << col << setw(1) << "" << setw(14 - 1) << left << "Phone number";
                 cout << col << setw(9) << "" << setw(26 - 9) << left << "Address";
                 cout << col << "\n";
 
                 for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
                     if(tmp->data.getCustomerPhoneNumber().find(phoneNumber) != -1) { 
-                        std::cout << leftSide << line(30);
+                        std::cout << setw(15) << "" << leftSide << line(30);
                         std::cout << midMid << line(14);
                         std::cout << midMid << line(26);
                         std::cout << rightSide << "\n";
 
-                        std::cout << col << setw((30 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(30 - (30 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerName();
+                        std::cout << setw(15) << "" << col << setw((30 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(30 - (30 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerName();
                         std::cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
                         std::cout << col << setw(26 - (26 - tmp->data.getCustomerAddress().length())/2) << right << tmp->data.getCustomerAddress() << setw((26 - tmp->data.getCustomerAddress().length())/2) << "";
                         std::cout << col << "\n";
                     }
                 }
-                cout << botLeftCorner << line(30);
+                cout << setw(15) << "" << botLeftCorner << line(30);
                 cout << botMid << line(14);
                 cout << botMid << line(26);
                 cout << botRightCorner << "\n";
@@ -410,7 +410,7 @@ void CustomerManager::Menu() {
 
             // std::system("pause");
         } else if(choice == "3") { // search by address
-           std::cout << setw(45) << "" << "Enter address: " << "\n";
+           std::cout << setw(45) << "" << "Enter address: ";
             string address;
             cin.ignore();
             std::getline(std::cin, address);
@@ -426,12 +426,12 @@ void CustomerManager::Menu() {
             }
             
             if(checkExist) {
-                cout << topLeftCorner << line(30);
+                cout << setw(15) << "" << topLeftCorner << line(30);
                 cout << topMid << line(14);
                 cout << topMid << line(26);
                 cout << topRightCorner << "\n";
                 
-                cout << col << setw(13) << "" << setw(30 - 13) << left << "Name";
+                cout << setw(15) << "" << col << setw(13) << "" << setw(30 - 13) << left << "Name";
                 cout << col << setw(1) << "" << setw(14 - 1) << left << "Phone number";
                 cout << col << setw(9) << "" << setw(26 - 9) << left << "Address";
                 cout << col << "\n";
@@ -442,18 +442,18 @@ void CustomerManager::Menu() {
                         tmps += tolower(tmp->data.getCustomerAddress()[j]);
                     }
                     if(tmps.find(address) != -1) { 
-                        std::cout << leftSide << line(30);
+                        std::cout << setw(15) << "" << leftSide << line(30);
                         std::cout << midMid << line(14);
                         std::cout << midMid << line(26);
                         std::cout << rightSide << "\n";
 
-                        std::cout << col << setw((30 - tmp->data.getCustomerName().length())/2) << "" << setw(30 - (30 - tmp->data.getCustomerName().length())/2) << left << tmp->data.getCustomerName();
+                        std::cout << setw(15) << "" << col << setw((30 - tmp->data.getCustomerName().length())/2) << "" << setw(30 - (30 - tmp->data.getCustomerName().length())/2) << left << tmp->data.getCustomerName();
                         std::cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
                         std::cout << col << setw(26 - (26 - tmp->data.getCustomerAddress().length())/2) << right << tmp->data.getCustomerAddress() << setw((26 - tmp->data.getCustomerAddress().length())/2) << "";
                         std::cout << col << "\n";
                     }
                 }
-                cout << botLeftCorner << line(30);
+                cout << setw(15) << "" << botLeftCorner << line(30);
                 cout << botMid << line(14);
                 cout << botMid << line(26);
                 cout << botRightCorner << "\n";
@@ -477,13 +477,14 @@ void CustomerManager::Menu() {
 const CustomerManager& CustomerManager::operator=(const CustomerManager& v )
 {
     if (this != &v) {
-        this->n=v.n;
+        //this->n=v.n;
         Node *k;  
         while (this->pHead!=NULL)
         {
             k=this->pHead;
             this->pHead=this->pHead->pNext;
             delete k;
+            this->n--;
         }
         this->pTail=NULL;
         for (Node *k=v.pHead;k!=NULL;k=k->pNext)

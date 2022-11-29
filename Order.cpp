@@ -77,24 +77,24 @@ void Order::show() //27
     
     int w = 26;
 
-    cout << setw(45) << "" << topLeftCorner << line(w) << topRightCorner << "\n";
-    cout << setw(45) << "" << col << " Order id: " << setw(w - 11) << right << this->ID << col << "\n";
-    cout << setw(45) << "" << col << " Customer p/n: " << setw(w - 15) << right << this->customerPhoneNumber << col << "\n";
-    cout << setw(45) << "" << col << " Staff id: " << setw(w - 11) << right << this->staffID << col << "\n";
+    cout << setw(40) << "" << topLeftCorner << line(w) << topRightCorner << "\n";
+    cout << setw(40) << "" << col << " Order id: " << setw(w - 11) << right << this->ID << col << "\n";
+    cout << setw(40) << "" << col << " Customer p/n: " << setw(w - 15) << right << this->customerPhoneNumber << col << "\n";
+    cout << setw(40) << "" << col << " Staff id: " << setw(w - 11) << right << this->staffID << col << "\n";
     
     Cart* tmp = this->cart;
     string stmp = tmp->data.getPhoneID() + "/" + to_string(tmp->data.getAmount());
-    cout << setw(45) << "" << col << " Cart: " << setw(w-7) << right << stmp << col << "\n";
+    cout << setw(40) << "" << col << " Cart: " << setw(w-7) << right << stmp << col << "\n";
     tmp = tmp->pNext;
     while(tmp != nullptr) {
         string stmp = tmp->data.getPhoneID() + "/" + to_string(tmp->data.getAmount());
-        cout << setw(45) << "" << col << setw(w) << right << stmp << col << "\n";
+        cout << setw(40) << "" << col << setw(w) << right << stmp << col << "\n";
         tmp = tmp->pNext; 
     }
     string date = to_string(this->purchaseDay.getDay()) + "/" + to_string(this->purchaseDay.getMonth()) + "/" + to_string(this->purchaseDay.getYear());
-    cout << setw(45) << "" << col << " Purchase day: " << setw(w - 15) << right << date << col << "\n";
-    cout << setw(45) << "" << col << " Total price: " << setw(w - 14) << right << this->totalPrice << col << "\n";
-    cout << setw(45) << "" << botLeftCorner << line(w) << botRightCorner << "\n\n";
+    cout << setw(40) << "" << col << " Purchase day: " << setw(w - 15) << right << date << col << "\n";
+    cout << setw(40) << "" << col << " Total price: " << setw(w - 14) << right << this->totalPrice << col << "\n";
+    cout << setw(40) << "" << botLeftCorner << line(w) << botRightCorner << "\n\n";
 }
 bool Order::searchCart(string id) {
     Cart* tmp = this->cart;

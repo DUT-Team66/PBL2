@@ -31,7 +31,7 @@ PhoneManager::~PhoneManager()
     delete this->pHead;
     delete this->pTail;
 }
-int PhoneManager::GetLength()
+int PhoneManager::GetLength() const
 {
     return this->n;
 }
@@ -120,8 +120,11 @@ void PhoneManager::Update(){
         std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
 
         this->Show();
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(hConsole, grey); 
+        cout << setw(45) << "" <<"Enter 'exit' to exit!\n";
+        SetConsoleTextAttribute(hConsole, brightwhite); 
         string id;
-        std::cout << setw(45) << "" << "(Enter 'exit' to exit)" << "\n";
         std::cout << setw(45) << "" << "Enter phone id: ";
         std::cin >> id;
         if(id == "exit") {
@@ -153,7 +156,7 @@ void PhoneManager::Update(){
                 std::cout << setw(47) << "" << "5. Update sale price" << "\n";
                 std::cout << setw(47) << "" << "6. Go back" << "\n";
                 string choice;  
-                std::cout << setw(45) << "" << "Your choice: ";
+                std::cout << setw(45) << "" << arrow << " Your choice: ";
                 std::cin >> choice;
                 
                 if(choice == "1") { // phone name
@@ -1483,17 +1486,27 @@ void PhoneManager::Menu() {
             } else break;
         }
         if(choice == "1") {
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	        SetConsoleTextAttribute(hConsole, grey); 
+            cout << setw(45) << "" <<"Enter 'exit' to exit!\n";
+	        SetConsoleTextAttribute(hConsole, brightwhite); 
             string phoneName;
-            cin.ignore();
-            bool exist = false;
             std::cout << setw(45) << "" << "Enter phone name: ";
+            cin.ignore();
             getline(cin, phoneName);
+
+            if(phoneName == "exit") {
+                continue;
+            }
+
+            bool exist = false;
             Node* tmp = this->pHead;
             while(tmp != nullptr) {
                 if(tmp->data.getPhoneName() == phoneName) {
                     exist = true;
                     break;
                 }
+                tmp = tmp->pNext;
             }
             if(!exist) {
                 string phoneID, brand, processor, RAM_ROM, display, camera; 
@@ -1518,23 +1531,41 @@ void PhoneManager::Menu() {
                 cin >> amount;
                 
                 this->Add(Phone(phoneName, phoneID, brand, processor, RAM_ROM, display, camera, entryPrice, salePrice, amount));
-                std::cout << setw(45) << "" << "\nAdd successfully!\n";
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	            SetConsoleTextAttribute(hConsole, brightgreen);
+                std::cout << "\n" << setw(45) << "" << "Add successfully!\n";
+	            SetConsoleTextAttribute(hConsole, brightwhite); 
             } else {
                 std::cout << setw(45) << "" << "Phone exists";
             }
             std::system("pause");
         } else if (choice == "2") {
             this->Show();
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	        SetConsoleTextAttribute(hConsole, grey); 
+            cout << setw(45) << "" <<"Enter 'exit' to exit!\n";
+	        SetConsoleTextAttribute(hConsole, brightwhite); 
             string s;
             std::cout << setw(45) << "" << "Enter ID: ";
             cin >> s;
-            cout << setw(45) << "" << "Confirm (Y/N): ";
+            if(s == "exit") {
+                continue;
+            }
+
+
+            HANDLE hConsole1 = GetStdHandle(STD_OUTPUT_HANDLE);
+            SetConsoleTextAttribute(hConsole1, brightyellow);
+            cout << setw(45) << "" << "Confirm (Y/N): ";    
+            SetConsoleTextAttribute(hConsole1, brightwhite); 
             string confirm; cin >> confirm;
             if(confirm == "Y") {
                 this->Delete(s);
                 std::system("pause");
             } else if(confirm != "N") {
+                HANDLE hConsole2 = GetStdHandle(STD_OUTPUT_HANDLE);
+	            SetConsoleTextAttribute(hConsole2, brightred);
                 cout << setw(45) << "" << "Invalid choice!\n";
+	            SetConsoleTextAttribute(hConsole2, brightwhite); 
                 std::system("pause");
             }
         } else if(choice == "3") {
@@ -1556,13 +1587,14 @@ void PhoneManager::Menu() {
 const PhoneManager& PhoneManager::operator=(const PhoneManager& v )
 {
     if (this != &v) {
-        this->n=v.n;
+        //this->n=v.n;
         Node *k;  
         while (this->pHead!=NULL)
         {
             k=this->pHead;
             this->pHead=this->pHead->pNext;
             delete k;
+            this->n--;
         }
         this->pTail=NULL;
         for (Node *k=v.pHead;k!=NULL;k=k->pNext)

@@ -985,8 +985,6 @@ void PhoneManager::Show()
 }
 void PhoneManager::ShowTable() {
 
-//	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-//	SetConsoleTextAttribute(hConsole, 3);
             
     Node<Phone> *phone = this->list.HeadNode();
     
@@ -1033,197 +1031,9 @@ void PhoneManager::ShowTable() {
     std::cout << col << "\n";
     std::cout << setw(15) << "" << botLeftCorner << line(25) << botMid << line(25) << botMid << line(25) << botMid << line(25) << botMid << line(25) << botRightCorner << "\n";
 
-
-	//std::cout << setw(45) << "" << botLeftCorner << line(20 * 5 + 4) << botRightCorner << "\n";
-//	SetConsoleTextAttribute(hConsole, 7);
-// 	for(int t = 0; t < 6; ++t) {
-//         cout << setw(45) << "" << leftSide << line(10) << midMid << line(10) << midMid << line(10) << midMid << line(10) << midMid << line(10) << rightSide << "\n";
-//         cout << setw(45) << "";
-//         stringstream ss1(phone->Data().getName());
-//         cout << col << " ";
-//         for(int i = 0; i < 2; ++i) {
-//             string tmp; ss1 >> tmp;
-//             cout << tmp << " ";
-//         }
-//         phone = phone->NextNode();
-        
-//         stringstream ss2(phone->Data().getName());
-//         cout << col << " ";
-//         for(int i = 0; i < 2; ++i) {
-//             string tmp; ss2 >> tmp;
-//             cout << setw(9) << left << tmp;
-//         }
-//         phone = phone->NextNode();
-
-//         stringstream ss3(phone->Data().getName());
-//         cout << col << " ";
-//         for(int i = 0; i < 2; ++i) {
-//             string tmp; ss3 >> tmp;
-//             cout << setw(9) << left << tmp;
-//         }
-//         phone = phone->NextNode();
-
-//         stringstream ss4(phone->Data().getName());
-//         cout << col << " ";
-//         for(int i = 0; i < 2; ++i) {
-//             string tmp; ss4 >> tmp;
-//             cout << setw(9) << left << tmp;
-//         }
-//         phone = phone->NextNode();
-
-//         stringstream ss5(phone->Data().getName());
-//         cout << col << " ";
-//         for(int i = 0; i < 2; ++i) {
-//             string tmp; ss5 >> tmp;
-//             cout << setw(9) << left << tmp;
-//         }
-//         phone = phone->NextNode();
-//         cout << col << "\n";
-
-//         cout << setw(45) << "";
-        
-//         cout << col << " ";
-//         string tmp1;
-//         int l1 = 9;
-//         while (ss1 >> tmp1) {
-//             cout << tmp1 << " ";
-//             l1 -= tmp1.length() + 1;
-//         }
-//         cout << setw(l1) << ""; 
-
-//         cout << col << " ";
-//         string tmp2;
-//         int l2 = 9;
-//         while (ss2 >> tmp2) {
-//             cout << tmp2 << " ";
-//             l2 -= tmp2.length() + 1;
-//         }
-//         cout << setw(l2) << ""; 
-        
-//         cout << col << " ";
-//         string tmp3;
-//         int l3 = 9;
-//         while (ss1 >> tmp3) {
-//             cout << tmp3 << " ";
-//             l3 -= tmp3.length() + 1;
-//         }
-//         cout << setw(l3) << ""; 
-        
-//         cout << col << " ";
-//         string tmp4;
-//         int l4 = 9;
-//         while (ss1 >> tmp4) {
-//             cout << tmp4 << " ";
-//             l4 -= tmp4.length() + 1;
-//         }
-//         cout << setw(l4) << ""; 
-
-//         cout << col << " ";
-//         string tmp5;
-//         int l5 = 9;
-//         while (ss1 >> tmp5) {
-//             cout << tmp5 << " ";
-//             l5 -= tmp5.length() + 1;
-//         }
-//         cout << setw(l5) << ""; 
-
-//         cout << col << "\n";
-//    }
-
-
-
-
-
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-    // stringstream ss3;    
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// stringstream ss4;
-    // cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// stringstream ss5;
-    // cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << "\n";
-	
-	
-	// cout << setw(45) << "";
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << "\n";
-	
-	// cout << setw(45) << "";
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << "\n";
-
-	// cout << setw(45) << "";
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << "\n";
-	
-	// cout << setw(45) << "";
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << "\n";
-	
-	// cout << setw(45) << "";
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
-	// cout << col << "\n";
-	
-	
-	// cout << setw(45) << "" << botLeftCorner << line(10) << botMid << line(10) << botMid << line(10) << botMid << line(10) << botMid << line(10) << botRightCorner << "\n";
-	
-	
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // for (int i=0;i<this->list.size();i+=2)
-    // {
-    //     cout<< setw(2) << right << i + 1 <<". " << setw(40) << left << k->Data().getName()  << "" << i + 2 << ". " << k->pNext->Data().getName() << "\n";
-    // }
-    // if(n & 1) {
-    //     cout << this->list.size() << ". " << (this->p + this->list.size() - 1)->getName() << endl;
-    // }
-    // int d=0;
-    // for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-    // {
-    //     cout<< setw(2) << right << d + 1 <<". " << setw(40) << left << k->Data().getName()  << "" << d + 2 << ". " << k->pNext->Data().getName() << "\n";
-    //     d+=2;
-    //     k=k->pNext;
-    // } 
-    // if(n & 1) {
-    //     cout << this->list.size() << ". " << this->pTail->Data().getName() << endl;
-    // }  
 }
-void PhoneManager::Shopping(Order& order) { 
+void PhoneManager::Shopping(Order& order) {     
     
-    
-    
-    // sửa lại setremaningamount(int,int)
-
-
-
     while(true) {
         std::cout << setw(30) << "" << "Choose what you want to purchase\n";
         this->ShowTable();
@@ -1237,8 +1047,7 @@ void PhoneManager::Shopping(Order& order) {
         std::cin >> choice;
         int ichoice = stringToInt(choice);
         if(choice == "exit") {
-            //cout << "exit shopping\n";
-            //system("pause");
+
             break;
         } else if(ichoice < 1 || ichoice > this->GetLength()) {
             std::cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
@@ -1250,8 +1059,7 @@ void PhoneManager::Shopping(Order& order) {
             std::cout << setw(45) << "" << "Amount: ";
             string samount; std::cin >> samount;
             int amount = stringToInt(samount);
-            //ShoppingList sp(phoneManager.getID(choice - 1),amount); 
-            
+
             if(amount > 0) {
                 if(amount > this->getRemainingAmount(ichoice-1)) {
                     cout << setw(45) << "" << "Remaining amount is not enough\n"; 
@@ -1545,9 +1353,9 @@ void PhoneManager::Menu() {
     }
     
 }
-const PhoneManager& PhoneManager::operator=(const PhoneManager& pm)
-{
+// const PhoneManager& PhoneManager::operator=(const PhoneManager& pm)
+// {
     
-    this->list = pm.list;
-    return *this;
-}
+//     this->list = pm.list;
+//     return *this;
+// }

@@ -107,8 +107,8 @@ int main()
         {
             
             Customer customer;
-            customerManager.setInfo(customer);
-           
+            bool checkExist = customerManager.setInfo(customer);
+            // return true if customer exist, otherwise false
             std::system("cls");
     
             Order order;
@@ -146,7 +146,7 @@ int main()
                 order.show();
                 // In ra hóa đơn
                 orderManager.Add(order);    
-                customerManager.Add(customer);
+                if(checkExist) customerManager.Add(customer);
                 admin.UpdateDoanhThuLoiNhuan(order);
 
             }  else {

@@ -32,6 +32,6 @@ class StaffManager
         void UpdateFile(); // edit file
         void Menu(); // manage staff choice
         void Login(bool&,bool&);
-        const StaffManager& operator=(const StaffManager& );
+        // const StaffManager& operator=(const StaffManager& );
 };
 #endif

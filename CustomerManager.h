@@ -15,10 +15,10 @@ class CustomerManager
         void Delete(string);
         void Search();
         void Show(); 
-        void setInfo(Customer&);
+        bool setInfo(Customer&);
         void LoadData();
         void UpdateFile();
         void Menu();
-        const CustomerManager& operator=(const CustomerManager& );
+        // const CustomerManager& operator=(const CustomerManager& );
 };
 #endif

@@ -22,6 +22,6 @@ class OrderManager
         void UpdateFile();
         void Show();
         void Menu();
-        const OrderManager& operator=(const OrderManager& );
+        // const OrderManager& operator=(const OrderManager& );
 };
 #endif

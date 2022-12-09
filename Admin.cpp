@@ -21,11 +21,6 @@ void Admin::setStaffManager(StaffManager& staffManager) {
 const StaffManager& Admin::getStaffManager() const {
     return *(this->manageStaff);
 }
-// void Admin::setAccountManager(const AccountManager& accountManager) {
-//     this->manageAccount = accountManager;
-//}
-
-
 void Admin::ShowThongKe()
 {   
 

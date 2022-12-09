@@ -55,7 +55,6 @@ void OrderManager::Add(const Order& s)
 {
     this->list.Add(s);
 }
-// 
 void OrderManager::SearchByOrderID(string m)
 {
     bool checkExist = false;
@@ -250,7 +249,6 @@ void OrderManager::SearchByStaffID(string m)
         std::cout << setw(45) << "" << " No orders found!\n";
     }
 }
-
 void OrderManager::Show() //Show All
 {
     std::cout << setw(15) << "" << topLeftCorner << line(7); // stt
@@ -443,11 +441,11 @@ void OrderManager::Menu() {
         std::system("cls");
     }
 }
-const OrderManager& OrderManager::operator=(const OrderManager& v )
-{
-    this->list = v.list;
-    return *this;
-}
+// const OrderManager& OrderManager::operator=(const OrderManager& v )
+// {
+//     this->list = v.list;
+//     return *this;
+// }
 void OrderManager::UpdateFile() {
     fstream editfile("Order.txt", ios::out);
     int d=0;

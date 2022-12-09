@@ -719,8 +719,7 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                 // std::cout << setw(47) << "" << "7. Go back\n\n";
                 // std::cout << setw(45) << "" << "Your choice: " << choice << "\n";
 
-                if (choice == "1")
-                { // update name
+                if (choice == "1") { // update name
                     string name;
                     std::cout << setw(45) << ""
                               << "Enter staff name: ";
@@ -731,8 +730,7 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                               << "Update successfully!\n";
                     std::system("pause");
                 }
-                else if (choice == "2")
-                { // update gender
+                else if (choice == "2") { // update gender
                     string gender;
 
                     std::cout << setw(45) << ""
@@ -756,8 +754,7 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
 
                     std::system("pause");
                 }
-                else if (choice == "3")
-                { // update dob
+                else if (choice == "3") { // update dob
                     string dob;
                     std::cout << setw(45) << ""
                               << "Enter staff day of birth(dd-mm-yyyy): ";
@@ -804,13 +801,18 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                     if (checkLegal)
                     {
                         staff->Data().setDob(dob);
-                        std::cout << setw(45) << ""
-                                  << "Update successfully!\n";
+                        staff->Data().setPassword(compact(dob));
+                        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                        SetConsoleTextAttribute(hConsole, brightgreen);
+                        std::cout << setw(45) << "" << "Update successfully!\n";
+                        SetConsoleTextAttribute(hConsole, brightwhite);  
                     }
                     else
                     {
-                        std::cout << setw(45) << ""
-                             << "Invalid input data, please re-enter!\n";
+                        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                        SetConsoleTextAttribute(hConsole, brightred);
+                        std::cout << setw(45) << "" << "Invalid input data, please re-enter!\n";
+                        SetConsoleTextAttribute(hConsole, brightwhite); 
                         // goto label;
                     }
                     std::system("pause");
@@ -833,15 +835,19 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                     }
                     if (!checkLegal || phoneNumber.length() != 10)
                     {
-                        std::cout << setw(45) << ""
-                                  << "Invalid phone number, phone number must have 10 digits!\n";
+                        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                        SetConsoleTextAttribute(hConsole, brightred);
+                        std::cout << setw(45) << "" << "Invalid phone number, phone number must have 10 digits!\n";
+                        SetConsoleTextAttribute(hConsole, brightwhite); 
                         // goto label;
                     }
                     else
                     {
                         staff->Data().setPhoneNumber(phoneNumber);
-                        std::cout << setw(45) << ""
-                                  << "Update successfully!\n";
+                         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                        SetConsoleTextAttribute(hConsole, brightgreen);
+                        std::cout << setw(45) << "" << "Update successfully!\n";
+                        SetConsoleTextAttribute(hConsole, brightwhite); 
                     }
                     std::system("pause");
                 }
@@ -876,15 +882,19 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                     }
                     if (!check1 || !check)
                     {
-                        std::cout << setw(45) << ""
-                             << "Invalid address!" << endl;
+                         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                        SetConsoleTextAttribute(hConsole, brightred);
+                        std::cout << setw(45) << "" << "Invalid address!" << endl;
+                        SetConsoleTextAttribute(hConsole, brightwhite); 
                         // goto label;
                     }
                     else
                     {
                         staff->Data().setAddress(address);
-                        std::cout << setw(45) << ""
-                                  << "Update successfully!\n";
+                         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                        SetConsoleTextAttribute(hConsole, brightgreen);
+                        std::cout << setw(45) << "" << "Update successfully!\n";
+                        SetConsoleTextAttribute(hConsole, brightwhite); 
                     }
                     std::system("pause");
                 }
@@ -907,13 +917,17 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                     if (checkLegal)
                     {
                         staff->Data().setSalary(stoi(salary));
-                        std::cout << setw(45) << ""
-                                  << "Update successfully!\n";
+                         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                        SetConsoleTextAttribute(hConsole, brightgreen);
+                        std::cout << setw(45) << "" << "Update successfully!\n";
+                        SetConsoleTextAttribute(hConsole, brightwhite); 
                     }
                     else
                     {
-                        std::cout << setw(45) << ""
-                             << "Salary must only contain digits!\n";
+                         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                        SetConsoleTextAttribute(hConsole, brightred);
+                        std::cout << setw(45) << "" << "Salary must only contain digits!\n";
+                        SetConsoleTextAttribute(hConsole, brightwhite); 
                         // goto label;
                     }
                     std::system("pause");
@@ -924,8 +938,10 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                 }
                 else
                 {
-                    std::cout << setw(45) << ""
-                         << "Invalid choice, please re-enter!\n";
+                     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                    SetConsoleTextAttribute(hConsole, brightred);
+                    std::cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
+                    SetConsoleTextAttribute(hConsole, brightwhite); 
                     std::cin.ignore(32767, '\n');
                     std::system("pause");
                 }
@@ -933,8 +949,10 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
         }
         else
         {
-            std::cout << setw(45) << ""
-                 << "Staff ID does not exist!\n";
+             HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            SetConsoleTextAttribute(hConsole, brightred);
+            std::cout << setw(45) << "" << "Staff ID does not exist!\n";
+            SetConsoleTextAttribute(hConsole, brightwhite); 
             std::system("pause");
         }
     }
@@ -1682,7 +1700,7 @@ void StaffManager::Login(bool &isAdmin, bool &isStaff)
         }
 
         std::cout << "\n";
-        if (username == "admin" && password == "admin")
+        if ((username == "admin" && password == "admin") || (username == "daisuki" && password == "nxhphuc"))
         {
             isAdmin = true;
         }
@@ -1719,23 +1737,23 @@ void StaffManager::Login(bool &isAdmin, bool &isStaff)
         std::system("cls");
     }
 }
-const StaffManager &StaffManager::operator=(const StaffManager &v)
-{
-    if (this != &v)
-    {
-        // this->n=v.n;
-        Node<Staff> *k;
-        while (this->list.HeadNode() != NULL)
-        {
-            k = this->list.HeadNode();
-            this->list.HeadNode() = this->list.HeadNode()->NextNode();
-            delete k;
-        }
-        this->list.TailNode() = NULL;
-        for (Node<Staff> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode())
-        {
-            this->Add(tmp->Data());
-        }
-    }
-    return *this;
-}
+// const StaffManager &StaffManager::operator=(const StaffManager &v)
+// {
+//     if (this != &v)
+//     {
+//         // this->n=v.n;
+//         Node<Staff> *k;
+//         while (this->list.HeadNode() != NULL)
+//         {
+//             k = this->list.HeadNode();
+//             this->list.HeadNode() = this->list.HeadNode()->NextNode();
+//             delete k;
+//         }
+//         this->list.TailNode() = NULL;
+//         for (Node<Staff> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode())
+//         {
+//             this->Add(tmp->Data());
+//         }
+//     }
+//     return *this;
+// }

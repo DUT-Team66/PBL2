@@ -34,6 +34,6 @@ class PhoneManager
         void LoadData();
         void UpdateFile();
         void Menu();
-        const PhoneManager& operator=(const PhoneManager& );
+        // const PhoneManager& operator=(const PhoneManager& );
 };
 #endif

@@ -1,13 +1,15 @@
 #include <iostream>
-#include "PhoneManager.h"
 #include <string>
 #include <fstream>
 #include <iomanip>
-#include "Table.h"
-#include "Order.h"
 #include <windows.h>
 #include <ctime>
+
+#include "Table.h"
+#include "PhoneManager.h"
 using namespace std;
+
+
 int stringToInt(string s) {
     int res = 0;
     for(int i = 0;i < s.length(); ++i) {
@@ -22,94 +24,23 @@ int stringToInt(string s) {
 }
 PhoneManager::PhoneManager()
 {
-    this->pHead = nullptr;
-    this->pTail=nullptr;
-    this->n=0;
+    
 }
 PhoneManager::~PhoneManager()
 {
-    delete this->pHead;
-    delete this->pTail;
+
 }
 int PhoneManager::GetLength() const
 {
-    return this->n;
+    return this->list.size();
 }
 void PhoneManager::Add(const Phone& s)
 {
-    Node *p= new Node;
-    if (p==NULL)
-    {
-        std::cout<<"\nKhong du bo nho de cap phat\n"<<endl;
-    }
-    p->data=s;
-    p->pNext=NULL;
-    if (this->pHead==NULL)
-    {
-        this->pHead=this->pTail=p;
-    }
-    else
-    {
-        this->pTail->pNext=p;
-        this->pTail=p;
-    }
-    this->n++;
+    this->list.Add(s);
 }
 void PhoneManager::Delete(string m)
 {
-    int index=-1;
-    if (this->pHead->data.getPhoneID()==m)
-    {
-        if (this->pTail==this->pHead)
-        {
-            this->pHead=this->pTail=NULL;
-            this->n--;
-            index=1;
-        }
-        else {
-            Node *p=this->pHead;
-            this->pHead=this->pHead->pNext;
-            delete p;
-            this->n--;
-            index=1;
-        }
-    }
-    else 
-        if (this->pTail->data.getPhoneID()==m)
-        {
-            for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-            {
-                if (k->pNext==this->pTail)
-                {
-                    delete this->pTail;
-                    k->pNext=NULL;
-                    this->pTail=k;
-                    this->n--;
-                    index=1;
-                }
-            }
-        }
-        else {
-            Node *g=new Node;
-            for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-            {
-                if (k->data.getPhoneID()==m)
-                {
-                    g->pNext=k->pNext;
-                    delete k;
-                    this->n--;
-                    index=1;
-                    break;
-                }
-                else g=k; 
-            }
-        }
-    
-    //Chu y truong hop index=-1(khong tim duoc)
-    if (index==1) std::cout<<"Delete successfully!\n";
-    else {
-        std::cout << "PhoneID does not exist!\n";
-    }
+    this->list.Delete(m);
 }
 void PhoneManager::Update(){
     
@@ -127,17 +58,19 @@ void PhoneManager::Update(){
         string id;
         std::cout << setw(45) << "" << "Enter phone id: ";
         std::cin >> id;
+        cin.clear();
+        fflush(stdin);
         if(id == "exit") {
             return;
         } 
         bool checkExist = false;
-        Node *phone = this->pHead;
+        Node<Phone> *phone = this->list.HeadNode();
         while(phone != nullptr) {
-            if(phone->data.getPhoneID() == id) {
+            if(phone->Data().getID() == id) {
                 checkExist = true;
                 break;
             }
-            phone = phone->pNext;
+            phone = phone->NextNode();
         }
 
         if(checkExist) {
@@ -147,7 +80,7 @@ void PhoneManager::Update(){
                 std::cout << setw(50) << "" << col << " PHONES " << col << "\n";
                 std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
                 
-                phone->data.showForStaff();
+                phone->Data().showForStaff();
 
                 std::cout << setw(47) << "" << "1. Update name" << "\n";
                 std::cout << setw(47) << "" << "2. Update brand" << "\n";
@@ -164,14 +97,14 @@ void PhoneManager::Update(){
                     std::cout << setw(45) << "" << "Enter new phone name: ";
                     std::cin.ignore();
                     std::getline(std::cin, name);
-                    phone->data.setPhoneName(name);
+                    phone->Data().setName(name);
                     std::cout << setw(45) << "" << "Update successfully" << "\n";
                     std::system("pause");
                 } else if(choice == "2") { //brand
                     string brand;
                     std::cout << setw(45) << "" << "Enter new brand: ";
                     std::cin >> brand;
-                    phone->data.setBrand(brand);
+                    phone->Data().setBrand(brand);
                     std::cout << setw(45) << "" << "Update successfully\n";
                     std::system("pause"); 
                 } else if(choice == "3") { // processor
@@ -179,7 +112,7 @@ void PhoneManager::Update(){
                     std::cout << setw(45) << "" << "Enter new processor: ";
                     std::cin.ignore();
                     std::getline(std::cin, processor);
-                    phone->data.setProcessor(processor);
+                    phone->Data().setProcessor(processor);
                     std::cout << setw(45) << "" << "Update successfully" << "\n";
                     std::system("pause");
                 } else if(choice == "4") { // ramrom
@@ -213,7 +146,7 @@ void PhoneManager::Update(){
                     }
 
                     
-                    phone->data.setRAM_ROM(RAM + "GB-" + ROM + "GB");
+                    phone->Data().setRAM_ROM(RAM + "GB-" + ROM + "GB");
                     std::cout << setw(45) << "" << "Update successfully!\n";
                     std::system("pause"); 
                 } else if(choice == "5") { // update sale price
@@ -228,7 +161,7 @@ void PhoneManager::Update(){
                         }
                     }
                     if(checkLegal) {
-                        phone->data.setSalePrice(stoi(price));
+                        phone->Data().setSalePrice(stoi(price));
                         std::cout << setw(45) << "" << "Update successfully" << "\n";
                     } else {
                         std::cout << setw(45) << "" << "Invalid price\n";
@@ -271,6 +204,8 @@ void PhoneManager::Search()
             std::cout << setw(47) << "" << "6. Go back" << "\n\n";
             std::cout << setw(45) << "" << "Your choice: ";
             std::cin >> choice;
+            cin.clear();
+            fflush(stdin);
             if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6") {
                 std::cout << setw(45) << "" << "Invalid choice!\n";
                 std::system("pause");
@@ -286,10 +221,10 @@ void PhoneManager::Search()
                 name[i] = tolower(name[i]);
             }
             bool checkExist = false;
-            for(Node *k = this->pHead; k != nullptr; k = k->pNext) {
+            for(Node<Phone> *k = this->list.HeadNode(); k != nullptr; k = k->NextNode()) {
                 string tmps = "";
-                for(int j = 0; j < k->data.getPhoneName().length(); ++j){
-                    tmps += tolower(k->data.getPhoneName()[j]);
+                for(int j = 0; j < k->Data().getName().length(); ++j){
+                    tmps += tolower(k->Data().getName()[j]);
                 }
                 if(tmps.find(name) != -1) {
                     checkExist = true;
@@ -323,10 +258,10 @@ void PhoneManager::Search()
                 std::cout << col << "\n";
 
                 
-                for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+                for(Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
                     string tmps = "";
-                    for(int j = 0; j < tmp->data.getPhoneName().length(); ++j){
-                        tmps += tolower(tmp->data.getPhoneName()[j]);
+                    for(int j = 0; j < tmp->Data().getName().length(); ++j){
+                        tmps += tolower(tmp->Data().getName()[j]);
                     }
                     if(tmps.find(name) != -1) {
                         std::cout << leftSide << line(39); // phonename
@@ -341,16 +276,16 @@ void PhoneManager::Search()
                         std::cout << midMid << line(8); // remaining amount
                         std::cout << rightSide << "\n";
 
-                        std::cout << col << setw((39 - tmp->data.getPhoneName().length())/2) << "" << setw(39 - (39 - tmp->data.getPhoneName().length())/2) << left << tmp->data.getPhoneName(); 
-                        std::cout << col << setw((13 - tmp->data.getPhoneID().length())/2) << "" << setw(13 - (13 - tmp->data.getPhoneID().length())/2) << left << tmp->data.getPhoneID();
-                        std::cout << col << setw((9 - tmp->data.getBrand().length())/2) << "" << setw(9 - (9 - tmp->data.getBrand().length())/2) << left << tmp->data.getBrand();
-                        std::cout << col << setw((27 - tmp->data.getProcessor().length())/2) << "" << setw(27 - (27 - tmp->data.getProcessor().length())/2) << left << tmp->data.getProcessor();
-                        std::cout << col << setw((12 - tmp->data.getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->data.getRAM_ROM().length())/2) << left << tmp->data.getRAM_ROM();
-                        std::cout << col << setw((29 - tmp->data.getDisplay().length())/2) << "" << setw(29 - (29 - tmp->data.getDisplay().length())/2) << left << tmp->data.getDisplay();
-                        std::cout << col << setw((13 - tmp->data.getCamera().length())/2) << "" << setw(13 - (13 - tmp->data.getCamera().length())/2) << left << tmp->data.getCamera();
-                        std::cout << col << setw(13 - (13 - to_string(tmp->data.getEntryPrice()).length())/2) << right << tmp->data.getEntryPrice() << setw((13 - to_string(tmp->data.getEntryPrice()).length())/2) << "" ;
-                        std::cout << col << setw(12 - (12 - to_string(tmp->data.getSalePrice()).length())/2) << right << tmp->data.getSalePrice() << setw((12 - to_string(tmp->data.getSalePrice()).length())/2) << "" ;
-                        std::cout << col << setw(8 - (8 - to_string(tmp->data.getRemainingAmount()).length())/2) << right << tmp->data.getRemainingAmount() << setw((8 - to_string(tmp->data.getRemainingAmount()).length())/2) << "" ;
+                        std::cout << col << setw((39 - tmp->Data().getName().length())/2) << "" << setw(39 - (39 - tmp->Data().getName().length())/2) << left << tmp->Data().getName(); 
+                        std::cout << col << setw((13 - tmp->Data().getID().length())/2) << "" << setw(13 - (13 - tmp->Data().getID().length())/2) << left << tmp->Data().getID();
+                        std::cout << col << setw((9 - tmp->Data().getBrand().length())/2) << "" << setw(9 - (9 - tmp->Data().getBrand().length())/2) << left << tmp->Data().getBrand();
+                        std::cout << col << setw((27 - tmp->Data().getProcessor().length())/2) << "" << setw(27 - (27 - tmp->Data().getProcessor().length())/2) << left << tmp->Data().getProcessor();
+                        std::cout << col << setw((12 - tmp->Data().getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->Data().getRAM_ROM().length())/2) << left << tmp->Data().getRAM_ROM();
+                        std::cout << col << setw((29 - tmp->Data().getDisplay().length())/2) << "" << setw(29 - (29 - tmp->Data().getDisplay().length())/2) << left << tmp->Data().getDisplay();
+                        std::cout << col << setw((13 - tmp->Data().getCamera().length())/2) << "" << setw(13 - (13 - tmp->Data().getCamera().length())/2) << left << tmp->Data().getCamera();
+                        std::cout << col << setw(13 - (13 - to_string(tmp->Data().getEntryPrice()).length())/2) << right << tmp->Data().getEntryPrice() << setw((13 - to_string(tmp->Data().getEntryPrice()).length())/2) << "" ;
+                        std::cout << col << setw(12 - (12 - to_string(tmp->Data().getSalePrice()).length())/2) << right << tmp->Data().getSalePrice() << setw((12 - to_string(tmp->Data().getSalePrice()).length())/2) << "" ;
+                        std::cout << col << setw(8 - (8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << right << tmp->Data().getRemainingAmount() << setw((8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << "" ;
                         std::cout << col << "\n";
                     }
                 }
@@ -381,14 +316,14 @@ void PhoneManager::Search()
                 brand[i] = tolower(brand[i]);
             }
             bool checkExist = false;
-            for(Node *k = this->pHead; k != nullptr; k = k->pNext) {
+            for(Node<Phone>* tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
                 string tmps = "";
-                for(int j = 0; j < k->data.getBrand().length(); ++j){
-                    tmps += tolower(k->data.getBrand()[j]);
+                for(int j = 0; j < tmp->Data().getBrand().length(); ++j){
+                    tmps += tolower(tmp->Data().getBrand()[j]);
                 }
                 if(tmps.find(brand) != -1) {
                     checkExist = true;
-                    k = nullptr;
+                    tmp = nullptr;
                     break;
                 }
             }
@@ -419,10 +354,10 @@ void PhoneManager::Search()
                 std::cout << col << "\n";
 
                 
-                for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+                for(Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
                     string tmps = "";
-                    for(int j = 0; j < tmp->data.getBrand().length(); ++j){
-                        tmps += tolower(tmp->data.getBrand()[j]);
+                    for(int j = 0; j < tmp->Data().getBrand().length(); ++j){
+                        tmps += tolower(tmp->Data().getBrand()[j]);
                     }
                     if(tmps.find(brand) != -1) {
                         std::cout << leftSide << line(39); // phonename
@@ -437,16 +372,16 @@ void PhoneManager::Search()
                         std::cout << midMid << line(8); // remaining amount
                         std::cout << rightSide << "\n";
 
-                        std::cout << col << setw((39 - tmp->data.getPhoneName().length())/2) << "" << setw(39 - (39 - tmp->data.getPhoneName().length())/2) << left << tmp->data.getPhoneName(); 
-                        std::cout << col << setw((13 - tmp->data.getPhoneID().length())/2) << "" << setw(13 - (13 - tmp->data.getPhoneID().length())/2) << left << tmp->data.getPhoneID();
-                        std::cout << col << setw((9 - tmp->data.getBrand().length())/2) << "" << setw(9 - (9 - tmp->data.getBrand().length())/2) << left << tmp->data.getBrand();
-                        std::cout << col << setw((27 - tmp->data.getProcessor().length())/2) << "" << setw(27 - (27 - tmp->data.getProcessor().length())/2) << left << tmp->data.getProcessor();
-                        std::cout << col << setw((12 - tmp->data.getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->data.getRAM_ROM().length())/2) << left << tmp->data.getRAM_ROM();
-                        std::cout << col << setw((29 - tmp->data.getDisplay().length())/2) << "" << setw(29 - (29 - tmp->data.getDisplay().length())/2) << left << tmp->data.getDisplay();
-                        std::cout << col << setw((13 - tmp->data.getCamera().length())/2) << "" << setw(13 - (13 - tmp->data.getCamera().length())/2) << left << tmp->data.getCamera();
-                        std::cout << col << setw(13 - (13 - to_string(tmp->data.getEntryPrice()).length())/2) << right << tmp->data.getEntryPrice() << setw((13 - to_string(tmp->data.getEntryPrice()).length())/2) << "" ;
-                        std::cout << col << setw(12 - (12 - to_string(tmp->data.getSalePrice()).length())/2) << right << tmp->data.getSalePrice() << setw((12 - to_string(tmp->data.getSalePrice()).length())/2) << "" ;
-                        std::cout << col << setw(8 - (8 - to_string(tmp->data.getRemainingAmount()).length())/2) << right << tmp->data.getRemainingAmount() << setw((8 - to_string(tmp->data.getRemainingAmount()).length())/2) << "" ;
+                        std::cout << col << setw((39 - tmp->Data().getName().length())/2) << "" << setw(39 - (39 - tmp->Data().getName().length())/2) << left << tmp->Data().getName(); 
+                        std::cout << col << setw((13 - tmp->Data().getID().length())/2) << "" << setw(13 - (13 - tmp->Data().getID().length())/2) << left << tmp->Data().getID();
+                        std::cout << col << setw((9 - tmp->Data().getBrand().length())/2) << "" << setw(9 - (9 - tmp->Data().getBrand().length())/2) << left << tmp->Data().getBrand();
+                        std::cout << col << setw((27 - tmp->Data().getProcessor().length())/2) << "" << setw(27 - (27 - tmp->Data().getProcessor().length())/2) << left << tmp->Data().getProcessor();
+                        std::cout << col << setw((12 - tmp->Data().getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->Data().getRAM_ROM().length())/2) << left << tmp->Data().getRAM_ROM();
+                        std::cout << col << setw((29 - tmp->Data().getDisplay().length())/2) << "" << setw(29 - (29 - tmp->Data().getDisplay().length())/2) << left << tmp->Data().getDisplay();
+                        std::cout << col << setw((13 - tmp->Data().getCamera().length())/2) << "" << setw(13 - (13 - tmp->Data().getCamera().length())/2) << left << tmp->Data().getCamera();
+                        std::cout << col << setw(13 - (13 - to_string(tmp->Data().getEntryPrice()).length())/2) << right << tmp->Data().getEntryPrice() << setw((13 - to_string(tmp->Data().getEntryPrice()).length())/2) << "" ;
+                        std::cout << col << setw(12 - (12 - to_string(tmp->Data().getSalePrice()).length())/2) << right << tmp->Data().getSalePrice() << setw((12 - to_string(tmp->Data().getSalePrice()).length())/2) << "" ;
+                        std::cout << col << setw(8 - (8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << right << tmp->Data().getRemainingAmount() << setw((8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << "" ;
                         std::cout << col << "\n";
                     }
                 }
@@ -476,14 +411,14 @@ void PhoneManager::Search()
                 processor[i] = tolower(processor[i]);
             }
             bool checkExist = false;
-            for(Node *k = this->pHead; k != nullptr; k = k->pNext) {
+            for(Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
                 string tmps = "";
-                for(int j = 0; j < k->data.getProcessor().length(); ++j){
-                    tmps += tolower(k->data.getProcessor()[j]);
+                for(int j = 0; j < tmp->Data().getProcessor().length(); ++j){
+                    tmps += tolower(tmp->Data().getProcessor()[j]);
                 }
                 if(tmps.find(processor) != -1) {
                     checkExist = true;
-                    k = nullptr;
+                    tmp = nullptr;
                     break;
                 }
             }
@@ -514,10 +449,10 @@ void PhoneManager::Search()
                 std::cout << col << "\n";
 
                 
-                for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+                for(Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
                     string tmps = "";
-                    for(int j = 0; j < tmp->data.getProcessor().length(); ++j){
-                        tmps += tolower(tmp->data.getProcessor()[j]);
+                    for(int j = 0; j < tmp->Data().getProcessor().length(); ++j){
+                        tmps += tolower(tmp->Data().getProcessor()[j]);
                     }
                     if(tmps.find(processor) != -1) {
                         std::cout << leftSide << line(39); // phonename
@@ -532,16 +467,16 @@ void PhoneManager::Search()
                         std::cout << midMid << line(8); // remaining amount
                         std::cout << rightSide << "\n";
 
-                        std::cout << col << setw((39 - tmp->data.getPhoneName().length())/2) << "" << setw(39 - (39 - tmp->data.getPhoneName().length())/2) << left << tmp->data.getPhoneName(); 
-                        std::cout << col << setw((13 - tmp->data.getPhoneID().length())/2) << "" << setw(13 - (13 - tmp->data.getPhoneID().length())/2) << left << tmp->data.getPhoneID();
-                        std::cout << col << setw((9 - tmp->data.getBrand().length())/2) << "" << setw(9 - (9 - tmp->data.getBrand().length())/2) << left << tmp->data.getBrand();
-                        std::cout << col << setw((27 - tmp->data.getProcessor().length())/2) << "" << setw(27 - (27 - tmp->data.getProcessor().length())/2) << left << tmp->data.getProcessor();
-                        std::cout << col << setw((12 - tmp->data.getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->data.getRAM_ROM().length())/2) << left << tmp->data.getRAM_ROM();
-                        std::cout << col << setw((29 - tmp->data.getDisplay().length())/2) << "" << setw(29 - (29 - tmp->data.getDisplay().length())/2) << left << tmp->data.getDisplay();
-                        std::cout << col << setw((13 - tmp->data.getCamera().length())/2) << "" << setw(13 - (13 - tmp->data.getCamera().length())/2) << left << tmp->data.getCamera();
-                        std::cout << col << setw(13 - (13 - to_string(tmp->data.getEntryPrice()).length())/2) << right << tmp->data.getEntryPrice() << setw((13 - to_string(tmp->data.getEntryPrice()).length())/2) << "" ;
-                        std::cout << col << setw(12 - (12 - to_string(tmp->data.getSalePrice()).length())/2) << right << tmp->data.getSalePrice() << setw((12 - to_string(tmp->data.getSalePrice()).length())/2) << "" ;
-                        std::cout << col << setw(8 - (8 - to_string(tmp->data.getRemainingAmount()).length())/2) << right << tmp->data.getRemainingAmount() << setw((8 - to_string(tmp->data.getRemainingAmount()).length())/2) << "" ;
+                        std::cout << col << setw((39 - tmp->Data().getName().length())/2) << "" << setw(39 - (39 - tmp->Data().getName().length())/2) << left << tmp->Data().getName(); 
+                        std::cout << col << setw((13 - tmp->Data().getID().length())/2) << "" << setw(13 - (13 - tmp->Data().getID().length())/2) << left << tmp->Data().getID();
+                        std::cout << col << setw((9 - tmp->Data().getBrand().length())/2) << "" << setw(9 - (9 - tmp->Data().getBrand().length())/2) << left << tmp->Data().getBrand();
+                        std::cout << col << setw((27 - tmp->Data().getProcessor().length())/2) << "" << setw(27 - (27 - tmp->Data().getProcessor().length())/2) << left << tmp->Data().getProcessor();
+                        std::cout << col << setw((12 - tmp->Data().getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->Data().getRAM_ROM().length())/2) << left << tmp->Data().getRAM_ROM();
+                        std::cout << col << setw((29 - tmp->Data().getDisplay().length())/2) << "" << setw(29 - (29 - tmp->Data().getDisplay().length())/2) << left << tmp->Data().getDisplay();
+                        std::cout << col << setw((13 - tmp->Data().getCamera().length())/2) << "" << setw(13 - (13 - tmp->Data().getCamera().length())/2) << left << tmp->Data().getCamera();
+                        std::cout << col << setw(13 - (13 - to_string(tmp->Data().getEntryPrice()).length())/2) << right << tmp->Data().getEntryPrice() << setw((13 - to_string(tmp->Data().getEntryPrice()).length())/2) << "" ;
+                        std::cout << col << setw(12 - (12 - to_string(tmp->Data().getSalePrice()).length())/2) << right << tmp->Data().getSalePrice() << setw((12 - to_string(tmp->Data().getSalePrice()).length())/2) << "" ;
+                        std::cout << col << setw(8 - (8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << right << tmp->Data().getRemainingAmount() << setw((8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << "" ;
                         std::cout << col << "\n";
                     }
                 }
@@ -595,10 +530,10 @@ void PhoneManager::Search()
             
             string RAM_ROM = RAM + "GB-" + ROM + "GB"; 
             bool checkExist = false;
-            for(Node *k = this->pHead; k != nullptr; k = k->pNext) {
-                if(k->data.getRAM_ROM() == RAM_ROM) {
+            for(Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
+                if(tmp->Data().getRAM_ROM() == RAM_ROM) {
                     checkExist = true;
-                    k = nullptr;
+                    tmp = nullptr;
                     break;
                 }
             }
@@ -629,8 +564,8 @@ void PhoneManager::Search()
                 std::cout << col << "\n";
 
                 
-                for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
-                    if(tmp->data.getRAM_ROM() == RAM_ROM) {
+                for(Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
+                    if(tmp->Data().getRAM_ROM() == RAM_ROM) {
                         std::cout << leftSide << line(39); // phonename
                         std::cout << midMid << line(13); // phoneID
                         std::cout << midMid << line(9); // brand
@@ -643,16 +578,16 @@ void PhoneManager::Search()
                         std::cout << midMid << line(8); // remaining amount
                         std::cout << rightSide << "\n";
 
-                        std::cout << col << setw((39 - tmp->data.getPhoneName().length())/2) << "" << setw(39 - (39 - tmp->data.getPhoneName().length())/2) << left << tmp->data.getPhoneName(); 
-                        std::cout << col << setw((13 - tmp->data.getPhoneID().length())/2) << "" << setw(13 - (13 - tmp->data.getPhoneID().length())/2) << left << tmp->data.getPhoneID();
-                        std::cout << col << setw((9 - tmp->data.getBrand().length())/2) << "" << setw(9 - (9 - tmp->data.getBrand().length())/2) << left << tmp->data.getBrand();
-                        std::cout << col << setw((27 - tmp->data.getProcessor().length())/2) << "" << setw(27 - (27 - tmp->data.getProcessor().length())/2) << left << tmp->data.getProcessor();
-                        std::cout << col << setw((12 - tmp->data.getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->data.getRAM_ROM().length())/2) << left << tmp->data.getRAM_ROM();
-                        std::cout << col << setw((29 - tmp->data.getDisplay().length())/2) << "" << setw(29 - (29 - tmp->data.getDisplay().length())/2) << left << tmp->data.getDisplay();
-                        std::cout << col << setw((13 - tmp->data.getCamera().length())/2) << "" << setw(13 - (13 - tmp->data.getCamera().length())/2) << left << tmp->data.getCamera();
-                        std::cout << col << setw(13 - (13 - to_string(tmp->data.getEntryPrice()).length())/2) << right << tmp->data.getEntryPrice() << setw((13 - to_string(tmp->data.getEntryPrice()).length())/2) << "" ;
-                        std::cout << col << setw(12 - (12 - to_string(tmp->data.getSalePrice()).length())/2) << right << tmp->data.getSalePrice() << setw((12 - to_string(tmp->data.getSalePrice()).length())/2) << "" ;
-                        std::cout << col << setw(8 - (8 - to_string(tmp->data.getRemainingAmount()).length())/2) << right << tmp->data.getRemainingAmount() << setw((8 - to_string(tmp->data.getRemainingAmount()).length())/2) << "" ;
+                        std::cout << col << setw((39 - tmp->Data().getName().length())/2) << "" << setw(39 - (39 - tmp->Data().getName().length())/2) << left << tmp->Data().getName(); 
+                        std::cout << col << setw((13 - tmp->Data().getID().length())/2) << "" << setw(13 - (13 - tmp->Data().getID().length())/2) << left << tmp->Data().getID();
+                        std::cout << col << setw((9 - tmp->Data().getBrand().length())/2) << "" << setw(9 - (9 - tmp->Data().getBrand().length())/2) << left << tmp->Data().getBrand();
+                        std::cout << col << setw((27 - tmp->Data().getProcessor().length())/2) << "" << setw(27 - (27 - tmp->Data().getProcessor().length())/2) << left << tmp->Data().getProcessor();
+                        std::cout << col << setw((12 - tmp->Data().getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->Data().getRAM_ROM().length())/2) << left << tmp->Data().getRAM_ROM();
+                        std::cout << col << setw((29 - tmp->Data().getDisplay().length())/2) << "" << setw(29 - (29 - tmp->Data().getDisplay().length())/2) << left << tmp->Data().getDisplay();
+                        std::cout << col << setw((13 - tmp->Data().getCamera().length())/2) << "" << setw(13 - (13 - tmp->Data().getCamera().length())/2) << left << tmp->Data().getCamera();
+                        std::cout << col << setw(13 - (13 - to_string(tmp->Data().getEntryPrice()).length())/2) << right << tmp->Data().getEntryPrice() << setw((13 - to_string(tmp->Data().getEntryPrice()).length())/2) << "" ;
+                        std::cout << col << setw(12 - (12 - to_string(tmp->Data().getSalePrice()).length())/2) << right << tmp->Data().getSalePrice() << setw((12 - to_string(tmp->Data().getSalePrice()).length())/2) << "" ;
+                        std::cout << col << setw(8 - (8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << right << tmp->Data().getRemainingAmount() << setw((8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << "" ;
                         std::cout << col << "\n";
                     }
                 }
@@ -677,7 +612,11 @@ void PhoneManager::Search()
 
             std::cout << setw(45) << "" << "1. Entry price" << "\n";
             std::cout << setw(45) << "" << "2. Sale price" << "\n";
+            std::cout << setw(45) << "" << "Your choice: ";
             string choice;
+            cin >> choice; 
+            cin.clear();
+            fflush(stdin);
             if(choice != "1" && choice != "2") {
                 std::cout << setw(45) << "" << "Invalid choice!\n"; 
                 std::system("pause");
@@ -686,6 +625,8 @@ void PhoneManager::Search()
                 string sprice, eprice;
                 std::cout << setw(45) << "" << "Price from: ";
                 std::cin >> sprice;
+                cin.clear();
+                fflush(stdin);
                 bool checkLegal = true;
                 for(int i = 0; i < sprice.length(); ++i) {
                     if(sprice[i] < '0' || sprice[i] > '9') {
@@ -701,6 +642,8 @@ void PhoneManager::Search()
                 
                 std::cout << setw(51) << "" << "to: ";
                 std::cin >> eprice;
+                cin.clear();
+                fflush(stdin);
                 
                 if(!checkLegal) {
                     cout << setw(45) << "" << "Invalid price!\n";
@@ -710,8 +653,8 @@ void PhoneManager::Search()
 
                 int isprice = stoi(sprice), ieprice = stoi(eprice);
                 bool checkExist = false;
-                for(Node* tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
-                    if(tmp->data.getEntryPrice() >= isprice && tmp->data.getEntryPrice() <= ieprice) {
+                for(Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
+                    if(tmp->Data().getEntryPrice() >= isprice && tmp->Data().getEntryPrice() <= ieprice) {
                         checkExist = true;
                         break;
                     }
@@ -742,9 +685,9 @@ void PhoneManager::Search()
                     std::cout << col << "\n";
 
                     
-                    for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+                    for(Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
                         
-                        if(tmp->data.getEntryPrice() >= isprice && tmp->data.getEntryPrice() <= ieprice) {
+                        if(tmp->Data().getEntryPrice() >= isprice && tmp->Data().getEntryPrice() <= ieprice) {
                             std::cout << leftSide << line(39); // phonename
                             std::cout << midMid << line(13); // phoneID
                             std::cout << midMid << line(9); // brand
@@ -757,16 +700,16 @@ void PhoneManager::Search()
                             std::cout << midMid << line(8); // remaining amount
                             std::cout << rightSide << "\n";
 
-                            std::cout << col << setw((39 - tmp->data.getPhoneName().length())/2) << "" << setw(39 - (39 - tmp->data.getPhoneName().length())/2) << left << tmp->data.getPhoneName(); 
-                            std::cout << col << setw((13 - tmp->data.getPhoneID().length())/2) << "" << setw(13 - (13 - tmp->data.getPhoneID().length())/2) << left << tmp->data.getPhoneID();
-                            std::cout << col << setw((9 - tmp->data.getBrand().length())/2) << "" << setw(9 - (9 - tmp->data.getBrand().length())/2) << left << tmp->data.getBrand();
-                            std::cout << col << setw((27 - tmp->data.getProcessor().length())/2) << "" << setw(27 - (27 - tmp->data.getProcessor().length())/2) << left << tmp->data.getProcessor();
-                            std::cout << col << setw((12 - tmp->data.getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->data.getRAM_ROM().length())/2) << left << tmp->data.getRAM_ROM();
-                            std::cout << col << setw((29 - tmp->data.getDisplay().length())/2) << "" << setw(29 - (29 - tmp->data.getDisplay().length())/2) << left << tmp->data.getDisplay();
-                            std::cout << col << setw((13 - tmp->data.getCamera().length())/2) << "" << setw(13 - (13 - tmp->data.getCamera().length())/2) << left << tmp->data.getCamera();
-                            std::cout << col << setw(13 - (13 - to_string(tmp->data.getEntryPrice()).length())/2) << right << tmp->data.getEntryPrice() << setw((13 - to_string(tmp->data.getEntryPrice()).length())/2) << "" ;
-                            std::cout << col << setw(12 - (12 - to_string(tmp->data.getSalePrice()).length())/2) << right << tmp->data.getSalePrice() << setw((12 - to_string(tmp->data.getSalePrice()).length())/2) << "" ;
-                            std::cout << col << setw(8 - (8 - to_string(tmp->data.getRemainingAmount()).length())/2) << right << tmp->data.getRemainingAmount() << setw((8 - to_string(tmp->data.getRemainingAmount()).length())/2) << "" ;
+                            std::cout << col << setw((39 - tmp->Data().getName().length())/2) << "" << setw(39 - (39 - tmp->Data().getName().length())/2) << left << tmp->Data().getName(); 
+                            std::cout << col << setw((13 - tmp->Data().getID().length())/2) << "" << setw(13 - (13 - tmp->Data().getID().length())/2) << left << tmp->Data().getID();
+                            std::cout << col << setw((9 - tmp->Data().getBrand().length())/2) << "" << setw(9 - (9 - tmp->Data().getBrand().length())/2) << left << tmp->Data().getBrand();
+                            std::cout << col << setw((27 - tmp->Data().getProcessor().length())/2) << "" << setw(27 - (27 - tmp->Data().getProcessor().length())/2) << left << tmp->Data().getProcessor();
+                            std::cout << col << setw((12 - tmp->Data().getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->Data().getRAM_ROM().length())/2) << left << tmp->Data().getRAM_ROM();
+                            std::cout << col << setw((29 - tmp->Data().getDisplay().length())/2) << "" << setw(29 - (29 - tmp->Data().getDisplay().length())/2) << left << tmp->Data().getDisplay();
+                            std::cout << col << setw((13 - tmp->Data().getCamera().length())/2) << "" << setw(13 - (13 - tmp->Data().getCamera().length())/2) << left << tmp->Data().getCamera();
+                            std::cout << col << setw(13 - (13 - to_string(tmp->Data().getEntryPrice()).length())/2) << right << tmp->Data().getEntryPrice() << setw((13 - to_string(tmp->Data().getEntryPrice()).length())/2) << "" ;
+                            std::cout << col << setw(12 - (12 - to_string(tmp->Data().getSalePrice()).length())/2) << right << tmp->Data().getSalePrice() << setw((12 - to_string(tmp->Data().getSalePrice()).length())/2) << "" ;
+                            std::cout << col << setw(8 - (8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << right << tmp->Data().getRemainingAmount() << setw((8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << "" ;
                             std::cout << col << "\n";
                         }
                     }
@@ -790,6 +733,8 @@ void PhoneManager::Search()
                 string sprice, eprice;
                 std::cout << setw(45) << "" << "Price from: ";
                 std::cin >> sprice;
+                cin.clear();
+                fflush(stdin);
                 bool checkLegal = true;
                 for(int i = 0; i < sprice.length(); ++i) {
                     if(sprice[i] < '0' || sprice[i] > '9') {
@@ -798,24 +743,31 @@ void PhoneManager::Search()
                     }
                 }
                 if(!checkLegal) {
+                    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                    SetConsoleTextAttribute(hConsole, brightred);
                     cout << setw(45) << "" << "Invalid price!\n";
+                    SetConsoleTextAttribute(hConsole, brightwhite); 
                     std::system("pause");
                     continue;
                 }
                 
                 std::cout << setw(51) << "" << "to: ";
                 std::cin >> eprice;
-                
+                cin.clear();
+                fflush(stdin);
                 if(!checkLegal) {
+                    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                    SetConsoleTextAttribute(hConsole, brightred);
                     cout << setw(45) << "" << "Invalid price!\n";
+                    SetConsoleTextAttribute(hConsole, brightwhite); 
                     std::system("pause");
                     continue;
                 }
 
                 int isprice = stoi(sprice), ieprice = stoi(eprice);
                 bool checkExist = false;
-                for(Node* tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
-                    if(tmp->data.getSalePrice() >= isprice && tmp->data.getSalePrice() <= ieprice) {
+                for(Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
+                    if(tmp->Data().getSalePrice() >= isprice && tmp->Data().getSalePrice() <= ieprice) {
                         checkExist = true;
                         break;
                     }
@@ -846,9 +798,9 @@ void PhoneManager::Search()
                     std::cout << col << "\n";
 
                     
-                    for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+                    for(Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
                         
-                        if(tmp->data.getSalePrice() >= isprice && tmp->data.getSalePrice() <= ieprice) {
+                        if(tmp->Data().getSalePrice() >= isprice && tmp->Data().getSalePrice() <= ieprice) {
                             std::cout << leftSide << line(39); // phonename
                             std::cout << midMid << line(13); // phoneID
                             std::cout << midMid << line(9); // brand
@@ -861,16 +813,16 @@ void PhoneManager::Search()
                             std::cout << midMid << line(8); // remaining amount
                             std::cout << rightSide << "\n";
 
-                            std::cout << col << setw((39 - tmp->data.getPhoneName().length())/2) << "" << setw(39 - (39 - tmp->data.getPhoneName().length())/2) << left << tmp->data.getPhoneName(); 
-                            std::cout << col << setw((13 - tmp->data.getPhoneID().length())/2) << "" << setw(13 - (13 - tmp->data.getPhoneID().length())/2) << left << tmp->data.getPhoneID();
-                            std::cout << col << setw((9 - tmp->data.getBrand().length())/2) << "" << setw(9 - (9 - tmp->data.getBrand().length())/2) << left << tmp->data.getBrand();
-                            std::cout << col << setw((27 - tmp->data.getProcessor().length())/2) << "" << setw(27 - (27 - tmp->data.getProcessor().length())/2) << left << tmp->data.getProcessor();
-                            std::cout << col << setw((12 - tmp->data.getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->data.getRAM_ROM().length())/2) << left << tmp->data.getRAM_ROM();
-                            std::cout << col << setw((29 - tmp->data.getDisplay().length())/2) << "" << setw(29 - (29 - tmp->data.getDisplay().length())/2) << left << tmp->data.getDisplay();
-                            std::cout << col << setw((13 - tmp->data.getCamera().length())/2) << "" << setw(13 - (13 - tmp->data.getCamera().length())/2) << left << tmp->data.getCamera();
-                            std::cout << col << setw(13 - (13 - to_string(tmp->data.getEntryPrice()).length())/2) << right << tmp->data.getEntryPrice() << setw((13 - to_string(tmp->data.getEntryPrice()).length())/2) << "" ;
-                            std::cout << col << setw(12 - (12 - to_string(tmp->data.getSalePrice()).length())/2) << right << tmp->data.getSalePrice() << setw((12 - to_string(tmp->data.getSalePrice()).length())/2) << "" ;
-                            std::cout << col << setw(8 - (8 - to_string(tmp->data.getRemainingAmount()).length())/2) << right << tmp->data.getRemainingAmount() << setw((8 - to_string(tmp->data.getRemainingAmount()).length())/2) << "" ;
+                            std::cout << col << setw((39 - tmp->Data().getName().length())/2) << "" << setw(39 - (39 - tmp->Data().getName().length())/2) << left << tmp->Data().getName(); 
+                            std::cout << col << setw((13 - tmp->Data().getID().length())/2) << "" << setw(13 - (13 - tmp->Data().getID().length())/2) << left << tmp->Data().getID();
+                            std::cout << col << setw((9 - tmp->Data().getBrand().length())/2) << "" << setw(9 - (9 - tmp->Data().getBrand().length())/2) << left << tmp->Data().getBrand();
+                            std::cout << col << setw((27 - tmp->Data().getProcessor().length())/2) << "" << setw(27 - (27 - tmp->Data().getProcessor().length())/2) << left << tmp->Data().getProcessor();
+                            std::cout << col << setw((12 - tmp->Data().getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->Data().getRAM_ROM().length())/2) << left << tmp->Data().getRAM_ROM();
+                            std::cout << col << setw((29 - tmp->Data().getDisplay().length())/2) << "" << setw(29 - (29 - tmp->Data().getDisplay().length())/2) << left << tmp->Data().getDisplay();
+                            std::cout << col << setw((13 - tmp->Data().getCamera().length())/2) << "" << setw(13 - (13 - tmp->Data().getCamera().length())/2) << left << tmp->Data().getCamera();
+                            std::cout << col << setw(13 - (13 - to_string(tmp->Data().getEntryPrice()).length())/2) << right << tmp->Data().getEntryPrice() << setw((13 - to_string(tmp->Data().getEntryPrice()).length())/2) << "" ;
+                            std::cout << col << setw(12 - (12 - to_string(tmp->Data().getSalePrice()).length())/2) << right << tmp->Data().getSalePrice() << setw((12 - to_string(tmp->Data().getSalePrice()).length())/2) << "" ;
+                            std::cout << col << setw(8 - (8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << right << tmp->Data().getRemainingAmount() << setw((8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << "" ;
                             std::cout << col << "\n";
                         }
                     }
@@ -929,10 +881,10 @@ void PhoneManager::Search()
     // int index=-1;
     // for (Node *k=this->pHead;k!=NULL;k=k->pNext)
     // {
-    //      if (k->data.getPhoneID()==m)
+    //      if (k->Data().getID()==m)
     //     {
     //         index=1;
-    //         k->data.showForStaff();
+    //         k->Data().showForStaff();
     //         break;
     //     }
     // }
@@ -942,17 +894,17 @@ void PhoneManager::Search()
     // std::cout<<endl;
 
 }
-const string& PhoneManager::getPhoneID(int index) {
+const string& PhoneManager::getID(int index) {
     static string s;
-    if(index < 0 || index > this->n) {
+    if(index < 0 || index > this->list.size()) {
         return s;
     }
-    Node *phone = this->pHead;
+    Node<Phone> *phone = this->list.HeadNode();
     while(index--) {
-        phone = phone->pNext;
+        phone = phone->NextNode();
     }
-    return phone->data.getPhoneID();
-   // return (this->p + index)->getPhoneID();
+    return phone->Data().getID();
+   // return (this->p + index)->getID();
 }
 void PhoneManager::Show()
 {
@@ -982,7 +934,7 @@ void PhoneManager::Show()
 	std::cout << col << setw(7) << right << "Amount" << setw(1) << "";
     std::cout << col << "\n";
 
-    Node *tmp = this->pHead;
+    Node<Phone> *tmp = this->list.HeadNode();
     int i = 0;
     while(tmp != nullptr) {
         std::cout << leftSide << line(7); // order
@@ -999,19 +951,19 @@ void PhoneManager::Show()
 		std::cout << rightSide << "\n";
 		
         std::cout << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1; ++i;
-		std::cout << col << setw((39 - tmp->data.getPhoneName().length())/2) << "" << setw(39 - (39 - tmp->data.getPhoneName().length())/2) << left << tmp->data.getPhoneName(); 
-		std::cout << col << setw((13 - tmp->data.getPhoneID().length())/2) << "" << setw(13 - (13 - tmp->data.getPhoneID().length())/2) << left << tmp->data.getPhoneID();
-		std::cout << col << setw((9 - tmp->data.getBrand().length())/2) << "" << setw(9 - (9 - tmp->data.getBrand().length())/2) << left << tmp->data.getBrand();
-		std::cout << col << setw((27 - tmp->data.getProcessor().length())/2) << "" << setw(27 - (27 - tmp->data.getProcessor().length())/2) << left << tmp->data.getProcessor();
-		std::cout << col << setw((12 - tmp->data.getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->data.getRAM_ROM().length())/2) << left << tmp->data.getRAM_ROM();
-		std::cout << col << setw((29 - tmp->data.getDisplay().length())/2) << "" << setw(29 - (29 - tmp->data.getDisplay().length())/2) << left << tmp->data.getDisplay();
-		std::cout << col << setw((13 - tmp->data.getCamera().length())/2) << "" << setw(13 - (13 - tmp->data.getCamera().length())/2) << left << tmp->data.getCamera();
-		std::cout << col << setw(13 - (13 - to_string(tmp->data.getEntryPrice()).length())/2) << right << tmp->data.getEntryPrice() << setw((13 - to_string(tmp->data.getEntryPrice()).length())/2) << "" ;
-		std::cout << col << setw(12 - (12 - to_string(tmp->data.getSalePrice()).length())/2) << right << tmp->data.getSalePrice() << setw((12 - to_string(tmp->data.getSalePrice()).length())/2) << "" ;
-		std::cout << col << setw(8 - (8 - to_string(tmp->data.getRemainingAmount()).length())/2) << right << tmp->data.getRemainingAmount() << setw((8 - to_string(tmp->data.getRemainingAmount()).length())/2) << "" ;
+		std::cout << col << setw((39 - tmp->Data().getName().length())/2) << "" << setw(39 - (39 - tmp->Data().getName().length())/2) << left << tmp->Data().getName(); 
+		std::cout << col << setw((13 - tmp->Data().getID().length())/2) << "" << setw(13 - (13 - tmp->Data().getID().length())/2) << left << tmp->Data().getID();
+		std::cout << col << setw((9 - tmp->Data().getBrand().length())/2) << "" << setw(9 - (9 - tmp->Data().getBrand().length())/2) << left << tmp->Data().getBrand();
+		std::cout << col << setw((27 - tmp->Data().getProcessor().length())/2) << "" << setw(27 - (27 - tmp->Data().getProcessor().length())/2) << left << tmp->Data().getProcessor();
+		std::cout << col << setw((12 - tmp->Data().getRAM_ROM().length())/2) << "" << setw(12 - (12 - tmp->Data().getRAM_ROM().length())/2) << left << tmp->Data().getRAM_ROM();
+		std::cout << col << setw((29 - tmp->Data().getDisplay().length())/2) << "" << setw(29 - (29 - tmp->Data().getDisplay().length())/2) << left << tmp->Data().getDisplay();
+		std::cout << col << setw((13 - tmp->Data().getCamera().length())/2) << "" << setw(13 - (13 - tmp->Data().getCamera().length())/2) << left << tmp->Data().getCamera();
+		std::cout << col << setw(13 - (13 - to_string(tmp->Data().getEntryPrice()).length())/2) << right << tmp->Data().getEntryPrice() << setw((13 - to_string(tmp->Data().getEntryPrice()).length())/2) << "" ;
+		std::cout << col << setw(12 - (12 - to_string(tmp->Data().getSalePrice()).length())/2) << right << tmp->Data().getSalePrice() << setw((12 - to_string(tmp->Data().getSalePrice()).length())/2) << "" ;
+		std::cout << col << setw(8 - (8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << right << tmp->Data().getRemainingAmount() << setw((8 - to_string(tmp->Data().getRemainingAmount()).length())/2) << "" ;
 		std::cout << col << "\n";
 
-        tmp = tmp->pNext;
+        tmp = tmp->NextNode();
     }
     std::cout << botLeftCorner << line(7); 
     std::cout << botMid << line(39); // phone name
@@ -1036,7 +988,7 @@ void PhoneManager::ShowTable() {
 //	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 //	SetConsoleTextAttribute(hConsole, 3);
             
-    Node *phone = this->pHead;
+    Node<Phone> *phone = this->list.HeadNode();
     
     int cnt = 1;
 
@@ -1057,24 +1009,24 @@ void PhoneManager::ShowTable() {
 	//std::cout << setw(45) << "" << topLeftCorner << line(20 * 5 + 4) << topRightCorner << "\n";
     std::cout << setw(15) << "" << topLeftCorner << line(25) << topMid << line(25) << topMid << line(25) << topMid << line(25) << topMid << line(25) << topRightCorner << "\n";
 	
-	for(int i = 0; i < this->n / 5; ++i) {
+	for(int i = 0; i < this->list.size() / 5; ++i) {
         std::cout << setw(15) << "";
         for(int j = 0; j < 5; ++j) {
-            std::cout << col << setw(3) << right << cnt << ". " << setw(20) << left << phone->data.getPhoneName();
-            phone = phone->pNext;
+            std::cout << col << setw(3) << right << cnt << ". " << setw(20) << left << phone->Data().getName();
+            phone = phone->NextNode();
             ++cnt;
         }
         std::cout << col << "\n";
         std::cout << setw(15) << "" << leftSide << line(25) << midMid << line(25) << midMid << line(25) << midMid << line(25) << midMid << line(25) << rightSide << "\n";
     }
     std::cout << setw(15) << "";
-    for(int i = 0; i < this->n % 5; ++i) {
-        std::cout << col << setw(3) << right << cnt << ". " << setw(20) << left << phone->data.getPhoneName();
+    for(int i = 0; i < this->list.size() % 5; ++i) {
+        std::cout << col << setw(3) << right << cnt << ". " << setw(20) << left << phone->Data().getName();
         ++cnt;
-        phone = phone->pNext;
+        phone = phone->NextNode();
     }
     
-    for(int i = 0; i < 5 - this->n % 5; ++i) {
+    for(int i = 0; i < 5 - this->list.size() % 5; ++i) {
         cout << col << setw(25) << "";
     }
 
@@ -1087,45 +1039,45 @@ void PhoneManager::ShowTable() {
 // 	for(int t = 0; t < 6; ++t) {
 //         cout << setw(45) << "" << leftSide << line(10) << midMid << line(10) << midMid << line(10) << midMid << line(10) << midMid << line(10) << rightSide << "\n";
 //         cout << setw(45) << "";
-//         stringstream ss1(phone->data.getPhoneName());
+//         stringstream ss1(phone->Data().getName());
 //         cout << col << " ";
 //         for(int i = 0; i < 2; ++i) {
 //             string tmp; ss1 >> tmp;
 //             cout << tmp << " ";
 //         }
-//         phone = phone->pNext;
+//         phone = phone->NextNode();
         
-//         stringstream ss2(phone->data.getPhoneName());
+//         stringstream ss2(phone->Data().getName());
 //         cout << col << " ";
 //         for(int i = 0; i < 2; ++i) {
 //             string tmp; ss2 >> tmp;
 //             cout << setw(9) << left << tmp;
 //         }
-//         phone = phone->pNext;
+//         phone = phone->NextNode();
 
-//         stringstream ss3(phone->data.getPhoneName());
+//         stringstream ss3(phone->Data().getName());
 //         cout << col << " ";
 //         for(int i = 0; i < 2; ++i) {
 //             string tmp; ss3 >> tmp;
 //             cout << setw(9) << left << tmp;
 //         }
-//         phone = phone->pNext;
+//         phone = phone->NextNode();
 
-//         stringstream ss4(phone->data.getPhoneName());
+//         stringstream ss4(phone->Data().getName());
 //         cout << col << " ";
 //         for(int i = 0; i < 2; ++i) {
 //             string tmp; ss4 >> tmp;
 //             cout << setw(9) << left << tmp;
 //         }
-//         phone = phone->pNext;
+//         phone = phone->NextNode();
 
-//         stringstream ss5(phone->data.getPhoneName());
+//         stringstream ss5(phone->Data().getName());
 //         cout << col << " ";
 //         for(int i = 0; i < 2; ++i) {
 //             string tmp; ss5 >> tmp;
 //             cout << setw(9) << left << tmp;
 //         }
-//         phone = phone->pNext;
+//         phone = phone->NextNode();
 //         cout << col << "\n";
 
 //         cout << setw(45) << "";
@@ -1182,54 +1134,54 @@ void PhoneManager::ShowTable() {
 
 
 
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
     // stringstream ss3;    
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
 	// stringstream ss4;
-    // cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
+    // cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
 	// stringstream ss5;
-    // cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
+    // cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
 	// cout << col << "\n";
 	
 	
 	// cout << setw(45) << "";
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
 	// cout << col << "\n";
 	
 	// cout << setw(45) << "";
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
 	// cout << col << "\n";
 
 	// cout << setw(45) << "";
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
 	// cout << col << "\n";
 	
 	// cout << setw(45) << "";
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
 	// cout << col << "\n";
 	
 	// cout << setw(45) << "";
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
-	// cout << col << setw(10) << left << phone->data.getPhoneName(); phone = phone->pNext;
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
+	// cout << col << setw(10) << left << phone->Data().getName(); phone = phone->NextNode();
 	// cout << col << "\n";
 	
 	
@@ -1246,22 +1198,22 @@ void PhoneManager::ShowTable() {
     
     
     
-    // for (int i=0;i<this->n;i+=2)
+    // for (int i=0;i<this->list.size();i+=2)
     // {
-    //     cout<< setw(2) << right << i + 1 <<". " << setw(40) << left << k->data.getPhoneName()  << "" << i + 2 << ". " << k->pNext->data.getPhoneName() << "\n";
+    //     cout<< setw(2) << right << i + 1 <<". " << setw(40) << left << k->Data().getName()  << "" << i + 2 << ". " << k->pNext->Data().getName() << "\n";
     // }
     // if(n & 1) {
-    //     cout << this->n << ". " << (this->p + this->n - 1)->getPhoneName() << endl;
+    //     cout << this->list.size() << ". " << (this->p + this->list.size() - 1)->getName() << endl;
     // }
     // int d=0;
     // for (Node *k=this->pHead;k!=NULL;k=k->pNext)
     // {
-    //     cout<< setw(2) << right << d + 1 <<". " << setw(40) << left << k->data.getPhoneName()  << "" << d + 2 << ". " << k->pNext->data.getPhoneName() << "\n";
+    //     cout<< setw(2) << right << d + 1 <<". " << setw(40) << left << k->Data().getName()  << "" << d + 2 << ". " << k->pNext->Data().getName() << "\n";
     //     d+=2;
     //     k=k->pNext;
     // } 
     // if(n & 1) {
-    //     cout << this->n << ". " << this->pTail->data.getPhoneName() << endl;
+    //     cout << this->list.size() << ". " << this->pTail->Data().getName() << endl;
     // }  
 }
 void PhoneManager::Shopping(Order& order) { 
@@ -1276,7 +1228,10 @@ void PhoneManager::Shopping(Order& order) {
         std::cout << setw(30) << "" << "Choose what you want to purchase\n";
         this->ShowTable();
         std::cout << "\n";
+        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(hConsole, grey);
         std::cout << setw(45) << "" << "Enter 'exit' to exit!\n";
+        SetConsoleTextAttribute(hConsole, brightwhite);
         std::cout << setw(45) << "" << "Your choice: ";
         string choice;
         std::cin >> choice;
@@ -1295,27 +1250,33 @@ void PhoneManager::Shopping(Order& order) {
             std::cout << setw(45) << "" << "Amount: ";
             string samount; std::cin >> samount;
             int amount = stringToInt(samount);
-            //ShoppingList sp(phoneManager.getPhoneID(choice - 1),amount); 
+            //ShoppingList sp(phoneManager.getID(choice - 1),amount); 
             
             if(amount > 0) {
                 if(amount > this->getRemainingAmount(ichoice-1)) {
                     cout << setw(45) << "" << "Remaining amount is not enough\n"; 
                     //std::system("pause");
                 } else {
-                    if(order.searchCart(this->getPhoneID(ichoice-1))) {
-                        order.addToCart(this->getPhoneID(ichoice-1),amount);
+                    if(order.searchCart(this->getID(ichoice-1))) {
+                        order.addToCart(this->getID(ichoice-1),amount);
                     } else {
-                        order.addToCart(Goods(this->getPhoneID(ichoice - 1),amount));
+                        order.addToCart(Goods(this->getID(ichoice - 1),amount));
                     }
                     this->setRemainingAmount(ichoice-1,amount);
                     long long price = this->getPhonePrice(ichoice-1) *(long long)amount;
                     order.setTotalPrice(order.getTotalPrice() + price);
+                     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                    SetConsoleTextAttribute(hConsole, brightgreen);
                     cout << setw(45) << "" << "Add to cart successfully!\n";
+                    SetConsoleTextAttribute(hConsole, brightwhite); 
                     //std::system("pause");
 
                 }
             } else {
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	            SetConsoleTextAttribute(hConsole, brightred);
                 cout << setw(45) << "" << "Invalid amount!\n";
+	            SetConsoleTextAttribute(hConsole, brightwhite);
             }
             std::system("pause");
         }
@@ -1323,14 +1284,13 @@ void PhoneManager::Shopping(Order& order) {
         std::system("cls");
     }
 }
-
 void PhoneManager::Show(int index) {
     int pos=0;
-    for (Node *k=this->pHead;k!=NULL;k=k->pNext)
+    for (Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode())
     {
         if (pos==index) 
         {
-            k->data.showForCustomer();
+            tmp->Data().showForCustomer();
             break;
         }
         pos++;
@@ -1338,46 +1298,46 @@ void PhoneManager::Show(int index) {
 }
 const int& PhoneManager::getPhonePrice(int index) {
     static int i;
-    if(index < 0 || index > this->n) {
+    if(index < 0 || index > this->list.size()) {
         return i;
     }
-    Node *phone = this->pHead;
+    Node<Phone> *phone = this->list.HeadNode();
     while(index--) {
-        phone = phone->pNext;
+        phone = phone->NextNode();
     }
-    return phone->data.getSalePrice();
+    return phone->Data().getSalePrice();
 }
 const int& PhoneManager::getEntryPrice(int index) {
     static int i;
-    if(index < 0 || index > this->n) {
+    if(index < 0 || index > this->list.size()) {
         return i;
     }
-    Node *phone = this->pHead;
+    Node<Phone> *phone = this->list.HeadNode();
     while(index--) {
-        phone = phone->pNext;
+        phone = phone->NextNode();
     }
-    return phone->data.getEntryPrice();
+    return phone->Data().getEntryPrice();
 }
 const int& PhoneManager::getRemainingAmount(int index) {
     static int i;
-    if(index < 0 || index > this->n) {
+    if(index < 0 || index > this->list.size()) {
         return i;
     }
-    Node *phone = this->pHead;
+    Node<Phone> *phone = this->list.HeadNode();
     while(index--) {
-        phone = phone->pNext;
+        phone = phone->NextNode();
     }
-    return phone->data.getRemainingAmount();
+    return phone->Data().getRemainingAmount();
 }
 void PhoneManager::setRemainingAmount(int index, int amount) {
     int pos=0;
-    for (Node *k=this->pHead;k!=NULL;k=k->pNext)
+    for (Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode())
     {
         if (pos==index) 
         {
-            //return k->data.getRemainingAmount();   
-             k->data.setRemainingAmount(k->data.getRemainingAmount() - amount);
-             return;     
+            //return k->Data().getRemainingAmount();   
+            tmp->Data().setRemainingAmount(tmp->Data().getRemainingAmount() - amount);
+            return;     
         }
         pos++;
     }
@@ -1451,9 +1411,9 @@ void PhoneManager::LoadData() {
 void PhoneManager::UpdateFile() {
     fstream editfile("Phone.txt", ios::out);
     int d=0;
-    for (Node *k=this->pHead;k!=NULL;k=k->pNext) {
-        string s = k->data.getPhoneName() + "/" + k->data.getPhoneID() + "/" + k->data.getBrand() + "/" + k->data.getProcessor() + "/" + k->data.getRAM_ROM() + "/" + k->data.getDisplay() + "/" + k->data.getCamera() + "/" + to_string(k->data.getEntryPrice()) + "/" + to_string(k->data.getSalePrice()) + "/" + to_string(k->data.getRemainingAmount()) + "/" ;
-        if(d != this->n-1) editfile << s << "\n";
+    for (Node<Phone> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
+        string s = tmp->Data().getName() + "/" + tmp->Data().getID() + "/" + tmp->Data().getBrand() + "/" + tmp->Data().getProcessor() + "/" + tmp->Data().getRAM_ROM() + "/" + tmp->Data().getDisplay() + "/" + tmp->Data().getCamera() + "/" + to_string(tmp->Data().getEntryPrice()) + "/" + to_string(tmp->Data().getSalePrice()) + "/" + to_string(tmp->Data().getRemainingAmount()) + "/" ;
+        if(d != this->list.size()-1) editfile << s << "\n";
         else editfile << s;
         d++;
     }
@@ -1479,6 +1439,8 @@ void PhoneManager::Menu() {
             
             std::cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
+            cin.clear();
+            fflush(stdin);
             if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6") {
                 std::cout << "Invalid choice, please re-enter!\n";
                 std::system("pause");
@@ -1500,13 +1462,13 @@ void PhoneManager::Menu() {
             }
 
             bool exist = false;
-            Node* tmp = this->pHead;
+            Node<Phone> *tmp = this->list.HeadNode();
             while(tmp != nullptr) {
-                if(tmp->data.getPhoneName() == phoneName) {
+                if(tmp->Data().getName() == phoneName) {
                     exist = true;
                     break;
                 }
-                tmp = tmp->pNext;
+                tmp = tmp->NextNode();
             }
             if(!exist) {
                 string phoneID, brand, processor, RAM_ROM, display, camera; 
@@ -1583,38 +1545,9 @@ void PhoneManager::Menu() {
     }
     
 }
-
-const PhoneManager& PhoneManager::operator=(const PhoneManager& v )
+const PhoneManager& PhoneManager::operator=(const PhoneManager& pm)
 {
-    if (this != &v) {
-        //this->n=v.n;
-        Node *k;  
-        while (this->pHead!=NULL)
-        {
-            k=this->pHead;
-            this->pHead=this->pHead->pNext;
-            delete k;
-            this->n--;
-        }
-        this->pTail=NULL;
-        for (Node *k=v.pHead;k!=NULL;k=k->pNext)
-        {
-            this->Add(k->data);
-        }
-        
-    }
+    
+    this->list = pm.list;
     return *this;
-}
-
-long long PhoneManager::GetVon()
-{
-    long long Von=0;
-    for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-    {
-        if (k->data.getRemainingAmount()<100) {
-            Von+=(100-k->data.getRemainingAmount())*k->data.getEntryPrice();
-            k->data.setRemainingAmount(100);
-        }
-    }
-    return Von;
 }

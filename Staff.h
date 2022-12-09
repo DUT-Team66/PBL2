@@ -4,10 +4,14 @@
 #include "PhoneManager.h"
 #include "OrderManager.h"
 #include "CustomerManager.h"
+#include "MyLib.h"
 #include "Account.h"
 #include <string>
 #include <iostream>
 using namespace std;
+class PhoneManager; 
+class OrderManager;
+class CustomerManager;
 
 class Staff
 {
@@ -20,9 +24,9 @@ class Staff
         string address;
         int salary;    
         Account account;
-        PhoneManager managePhone;
-        OrderManager manageOrder;
-        CustomerManager manageCustomer;
+        PhoneManager *managePhone;
+        OrderManager *manageOrder;
+        CustomerManager *manageCustomer;
     public:
 
     
@@ -48,10 +52,10 @@ class Staff
         const string& getUsername() const;
         void setPassword(const string&); 
         const string& getPassword() const;
-        void setPhoneManager(const PhoneManager&);
+        void setPhoneManager(PhoneManager&);
         const PhoneManager& getPhoneManager() const;
-        void setOrderManager(const OrderManager&);
-        void setCustomerManager(const CustomerManager&);
+        void setOrderManager(OrderManager&);
+        void setCustomerManager(CustomerManager&);
         
         void show(); // show staff information
         void Menu(); // staff route

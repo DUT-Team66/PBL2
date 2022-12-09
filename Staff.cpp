@@ -14,6 +14,10 @@ Staff::Staff()
     this->phoneNumber = "";
     this->address = "";
     this->salary = 5000000;
+    this->account = {"",""};
+    this->manageCustomer = nullptr;
+    this->manageOrder = nullptr;
+    this->managePhone = nullptr;
 }
 Staff::Staff(string a, string b, string c, string d, string e, string f,string g, string h)
     : name(a), ID(b), gender(c), dob(d), phoneNumber(e), address(f), account(g,h)
@@ -91,17 +95,17 @@ void Staff::setPassword(const string& password) {
 const string& Staff::getPassword() const {
     return this->account.getPassword();
 }
-void Staff::setPhoneManager(const PhoneManager& phoneManager) {
-    this->managePhone = phoneManager;
+void Staff::setPhoneManager(PhoneManager& phoneManager) {
+    this->managePhone = &phoneManager;
 }
 const PhoneManager& Staff::getPhoneManager() const {
-    return this->managePhone;
+    return *(this->managePhone);
 }
-void Staff::setOrderManager(const OrderManager& orderManager) {
-    this->manageOrder = orderManager;
+void Staff::setOrderManager(OrderManager& orderManager) {
+    this->manageOrder = &orderManager;
 }
-void Staff::setCustomerManager(const CustomerManager& manageCustomer) {
-    this->manageCustomer = manageCustomer;
+void Staff::setCustomerManager(CustomerManager& manageCustomer) {
+    this->manageCustomer = &manageCustomer;
 }
 void Staff::show()
 {
@@ -162,8 +166,6 @@ void Staff::show()
     
 
 }
-
-
 void Staff::Menu() {
     while(true) {
         string choice;
@@ -186,15 +188,14 @@ void Staff::Menu() {
         }
         
         if(choice == "1") {
-            this->managePhone.Menu();
+            this->managePhone->Menu();
         } else if(choice == "2") {
-            this->manageOrder.Menu();
+            this->manageOrder->Menu();
         } else if(choice == "3") {
-            this->manageCustomer.Menu();
+            this->manageCustomer->Menu();
         } else break;
     }
 }
-
 void Staff::setInfo() {
 
     string name, gender, dob, phoneNumber, address;
@@ -238,5 +239,5 @@ void Staff::setInfo() {
     getline(cin, this->address);
 }
 void Staff::UpdateAllFiles() {
-    this->managePhone.UpdateFile();
+    this->managePhone->UpdateFile();
 }

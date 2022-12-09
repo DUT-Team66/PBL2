@@ -4,18 +4,13 @@
 #include "Phone.h"
 #include "Goods.h"
 #include "Order.h"
+#include "MyLib.h"
 
 class PhoneManager
 {
     friend class Admin;
     private: 
-        struct Node{
-            Phone data;
-            Node* pNext;
-        };
-        Node *pHead;
-        Node *pTail;
-        int n;
+        List<Phone> list;
     public:
         //Khong co SV
         PhoneManager();
@@ -31,8 +26,8 @@ class PhoneManager
         void Show(int); // show 1 phone information
         void Shopping(Order&); // buy phone
 
-        const string& getPhoneID(int);
-        const int& getPhonePrice(int);
+        const string& getID(int);
+        const int& getPhonePrice(int); // sale price
         const int& getRemainingAmount(int);
         const int& getEntryPrice(int);
         void setRemainingAmount(int,int);
@@ -40,7 +35,5 @@ class PhoneManager
         void UpdateFile();
         void Menu();
         const PhoneManager& operator=(const PhoneManager& );
-
-        long long GetVon();
 };
 #endif

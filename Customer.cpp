@@ -28,8 +28,10 @@ void Customer::setCustomerAddress(const string& address) {
 const string& Customer::getCustomerAddress() const {
 	return this->customerAddress;
 }
-
-void Customer::Show()   // Chưa vẽ bảng
+const string& Customer::getID() const {
+	return this->customerPhoneNumber;
+}
+void Customer::show()   // Chưa vẽ bảng
 {
 	cout << setw(42) << "" << "Name: " << this->customerName << "\n";
 	//cout<<"CustomerPhoneNumber: "<<this->customerPhoneNumber<<"\n";

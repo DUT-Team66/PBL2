@@ -3,16 +3,12 @@
 #define _STAFFMANAGER_
 
 #include "Staff.h"
+#include "MyLib.h"
+
 class StaffManager
 {
     private: 
-        struct Node{
-            Staff data;
-            Node* pNext;
-        };
-        Node *pHead;
-        Node *pTail;
-        int n;
+        List<Staff> list;
     public:
         
         StaffManager();
@@ -23,15 +19,15 @@ class StaffManager
         void Delete(string);
         void Search();
         void Update();
-        void Show() const;
-        const string& getStaffName(int) const;
-        const string& getStaffID(int) const;
-        const string& getStaffGender(int) const;
-        const string& getStaffDob(int) const;
-        const string& getStaffPhoneNumber(int) const;
-        const string& getStaffAddress(int) const;
+        void Show();
+        const string& getStaffName(int);
+        const string& getStaffID(int);
+        const string& getStaffGender(int);
+        const string& getStaffDob(int);
+        const string& getStaffPhoneNumber(int);
+        const string& getStaffAddress(int);
         //-----------------
-        const int& GetLength() const;
+        int GetLength() const;
         void LoadData(); // load data from file
         void UpdateFile(); // edit file
         void Menu(); // manage staff choice

@@ -7,133 +7,114 @@
 using namespace std;
 OrderManager::OrderManager()
 {
-    this->pHead = nullptr;
-    this->pTail=nullptr;
-    this->n=0;
+
 }
 OrderManager::~OrderManager()
 {
-    delete this->pHead;
-    delete this->pTail;
+
 }
-const int& OrderManager::GetLength() const {
-    return this->n;
+int OrderManager::GetLength() const {
+    return this->list.size();
 }
 const int& OrderManager::GetMonth(int index)  
 {
     static int i;
-    if(index < 0 || index > this->n) {
+    if(index < 0 || index > this->list.size()) {
         return i;
     }
-    Node *order = this->pHead;
+    Node<Order> *order = this->list.HeadNode();
     while(index--) {
-        order = order->pNext;
+        order = order->NextNode();
     }
-    return order->data.getPurchaseDay().getMonth();
+    return order->Data().getPurchaseDay().getMonth();
 }
-const int& OrderManager::GetYear(int index) const 
+const int& OrderManager::GetYear(int index)
 {
     static int i;
-    if(index < 0 || index > this->n) {
+    if(index < 0 || index > this->list.size()) {
         return i;
     }
-    Node *order = this->pHead;
+    Node<Order> *order = this->list.HeadNode();
     while(index--) {
-        order = order->pNext;
+        order = order->NextNode();
     }
-    return order->data.getPurchaseDay().getYear();
+    return order->Data().getPurchaseDay().getYear();
 }
-const long long& OrderManager::GetTotalPrice(int index) const {
+const long long& OrderManager::GetTotalPrice(int index) {
     static long long i;
-    if(index < 0 || index > this->n) {
+    if(index < 0 || index > this->list.size()) {
         return i;
     }
-    Node *order = this->pHead;
+    Node<Order> *order = this->list.HeadNode();
     while(index--) {
-        order = order->pNext;
+        order = order->NextNode();
     }
-    return order->data.getTotalPrice();
+    return order->Data().getTotalPrice();
 }
 void OrderManager::Add(const Order& s)
 {
-    Node *p= new Node;
-    if (p==NULL)
-    {
-        cout<<"\nKhong du bo nho de cap phat\n"<<endl;
-    }
-    p->data=s;
-    p->pNext=NULL;
-    if (this->pHead==NULL)
-    {
-        this->pHead=this->pTail=p;
-    }
-    else
-    {
-        this->pTail->pNext=p;
-        this->pTail=p;
-    }
-    this->n++;
+    this->list.Add(s);
 }
 // 
 void OrderManager::SearchByOrderID(string m)
 {
     bool checkExist = false;
-    Node *tmp = this->pHead;
+    Node<Order> *tmp = this->list.HeadNode();
     while(tmp != nullptr) {
-        if(tmp->data.getID() == m) {
+        if(tmp->Data().getID() == m) {
             checkExist = true;
-            cout << topLeftCorner << line(11); // orderid
-            cout << topMid << line(14); //customerID
-            cout << topMid << line(14); // staffID
-            cout << topMid << line(14); // cart
-            cout << topMid << line(13); //purchaseday
-            cout << topMid << line(14); //totalprice
-            cout << topRightCorner << "\n";
+            std::cout << topLeftCorner << line(11); // orderid
+            std::cout << topMid << line(14); //customerID
+            std::cout << topMid << line(14); // staffID
+            std::cout << topMid << line(14); // cart
+            std::cout << topMid << line(13); //purchaseday
+            std::cout << topMid << line(14); //totalprice
+            std::cout << topRightCorner << "\n";
             
-            cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
-            cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
-            cout << col << setw(3) << "" << setw(11) << left << "StaffID";
-            cout << col << setw(4) << "" << setw(10) << left << "Cart";
-            cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
-            cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
-            cout << col << "\n";
+            std::cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
+            std::cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
+            std::cout << col << setw(3) << "" << setw(11) << left << "StaffID";
+            std::cout << col << setw(4) << "" << setw(10) << left << "Cart";
+            std::cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
+            std::cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
+            std::cout << col << "\n";
 
-            cout << leftSide << line(11);
-            cout << midMid << line(14);
-            cout << midMid << line(14);
-            cout << midMid << line(14);
-            cout << midMid << line(13);
-            cout << midMid << line(14);
-            cout << rightSide << "\n";
+            std::cout << leftSide << line(11);
+            std::cout << midMid << line(14);
+            std::cout << midMid << line(14);
+            std::cout << midMid << line(14);
+            std::cout << midMid << line(13);
+            std::cout << midMid << line(14);
+            std::cout << rightSide << "\n";
 
-            cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
-            cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
-            cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
-            cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
-            cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
-            cout << col << setw(14 - (14 - to_string(tmp->data.getTotalPrice()).length())/2) << right << tmp->data.getTotalPrice() << setw((14 - to_string(tmp->data.getTotalPrice()).length())/2) << "";	
-            cout << col << "\n";
+            std::cout << col << setw((11 - tmp->Data().getID().length())/2) << "" << setw(11 - (11 - tmp->Data().getID().length())/2) << left << tmp->Data().getID();
+            std::cout << col << setw((14 - tmp->Data().getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->Data().getCustomerPhoneNumber().length())/2) << left << tmp->Data().getCustomerPhoneNumber();
+            std::cout << col << setw((14 - tmp->Data().getStaffID().length())/2) << "" << setw(14 - (14 - tmp->Data().getStaffID().length())/2) << left << tmp->Data().getStaffID();
+            std::cout << col << setw(1) << "" << tmp->Data().getGoods(0).getPhoneID() << "/" << to_string(tmp->Data().getGoods(0).getAmount()) << setw(12 - tmp->Data().getGoods(0).getPhoneID().length() - to_string(tmp->Data().getGoods(0).getAmount()).length()) << "";
+            std::cout << col << "  " << setw(0) << left << tmp->Data().getPurchaseDay() << setw(10 - to_string(tmp->Data().getPurchaseDay().getDay()).length() - to_string(tmp->Data().getPurchaseDay().getMonth()).length() - to_string(tmp->Data().getPurchaseDay().getYear()).length() - 1) << "";
+            std::cout << col << setw(14 - (14 - to_string(tmp->Data().getTotalPrice()).length())/2) << right << tmp->Data().getTotalPrice() << setw((14 - to_string(tmp->Data().getTotalPrice()).length())/2) << "";	
+            std::cout << col << "\n";
 
-            int n = tmp->data.getShpllength();
+            int n = tmp->Data().getShpllength();
             for(int j = 1; j < n; ++j) {
-                cout << col << setw(11) << "";
-                cout << col << setw(14) << "";
-                cout << col << setw(14) << ""; 
-                cout << col << " " << setw(0) << left << tmp->data.getGoods(j).getPhoneID() << "/" << to_string(tmp->data.getGoods(j).getAmount()) << setw(12 - tmp->data.getGoods(j).getPhoneID().length() - to_string(tmp->data.getGoods(j).getAmount()).length()) << "";
-                cout << col << setw(13) << "";
-                cout << col << setw(14) << "";
-                cout << col << "\n";
+                std::cout << col << setw(11) << "";
+                std::cout << col << setw(14) << "";
+                std::cout << col << setw(14) << ""; 
+                std::cout << col << " " << setw(0) << left << tmp->Data().getGoods(j).getPhoneID() << "/" << to_string(tmp->Data().getGoods(j).getAmount()) << setw(12 - tmp->Data().getGoods(j).getPhoneID().length() - to_string(tmp->Data().getGoods(j).getAmount()).length()) << "";
+                std::cout << col << setw(13) << "";
+                std::cout << col << setw(14) << "";
+                std::cout << col << "\n";
             }
-            cout << botLeftCorner << line(11);
-            cout << botMid << line(14); 
-            cout << botMid << line(14); 
-            cout << botMid << line(14); 
-            cout << botMid << line(13);
-            cout << botMid << line(14); 
-            cout << botRightCorner << "\n";
+            std::cout << botLeftCorner << line(11);
+            std::cout << botMid << line(14); 
+            std::cout << botMid << line(14); 
+            std::cout << botMid << line(14); 
+            std::cout << botMid << line(13);
+            std::cout << botMid << line(14); 
+            std::cout << botRightCorner << "\n";
             break;
         }
-        tmp = tmp->pNext;
+        tmp = tmp->NextNode();
     }
 
     if(!checkExist) {
@@ -144,61 +125,61 @@ void OrderManager::SearchByOrderID(string m)
 void OrderManager::SearchByCustomerPhoneNumber(string m)
 {
     bool checkExist = false;
-    Node *tmp = this->pHead;
+    Node<Order> *tmp = this->list.HeadNode();
     while(tmp != nullptr) {
-        if(tmp->data.getCustomerPhoneNumber() == m) {
+        if(tmp->Data().getCustomerPhoneNumber() == m) {
             checkExist = true;
-            cout << topLeftCorner << line(11); // orderid
-            cout << topMid << line(14); //customerID
-            cout << topMid << line(14); // staffID
-            cout << topMid << line(14); // cart
-            cout << topMid << line(13); //purchaseday
-            cout << topMid << line(14); //totalprice
-            cout << topRightCorner << "\n";
+            std::cout << topLeftCorner << line(11); // orderid
+            std::cout << topMid << line(14); //customerID
+            std::cout << topMid << line(14); // staffID
+            std::cout << topMid << line(14); // cart
+            std::cout << topMid << line(13); //purchaseday
+            std::cout << topMid << line(14); //totalprice
+            std::cout << topRightCorner << "\n";
             
-            cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
-            cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
-            cout << col << setw(3) << "" << setw(11) << left << "StaffID";
-            cout << col << setw(4) << "" << setw(10) << left << "Cart";
-            cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
-            cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
-            cout << col << "\n";
+            std::cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
+            std::cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
+            std::cout << col << setw(3) << "" << setw(11) << left << "StaffID";
+            std::cout << col << setw(4) << "" << setw(10) << left << "Cart";
+            std::cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
+            std::cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
+            std::cout << col << "\n";
 
-            cout << leftSide << line(11);
-            cout << midMid << line(14);
-            cout << midMid << line(14);
-            cout << midMid << line(14);
-            cout << midMid << line(13);
-            cout << midMid << line(14);
-            cout << rightSide << "\n";
+            std::cout << leftSide << line(11);
+            std::cout << midMid << line(14);
+            std::cout << midMid << line(14);
+            std::cout << midMid << line(14);
+            std::cout << midMid << line(13);
+            std::cout << midMid << line(14);
+            std::cout << rightSide << "\n";
 
-            cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
-            cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
-            cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
-            cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
-            cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
-            cout << col << setw(14 - (14 - to_string(tmp->data.getTotalPrice()).length())/2) << right << tmp->data.getTotalPrice() << setw((14 - to_string(tmp->data.getTotalPrice()).length())/2) << "";	
-            cout << col << "\n";
+            std::cout << col << setw((11 - tmp->Data().getID().length())/2) << "" << setw(11 - (11 - tmp->Data().getID().length())/2) << left << tmp->Data().getID();
+            std::cout << col << setw((14 - tmp->Data().getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->Data().getCustomerPhoneNumber().length())/2) << left << tmp->Data().getCustomerPhoneNumber();
+            std::cout << col << setw((14 - tmp->Data().getStaffID().length())/2) << "" << setw(14 - (14 - tmp->Data().getStaffID().length())/2) << left << tmp->Data().getStaffID();
+            std::cout << col << setw(1) << "" << tmp->Data().getGoods(0).getPhoneID() << "/" << to_string(tmp->Data().getGoods(0).getAmount()) << setw(12 - tmp->Data().getGoods(0).getPhoneID().length() - to_string(tmp->Data().getGoods(0).getAmount()).length()) << "";
+            std::cout << col << "  " << setw(0) << left << tmp->Data().getPurchaseDay() << setw(10 - to_string(tmp->Data().getPurchaseDay().getDay()).length() - to_string(tmp->Data().getPurchaseDay().getMonth()).length() - to_string(tmp->Data().getPurchaseDay().getYear()).length() - 1) << "";
+            std::cout << col << setw(14 - (14 - to_string(tmp->Data().getTotalPrice()).length())/2) << right << tmp->Data().getTotalPrice() << setw((14 - to_string(tmp->Data().getTotalPrice()).length())/2) << "";	
+            std::cout << col << "\n";
 
-            int n = tmp->data.getShpllength();
+            int n = tmp->Data().getShpllength();
             for(int j = 1; j < n; ++j) {
-                cout << col << setw(11) << "";
-                cout << col << setw(14) << "";
-                cout << col << setw(14) << ""; 
-                cout << col << " " << setw(0) << left << tmp->data.getGoods(j).getPhoneID() << "/" << to_string(tmp->data.getGoods(j).getAmount()) << setw(12 - tmp->data.getGoods(j).getPhoneID().length() - to_string(tmp->data.getGoods(j).getAmount()).length()) << "";
-                cout << col << setw(13) << "";
-                cout << col << setw(14) << "";
-                cout << col << "\n";
+                std::cout << col << setw(11) << "";
+                std::cout << col << setw(14) << "";
+                std::cout << col << setw(14) << ""; 
+                std::cout << col << " " << setw(0) << left << tmp->Data().getGoods(j).getPhoneID() << "/" << to_string(tmp->Data().getGoods(j).getAmount()) << setw(12 - tmp->Data().getGoods(j).getPhoneID().length() - to_string(tmp->Data().getGoods(j).getAmount()).length()) << "";
+                std::cout << col << setw(13) << "";
+                std::cout << col << setw(14) << "";
+                std::cout << col << "\n";
             }
-            cout << botLeftCorner << line(11);
-            cout << botMid << line(14); 
-            cout << botMid << line(14); 
-            cout << botMid << line(14); 
-            cout << botMid << line(13);
-            cout << botMid << line(14); 
-            cout << botRightCorner << "\n";
+            std::cout << botLeftCorner << line(11);
+            std::cout << botMid << line(14); 
+            std::cout << botMid << line(14); 
+            std::cout << botMid << line(14); 
+            std::cout << botMid << line(13);
+            std::cout << botMid << line(14); 
+            std::cout << botRightCorner << "\n";
         }
-        tmp = tmp->pNext;
+        tmp = tmp->NextNode();
     }
 
     if(!checkExist) {
@@ -208,61 +189,61 @@ void OrderManager::SearchByCustomerPhoneNumber(string m)
 void OrderManager::SearchByStaffID(string m)
 {   
     bool checkExist = false;
-    Node *tmp = this->pHead;
+    Node<Order> *tmp = this->list.HeadNode();
     while(tmp != nullptr) {
-        if(tmp->data.getStaffID() == m) {
+        if(tmp->Data().getStaffID() == m) {
             checkExist = true;
-            cout << topLeftCorner << line(11); // orderid
-            cout << topMid << line(14); //customerID
-            cout << topMid << line(14); // staffID
-            cout << topMid << line(14); // cart
-            cout << topMid << line(13); //purchaseday
-            cout << topMid << line(14); //totalprice
-            cout << topRightCorner << "\n";
+            std::cout << topLeftCorner << line(11); // orderid
+            std::cout << topMid << line(14); //customerID
+            std::cout << topMid << line(14); // staffID
+            std::cout << topMid << line(14); // cart
+            std::cout << topMid << line(13); //purchaseday
+            std::cout << topMid << line(14); //totalprice
+            std::cout << topRightCorner << "\n";
             
-            cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
-            cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
-            cout << col << setw(3) << "" << setw(11) << left << "StaffID";
-            cout << col << setw(4) << "" << setw(10) << left << "Cart";
-            cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
-            cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
-            cout << col << "\n";
+            std::cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
+            std::cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
+            std::cout << col << setw(3) << "" << setw(11) << left << "StaffID";
+            std::cout << col << setw(4) << "" << setw(10) << left << "Cart";
+            std::cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
+            std::cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
+            std::cout << col << "\n";
 
-            cout << leftSide << line(11);
-            cout << midMid << line(14);
-            cout << midMid << line(14);
-            cout << midMid << line(14);
-            cout << midMid << line(13);
-            cout << midMid << line(14);
-            cout << rightSide << "\n";
+            std::cout << leftSide << line(11);
+            std::cout << midMid << line(14);
+            std::cout << midMid << line(14);
+            std::cout << midMid << line(14);
+            std::cout << midMid << line(13);
+            std::cout << midMid << line(14);
+            std::cout << rightSide << "\n";
 
-            cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
-            cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
-            cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
-            cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
-            cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
-            cout << col << setw(14 - (14 - to_string(tmp->data.getTotalPrice()).length())/2) << right << tmp->data.getTotalPrice() << setw((14 - to_string(tmp->data.getTotalPrice()).length())/2) << "";	
-            cout << col << "\n";
+            std::cout << col << setw((11 - tmp->Data().getID().length())/2) << "" << setw(11 - (11 - tmp->Data().getID().length())/2) << left << tmp->Data().getID();
+            std::cout << col << setw((14 - tmp->Data().getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->Data().getCustomerPhoneNumber().length())/2) << left << tmp->Data().getCustomerPhoneNumber();
+            std::cout << col << setw((14 - tmp->Data().getStaffID().length())/2) << "" << setw(14 - (14 - tmp->Data().getStaffID().length())/2) << left << tmp->Data().getStaffID();
+            std::cout << col << setw(1) << "" << tmp->Data().getGoods(0).getPhoneID() << "/" << to_string(tmp->Data().getGoods(0).getAmount()) << setw(12 - tmp->Data().getGoods(0).getPhoneID().length() - to_string(tmp->Data().getGoods(0).getAmount()).length()) << "";
+            std::cout << col << "  " << setw(0) << left << tmp->Data().getPurchaseDay() << setw(10 - to_string(tmp->Data().getPurchaseDay().getDay()).length() - to_string(tmp->Data().getPurchaseDay().getMonth()).length() - to_string(tmp->Data().getPurchaseDay().getYear()).length() - 1) << "";
+            std::cout << col << setw(14 - (14 - to_string(tmp->Data().getTotalPrice()).length())/2) << right << tmp->Data().getTotalPrice() << setw((14 - to_string(tmp->Data().getTotalPrice()).length())/2) << "";	
+            std::cout << col << "\n";
 
-            int n = tmp->data.getShpllength();
+            int n = tmp->Data().getShpllength();
             for(int j = 1; j < n; ++j) {
-                cout << col << setw(11) << "";
-                cout << col << setw(14) << "";
-                cout << col << setw(14) << ""; 
-                cout << col << " " << setw(0) << left << tmp->data.getGoods(j).getPhoneID() << "/" << to_string(tmp->data.getGoods(j).getAmount()) << setw(12 - tmp->data.getGoods(j).getPhoneID().length() - to_string(tmp->data.getGoods(j).getAmount()).length()) << "";
-                cout << col << setw(13) << "";
-                cout << col << setw(14) << "";
-                cout << col << "\n";
+                std::cout << col << setw(11) << "";
+                std::cout << col << setw(14) << "";
+                std::cout << col << setw(14) << ""; 
+                std::cout << col << " " << setw(0) << left << tmp->Data().getGoods(j).getPhoneID() << "/" << to_string(tmp->Data().getGoods(j).getAmount()) << setw(12 - tmp->Data().getGoods(j).getPhoneID().length() - to_string(tmp->Data().getGoods(j).getAmount()).length()) << "";
+                std::cout << col << setw(13) << "";
+                std::cout << col << setw(14) << "";
+                std::cout << col << "\n";
             }
-            cout << botLeftCorner << line(11);
-            cout << botMid << line(14); 
-            cout << botMid << line(14); 
-            cout << botMid << line(14); 
-            cout << botMid << line(13);
-            cout << botMid << line(14); 
-            cout << botRightCorner << "\n";
+            std::cout << botLeftCorner << line(11);
+            std::cout << botMid << line(14); 
+            std::cout << botMid << line(14); 
+            std::cout << botMid << line(14); 
+            std::cout << botMid << line(13);
+            std::cout << botMid << line(14); 
+            std::cout << botRightCorner << "\n";
         }
-        tmp = tmp->pNext;
+        tmp = tmp->NextNode();
     }
 
     if(!checkExist) {
@@ -272,66 +253,66 @@ void OrderManager::SearchByStaffID(string m)
 
 void OrderManager::Show() //Show All
 {
-    cout << setw(15) << "" << topLeftCorner << line(7); // stt
-	cout << topMid << line(11); // orderid
-	cout << topMid << line(14); //customerID
-	cout << topMid << line(14); // staffID
-	cout << topMid << line(14); // cart
-	cout << topMid << line(13); //purchaseday
-	cout << topMid << line(14); //totalprice
-	cout << topRightCorner << "\n";
+    std::cout << setw(15) << "" << topLeftCorner << line(7); // stt
+	std::cout << topMid << line(11); // orderid
+	std::cout << topMid << line(14); //customerID
+	std::cout << topMid << line(14); // staffID
+	std::cout << topMid << line(14); // cart
+	std::cout << topMid << line(13); //purchaseday
+	std::cout << topMid << line(14); //totalprice
+	std::cout << topRightCorner << "\n";
 	
-	cout << setw(15) << "" << col << setw(1) << "" << setw(6) << left << "Order";
-	cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
-	cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
-	cout << col << setw(3) << "" << setw(11) << left << "StaffID";
-	cout << col << setw(4) << "" << setw(10) << left << "Cart";
-	cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
-	cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
-	cout << col << "\n";
+	std::cout << setw(15) << "" << col << setw(1) << "" << setw(6) << left << "Order";
+	std::cout << col << setw(2) << "" << setw(9) << left << "OrderID"; 
+	std::cout << col << setw(2) << "" << setw(12) << left << "CustomerID";
+	std::cout << col << setw(3) << "" << setw(11) << left << "StaffID";
+	std::cout << col << setw(4) << "" << setw(10) << left << "Cart";
+	std::cout << col << setw(1) << "" << setw(12) << left << "Purchaseday";
+	std::cout << col << setw(2) << "" << setw(12) << left << "Totalprice";
+	std::cout << col << "\n";
 
-    Node *tmp = this->pHead;
+    Node<Order> *tmp = this->list.HeadNode();
     int i = 0;
     while(tmp != nullptr) {
-        cout << setw(15) << "" << leftSide << line(7);
-		cout << midMid << line(11);
-		cout << midMid << line(14);
-		cout << midMid << line(14);
-		cout << midMid << line(14);
-		cout << midMid << line(13);
-		cout << midMid << line(14);
-		cout << rightSide << "\n";
+        std::cout << setw(15) << "" << leftSide << line(7);
+		std::cout << midMid << line(11);
+		std::cout << midMid << line(14);
+		std::cout << midMid << line(14);
+		std::cout << midMid << line(14);
+		std::cout << midMid << line(13);
+		std::cout << midMid << line(14);
+		std::cout << rightSide << "\n";
 		
-        cout << setw(15) << "" << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1; ++i;
-		cout << col << setw((11 - tmp->data.getID().length())/2) << "" << setw(11 - (11 - tmp->data.getID().length())/2) << left << tmp->data.getID();
-		cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
-		cout << col << setw((14 - tmp->data.getStaffID().length())/2) << "" << setw(14 - (14 - tmp->data.getStaffID().length())/2) << left << tmp->data.getStaffID();
-        cout << col << setw(1) << "" << tmp->data.getGoods(0).getPhoneID() << "/" << to_string(tmp->data.getGoods(0).getAmount()) << setw(12 - tmp->data.getGoods(0).getPhoneID().length() - to_string(tmp->data.getGoods(0).getAmount()).length()) << "";
-		cout << col << "  " << setw(0) << left << tmp->data.getPurchaseDay() << setw(10 - to_string(tmp->data.getPurchaseDay().getDay()).length() - to_string(tmp->data.getPurchaseDay().getMonth()).length() - to_string(tmp->data.getPurchaseDay().getYear()).length() - 1) << "";
-		cout << col << setw(14 - (14 - to_string(tmp->data.getTotalPrice()).length())/2) << right << tmp->data.getTotalPrice() << setw((14 - to_string(tmp->data.getTotalPrice()).length())/2) << "";	
-		cout << col << "\n";
+        std::cout << setw(15) << "" << col << setw((7 - to_string(i + 1).length())/2) << "" << setw(7 - (7 - to_string(i + 1).length())/2) << left << i + 1; ++i;
+		std::cout << col << setw((11 - tmp->Data().getID().length())/2) << "" << setw(11 - (11 - tmp->Data().getID().length())/2) << left << tmp->Data().getID();
+		std::cout << col << setw((14 - tmp->Data().getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->Data().getCustomerPhoneNumber().length())/2) << left << tmp->Data().getCustomerPhoneNumber();
+		std::cout << col << setw((14 - tmp->Data().getStaffID().length())/2) << "" << setw(14 - (14 - tmp->Data().getStaffID().length())/2) << left << tmp->Data().getStaffID();
+        std::cout << col << setw(1) << "" << tmp->Data().getGoods(0).getPhoneID() << "/" << to_string(tmp->Data().getGoods(0).getAmount()) << setw(12 - tmp->Data().getGoods(0).getPhoneID().length() - to_string(tmp->Data().getGoods(0).getAmount()).length()) << "";
+		std::cout << col << "  " << setw(0) << left << tmp->Data().getPurchaseDay() << setw(10 - to_string(tmp->Data().getPurchaseDay().getDay()).length() - to_string(tmp->Data().getPurchaseDay().getMonth()).length() - to_string(tmp->Data().getPurchaseDay().getYear()).length() - 1) << "";
+		std::cout << col << setw(14 - (14 - to_string(tmp->Data().getTotalPrice()).length())/2) << right << tmp->Data().getTotalPrice() << setw((14 - to_string(tmp->Data().getTotalPrice()).length())/2) << "";	
+		std::cout << col << "\n";
 
-        int n = tmp->data.getShpllength();
+        int n = tmp->Data().getShpllength();
         for(int j = 1; j < n; ++j) {
-            cout << setw(15) << "" << col << setw(7) << "";
-			cout << col << setw(11) << "";
-			cout << col << setw(14) << "";
-			cout << col << setw(14) << ""; 
-            cout << col << " " << setw(0) << left << tmp->data.getGoods(j).getPhoneID() << "/" << to_string(tmp->data.getGoods(j).getAmount()) << setw(12 - tmp->data.getGoods(j).getPhoneID().length() - to_string(tmp->data.getGoods(j).getAmount()).length()) << "";
-			cout << col << setw(13) << "";
-			cout << col << setw(14) << "";
-			cout << col << "\n";
+            std::cout << setw(15) << "" << col << setw(7) << "";
+			std::cout << col << setw(11) << "";
+			std::cout << col << setw(14) << "";
+			std::cout << col << setw(14) << ""; 
+            std::cout << col << " " << setw(0) << left << tmp->Data().getGoods(j).getPhoneID() << "/" << to_string(tmp->Data().getGoods(j).getAmount()) << setw(12 - tmp->Data().getGoods(j).getPhoneID().length() - to_string(tmp->Data().getGoods(j).getAmount()).length()) << "";
+			std::cout << col << setw(13) << "";
+			std::cout << col << setw(14) << "";
+			std::cout << col << "\n";
         }
-        tmp = tmp->pNext;
+        tmp = tmp->NextNode();
     } 
-    cout << setw(15) << "" << botLeftCorner << line(7); 
-	cout << botMid << line(11);
-	cout << botMid << line(14); 
-	cout << botMid << line(14); 
-	cout << botMid << line(14); 
-	cout << botMid << line(13);
-	cout << botMid << line(14); 
-	cout << botRightCorner << "\n";
+    std::cout << setw(15) << "" << botLeftCorner << line(7); 
+	std::cout << botMid << line(11);
+	std::cout << botMid << line(14); 
+	std::cout << botMid << line(14); 
+	std::cout << botMid << line(14); 
+	std::cout << botMid << line(13);
+	std::cout << botMid << line(14); 
+	std::cout << botRightCorner << "\n";
     
 }
 void OrderManager::LoadData() {
@@ -419,35 +400,35 @@ void OrderManager::Menu() {
         string choice;
         while(true) {
             
-            cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
-	        cout << setw(50) << "" << col << " ORDERS " << col << "\n";
-	        cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
+            std::cout << setw(50) << "" << topLeftCorner << line(8) << topRightCorner << "\n";
+	        std::cout << setw(50) << "" << col << " ORDERS " << col << "\n";
+	        std::cout << setw(50) << "" << botLeftCorner << line(8) << botRightCorner << "\n\n";
 
-            cout << setw(47) << "" << "1. Search by orderID" << "\n"; //  nhap orderid
-            cout << setw(47) << "" << "2. Search by customer phone number" << "\n"; // nhap customerid
-            cout << setw(47) << "" << "3. Search by staffID" << "\n"; // nhap customerid
-            cout << setw(47) << "" << "4. Show all orders" << "\n";
-            cout << setw(47) << "" << "5. Go back" << "\n\n";
-            cout << setw(45) << "" << "Your choice: ";
+            std::cout << setw(47) << "" << "1. Search by orderID" << "\n"; //  nhap orderid
+            std::cout << setw(47) << "" << "2. Search by customer phone number" << "\n"; // nhap customerid
+            std::cout << setw(47) << "" << "3. Search by staffID" << "\n"; // nhap customerid
+            std::cout << setw(47) << "" << "4. Show all orders" << "\n";
+            std::cout << setw(47) << "" << "5. Go back" << "\n\n";
+            std::cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
             if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5") {
-                cout << "Invalid choice, please re-enter!\n";
+                std::cout << "Invalid choice, please re-enter!\n";
                 std::system("pause");
                 std::system("cls"); 
             } else break;
         }
         if(choice == "1") {
-            cout << setw(35) << "" << "Enter orderID you want to search: ";
+            std::cout << setw(35) << "" << "Enter orderID you want to search: ";
             string id; cin >> id;
             this->SearchByOrderID(id);
             std::system("pause");
         } else if (choice == "2") {
-            cout << setw(35) << "" << "Enter customer phone number you want to search: ";
+            std::cout << setw(35) << "" << "Enter customer phone number you want to search: ";
             string phoneNumber; cin >> phoneNumber;
             this->SearchByCustomerPhoneNumber(phoneNumber);
             std::system("pause");
         } else if (choice == "3") {
-            cout << setw(35) << "" << "Enter staffID you want to search: ";
+            std::cout << setw(35) << "" << "Enter staffID you want to search: ";
             string id; cin >> id;
             this->SearchByStaffID(id);
             std::system("pause");
@@ -464,38 +445,22 @@ void OrderManager::Menu() {
 }
 const OrderManager& OrderManager::operator=(const OrderManager& v )
 {
-    if (this != &v) {
-        //this->n=v.n;
-        Node *k;  
-        while (this->pHead!=NULL)
-        {
-            k=this->pHead;
-            this->pHead=this->pHead->pNext;
-            delete k;
-            this->n--;
-        }
-        this->pTail=NULL;
-        for (Node *k=v.pHead;k!=NULL;k=k->pNext)
-        {
-            this->Add(k->data);
-        }
-        
-    }
+    this->list = v.list;
     return *this;
 }
 void OrderManager::UpdateFile() {
     fstream editfile("Order.txt", ios::out);
     int d=0;
-    for (Node *k=this->pHead;k!=NULL;k=k->pNext) {
+    for (Node<Order> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
         string tmp1 = "";
-        for(int j = 0; j < k->data.getShpllength(); ++j) {
-            Goods sp = k->data.getGoods(j);
+        for(int j = 0; j < tmp->Data().getShpllength(); ++j) {
+            Goods sp = tmp->Data().getGoods(j);
             tmp1 += sp.getPhoneID() + " " + to_string(sp.getAmount()) + " ";
         }
-        Date dmy = k->data.getPurchaseDay();
+        Date dmy = tmp->Data().getPurchaseDay();
         string tmp2 = to_string(dmy.getDay()) + " " + to_string(dmy.getMonth()) + " " + to_string(dmy.getYear()) + " ";
-        string s = k->data.getID() + "/" + k->data.getCustomerPhoneNumber() + "/" + k->data.getStaffID() + "/" + tmp1 + "/" + to_string(k->data.getShpllength()) + "/" + tmp2 + "/" + to_string(k->data.getTotalPrice()) + "/";
-        if(d != this->n-1) editfile << s << "\n";
+        string s = tmp->Data().getID() + "/" + tmp->Data().getCustomerPhoneNumber() + "/" + tmp->Data().getStaffID() + "/" + tmp1 + "/" + to_string(tmp->Data().getShpllength()) + "/" + tmp2 + "/" + to_string(tmp->Data().getTotalPrice()) + "/";
+        if(d != this->list.size() - 1) editfile << s << "\n";
         else editfile << s;
         d++;
     }

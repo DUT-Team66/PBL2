@@ -9,7 +9,7 @@
 
 class Admin : public Staff {
     private:
-        StaffManager manageStaff;
+        StaffManager *manageStaff;
         //AccountManager manageAccount;
         vector<ThongKe> thongKe;
     public:
@@ -17,7 +17,7 @@ class Admin : public Staff {
         Admin(string,string, string, string,string,string,string,string);
         ~Admin();
 
-        void setStaffManager(const StaffManager&);
+        void setStaffManager(StaffManager&);
         const StaffManager& getStaffManager() const;
         //void setAccountManager(const AccountManager&);
         void ShowThongKe();

@@ -1,24 +1,19 @@
 #ifndef _ORDERMANAGER_
 #define _ORDERMANAGER_
 #include "Order.h"
+#include "MyLib.h"
 class OrderManager
 {
     private: 
-        struct Node{
-            Order data;
-            Node* pNext;
-        };
-        Node *pHead;
-        Node *pTail;
-        int n;
+        List<Order> list;
     public:
         //Khong co SV
         OrderManager();
         ~OrderManager();
-        const int& GetLength() const;
+        int GetLength() const;
         const int& GetMonth(int) ; // lay thang mua order thu index
-        const int& GetYear(int) const; // lay nam 
-        const long long& GetTotalPrice(int) const; // lay tong tien cua 1 don hang
+        const int& GetYear(int); // lay nam 
+        const long long& GetTotalPrice(int); // lay tong tien cua 1 don hang
         void SearchByOrderID(string);
         void SearchByCustomerPhoneNumber(string);
         void SearchByStaffID(string);

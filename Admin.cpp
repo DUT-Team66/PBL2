@@ -15,11 +15,11 @@ Admin::~Admin() {
 Admin::Admin(string name, string id, string gender, string dob, string phoneNumber, string address, string username, string password) : Staff(name,id,gender,dob,phoneNumber,address,username,password) {
     this->salary = 15000000;
 }
-void Admin::setStaffManager(const StaffManager& staffManager) {
-    this->manageStaff = staffManager;
+void Admin::setStaffManager(StaffManager& staffManager) {
+    this->manageStaff = &staffManager;
 }
 const StaffManager& Admin::getStaffManager() const {
-    return this->manageStaff;
+    return *(this->manageStaff);
 }
 // void Admin::setAccountManager(const AccountManager& accountManager) {
 //     this->manageAccount = accountManager;
@@ -89,13 +89,13 @@ void Admin::Menu() {
         }
         
         if(choice == "1") {
-            this->manageStaff.Menu();
+            this->manageStaff->Menu();
         } else if(choice == "2") {
-            this->managePhone.Menu();
+            this->managePhone->Menu();
         } else if(choice == "3") {
-            this->manageOrder.Menu();
+            this->manageOrder->Menu();
         } else if(choice == "4") {
-            this->manageCustomer.Menu();
+            this->manageCustomer->Menu();
         } else if(choice == "5") {
             this->Import();
         } else if(choice == "6") {
@@ -120,10 +120,10 @@ void Admin::Import() {
     }
     long long total = 0;
     //cout << this->managePhone.GetLength() << "\n";
-    for(int i = 0; i < this->managePhone.GetLength(); ++i) {
-        total += (100 - this->managePhone.getRemainingAmount(i))* this->managePhone.getEntryPrice(i);
+    for(int i = 0; i < this->managePhone->GetLength(); ++i) {
+        total += (100 - this->managePhone->getRemainingAmount(i))* this->managePhone->getEntryPrice(i);
         //cout << i << "\n";
-        this->managePhone.setRemainingAmount(i,this->managePhone.getRemainingAmount(i) - 100);
+        this->managePhone->setRemainingAmount(i,this->managePhone->getRemainingAmount(i) - 100);
     }
     //cout << 1 << "\n";
     time_t now = time(0);
@@ -211,7 +211,7 @@ void Admin::UpdateDoanhThuLoiNhuan(Order& order) {
 }
 void Admin::UpdateAllFiles() {
     Staff::UpdateAllFiles();
-    this->manageStaff.UpdateFile();
+    this->manageStaff->UpdateFile();
     this->UpdateThongKe();
     //this->manageAccount.UpdateFile();
 }

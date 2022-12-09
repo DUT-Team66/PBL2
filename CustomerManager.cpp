@@ -9,127 +9,40 @@ using namespace std;
 
 CustomerManager::CustomerManager()
 {
-    this->pHead = nullptr;
-    this->pTail=nullptr;
-    this->n=0;
+    
 }
 CustomerManager::~CustomerManager()
 {
-    Node *k;  
-    while (this->pHead!=NULL)
-    {
-        k=this->pHead;
-        this->pHead=this->pHead->pNext;
-        delete k;
-    }
-    this->pTail=NULL;
-    delete this->pHead;
-    delete this->pTail;
+    
 }
 int CustomerManager::GetLength()
 {
-    return this->n;
+    return this->list.size();
 }
 void CustomerManager::Add(const Customer& s)
 {
-    bool checkExist = false;
-    for(Node* tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
-        if(s.getCustomerPhoneNumber() == tmp->data.getCustomerPhoneNumber()) {
-            checkExist = true;
-            break;
-        }
-    }
-    if(checkExist) return;
-    Node *p= new Node;
-    if (p==NULL)
-    {
-        cout<<"\nKhong du bo nho de cap phat\n"<<endl;
-    }
-    p->data=s;
-    p->pNext=NULL;
-    if (this->pHead==NULL)
-    {
-        this->pHead=this->pTail=p;
-    }
-    else
-    {
-        this->pTail->pNext=p;
-        this->pTail=p;
-    }
-    this->n++;
+    this->list.Add(s);
 }
 void CustomerManager::Delete(string m)
 {
-    int index=-1;
-    if (this->pHead->data.getCustomerPhoneNumber()==m)
-    {
-        if (this->pTail==this->pHead)
-        {
-            this->pHead=this->pTail=NULL;
-            this->n--;
-            index=1;
-        }
-        else {
-            Node *p=this->pHead;
-            this->pHead=this->pHead->pNext;
-            delete p;
-            this->n--;
-            index=1;
-        }
-    }
-    else 
-        if (this->pTail->data.getCustomerPhoneNumber()==m)
-        {
-            for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-            {
-                if (k->pNext==this->pTail)
-                {
-                    delete this->pTail;
-                    k->pNext=NULL;
-                    this->pTail=k;
-                    this->n--;
-                    index=1;
-                }
-            }
-        }
-        else {
-            Node *g=new Node;
-            for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-            {
-                if (k->data.getCustomerPhoneNumber()==m)
-                {
-                    g->pNext=k->pNext;
-                    delete k;
-                    this->n--;
-                    index=1;
-                    break;
-                }
-                else g=k; 
-            }
-        }
-    
-    //Chu y truong hop index=-1(khong tim duoc)
-    if (index==1) cout<<"Delete successfully!\n";
-    else {
-        cout << "Customer does not exist!\n";
-    }
+    this->list.Delete(m);
 }
-void CustomerManager::Search(string m)
+void CustomerManager::Search()
 {
-    int index=-1;
-    for (Node *k=this->pHead;k!=NULL;k=k->pNext)
-    {
-         if (k->data.getCustomerPhoneNumber()==m)
-        {
-            index=1;
-            k->data.Show();    // chưa vẽ bảng
-            break;
-        }
-    }
-    if (index==-1) cout << "CustomerID does not exist!\n";
-    cout<<endl;
+    // int index=-1;
+    // for (Node *k=this->pHead;k!=NULL;k=k->pNext)
+    // {
+    //      if (k->data.getCustomerPhoneNumber()==m)
+    //     {
+    //         index=1;
+    //         k->data.Show();    // chưa vẽ bảng
+    //         break;
+    //     }
+    // }
+    // if (index==-1) cout << "CustomerID does not exist!\n";
+    // cout<<endl;
 }
-void CustomerManager::Show() const  
+void CustomerManager::Show()  
 {
     cout << setw(15) << "" << topLeftCorner << line(7); //order
     cout << topMid << line(30); // customer name
@@ -144,7 +57,7 @@ void CustomerManager::Show() const
     cout << col << "\n";
     
     int i = 1;
-    for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+    for(Node<Customer> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
         std::cout << setw(15) << "" << leftSide << line(7);
         std::cout << midMid << line(30);
         std::cout << midMid << line(14);
@@ -152,9 +65,9 @@ void CustomerManager::Show() const
         std::cout << rightSide << "\n";
 
         std::cout << setw(15) << "" << col << setw((7 - to_string(i).length())/2) << "" << setw(7 - (7 - to_string(i).length())/2) << left << i ; ++i;
-        std::cout << col << setw((30 - tmp->data.getCustomerName().length())/2) << "" << setw(30 - (30 - tmp->data.getCustomerName().length())/2) << left << tmp->data.getCustomerName();
-        std::cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
-        std::cout << col << setw(26 - (26 - tmp->data.getCustomerAddress().length())/2) << right << tmp->data.getCustomerAddress() << setw((26 - tmp->data.getCustomerAddress().length())/2) << "";
+        std::cout << col << setw((30 - tmp->Data().getCustomerName().length())/2) << "" << setw(30 - (30 - tmp->Data().getCustomerName().length())/2) << left << tmp->Data().getCustomerName();
+        std::cout << col << setw((14 - tmp->Data().getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->Data().getCustomerPhoneNumber().length())/2) << left << tmp->Data().getCustomerPhoneNumber();
+        std::cout << col << setw(26 - (26 - tmp->Data().getCustomerAddress().length())/2) << right << tmp->Data().getCustomerAddress() << setw((26 - tmp->Data().getCustomerAddress().length())/2) << "";
         std::cout << col << "\n";
         
     }
@@ -194,13 +107,13 @@ void CustomerManager::setInfo(Customer& customer) {
             continue;
         }
         bool checkExist = false;
-        Node *tmp = this->pHead;
+        Node<Customer> *tmp = this->list.HeadNode();
         while(tmp != nullptr) {
-            if(phoneNumber == tmp->data.getCustomerPhoneNumber()) {
+            if(phoneNumber == tmp->Data().getCustomerPhoneNumber()) {
                 checkExist = true;
                 break;
             }
-            tmp = tmp->pNext;
+            tmp = tmp->NextNode();
         }
         if(!checkExist) {
             cin.ignore();
@@ -217,8 +130,8 @@ void CustomerManager::setInfo(Customer& customer) {
 
         } else {
             cout << setw(42) << "" << "Customer exists!\n";
-            customer = tmp->data;
-            customer.Show();
+            customer = tmp->Data();
+            customer.show();
             std::system("pause");   
         }
         string choice;
@@ -227,7 +140,7 @@ void CustomerManager::setInfo(Customer& customer) {
             cout << "\n";
             cout << setw(45) << "" << "Enter your information: " << "\n\n";
             cout << setw(42) << "" << "Phone number: " << phoneNumber << "\n";
-            customer.Show();
+            customer.show();
             std::cout << "\n";
             std::cout << setw(42) << "" << "Enter B to re-enter information" << "\n";
             std::cout << setw(42) << "" << "Enter C to continue" << "\n";
@@ -275,9 +188,9 @@ void CustomerManager::LoadData() {
 void CustomerManager::UpdateFile() {
     fstream editfile("Customer.txt", ios::out);
     int d=0;
-    for (Node *k=this->pHead;k!=NULL;k=k->pNext) {
-        string s = k->data.getCustomerPhoneNumber() + "/" + k->data.getCustomerName() + "/" + k->data.getCustomerAddress() + "/" ;
-        if(d != this->n-1) editfile << s << "\n";
+    for (Node<Customer> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
+        string s = tmp->Data().getCustomerPhoneNumber() + "/" + tmp->Data().getCustomerName() + "/" + tmp->Data().getCustomerAddress() + "/" ;
+        if(d != this->list.size() - 1) editfile << s << "\n";
         else editfile << s;
         d++;
     }
@@ -315,10 +228,10 @@ void CustomerManager::Menu() {
                 name[i] = tolower(name[i]);
             }
             bool checkExist = false;
-            for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+            for(Node<Customer> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
                 string tmps = "";
-                for(int j = 0; j < tmp->data.getCustomerName().length(); ++j){
-                    tmps += tolower(tmp->data.getCustomerName()[j]);
+                for(int j = 0; j < tmp->Data().getCustomerName().length(); ++j){
+                    tmps += tolower(tmp->Data().getCustomerName()[j]);
                 }
                 if(tmps.find(name) != -1) {
                     checkExist = true;
@@ -337,10 +250,10 @@ void CustomerManager::Menu() {
                 cout << col << setw(9) << "" << setw(26 - 9) << left << "Address";
                 cout << col << "\n";
 
-                for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+                for(Node<Customer> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
                     string tmps = "";
-                    for(int j = 0; j < tmp->data.getCustomerName().length(); ++j){
-                        tmps += tolower(tmp->data.getCustomerName()[j]);
+                    for(int j = 0; j < tmp->Data().getCustomerName().length(); ++j){
+                        tmps += tolower(tmp->Data().getCustomerName()[j]);
                     }
                     if(tmps.find(name) != -1) { 
                         std::cout << setw(15) << "" << leftSide << line(30);
@@ -348,9 +261,9 @@ void CustomerManager::Menu() {
                         std::cout << midMid << line(26);
                         std::cout << rightSide << "\n";
 
-                        std::cout << setw(15) << "" << col << setw((30 - tmp->data.getCustomerName().length())/2) << "" << setw(30 - (30 - tmp->data.getCustomerName().length())/2) << left << tmp->data.getCustomerName();
-                        std::cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
-                        std::cout << col << setw(26 - (26 - tmp->data.getCustomerAddress().length())/2) << right << tmp->data.getCustomerAddress() << setw((26 - tmp->data.getCustomerAddress().length())/2) << "";
+                        std::cout << setw(15) << "" << col << setw((30 - tmp->Data().getCustomerName().length())/2) << "" << setw(30 - (30 - tmp->Data().getCustomerName().length())/2) << left << tmp->Data().getCustomerName();
+                        std::cout << col << setw((14 - tmp->Data().getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->Data().getCustomerPhoneNumber().length())/2) << left << tmp->Data().getCustomerPhoneNumber();
+                        std::cout << col << setw(26 - (26 - tmp->Data().getCustomerAddress().length())/2) << right << tmp->Data().getCustomerAddress() << setw((26 - tmp->Data().getCustomerAddress().length())/2) << "";
                         std::cout << col << "\n";
                     }
                 }
@@ -369,8 +282,8 @@ void CustomerManager::Menu() {
             string phoneNumber;
             std:: cin >> phoneNumber;
             bool checkExist = false;
-            for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
-                if(tmp->data.getCustomerPhoneNumber().find(phoneNumber) != -1) {
+            for(Node<Customer> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
+                if(tmp->Data().getCustomerPhoneNumber().find(phoneNumber) != -1) {
                     checkExist = true;
                     break;
                 }
@@ -387,16 +300,16 @@ void CustomerManager::Menu() {
                 cout << col << setw(9) << "" << setw(26 - 9) << left << "Address";
                 cout << col << "\n";
 
-                for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
-                    if(tmp->data.getCustomerPhoneNumber().find(phoneNumber) != -1) { 
+                for(Node<Customer> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
+                    if(tmp->Data().getCustomerPhoneNumber().find(phoneNumber) != -1) { 
                         std::cout << setw(15) << "" << leftSide << line(30);
                         std::cout << midMid << line(14);
                         std::cout << midMid << line(26);
                         std::cout << rightSide << "\n";
 
-                        std::cout << setw(15) << "" << col << setw((30 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(30 - (30 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerName();
-                        std::cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
-                        std::cout << col << setw(26 - (26 - tmp->data.getCustomerAddress().length())/2) << right << tmp->data.getCustomerAddress() << setw((26 - tmp->data.getCustomerAddress().length())/2) << "";
+                        std::cout << setw(15) << "" << col << setw((30 - tmp->Data().getCustomerPhoneNumber().length())/2) << "" << setw(30 - (30 - tmp->Data().getCustomerPhoneNumber().length())/2) << left << tmp->Data().getCustomerName();
+                        std::cout << col << setw((14 - tmp->Data().getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->Data().getCustomerPhoneNumber().length())/2) << left << tmp->Data().getCustomerPhoneNumber();
+                        std::cout << col << setw(26 - (26 - tmp->Data().getCustomerAddress().length())/2) << right << tmp->Data().getCustomerAddress() << setw((26 - tmp->Data().getCustomerAddress().length())/2) << "";
                         std::cout << col << "\n";
                     }
                 }
@@ -418,8 +331,8 @@ void CustomerManager::Menu() {
                 address[i] = tolower(address[i]);
             }
             bool checkExist = false;
-            for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
-                if(tmp->data.getCustomerAddress().find(address) != -1) {
+            for(Node<Customer> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
+                if(tmp->Data().getCustomerAddress().find(address) != -1) {
                     checkExist = true;
                     break;
                 }
@@ -436,10 +349,10 @@ void CustomerManager::Menu() {
                 cout << col << setw(9) << "" << setw(26 - 9) << left << "Address";
                 cout << col << "\n";
 
-                for(Node *tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+                for(Node<Customer> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
                     string tmps = "";
-                    for(int j = 0; j < tmp->data.getCustomerAddress().length(); ++j){
-                        tmps += tolower(tmp->data.getCustomerAddress()[j]);
+                    for(int j = 0; j < tmp->Data().getCustomerAddress().length(); ++j){
+                        tmps += tolower(tmp->Data().getCustomerAddress()[j]);
                     }
                     if(tmps.find(address) != -1) { 
                         std::cout << setw(15) << "" << leftSide << line(30);
@@ -447,9 +360,9 @@ void CustomerManager::Menu() {
                         std::cout << midMid << line(26);
                         std::cout << rightSide << "\n";
 
-                        std::cout << setw(15) << "" << col << setw((30 - tmp->data.getCustomerName().length())/2) << "" << setw(30 - (30 - tmp->data.getCustomerName().length())/2) << left << tmp->data.getCustomerName();
-                        std::cout << col << setw((14 - tmp->data.getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->data.getCustomerPhoneNumber().length())/2) << left << tmp->data.getCustomerPhoneNumber();
-                        std::cout << col << setw(26 - (26 - tmp->data.getCustomerAddress().length())/2) << right << tmp->data.getCustomerAddress() << setw((26 - tmp->data.getCustomerAddress().length())/2) << "";
+                        std::cout << setw(15) << "" << col << setw((30 - tmp->Data().getCustomerName().length())/2) << "" << setw(30 - (30 - tmp->Data().getCustomerName().length())/2) << left << tmp->Data().getCustomerName();
+                        std::cout << col << setw((14 - tmp->Data().getCustomerPhoneNumber().length())/2) << "" << setw(14 - (14 - tmp->Data().getCustomerPhoneNumber().length())/2) << left << tmp->Data().getCustomerPhoneNumber();
+                        std::cout << col << setw(26 - (26 - tmp->Data().getCustomerAddress().length())/2) << right << tmp->Data().getCustomerAddress() << setw((26 - tmp->Data().getCustomerAddress().length())/2) << "";
                         std::cout << col << "\n";
                     }
                 }
@@ -476,22 +389,6 @@ void CustomerManager::Menu() {
 }
 const CustomerManager& CustomerManager::operator=(const CustomerManager& v )
 {
-    if (this != &v) {
-        //this->n=v.n;
-        Node *k;  
-        while (this->pHead!=NULL)
-        {
-            k=this->pHead;
-            this->pHead=this->pHead->pNext;
-            delete k;
-            this->n--;
-        }
-        this->pTail=NULL;
-        for (Node *k=v.pHead;k!=NULL;k=k->pNext)
-        {
-            this->Add(k->data);
-        }
-        
-    }
+    this->list = v.list;
     return *this;
 }

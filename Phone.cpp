@@ -28,20 +28,20 @@ Phone::~Phone()
 
 }
 
-void Phone::setPhoneID(const string& s)
+void Phone::setID(const string& s)
 {
     this->phoneID=s;
 }
-const string& Phone::getPhoneID()
+const string& Phone::getID()
 {
     return this->phoneID;
 }
 
-void Phone::setPhoneName(const string& s)
+void Phone::setName(const string& s)
 {
     this->phoneName=s;
 }
-const string& Phone::getPhoneName()
+const string& Phone::getName()
 {
     return this->phoneName;
 }

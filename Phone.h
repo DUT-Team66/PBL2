@@ -7,26 +7,26 @@ using namespace std;
 class Phone
 {
     private: 
-        string phoneName;//b
-        string phoneID;//a
+        string phoneName;//a
+        string phoneID;//b
         string brand;//c
-        string processor;//e
-        string RAM_ROM; // d
-        string display; //h 
-        string camera; // g
-        int entryPrice;//x
-        int salePrice;//y
-        int remainingAmount;//z
+        string processor;//d
+        string RAM_ROM; // e
+        string display; //g
+        string camera; // h
+        int entryPrice;//i
+        int salePrice;//j
+        int remainingAmount;//k
     public:
         Phone();
         Phone(string, string, string, string,string, string, string,int,int,int);
         ~Phone();
 
-        void setPhoneID(const string& );
-        const string& getPhoneID();
+        void setID(const string& );
+        const string& getID();
 
-        void setPhoneName(const string& );
-        const string& getPhoneName();
+        void setName(const string& );
+        const string& getName();
 
         void setBrand(const string& );
         const string& getBrand();
@@ -54,7 +54,10 @@ class Phone
         
         void setInfo();
         void showForCustomer();   
-        void showForStaff();   
+        void showForStaff(); 
+        void show() {
+            cout << "phone show" << "\n";
+        } 
         
 };
 

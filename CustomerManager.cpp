@@ -333,7 +333,11 @@ void CustomerManager::Menu() {
             }
             bool checkExist = false;
             for(Node<Customer> *tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
-                if(tmp->Data().getCustomerAddress().find(address) != -1) {
+                string tmps = "";
+                for(int i = 0; i < tmp->Data().getCustomerAddress().length(); ++i) {
+                    tmps += tolower(tmp->Data().getCustomerAddress()[i]);
+                }
+                if(tmps.find(address) != -1) {
                     checkExist = true;
                     break;
                 }

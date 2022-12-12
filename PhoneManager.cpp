@@ -215,7 +215,6 @@ void PhoneManager::Search()
         if(choice == "1") {   // search by name
             string name;
             std::cout << setw(45) << "" << "Enter phone name: ";
-            std::cin.ignore();
             std::getline(std::cin, name);
             for(int i = 0; i < name.length(); ++i) {
                 name[i] = tolower(name[i]);
@@ -310,12 +309,12 @@ void PhoneManager::Search()
         } else if(choice == "2") {  // search by brand
             string brand;
             std::cout << setw(45) << "" << "Enter phone brand: ";
-            std::cin.ignore();
             std::getline(std::cin, brand);
             for(int i = 0; i < brand.length(); ++i) {
                 brand[i] = tolower(brand[i]);
             }
             bool checkExist = false;
+
             for(Node<Phone>* tmp = this->list.HeadNode(); tmp != nullptr; tmp = tmp->NextNode()) {
                 string tmps = "";
                 for(int j = 0; j < tmp->Data().getBrand().length(); ++j){
@@ -405,7 +404,6 @@ void PhoneManager::Search()
         } else if (choice == "3") { // search by processor
             string processor;
             std::cout << setw(45) << "" << "Enter phone processor: ";
-            std::cin.ignore();
             std::getline(std::cin, processor);
             for(int i = 0; i < processor.length(); ++i) {
                 processor[i] = tolower(processor[i]);
@@ -1260,29 +1258,30 @@ void PhoneManager::Menu() {
 	        SetConsoleTextAttribute(hConsole, grey); 
             cout << setw(45) << "" <<"Enter 'exit' to exit!\n";
 	        SetConsoleTextAttribute(hConsole, brightwhite); 
-            string phoneName;
-            std::cout << setw(45) << "" << "Enter phone name: ";
-            cin.ignore();
-            getline(cin, phoneName);
+            string phoneID;
+            std::cout << setw(45) << "" << "Enter phone id: ";
+            getline(cin, phoneID);
 
-            if(phoneName == "exit") {
+            if(phoneID == "exit") {
                 continue;
             }
-
+            for(int i = 0; i < phoneID.length(); ++i) {
+                phoneID[i] = tolower(phoneID[i]);
+            }
             bool exist = false;
             Node<Phone> *tmp = this->list.HeadNode();
             while(tmp != nullptr) {
-                if(tmp->Data().getName() == phoneName) {
+                if(tmp->Data().getID() == phoneID) {
                     exist = true;
                     break;
                 }
                 tmp = tmp->NextNode();
             }
             if(!exist) {
-                string phoneID, brand, processor, RAM_ROM, display, camera; 
+                string phoneName, brand, processor, RAM_ROM, display, camera; 
                 int entryPrice, salePrice, amount;
-                std::cout << setw(45) << "" << "Enter phone id: ";
-                getline(cin, phoneID);
+                std::cout << setw(45) << "" << "Enter phone name: ";
+                getline(cin, phoneName);
                 std::cout << setw(45) << "" << "Enter brand: ";
                 getline(cin,brand);
                 std::cout << setw(45) << "" << "Enter processor: ";
@@ -1306,7 +1305,11 @@ void PhoneManager::Menu() {
                 std::cout << "\n" << setw(45) << "" << "Add successfully!\n";
 	            SetConsoleTextAttribute(hConsole, brightwhite); 
             } else {
-                std::cout << setw(45) << "" << "Phone exists";
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	            SetConsoleTextAttribute(hConsole, brightyellow);
+                std::cout << setw(45) << "" << "Phone exists!\n";
+	            SetConsoleTextAttribute(hConsole, brightwhite);
+                tmp->Data().showForStaff();
             }
             std::system("pause");
         } else if (choice == "2") {
@@ -1318,6 +1321,8 @@ void PhoneManager::Menu() {
             string s;
             std::cout << setw(45) << "" << "Enter ID: ";
             cin >> s;
+            cin.clear();
+            fflush(stdin);
             if(s == "exit") {
                 continue;
             }

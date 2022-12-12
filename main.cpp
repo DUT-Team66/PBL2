@@ -146,7 +146,7 @@ int main()
                 order.show();
                 // In ra hóa đơn
                 orderManager.Add(order);    
-                if(checkExist) customerManager.Add(customer);
+                if(!checkExist) customerManager.Add(customer);
                 admin.UpdateDoanhThuLoiNhuan(order);
 
             }  else {

@@ -90,6 +90,8 @@ void StaffManager::Search()
             std::cout << setw(45) << ""
                       << "Your choice: ";
             std::cin >> choice;
+            cin.clear();
+            fflush(stdin);
             if (choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6")
             {
                 std::cout << setw(45) << ""
@@ -106,6 +108,8 @@ void StaffManager::Search()
             std::cout << setw(45) << ""
                       << "Enter staff ID: ";
             std::cin >> id;
+            cin.clear();
+            fflush(stdin);
             bool checkLegal = true;
             for (int i = 0; i < id.length(); ++i)
             {
@@ -206,7 +210,6 @@ void StaffManager::Search()
             string name;
             std::cout << setw(45) << ""
                       << "Enter staff name: ";
-            std::cin.ignore();
             std::getline(std::cin, name);
             for (int i = 0; i < name.length(); ++i)
             {
@@ -310,6 +313,8 @@ void StaffManager::Search()
             std::cout << setw(45) << ""
                       << "Enter gender: ";
             std::cin >> gender;
+            cin.clear();
+            fflush(stdin);
             for (int i = 0; i < gender.length(); ++i)
             {
                 gender[i] = tolower(gender[i]);
@@ -410,6 +415,8 @@ void StaffManager::Search()
             std::cout << setw(45) << ""
                       << "Enter year of birth: ";
             std::cin >> year;
+            cin.clear();
+            fflush(stdin);
             bool checkLegal = true;
             for (int i = 0; i < year.length(); ++i)
             {
@@ -522,6 +529,8 @@ void StaffManager::Search()
             std::cout << setw(45) << ""
                       << "Enter phone number: ";
             std::cin >> phoneNumber;
+            cin.clear();
+            fflush(stdin);
             bool checkLegal = true;
             if (phoneNumber.length() != 10)
             {
@@ -700,7 +709,8 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                 std::cout << setw(45) << ""
                           << "Your choice: ";
                 std::cin >> choice;
-
+                cin.clear();
+                fflush(stdin);
                 // label:
                 // std::system("cls");
 
@@ -723,7 +733,6 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                     string name;
                     std::cout << setw(45) << ""
                               << "Enter staff name: ";
-                    std::cin.ignore();
                     std::getline(std::cin, name);
                     staff->Data().setName(name);
                     std::cout << setw(45) << ""
@@ -736,6 +745,8 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                     std::cout << setw(45) << ""
                               << "Enter staff gender: ";
                     std::cin >> gender;
+                    cin.clear();
+                    fflush(stdin);
                     for (int i = 0; i < gender.length(); ++i)
                     {
                         gender[i] = tolower(gender[i]);
@@ -759,6 +770,8 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                     std::cout << setw(45) << ""
                               << "Enter staff day of birth(dd-mm-yyyy): ";
                     std::cin >> dob;
+                    cin.clear();
+                    fflush(stdin);
                     bool checkLegal = false;
                     if (dob[0] >= '0' && dob[0] <= '9' && dob[1] >= '0' && dob[1] <= '9' && dob[2] == '-' && dob[3] >= '0' && dob[3] <= '9' && dob[4] >= '0' && dob[4] <= '9' && dob[5] == '-' && dob[6] >= '0' && dob[6] <= '9' && dob[7] >= '0' && dob[7] <= '9' && dob[8] >= '0' && dob[8] <= '9' && dob[9] >= '0' && dob[9] <= '9')
                     {
@@ -824,6 +837,8 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                     std::cout << setw(45) << ""
                               << "Enter staff phone number: ";
                     std::cin >> phoneNumber;
+                    cin.clear();
+                    fflush(stdin);
                     bool checkLegal = true;
                     for (int i = 0; i < phoneNumber.length(); ++i)
                     {
@@ -904,6 +919,8 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                     std::cout << setw(45) << ""
                               << "Enter staff salary: ";
                     std::cin >> salary;
+                    cin.clear();
+                    fflush(stdin);
                     bool checkLegal = true;
                     for (int i = 0; i < salary.length(); ++i)
                     {
@@ -938,7 +955,7 @@ void StaffManager::Update() // chu y: Update co the cap nhat nhieu cai
                 }
                 else
                 {
-                     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
                     SetConsoleTextAttribute(hConsole, brightred);
                     std::cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
                     SetConsoleTextAttribute(hConsole, brightwhite); 
@@ -1224,6 +1241,8 @@ void StaffManager::Menu()
             cout << setw(45) << ""
                  << "Your choice: ";
             cin >> choice;
+            cin.clear();
+            fflush(stdin);
             if (choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6")
             {
                 cout << setw(45) << ""
@@ -1256,6 +1275,8 @@ void StaffManager::Menu()
             cout << setw(45) << ""
                  << "Enter ID: ";
             cin >> id;
+            cin.clear();
+            fflush(stdin);
             if (id == "exit")
             {
                 continue;
@@ -1294,8 +1315,6 @@ void StaffManager::Menu()
             if (!checkExist)
             {
                 string name, gender, dob, phoneNumber, address;
-                cin.ignore();
-
                 cout << setw(45) << ""
                      << "Enter name: ";
                 getline(cin, name);
@@ -1598,6 +1617,8 @@ void StaffManager::Menu()
             cout << setw(45) << ""
                  << "Enter ID: ";
             cin >> id;
+            cin.clear();
+            fflush(stdin);
             if (id == "exit")
             {
                 continue;

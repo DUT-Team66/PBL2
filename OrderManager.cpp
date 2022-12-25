@@ -410,7 +410,10 @@ void OrderManager::Menu() {
             std::cout << setw(45) << "" << "Your choice: ";
             cin >> choice;
             if(choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5") {
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                SetConsoleTextAttribute(hConsole, brightred); 
                 std::cout << "Invalid choice, please re-enter!\n";
+    	        SetConsoleTextAttribute(hConsole, brightwhite); 
                 std::system("pause");
                 std::system("cls"); 
             } else break;

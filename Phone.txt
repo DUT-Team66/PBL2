@@ -25,3 +25,4 @@ Vivo X80/vvx80/Vivo/MediaTek Dimensity 900 5G/8GB-128GB/6.78 inch, AMOLED/50MP +
 Vivo Y53s/vvy53s/Vivo/MediaTek Helio G80/8GB-128GB/6.58 inch, AMOLED/64MP + 2MP/6000000/7000000/100/
 Xiaomi 12T Pro/xm12tpr/Xiaomi/Snapdragon 8+ Gen 1/12GB-256GB/6.67 inch, AMOLED/200MP + 20MP/15000000/17000000/100/
 Xiaomi Redmi 10C/xmrm10c/Xiaomi/Snapdragon 680/4GB-64GB/6.71 inch, IPS LCD/50MP + 2MP/3000000/3500000/100/
+Vivo Y21/vvy21/Vivo/Helio P35/4GB-64GB/6.51 inch, IPS LCD/8MP + 13MP/3700000/3900000/100/

@@ -1245,8 +1245,10 @@ void StaffManager::Menu()
             fflush(stdin);
             if (choice != "1" && choice != "2" && choice != "3" && choice != "4" && choice != "5" && choice != "6")
             {
-                cout << setw(45) << ""
-                     << "Invalid choice, please re-enter!\n";
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                SetConsoleTextAttribute(hConsole, brightred); 
+                cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
+	            SetConsoleTextAttribute(hConsole, brightwhite); 
                 std::system("pause");
                 std::system("cls");
             }

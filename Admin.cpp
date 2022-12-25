@@ -103,8 +103,10 @@ void Admin::Menu() {
 
 }
 void Admin::Import() {
-
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, brightyellow); 
     string confirm; cout << setw(45) << "" << "Confirm (Y/N): ";
+    SetConsoleTextAttribute(hConsole, brightwhite); 
     cin >> confirm;
     if(confirm == "N") {
         return;
@@ -134,7 +136,6 @@ void Admin::Import() {
 
     //cout << 2 << "\n";
 
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, 10);
     cout << "\n";
     cout << setw(45) << "" << "IMPORT SUCCESSFULLY!" << "\n";

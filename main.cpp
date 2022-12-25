@@ -160,6 +160,7 @@ int main()
         } else if(choice == "3") {
             std::cout << "\n\n";
             std::cout << setw(45) << "" << "GOOD BYE!\n";
+            std::system("pause");
             break;
         }
         std::system("cls");

@@ -977,7 +977,7 @@ void PhoneManager::Show()
 	std::cout << botRightCorner << "\n";
 
 
-    std::system("pause");
+    // std::system("pause");
     
 
 }
@@ -1048,7 +1048,9 @@ void PhoneManager::Shopping(Order& order) {
 
             break;
         } else if(ichoice < 1 || ichoice > this->GetLength()) {
+            SetConsoleTextAttribute(hConsole, brightred);
             std::cout << setw(45) << "" << "Invalid choice, please re-enter!\n";
+            SetConsoleTextAttribute(hConsole, brightwhite);
             std::system("pause");
         } else {
 
@@ -1060,7 +1062,9 @@ void PhoneManager::Shopping(Order& order) {
 
             if(amount > 0) {
                 if(amount > this->getRemainingAmount(ichoice-1)) {
+                    SetConsoleTextAttribute(hConsole, brightred);
                     cout << setw(45) << "" << "Remaining amount is not enough\n"; 
+                    SetConsoleTextAttribute(hConsole, brightwhite);
                     //std::system("pause");
                 } else {
                     if(order.searchCart(this->getID(ichoice-1))) {
@@ -1326,29 +1330,14 @@ void PhoneManager::Menu() {
             if(s == "exit") {
                 continue;
             }
-
-
-            HANDLE hConsole1 = GetStdHandle(STD_OUTPUT_HANDLE);
-            SetConsoleTextAttribute(hConsole1, brightyellow);
-            cout << setw(45) << "" << "Confirm (Y/N): ";    
-            SetConsoleTextAttribute(hConsole1, brightwhite); 
-            string confirm; cin >> confirm;
-            if(confirm == "Y") {
-                this->Delete(s);
-                std::system("pause");
-            } else if(confirm != "N") {
-                HANDLE hConsole2 = GetStdHandle(STD_OUTPUT_HANDLE);
-	            SetConsoleTextAttribute(hConsole2, brightred);
-                cout << setw(45) << "" << "Invalid choice!\n";
-	            SetConsoleTextAttribute(hConsole2, brightwhite); 
-                std::system("pause");
-            }
+           this->Delete(s);
         } else if(choice == "3") {
             this->Search();
         } else if (choice == "4") {
             this->Update();
         } else if(choice == "5") {
             this->Show();
+            std::system("pause");
         } else {
             std::system("cls");
             break;  

@@ -41,49 +41,67 @@ void List<T>::Add(const T& t) {
 }
 template <class T>
 void List<T>::Delete(string m) {
-    bool index = false;
-    if(this->pHead->data.getID() == m) {
-        if(this->pTail == this->pHead){
-            this->pHead = this->pTail = nullptr;
-            index = true;
-        } else {
-            Node<T> *p = this->pHead;
-            this->pHead = this->pHead->pNext;
-            delete p;
-            index = true;
-        }
-    } else if (this->pTail->data.getID() == m) {
-        for(Node<T> *k = this->pHead; k != nullptr; k = k->pNext) {
-            if(k->pNext == this->pTail) {
-                delete this->pTail;
-                k->pNext = nullptr;
-                this->pTail = k;
-                index = true;
-            }
-        }
-    } else {
-        Node<T> *g = new Node<T>;
-        for(Node<T> *k = this->pHead; k != nullptr; k = k->pNext) {
-            if(k->data.getID() == m) {
-                g->pNext = k->pNext;
-                delete k;
-                index = true;
-                break;
-            } else {
-                g = k;
-            }
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    bool checkExist = false;
+    for(Node<T>* tmp = this->pHead; tmp != nullptr; tmp = tmp->pNext) {
+        if(tmp->data.getID() == m) {
+            checkExist = true;
+            break;
         }
     }
-    if (index == true) {
-        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-        SetConsoleTextAttribute(hConsole, brightgreen);
-        std::cout << "\n" << setw(45) << "" << "Delete successfully!\n";
+    if(checkExist) {
+        SetConsoleTextAttribute(hConsole, brightyellow);
+        cout << setw(45) << "" << "Confirm (Y/N): ";    
         SetConsoleTextAttribute(hConsole, brightwhite); 
+        string confirm; cin >> confirm;
+        if(confirm == "Y") {
+            if(this->pHead->data.getID() == m) {
+                if(this->pTail == this->pHead){
+                    this->pHead = this->pTail = nullptr;
+                    checkExist = true;
+                } else {
+                    Node<T> *p = this->pHead;
+                    this->pHead = this->pHead->pNext;
+                    delete p;
+                    checkExist = true;
+                }
+            } else if (this->pTail->data.getID() == m) {
+                for(Node<T> *k = this->pHead; k != nullptr; k = k->pNext) {
+                    if(k->pNext == this->pTail) {
+                        delete this->pTail;
+                        k->pNext = nullptr;
+                        this->pTail = k;
+                        checkExist = true;
+                    }
+                }
+            } else {
+                Node<T> *g = new Node<T>;
+                for(Node<T> *k = this->pHead; k != nullptr; k = k->pNext) {
+                    if(k->data.getID() == m) {
+                        g->pNext = k->pNext;
+                        delete k;
+                        checkExist = true;
+                        break;
+                    } else {
+                        g = k;
+                    }
+                }
+            }
+            SetConsoleTextAttribute(hConsole, brightgreen);
+            cout << setw(45) << "" << "Delete successfully!\n";
+            SetConsoleTextAttribute(hConsole, brightwhite); 
+            system("pause");
+        } else if (confirm != "N") {
+            SetConsoleTextAttribute(hConsole, brightred);
+            cout << setw(45) << "" << "Invalid choice!\n";
+            SetConsoleTextAttribute(hConsole, brightwhite); 
+            system("pause");
+        }
     } else {
-        HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
         SetConsoleTextAttribute(hConsole, brightred);
-        std::cout << "ID does not exist!\n";
+        std::cout << setw(45) << "" << "ID does not exist!\n";
         SetConsoleTextAttribute(hConsole, brightwhite); 
+        system("pause");
     }
 }
 template <class T>

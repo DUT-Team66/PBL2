@@ -1634,27 +1634,13 @@ void StaffManager::Menu()
             }
             if (!checkLegal || id.length() != 12)
             {
-                cout << setw(45) << ""
-                     << "Invalid id!"
-                     << "\n";
+                SetConsoleTextAttribute(hConsole, brightred);
+                cout << setw(45) << "" << "Invalid id!" << "\n";
+                SetConsoleTextAttribute(hConsole, brightwhite);
                 system("pause");
                 continue;
             }
-            string confirm;
-            cout << setw(45) << ""
-                 << "Confirm (Y/N): ";
-            cin >> confirm;
-            if (confirm == "Y")
-            {
-                this->Delete(id);
-                std::system("pause");
-            }
-            else if (confirm != "N")
-            {
-                cout << setw(45) << ""
-                     << "Invalid choice!\n";
-                std::system("pause");
-            }
+            this->Delete(id);
         }
         else if (choice == "3")
         {
